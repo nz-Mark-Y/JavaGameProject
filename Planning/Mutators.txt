@@ -1,0 +1,14 @@
+Game speed (= ball + paddle speed)
+Ball speed
+Paddle speed
+Ball speeds up on bounce
+Multiple balls
+Paddle reverse physics
+Fire balls (penetrate further)
+Huge balls (does AoE)
+Reverse controls
+Random bounce (+ delay)
+Ball offspring (Makes gun bullets on paddle hit)
+Chaotic (all of the above)
+
+
