@@ -1,10 +1,10 @@
 Sylvain Bechet- France: Freedom of movement (passive)
 Shia Labeouf- USA: Single gun shot (cooldown)
-Nigel Farage- England: Brexit, immunity for a short amount of time (cooldown)
-Andrew Chen- New Zealand: Summon a sheep - extra paddle, walks randomly (cooldown)
+Nigel Farage- England: Trigger Brexit, immunity for a short amount of time (single use per game)
+Andrew Chen- New Zealand: Has a sheep - extra paddle, walks randomly (passive)
 Mark Yep- China: Extra layer of wall (passive)
 Tony Abbot- Australia: Summon poisonous spider at the other player (slow them down) (cooldown)
 Partha Roop- India: 2 paddles, slightly smaller, follow each other (passive)
 Vladimir- Russia: Steals parts of other peoples walls, puts them in a communal shield (cooldown)
-Muhammad Nadeem- Egypt: 
-Fidel Castro- Brazil: 
+Muhammad Nadeem- Egypt: Summon pyramid, paddle turns into a massive pyramid but cant move (cooldown)
+Neymar- Brazil: Goalkeeper, can catch ball (passive)
