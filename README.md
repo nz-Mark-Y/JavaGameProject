@@ -1,14 +1,10 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
-COMPSYS 302 Java game design project
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### COMPSYS 302 Java Game Design Project ###
+* [Group 01](https://www.youtube.com/watch?v=PfYnvDL0Qcw)
+* Version 01
 
 ### How do I get set up? ###
-
 * Summary of set up
 * Configuration
 * Dependencies
@@ -17,12 +13,10 @@ COMPSYS 302 Java game design project
 * Deployment instructions
 
 ### Contribution guidelines ###
-
 * Writing tests
 * Code review
 * Other guidelines
 
 ### Who do I talk to? ###
-
 * Repo owner or admin
 * Other community or team contact
