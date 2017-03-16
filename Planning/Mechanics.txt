@@ -1,0 +1,7 @@
+Controls [Left, use ability, Right]:
+	A,S,D (+W for France)
+	J,K,L (+I for France)
+	3,6,9 (+5 for France)
+	Left, Down, Right (+Up for France) 
+
+
