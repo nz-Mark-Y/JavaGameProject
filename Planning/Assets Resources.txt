@@ -1,0 +1,22 @@
+Places where we could get free (CC0) assets (sound/graphics):
+Include link to website if used to credit the creator(s).
+
+
+
+Sound:
+
+http://www.freesfx.co.uk/ 
+(Credit: http://www.freesfx.co.uk/info/eula/)
+
+http://www.bfxr.net/
+(Credit: Nothing required but website inclusion would be nice)
+
+
+
+Graphics:
+
+http://kenney.nl/
+(Credit: Most of them nothing - details under download button - but website inclusion would be nice)
+
+http://opengameart.org/
+(Credit: Make sure to select the CC0 tickbox when searching items; crediting as per above)
