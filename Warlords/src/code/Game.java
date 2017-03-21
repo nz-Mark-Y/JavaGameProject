@@ -1,11 +1,17 @@
+package code;
 import warlordstest.IGame;
 
 public class Game implements IGame {
-
+	private Ball ball;
+	
+	public Game(Ball ball) {
+		this.ball = ball;
+	}
+	
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		
+		ball.setXPos(ball.getXPos() + ball.getXVelocity());
+		ball.setYPos(ball.getYPos() + ball.getYVelocity());
 	}
 
 	@Override

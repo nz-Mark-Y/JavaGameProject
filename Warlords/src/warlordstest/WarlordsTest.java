@@ -1,10 +1,14 @@
 package warlordstest;
 
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import code.Ball;
+import code.Game;
+import junit.framework.TestSuite;
 
 
 public class WarlordsTest extends TestSuite {
@@ -18,10 +22,8 @@ public class WarlordsTest extends TestSuite {
 
     @Before
     public void setUp(){
-
-        //Instantiate objects to initialise the fields - and preferably no other game objects, to minimise the possibility of conflicts
-        //All game objects should be instantiated at coordinates (0,0) with zero velocity
-
+    	this.ball = new Ball(0,0);
+    	this.game = new Game((Ball) this.ball);
     }
 
     @Test

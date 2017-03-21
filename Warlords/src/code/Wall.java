@@ -1,3 +1,4 @@
+package code;
 import warlordstest.IWall;
 
 public class Wall implements IWall {

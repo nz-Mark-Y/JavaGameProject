@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="warlordstest.IWarlord"/>
+<fullyQualifiedTypeName name="warlordstest.IBall"/>
+<fullyQualifiedTypeName name="warlordstest.IGame"/>
+<fullyQualifiedTypeName name="warlordstest.IWall"/>
+<fullyQualifiedTypeName name="warlordstest.IPaddle"/>
+<fullyQualifiedTypeName name="code.Warlord"/>
+</qualifiedTypeNameHistroy>

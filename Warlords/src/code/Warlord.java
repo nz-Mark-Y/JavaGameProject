@@ -1,17 +1,16 @@
+package code;
 import warlordstest.IWarlord;
 
 public class Warlord implements IWarlord {
 
 	@Override
 	public void setXPos(int x) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
 	public void setYpos(int y) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
