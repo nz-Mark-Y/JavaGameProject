@@ -1,4 +1,4 @@
-package warlordstest;
+package warlords.tests;
 
 /***
  * Interface for use in testing the behaviour of a wall in a Warlords-like game.

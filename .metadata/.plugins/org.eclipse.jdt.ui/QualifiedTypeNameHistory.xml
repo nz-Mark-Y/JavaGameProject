@@ -5,5 +5,9 @@
 <fullyQualifiedTypeName name="warlordstest.IGame"/>
 <fullyQualifiedTypeName name="warlordstest.IWall"/>
 <fullyQualifiedTypeName name="warlordstest.IPaddle"/>
+<fullyQualifiedTypeName name="code.Paddle"/>
 <fullyQualifiedTypeName name="code.Warlord"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
 </qualifiedTypeNameHistroy>

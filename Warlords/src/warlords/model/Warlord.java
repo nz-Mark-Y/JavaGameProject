@@ -1,8 +1,13 @@
-package code;
-import warlordstest.IWarlord;
+package warlords.model;
+import warlords.tests.IWarlord;
 
 public class Warlord implements IWarlord {
-
+	private Paddle paddle;
+	
+	public Warlord(Paddle paddle) {
+		this.paddle = paddle;
+	}
+	
 	@Override
 	public void setXPos(int x) {
 		// TODO Auto-generated method stub		

@@ -1,5 +1,5 @@
-package code;
-import warlordstest.IBall;
+package warlords.model;
+import warlords.tests.IBall;
 
 public class Ball implements IBall {
 	private int x;

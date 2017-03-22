@@ -1,5 +1,5 @@
-package code;
-import warlordstest.IPaddle;
+package warlords.model;
+import warlords.tests.IPaddle;
 
 public class Paddle implements IPaddle {
 	private int x;

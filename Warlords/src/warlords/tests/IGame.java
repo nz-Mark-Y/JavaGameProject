@@ -1,4 +1,4 @@
-package warlordstest;
+package warlords.tests;
 
 /***
  * Interface for use in testing high-level game systems in a Warlords-like game.

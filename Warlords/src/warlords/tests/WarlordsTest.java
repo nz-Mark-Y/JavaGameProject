@@ -1,4 +1,4 @@
-package warlordstest;
+package warlords.tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -6,9 +6,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import code.Ball;
-import code.Game;
 import junit.framework.TestSuite;
+import warlords.model.Ball;
+import warlords.model.Game;
+import warlords.model.Paddle;
+import warlords.model.Warlord;
 
 
 public class WarlordsTest extends TestSuite {
@@ -23,7 +25,9 @@ public class WarlordsTest extends TestSuite {
     @Before
     public void setUp(){
     	this.ball = new Ball(0,0);
-    	this.game = new Game((Ball) this.ball);
+    	this.paddle = new Paddle(0,0);
+    	this.player1 = new Warlord((Paddle) this.paddle);
+    	this.game = new Game((Ball) this.ball, 768, 768, (Warlord) this.player1);
     }
 
     @Test
@@ -54,6 +58,21 @@ public class WarlordsTest extends TestSuite {
         assertTrue("The ball should remain within bounds", this.ball.getXPos() >= 0);
         assertTrue("The ball's velocity should be reversed in the direction of the collision", this.ball.getXVelocity() == 50 && this.ball.getYVelocity() == 50);
 
+    }
+    
+    @Test
+    public void testBallCollisionWithBoundary2(){
+
+        this.ball.setXPos(100);
+        this.ball.setYPos(750);
+
+        this.ball.setXVelocity(50);
+        this.ball.setYVelocity(50);
+
+        this.game.tick();
+
+        assertTrue("The ball should remain within bounds", this.ball.getYPos() == 736);
+        assertTrue("The ball's velocity should be reversed in the direction of the collision", this.ball.getYVelocity() == -50 && this.ball.getXVelocity() == 50);
 
     }
 

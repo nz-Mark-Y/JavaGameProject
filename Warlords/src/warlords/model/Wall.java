@@ -1,5 +1,5 @@
-package code;
-import warlordstest.IWall;
+package warlords.model;
+import warlords.tests.IWall;
 
 public class Wall implements IWall {
 
