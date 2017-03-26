@@ -29,5 +29,9 @@ public class Warlord implements IWarlord {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public Paddle getPaddle() {
+		return paddle;
+	}
 
 }

@@ -24,10 +24,10 @@ public class WarlordsTest extends TestSuite {
 
     @Before
     public void setUp(){
-    	this.ball = new Ball(0,0);
-    	this.paddle = new Paddle(0,0);
-    	this.player1 = new Warlord((Paddle) this.paddle);
-    	this.game = new Game((Ball) this.ball, 768, 768, (Warlord) this.player1);
+    	ball = new Ball(0,0);
+    	paddle = new Paddle(0,0);
+    	player1 = new Warlord((Paddle) this.paddle);
+    	game = new Game((Ball) this.ball, 768, 768, (Warlord) this.player1);
     }
 
     @Test

@@ -10,4 +10,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javafx.scene.Scene"/>
 </qualifiedTypeNameHistroy>

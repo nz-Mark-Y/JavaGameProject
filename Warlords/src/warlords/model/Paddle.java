@@ -6,13 +6,13 @@ public class Paddle implements IPaddle {
 	private int y;
 	
 	public Paddle(int init_x, int init_y) {
-		this.x = init_x;
-		this.y = init_y;
+		x = init_x;
+		y = init_y;
 	}
 	
 	public Paddle() {
-		this.x = 0;
-		this.y = 0;
+		x = 0;
+		y = 0;
 	}
 
 	@Override
@@ -23,6 +23,14 @@ public class Paddle implements IPaddle {
 	@Override
 	public void setYpos(int y) {
 		this.y = y;
+	}
+	
+	public int getXPos() {
+		return x;
+	}
+	
+	public int getYPos() {
+		return y;
 	}
 
 }

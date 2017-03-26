@@ -36,34 +36,34 @@ public class Ball implements IBall {
 
 	@Override
 	public int getXPos() {
-		return this.x;
+		return x;
 	}
 
 	@Override
 	public int getYPos() {
-		return this.y;
+		return y;
 	}
 
 	@Override
 	public void setXVelocity(int dX) {
-		this.dx = dX;
+		dx = dX;
 		
 	}
 
 	@Override
 	public void setYVelocity(int dY) {
-		this.dy = dY;
+		dy = dY;
 		
 	}
 
 	@Override
 	public int getXVelocity() {
-		return this.dx;
+		return dx;
 	}
 
 	@Override
 	public int getYVelocity() {
-		return this.dy;
+		return dy;
 	}
 
 }
