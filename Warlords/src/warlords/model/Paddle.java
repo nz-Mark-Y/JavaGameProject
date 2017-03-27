@@ -4,6 +4,8 @@ import warlords.tests.IPaddle;
 public class Paddle implements IPaddle {
 	private int x;
 	private int y;
+	public static int height = 5;
+	public static int length = 5;
 	
 	public Paddle(int init_x, int init_y) {
 		x = init_x;

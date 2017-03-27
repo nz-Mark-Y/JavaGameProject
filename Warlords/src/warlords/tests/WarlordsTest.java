@@ -3,6 +3,8 @@ package warlords.tests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,6 +12,7 @@ import junit.framework.TestSuite;
 import warlords.model.Ball;
 import warlords.model.Game;
 import warlords.model.Paddle;
+import warlords.model.Wall;
 import warlords.model.Warlord;
 
 
@@ -24,10 +27,17 @@ public class WarlordsTest extends TestSuite {
 
     @Before
     public void setUp(){
-    	ball = new Ball(0,0);
-    	paddle = new Paddle(0,0);
+    	ball = new Ball();
+    	paddle = new Paddle();
     	player1 = new Warlord((Paddle) this.paddle);
-    	game = new Game((Ball) this.ball, 768, 768, (Warlord) this.player1);
+    	player2 = new Warlord(new Paddle());
+    	ArrayList<Warlord> playerList = new ArrayList<Warlord>();
+    	playerList.add((Warlord) player1);
+    	playerList.add((Warlord) player2);
+    	player1Wall = new Wall(0);
+    	ArrayList<Wall> wallList = new ArrayList<Wall>();
+    	wallList.add((Wall) player1Wall);
+    	game = new Game((Ball) ball, 768, 768, playerList, wallList);
     }
 
     @Test
