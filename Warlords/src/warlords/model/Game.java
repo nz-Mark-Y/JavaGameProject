@@ -237,5 +237,9 @@ public class Game implements IGame {
 	public void setTimeRemaining(int seconds) {
 		timeRemaining = seconds;
 	}
+	
+	public Ball getBall() {
+		return ball;
+	}
 
 }

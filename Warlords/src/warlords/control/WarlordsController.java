@@ -1,16 +1,44 @@
 package warlords.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import warlords.model.Ball;
+import warlords.model.Game;
+import warlords.model.Paddle;
+import warlords.model.Wall;
+import warlords.model.Warlord;
+import warlords.view.GameViewController;
 
 public class WarlordsController extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	private Game game;
+	
+	public WarlordsController() {
+		createNewGame();
+	}
+	
+	public void createNewGame() {
+		Ball ball = new Ball(350, 350);
+		Warlord player1 = new Warlord(new Paddle(50,50));
+		Warlord player2 = new Warlord(new Paddle(50, 718));
+		ArrayList<Warlord> playerList = new ArrayList<Warlord>();
+		playerList.add(player1);
+		playerList.add(player2);
+		Wall wall1 = new Wall(100, 100, 0);
+		Wall wall2 = new Wall(668, 668, 1);
+		ArrayList<Wall> wallList = new ArrayList<Wall>();
+		wallList.add(wall1);
+		wallList.add(wall2);
+		game = new Game(ball, 768, 768, playerList, wallList);		
+	}
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -18,6 +46,8 @@ public class WarlordsController extends Application {
 		this.primaryStage.setTitle("Warlords");
 		
 		initRootLayout();
+		
+		showGameView();
 	}
 
 	public static void main(String[] args) {
@@ -27,7 +57,7 @@ public class WarlordsController extends Application {
 	public void initRootLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("../view/GameView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("../view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			
 			Scene scene  = new Scene(rootLayout);
@@ -36,5 +66,28 @@ public class WarlordsController extends Application {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public void showGameView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("../view/GameView.fxml"));
+			AnchorPane gameView = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(gameView);
+			
+			GameViewController controller = loader.getController();
+			controller.setWarlordsController(this);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}	
+	
+	public Game getGame() {
+		return game;
 	}
 }
