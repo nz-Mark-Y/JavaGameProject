@@ -27,13 +27,13 @@ public class WarlordsController extends Application {
 	
 	public void createNewGame() {
 		Ball ball = new Ball(600, 600);
-		Warlord player1 = new Warlord(new Paddle(80, 100), 700, 50);
-		Warlord player2 = new Warlord(new Paddle(50, 718), 720, 70);
+		Warlord player1 = new Warlord(new Paddle(200, 200), 100, 100);
+		Warlord player2 = new Warlord(new Paddle(568, 568), 668, 668);
 		ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 		playerList.add(player1);
 		playerList.add(player2);
-		Wall wall1 = new Wall(200, 150, 0);
-		Wall wall2 = new Wall(50, 668, 1);
+		Wall wall1 = new Wall(100, 200, 0);
+		Wall wall2 = new Wall(668, 618, 1);
 		ArrayList<Wall> wallList = new ArrayList<Wall>();
 		wallList.add(wall1);
 		wallList.add(wall2);

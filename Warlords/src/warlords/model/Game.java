@@ -122,23 +122,33 @@ public class Game implements IGame {
 			Wall wall = wallList.get(i);
 			if (!wall.isDestroyed()) {
 				int wallX, wallY;
-				for (int j=0; j<Wall.length; j++) {
-					for (int k=0; k<Wall.height; k++) {
-						wallX = wall.getXPos() + j;
-						wallY = wall.getYPos() + k;
-						if (coordInBallPath(wallX, wallY)) {
-							if (((k == 0) && (ball.getYPos() < wall.getYPos())) || ((k == 4) && (ball.getYPos() > wall.getYPos()))) {
-								ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() - wall.getYPos()));
-								ball.setYVelocity(ball.getYVelocity() * -1);
-								ball.setXPos(ball.getXPos() + ball.getXVelocity());
-							} else {
-								ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() - wall.getXPos()));
-								ball.setXVelocity(ball.getXVelocity() * -1);
-								ball.setYPos(ball.getYPos() + ball.getYVelocity());
-							}	
-							wall.destroy();
-							return true;
-						}
+				for (int j=0; j<Wall.length; j++) { // column by column
+					for (int k=0; k<Wall.height; k++) { // row by row
+						if ((k == 0) || (k == Wall.height - 1) || (j == 0) || (j == Wall.length - 1)) {
+							wallX = wall.getXPos() + j;
+							wallY = wall.getYPos() + k;
+							if (coordInBallPath(wallX, wallY)) { 
+								if ((k == 0) && (ball.getYPos() < wall.getYPos())) {
+									ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() - wall.getYPos()));
+									ball.setYVelocity(ball.getYVelocity() * -1);
+									ball.setXPos(ball.getXPos() + ball.getXVelocity());
+								} else if ((k == Wall.height - 1) && (ball.getYPos() > wall.getYPos())) {
+									ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
+									ball.setYVelocity(ball.getYVelocity() * -1);
+									ball.setXPos(ball.getXPos() + ball.getXVelocity());
+								} else if ((j == Wall.length - 1) && (ball.getXPos() > wall.getXPos())) {
+									ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
+									ball.setXVelocity(ball.getXVelocity() * -1);
+									ball.setYPos(ball.getYPos() + ball.getYVelocity());
+								} else {
+									ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() - wall.getXPos()));
+									ball.setXVelocity(ball.getXVelocity() * -1);
+									ball.setYPos(ball.getYPos() + ball.getYVelocity());
+								}	
+								wall.destroy();
+								return true;
+							} 
+						}							
 					}
 				}
 			}
@@ -152,23 +162,33 @@ public class Game implements IGame {
 			Warlord player = playerList.get(i);
 			if (!player.isDead()) {
 				int playerX, playerY;
-				for (int j=0; j<Warlord.length; j++) {
-					for (int k=0; k<Warlord.height; k++) {
-						playerX = player.getXPos() + j;
-						playerY = player.getYPos() + k;
-						if (coordInBallPath(playerX, playerY)) {
-							if (((k == 0) && (ball.getYPos() < player.getYPos())) || ((k == 4) && (ball.getYPos() > player.getYPos()))) {
-								ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() - player.getYPos()));
-								ball.setYVelocity(ball.getYVelocity() * -1);
-								ball.setXPos(ball.getXPos() + ball.getXVelocity());
-							} else {
-								ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() - player.getXPos()));
-								ball.setXVelocity(ball.getXVelocity() * -1);
-								ball.setYPos(ball.getYPos() + ball.getYVelocity());
-							}	
-							player.dies();
-							return true;
-						}
+				for (int j=0; j<Warlord.length; j++) { // column by column
+					for (int k=0; k<Warlord.height; k++) { // row by row
+						if ((k == 0) || (k == Warlord.height - 1) || (j == 0) || (j == Warlord.length - 1)) {
+							playerX = player.getXPos() + j;
+							playerY = player.getYPos() + k;
+							if (coordInBallPath(playerX, playerY)) { 
+								if ((k == 0) && (ball.getYPos() < player.getYPos())) {
+									ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() - player.getYPos()));
+									ball.setYVelocity(ball.getYVelocity() * -1);
+									ball.setXPos(ball.getXPos() + ball.getXVelocity());
+								} else if ((k == Warlord.height - 1) && (ball.getYPos() > player.getYPos())) {
+									ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
+									ball.setYVelocity(ball.getYVelocity() * -1);
+									ball.setXPos(ball.getXPos() + ball.getXVelocity());
+								} else if ((j == Warlord.length - 1) && (ball.getXPos() > player.getXPos())) {
+									ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
+									ball.setXVelocity(ball.getXVelocity() * -1);
+									ball.setYPos(ball.getYPos() + ball.getYVelocity());
+								} else {
+									ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() - player.getXPos()));
+									ball.setXVelocity(ball.getXVelocity() * -1);
+									ball.setYPos(ball.getYPos() + ball.getYVelocity());
+								}	
+								player.dies();
+								return true;
+							} 
+						}							
 					}
 				}
 			}
@@ -250,6 +270,7 @@ public class Game implements IGame {
 				// Check coords for hit	
 				for (int i=0; i<coordsList.size();i++) {				
 					if ((xCoord == coordsList.get(i)[0]) && (yCoord == coordsList.get(i)[1])) {
+						System.out.println("hit");
 						return true;
 					}
 				}

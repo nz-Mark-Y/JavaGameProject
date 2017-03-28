@@ -4,8 +4,8 @@ import warlords.tests.IWall;
 public class Wall implements IWall {
 	private int x;
 	private int y;
-	public static int height = 5;
-	public static int length = 5; 
+	public static int height = 30;
+	public static int length = 30; 
 	private boolean destroyed;
 	private int belongsTo;
 	

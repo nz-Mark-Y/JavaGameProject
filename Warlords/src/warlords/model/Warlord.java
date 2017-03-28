@@ -5,8 +5,8 @@ public class Warlord implements IWarlord {
 	private Paddle paddle;
 	private int x;
 	private int y;
-	public static int height = 5;
-	public static int length = 5; 
+	public static int height = 50;
+	public static int length = 50; 
 	private boolean dead;
 	private boolean won;
 	private int wallsLeft;

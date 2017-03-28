@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import warlords.control.WarlordsController;
 import warlords.model.Game;
 import warlords.model.Paddle;
+import warlords.model.Wall;
 import warlords.model.Warlord;
 
 public class GameViewController {
@@ -50,8 +51,8 @@ public class GameViewController {
 		this.warlordsController = warlordsController;
 		this.game = warlordsController.getGame();
 		
-		game.getBall().setXVelocity(-3);
-		game.getBall().setYVelocity(-3);
+		game.getBall().setXVelocity(-2);
+		game.getBall().setYVelocity(-4);
 		
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask () {
@@ -71,12 +72,12 @@ public class GameViewController {
 		player2Paddle.setX(game.getPlayerList().get(1).getPaddle().getXPos());
 		player2Paddle.setY(-(game.getPlayerList().get(1).getPaddle().getYPos() + Paddle.height));
 		player1Wall.setX(game.getWallList().get(0).getXPos());
-		player1Wall.setY(-game.getWallList().get(0).getYPos());
+		player1Wall.setY(-(game.getWallList().get(0).getYPos() + Wall.height));
 		player2Wall.setX(game.getWallList().get(1).getXPos());
-		player2Wall.setY(-game.getWallList().get(1).getYPos());
+		player2Wall.setY(-(game.getWallList().get(1).getYPos() + Wall.height));
 		player1Warlord.setX(game.getPlayerList().get(0).getXPos());
-		player1Warlord.setY(-game.getPlayerList().get(0).getYPos());
+		player1Warlord.setY(-(game.getPlayerList().get(0).getYPos() + Warlord.height));
 		player2Warlord.setX(game.getPlayerList().get(1).getXPos());
-		player2Warlord.setY(-game.getPlayerList().get(1).getYPos());
+		player2Warlord.setY(-(game.getPlayerList().get(1).getYPos() + Warlord.height));
 	}
 }
