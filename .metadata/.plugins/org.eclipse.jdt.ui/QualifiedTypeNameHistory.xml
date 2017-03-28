@@ -9,12 +9,8 @@
 <fullyQualifiedTypeName name="code.Warlord"/>
 <fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javafx.scene.Scene"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
-<fullyQualifiedTypeName name="warlords.model.Paddle"/>
-<fullyQualifiedTypeName name="warlords.model.Warlord"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="warlords.model.Wall"/>
 <fullyQualifiedTypeName name="warlords.model.Ball"/>
 <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
@@ -24,4 +20,10 @@
 <fullyQualifiedTypeName name="warlords.model.Game"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
 <fullyQualifiedTypeName name="java.util.TimerTask"/>
+<fullyQualifiedTypeName name="javafx.scene.shape.Rectangle"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="warlords.model.Warlord"/>
+<fullyQualifiedTypeName name="warlords.control.KeyHandlers"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="warlords.model.Paddle"/>
 </qualifiedTypeNameHistroy>

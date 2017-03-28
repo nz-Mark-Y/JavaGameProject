@@ -4,8 +4,8 @@ import warlords.tests.IPaddle;
 public class Paddle implements IPaddle {
 	private int x;
 	private int y;
-	public static int height = 5;
-	public static int length = 5;
+	public static int height = 40;
+	public static int length = 40;
 	
 	public Paddle(int init_x, int init_y) {
 		x = init_x;
@@ -23,7 +23,7 @@ public class Paddle implements IPaddle {
 	}
 
 	@Override
-	public void setYpos(int y) {
+	public void setYPos(int y) {
 		this.y = y;
 	}
 	

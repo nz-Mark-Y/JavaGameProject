@@ -1,6 +1,7 @@
 package warlords.model;
 import java.util.ArrayList;
 
+import warlords.control.KeyHandlers;
 import warlords.tests.IGame;
 
 public class Game implements IGame {
@@ -11,6 +12,7 @@ public class Game implements IGame {
 	private static int yBound;
 	private boolean finished;
 	private int timeRemaining;
+	private int ticksSinceLastHit;
 	
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
 		this.ball = ball;
@@ -20,26 +22,34 @@ public class Game implements IGame {
 		this.wallList = wallList;
 		finished = false;
 		timeRemaining = 120;
+		ticksSinceLastHit = 11;
 	}
 	
 	@Override
-	public void tick() {
-		// Check if the ball is going to hit a warlord
-		if (checkWarlords()) {
-			checkWin();
-			return;
-		}
-		
-		// Check if the ball is going to hit a block
-		if (checkWalls()) {
-			checkWin();
-			return;
-		}
-		
-		// Check if the ball is going to hit a paddle
-		if (checkPaddles()) {
-			checkWin();
-			return;
+	public void tick() {	
+		if (ticksSinceLastHit > 10) {
+			// Check if the ball is going to hit a paddle
+			if (checkPaddles()) {
+				ticksSinceLastHit = 0;
+				checkWin();
+				return;
+			}
+				
+			// Check if the ball is going to hit a block
+			if (checkWalls()) {
+				ticksSinceLastHit = 0;
+				checkWin();
+				return;
+			}
+				
+			// Check if the ball is going to hit a warlord
+			if (checkWarlords()) {
+				ticksSinceLastHit = 0;
+				checkWin();
+				return;
+			}
+		} else {
+			ticksSinceLastHit++;
 		}
 		
 		// Check for boundaries, if we hit one then rebound
@@ -49,10 +59,10 @@ public class Game implements IGame {
 		} else if (ball.getXPos() + ball.getXVelocity() <= 0) {	
 			ball.setXPos((ball.getXPos() + ball.getXVelocity()) * -1);
 			ball.setXVelocity(ball.getXVelocity() * -1);
-		} else {
+		} else {	
 			ball.setXPos(ball.getXPos() + ball.getXVelocity());
 		}
-		
+
 		if (ball.getYPos() + ball.getYVelocity() >= yBound) {
 			ball.setYPos(yBound - (ball.getYPos() + ball.getYVelocity() - yBound));
 			ball.setYVelocity(ball.getYVelocity() * -1);
@@ -69,26 +79,36 @@ public class Game implements IGame {
 	
 	// Check for paddles, if we hit one then rebound
 	private boolean checkPaddles() {
-		for (int i=0; i<playerList.size(); i++) {
-			Paddle paddle = playerList.get(i).getPaddle();
+		for (int i=0; i<playerList.size(); i++) {			
 			if (!playerList.get(i).isDead()) {
+				Paddle paddle = playerList.get(i).getPaddle();
 				int paddleX, paddleY;
-				for (int j=0; j<Paddle.length; j++) { 
-					for (int k=0; k<Paddle.height; k++) { 
-						paddleX = paddle.getXPos() + j;
-						paddleY = paddle.getYPos() + k;
-						if (coordInBallPath(paddleX, paddleY)) {
-							if (((k == 0) && (ball.getYPos() < paddle.getYPos())) || ((k == 4) && (ball.getYPos() > paddle.getYPos()))) {
-								ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() - paddle.getYPos()));
-								ball.setYVelocity(ball.getYVelocity() * -1);
-								ball.setXPos(ball.getXPos() + ball.getXVelocity());
-							} else {
-								ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() - paddle.getXPos()));
-								ball.setXVelocity(ball.getXVelocity() * -1);
-								ball.setYPos(ball.getYPos() + ball.getYVelocity());
-							}	
-							return true;
-						} 			
+				for (int j=0; j<Paddle.length; j++) { // column by column
+					for (int k=0; k<Paddle.height; k++) { // row by row
+						if ((k == 0) || (k == Paddle.height - 1) || (j == 0) || (j == Paddle.length - 1)) {
+							paddleX = paddle.getXPos() + j;
+							paddleY = paddle.getYPos() + k;
+							if (coordInBallPath(paddleX, paddleY)) { 
+								if ((k == 0) && (ball.getYPos() < paddle.getYPos())) {
+									ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() - paddle.getYPos()));
+									ball.setYVelocity(ball.getYVelocity() * -1);
+									ball.setXPos(ball.getXPos() + ball.getXVelocity());
+								} else if ((k == Paddle.height - 1) && (ball.getYPos() > paddle.getYPos())) {
+									ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
+									ball.setYVelocity(ball.getYVelocity() * -1);
+									ball.setXPos(ball.getXPos() + ball.getXVelocity());
+								} else if ((j == Paddle.length - 1) && (ball.getXPos() > paddle.getXPos())) {
+									ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
+									ball.setXVelocity(ball.getXVelocity() * -1);
+									ball.setYPos(ball.getYPos() + ball.getYVelocity());
+								} else {
+									ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() - paddle.getXPos()));
+									ball.setXVelocity(ball.getXVelocity() * -1);
+									ball.setYPos(ball.getYPos() + ball.getYVelocity());
+								}	
+								return true;
+							} 
+						}							
 					}
 				}
 			}
@@ -196,28 +216,39 @@ public class Game implements IGame {
 				y0 = ball.getYPos() + y;
 				y1 = ball.getYPos() + ball.getYVelocity() + y;		
 				ArrayList<int []> coordsList = new ArrayList<int []>();
-				
 				// Bresenham's Algorithm
 				int deltaX = x1 - x0;
 				int deltaY = y1 - y0;
 				if (deltaX == 0) {
 					deltaX = 1;
-				}
+					x1++;
+				} 
 				double deltaError = Math.abs(deltaY / deltaX);
 				double error = deltaError - 0.5;
 				int yTemp = y0;
-				for (int i=x0; i<x1; i++) {
-					int[] tempArray = {i, yTemp};
-					coordsList.add(tempArray);
-					error = error + deltaError;
-					if (error >= 0.5) {
-						yTemp++;
-						error = error - 1.0;
+				if (deltaX > 0) {
+					for (int i=x0; i<x1; i++) {
+						int[] tempArray = {i, yTemp};
+						coordsList.add(tempArray);
+						error = error + deltaError;
+						if (error >= 0.5) {
+							yTemp++;
+							error = error - 1.0;
+						}	
 					}
-				
+				} else {
+					for (int i=x1; i<x0; i++) {
+						int[] tempArray = {i, yTemp};
+						coordsList.add(tempArray);
+						error = error + deltaError;
+						if (error >= 0.5) {
+							yTemp++;
+							error = error - 1.0;
+						}	
+					}
 				}
 				// Check coords for hit	
-				for (int i=0; i<coordsList.size();i++) {
+				for (int i=0; i<coordsList.size();i++) {				
 					if ((xCoord == coordsList.get(i)[0]) && (yCoord == coordsList.get(i)[1])) {
 						return true;
 					}
@@ -240,6 +271,14 @@ public class Game implements IGame {
 	
 	public Ball getBall() {
 		return ball;
+	}
+	
+	public ArrayList<Warlord> getPlayerList() {
+		return playerList;
+	}
+	
+	public ArrayList<Wall> getWallList() {
+		return wallList;
 	}
 
 }

@@ -95,13 +95,12 @@ public class WarlordsTest extends TestSuite {
         this.ball.setYVelocity(10);
 
         this.paddle.setXPos(500);
-        this.paddle.setYpos(500);
+        this.paddle.setYPos(500);
 
         this.game.tick();
 
         assertTrue("The ball should not travel through the paddle", this.ball.getYPos() <= 500);
         assertTrue("The ball's velocity should be reversed in the direction of the collision", this.ball.getXVelocity() == 10 && this.ball.getYVelocity() == -10);
-
     }
 
     @Test
@@ -153,7 +152,7 @@ public class WarlordsTest extends TestSuite {
         this.ball.setYVelocity(300);
 
         this.paddle.setXPos(500);
-        this.paddle.setYpos(500);
+        this.paddle.setYPos(500);
 
         this.game.tick();
 

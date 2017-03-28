@@ -6,8 +6,8 @@ public class Ball implements IBall {
 	private int y;
 	private int dx;
 	private int dy;
-	public static int height = 5;
-	public static int length = 5; 
+	public static int height = 10;
+	public static int length = 10; 
 	
 	public Ball(int init_x, int init_y) {
 		x = init_x;
