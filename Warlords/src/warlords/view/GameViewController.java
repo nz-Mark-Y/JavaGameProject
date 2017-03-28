@@ -35,6 +35,24 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player2Warlord;
 	
+	@FXML 
+	private Rectangle player3Paddle;
+	
+	@FXML 
+	private Rectangle player4Paddle;
+	
+	@FXML 
+	private Rectangle player3Wall;
+	
+	@FXML 
+	private Rectangle player4Wall;
+	
+	@FXML 
+	private Rectangle player3Warlord;
+	
+	@FXML 
+	private Rectangle player4Warlord;
+	
 	private WarlordsController warlordsController;
 	private Game game;
 	
@@ -78,6 +96,18 @@ public class GameViewController {
 		player1Warlord.setX(game.getPlayerList().get(0).getXPos());
 		player1Warlord.setY(-(game.getPlayerList().get(0).getYPos() + Warlord.height));
 		player2Warlord.setX(game.getPlayerList().get(1).getXPos());
-		player2Warlord.setY(-(game.getPlayerList().get(1).getYPos() + Warlord.height));
+		player2Warlord.setY(-(game.getPlayerList().get(1).getYPos() + Warlord.height));	
+		player3Paddle.setX(game.getPlayerList().get(2).getPaddle().getXPos());
+		player3Paddle.setY(-(game.getPlayerList().get(2).getPaddle().getYPos() + Paddle.height));
+		player4Paddle.setX(game.getPlayerList().get(3).getPaddle().getXPos());
+		player4Paddle.setY(-(game.getPlayerList().get(3).getPaddle().getYPos() + Paddle.height));
+		player3Wall.setX(game.getWallList().get(2).getXPos());
+		player3Wall.setY(-(game.getWallList().get(2).getYPos() + Wall.height));
+		player4Wall.setX(game.getWallList().get(3).getXPos());
+		player4Wall.setY(-(game.getWallList().get(3).getYPos() + Wall.height));
+		player3Warlord.setX(game.getPlayerList().get(2).getXPos());
+		player3Warlord.setY(-(game.getPlayerList().get(2).getYPos() + Warlord.height));
+		player4Warlord.setX(game.getPlayerList().get(3).getXPos());
+		player4Warlord.setY(-(game.getPlayerList().get(3).getYPos() + Warlord.height));
 	}
 }
