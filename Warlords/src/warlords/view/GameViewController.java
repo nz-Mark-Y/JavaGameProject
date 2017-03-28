@@ -52,7 +52,7 @@ public class GameViewController {
 		this.game = warlordsController.getGame();
 		
 		game.getBall().setXVelocity(-2);
-		game.getBall().setYVelocity(-4);
+		game.getBall().setYVelocity(-5);
 		
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask () {

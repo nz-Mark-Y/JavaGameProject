@@ -80,7 +80,7 @@ public class Game implements IGame {
 	// Check for paddles, if we hit one then rebound
 	private boolean checkPaddles() {
 		for (int i=0; i<playerList.size(); i++) {			
-			if (!playerList.get(i).isDead()) {
+			//if (!playerList.get(i).isDead()) {
 				Paddle paddle = playerList.get(i).getPaddle();
 				int paddleX, paddleY;
 				for (int j=0; j<Paddle.length; j++) { // column by column
@@ -111,7 +111,7 @@ public class Game implements IGame {
 						}							
 					}
 				}
-			}
+			//}
 		}
 		return false;
 	}
@@ -120,7 +120,7 @@ public class Game implements IGame {
 	private boolean checkWalls() {
 		for (int i=0; i<wallList.size(); i++) {
 			Wall wall = wallList.get(i);
-			if (!wall.isDestroyed()) {
+			//if (!wall.isDestroyed()) {
 				int wallX, wallY;
 				for (int j=0; j<Wall.length; j++) { // column by column
 					for (int k=0; k<Wall.height; k++) { // row by row
@@ -151,7 +151,7 @@ public class Game implements IGame {
 						}							
 					}
 				}
-			}
+			//}
 		}
 		return false;
 	}
@@ -160,7 +160,7 @@ public class Game implements IGame {
 	private boolean checkWarlords() {
 		for (int i=0; i<playerList.size(); i++) {
 			Warlord player = playerList.get(i);
-			if (!player.isDead()) {
+			//if (!player.isDead()) {
 				int playerX, playerY;
 				for (int j=0; j<Warlord.length; j++) { // column by column
 					for (int k=0; k<Warlord.height; k++) { // row by row
@@ -191,7 +191,7 @@ public class Game implements IGame {
 						}							
 					}
 				}
-			}
+			//}
 		}
 		return false;
 	}
