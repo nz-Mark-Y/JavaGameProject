@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import warlords.control.WarlordsController;
+import warlords.WarlordsController;
 import warlords.model.Game;
 import warlords.model.Paddle;
 import warlords.model.Wall;

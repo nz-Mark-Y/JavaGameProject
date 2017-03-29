@@ -1,4 +1,5 @@
-package warlords.control;
+package warlords;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class WarlordsController extends Application {
 	public void initRootLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("../view/RootLayout.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			
 			Scene scene  = new Scene(rootLayout);
@@ -79,7 +80,7 @@ public class WarlordsController extends Application {
 	public void showGameView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("../view/GameView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/GameView.fxml"));
 			AnchorPane gameView = (AnchorPane) loader.load();
 			
 			rootLayout.setCenter(gameView);
