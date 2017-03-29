@@ -38,7 +38,15 @@ public class GameViewController {
 			public void run() {
 				onTick();
 			}
-		}, 16, 16);
+		}, 20, 20);
+		
+		Timer timer2 = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask () {
+			@Override
+			public void run() {
+				showTime();
+			}
+		}, 1000, 1000);
 	}
 	
 	private void onTick() {
@@ -68,7 +76,11 @@ public class GameViewController {
 		player3Warlord.setX(game.getPlayerList().get(2).getXPos());
 		player3Warlord.setY(-(game.getPlayerList().get(2).getYPos() + Warlord.height));
 		player4Warlord.setX(game.getPlayerList().get(3).getXPos());
-		player4Warlord.setY(-(game.getPlayerList().get(3).getYPos() + Warlord.height));
+		player4Warlord.setY(-(game.getPlayerList().get(3).getYPos() + Warlord.height));	
+	}
+	
+	private void showTime() {
+		System.out.println("Time Remaining: " + game.getTimeRemaining());
 	}
 
 	@FXML

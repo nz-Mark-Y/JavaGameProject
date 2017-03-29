@@ -11,7 +11,7 @@ public class Game implements IGame {
 	private static int xBound;
 	private static int yBound;
 	private boolean finished;
-	private int timeRemaining;
+	private float timeRemaining;
 	private int ticksSinceLastHit;
 	
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
@@ -21,12 +21,13 @@ public class Game implements IGame {
 		this.playerList = playerList;
 		this.wallList = wallList;
 		finished = false;
-		timeRemaining = 120;
+		timeRemaining = (float) 120;
 		ticksSinceLastHit = 11;
 	}
 	
 	@Override
 	public void tick() {	
+		timeRemaining -= 0.02;
 		if (ticksSinceLastHit > 10) {
 			// Check if the ball is going to hit a paddle
 			if (checkPaddles()) {
@@ -295,7 +296,11 @@ public class Game implements IGame {
 
 	@Override
 	public void setTimeRemaining(int seconds) {
-		timeRemaining = seconds;
+		timeRemaining = (float) seconds;
+	}
+	
+	public int getTimeRemaining() {
+		return (int) timeRemaining;
 	}
 	
 	public Ball getBall() {
