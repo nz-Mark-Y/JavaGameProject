@@ -56,7 +56,7 @@ public class WarlordsController extends Application {
 		
 		initRootLayout();
 		
-		showGameView();
+		showMainMenu();
 	}
 
 	public static void main(String[] args) {
@@ -87,6 +87,19 @@ public class WarlordsController extends Application {
 			
 			GameViewController controller = loader.getController();
 			controller.setWarlordsController(this);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void showMainMenu() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/MainMenuView.fxml"));
+			AnchorPane menuView = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(menuView);
+			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
