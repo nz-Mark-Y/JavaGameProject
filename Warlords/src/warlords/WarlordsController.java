@@ -99,4 +99,11 @@ public class WarlordsController extends Application {
 	public Game getGame() {
 		return game;
 	}
+	
+	//Terminate the application when window is closed
+	@Override
+	public void stop(){
+	    System.out.println("Application terminated successfully.");
+	    System.exit(0);
+	}
 }
