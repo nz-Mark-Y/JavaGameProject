@@ -69,8 +69,8 @@ public class GameViewController {
 		this.warlordsController = warlordsController;
 		this.game = warlordsController.getGame();
 		
-		game.getBall().setXVelocity(-2);
-		game.getBall().setYVelocity(-5);
+		game.getBall().setXVelocity(-3);
+		game.getBall().setYVelocity(-3);
 		
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask () {
@@ -78,7 +78,7 @@ public class GameViewController {
 			public void run() {
 				onTick();
 			}
-		},20, 20);
+		},40, 40);
 	}
 	
 	private void onTick() {

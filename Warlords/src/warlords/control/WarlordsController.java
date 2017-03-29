@@ -26,7 +26,7 @@ public class WarlordsController extends Application {
 	}
 	
 	public void createNewGame() {
-		Ball ball = new Ball(600, 600);
+		Ball ball = new Ball(350, 350);
 		Warlord player1 = new Warlord(new Paddle(200, 200), 100, 100);
 		Warlord player2 = new Warlord(new Paddle(568, 568), 668, 668);
 		Warlord player3 = new Warlord(new Paddle(200, 568), 100, 668);

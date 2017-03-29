@@ -89,19 +89,79 @@ public class Game implements IGame {
 							paddleX = paddle.getXPos() + j;
 							paddleY = paddle.getYPos() + k;
 							if (coordInBallPath(paddleX, paddleY)) { 
-								if ((k == 0) && (ball.getYPos() < paddle.getYPos())) {
+								if ((k == 0) && (j == 0)) { // bottom left corner
+									if ((ball.getXVelocity() > 0) && (ball.getYVelocity() > 0)) { // ball coming from bottom left, reverse x and y
+										ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse x
+										ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									} else { // ball coming from bottom right, reverse y
+										ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									}
+								} else if ((k == Paddle.height - 1) && (j == Paddle.length - 1)) { // top right corner
+									if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right, reverse x and y
+										ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse y
+										ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									} else { // ball coming from bottom right, reverse x
+										ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									}
+								} else if ((k == 0) && (j == Paddle.length - 1)) { // bottom right corner
+									if ((ball.getXVelocity() < 0) && (ball.getYVelocity() > 0)) { // ball coming from bottom right, reverse x and y
+										ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right, reverse x
+										ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									} else { // ball coming from bottom left, reverse y
+										ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+									}
+								} else if ((k == Paddle.height - 1) && (j == 0)) { // top left corner
+									if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse x and y
+										ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right
+										ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									} else { // ball coming from bottom left
+										ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									}
+								} else if (k == 0) { // bottom side, reverse y
 									ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((k == Paddle.height - 1) && (ball.getYPos() > paddle.getYPos())) {
+									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+								} else if (k == Paddle.height - 1) { // top side, reverse y
 									ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((j == Paddle.length - 1) && (ball.getXPos() > paddle.getXPos())) {
+								} else if (j == Paddle.length - 1) { // right side, reverse x
 									ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
 									ball.setXVelocity(ball.getXVelocity() * -1);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else {
+								} else { // left side, reverse y
 									ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
 									ball.setXVelocity(ball.getXVelocity() * -1);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
@@ -128,20 +188,80 @@ public class Game implements IGame {
 							wallX = wall.getXPos() + j;
 							wallY = wall.getYPos() + k;
 							if (coordInBallPath(wallX, wallY)) { 
-								if ((k == 0) && (ball.getYPos() < wall.getYPos())) {
+								if ((k == 0) && (j == 0)) { // bottom left corner
+									if ((ball.getXVelocity() > 0) && (ball.getYVelocity() > 0)) { // ball coming from bottom left, reverse x and y
+										ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse x
+										ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									} else { // ball coming from bottom right, reverse y
+										ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									}
+								} else if ((k == Wall.height - 1) && (j == Wall.length - 1)) { // top right corner
+									if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right, reverse x and y
+										ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse y
+										ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									} else { // ball coming from bottom right, reverse x
+										ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									}
+								} else if ((k == 0) && (j == Wall.length - 1)) { // bottom right corner
+									if ((ball.getXVelocity() < 0) && (ball.getYVelocity() > 0)) { // ball coming from bottom right, reverse x and y
+										ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right, reverse x
+										ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									} else { // ball coming from bottom left, reverse y
+										ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+									}
+								} else if ((k == Wall.height - 1) && (j == 0)) { // top left corner
+									if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse x and y
+										ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right
+										ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									} else { // ball coming from bottom left
+										ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									}
+								} else if (k == 0) { // bottom side, reverse y
 									ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((k == Wall.height - 1) && (ball.getYPos() > wall.getYPos())) {
+									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+								} else if (k == Wall.height - 1) { // top side, reverse y
 									ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((j == Wall.length - 1) && (ball.getXPos() > wall.getXPos())) {
+								} else if (j == Wall.length - 1) { // right side, reverse x
 									ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
 									ball.setXVelocity(ball.getXVelocity() * -1);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else {
-									ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity()  + Ball.length - wall.getXPos()));
+								} else { // left side, reverse y
+									ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
 									ball.setXVelocity(ball.getXVelocity() * -1);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								}	
@@ -168,19 +288,79 @@ public class Game implements IGame {
 							playerX = player.getXPos() + j;
 							playerY = player.getYPos() + k;
 							if (coordInBallPath(playerX, playerY)) { 
-								if ((k == 0) && (ball.getYPos() < player.getYPos())) {
+								if ((k == 0) && (j == 0)) { // bottom left corner
+									if ((ball.getXVelocity() > 0) && (ball.getYVelocity() > 0)) { // ball coming from bottom left, reverse x and y
+										ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse x
+										ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									} else { // ball coming from bottom right, reverse y
+										ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									}
+								} else if ((k == Warlord.height - 1) && (j == Warlord.length - 1)) { // top right corner
+									if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right, reverse x and y
+										ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse y
+										ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									} else { // ball coming from bottom right, reverse x
+										ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									}
+								} else if ((k == 0) && (j == Warlord.length - 1)) { // bottom right corner
+									if ((ball.getXVelocity() < 0) && (ball.getYVelocity() > 0)) { // ball coming from bottom right, reverse x and y
+										ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right, reverse x
+										ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									} else { // ball coming from bottom left, reverse y
+										ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+									}
+								} else if ((k == Warlord.height - 1) && (j == 0)) { // top left corner
+									if ((ball.getXVelocity() > 0) && (ball.getYVelocity() < 0)) { // ball coming from top left, reverse x and y
+										ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+									} else if ((ball.getXVelocity() < 0) && (ball.getYVelocity() < 0)) { // ball coming from top right
+										ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
+										ball.setYVelocity(ball.getYVelocity() * -1);
+										ball.setXPos(ball.getXPos() + ball.getXVelocity());
+									} else { // ball coming from bottom left
+										ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
+										ball.setXVelocity(ball.getXVelocity() * -1);
+										ball.setYPos(ball.getYPos() + ball.getYVelocity());
+									}
+								} else if (k == 0) { // bottom side, reverse y
 									ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((k == Warlord.height - 1) && (ball.getYPos() > player.getYPos())) {
+									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+								} else if (k == Warlord.height - 1) { // top side, reverse y
 									ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((j == Warlord.length - 1) && (ball.getXPos() > player.getXPos())) {
+								} else if (j == Warlord.length - 1) { // right side, reverse x
 									ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
 									ball.setXVelocity(ball.getXVelocity() * -1);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else {
+								} else { // left side, reverse y
 									ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
 									ball.setXVelocity(ball.getXVelocity() * -1);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
@@ -270,7 +450,6 @@ public class Game implements IGame {
 				// Check coords for hit	
 				for (int i=0; i<coordsList.size();i++) {				
 					if ((xCoord == coordsList.get(i)[0]) && (yCoord == coordsList.get(i)[1])) {
-						System.out.println("hit");
 						return true;
 					}
 				}
