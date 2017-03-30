@@ -1,15 +1,17 @@
 package warlords;
 
 
-import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -18,19 +20,24 @@ import warlords.model.Game;
 import warlords.model.Paddle;
 import warlords.model.Wall;
 import warlords.model.Warlord;
+import warlords.view.CampaignMenuViewController;
 import warlords.view.GameViewController;
 import warlords.view.LeftSideViewController;
+import warlords.view.MainMenuViewController;
 import warlords.view.RightSideViewController;
 
 public class WarlordsController extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Game game;
+	boolean goUp, goDown;
+	Scene scene;
 
 	public WarlordsController() {
 		createNewGame();
 	}
-
+	
+	// Set up the objects in a new game
 	public void createNewGame() {
 		Ball ball = new Ball(350, 350);
 		Warlord player1 = new Warlord(new Paddle(200, 200), 100, 100);
@@ -53,12 +60,12 @@ public class WarlordsController extends Application {
 		wallList.add(wall4);
 		game = new Game(ball, 763, 763, playerList, wallList);		
 	}
-
+	
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Warlords");
-
+		this.primaryStage.setTitle("Warlords");	
+		
 		initRootLayout();
 		showMainMenu();
 	}
@@ -66,21 +73,24 @@ public class WarlordsController extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+	
+	// Create the root window of the game
 	public void initRootLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(WarlordsController.class.getResource("view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
-			Scene scene  = new Scene(rootLayout);
+			scene  = new Scene(rootLayout);
+
 			primaryStage.setScene(scene);
-			primaryStage.show();
+			primaryStage.show();		
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-
+	
+	// Display the game view, and the two side windows 
 	public void showGameView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -112,22 +122,43 @@ public class WarlordsController extends Application {
 		}
 	}
 
+	// Display the main menu, and two black side windows
 	public void showMainMenu() {
-		
-		//Button to switch from menu to game
-		Button startButton = new Button("Start!");
-		startButton.setMinSize(100, 100);
-		startButton.setOnAction(event -> {
-			showGameView();
-		});
-		
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(WarlordsController.class.getResource("view/MainMenuView.fxml"));
 			AnchorPane menuView = (AnchorPane) loader.load();	
+			
+			FXMLLoader loader2 = new FXMLLoader();
+			loader2.setLocation(WarlordsController.class.getResource("view/BlackSideView.fxml"));
+			AnchorPane leftSideView = (AnchorPane) loader2.load();
+			
+			FXMLLoader loader3 = new FXMLLoader();
+			loader3.setLocation(WarlordsController.class.getResource("view/BlackSideView.fxml"));
+			AnchorPane rightSideView = (AnchorPane) loader3.load();
+			
 			rootLayout.setCenter(menuView);
-			rootLayout.setCenter(startButton);
-
+			rootLayout.setLeft(leftSideView);
+			rootLayout.setRight(rightSideView);
+			
+			MainMenuViewController controller = loader.getController();
+			controller.setWarlordsController(this, scene);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	// Display the campaign menu
+	public void showCampaignMenu() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/CampaignMenuView.fxml"));
+			AnchorPane campaignMenuView = (AnchorPane) loader.load();	
+			
+			rootLayout.setCenter(campaignMenuView);
+			
+			CampaignMenuViewController controller = loader.getController();
+			controller.setWarlordsController(this, scene);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -141,7 +172,7 @@ public class WarlordsController extends Application {
 		return game;
 	}
 
-	//Terminate the application when window is closed
+	// Terminate the application when window is closed
 	@Override
 	public void stop(){
 		System.out.println("Application terminated successfully.");
