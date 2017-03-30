@@ -38,14 +38,17 @@ public class CampaignMenuViewController {
 		
 		// Set custom fonts 
 		Font myFont = null;
+		Font titleFont = null;
         try {
             myFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 84);
+            titleFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         for (int i=0; i<menuList.size(); i++) {
         	menuList.get(i).setFont(myFont);
         }
+        title.setFont(titleFont);
         updateSelection();
         
         // Create a key handler for the scene
@@ -113,6 +116,9 @@ public class CampaignMenuViewController {
 			System.out.println("Unavailable Menu Option");
 		}
 	}
+	
+	@FXML
+	private Text title;
 	
 	@FXML
 	private Text cont;

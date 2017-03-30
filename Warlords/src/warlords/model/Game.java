@@ -1,7 +1,6 @@
 package warlords.model;
 import java.util.ArrayList;
 
-import warlords.control.KeyHandlers;
 import warlords.tests.IGame;
 
 public class Game implements IGame {

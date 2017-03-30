@@ -13,7 +13,7 @@
             <Image url="@../../../images/background.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="224.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Campaign" textAlignment="CENTER">
+      <Text fx:id="title" fill="WHITE" layoutX="224.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Campaign" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="96.0" />
          </font>
