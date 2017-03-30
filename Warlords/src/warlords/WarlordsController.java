@@ -16,6 +16,8 @@ import warlords.model.Paddle;
 import warlords.model.Wall;
 import warlords.model.Warlord;
 import warlords.view.GameViewController;
+import warlords.view.LeftSideViewController;
+import warlords.view.RightSideViewController;
 
 public class WarlordsController extends Application {
 	private Stage primaryStage;
@@ -56,7 +58,7 @@ public class WarlordsController extends Application {
 		
 		initRootLayout();
 		
-		showMainMenu();
+		showGameView();
 	}
 
 	public static void main(String[] args) {
@@ -83,10 +85,26 @@ public class WarlordsController extends Application {
 			loader.setLocation(WarlordsController.class.getResource("view/GameView.fxml"));
 			AnchorPane gameView = (AnchorPane) loader.load();
 			
+			FXMLLoader loader2 = new FXMLLoader();
+			loader2.setLocation(WarlordsController.class.getResource("view/RightSideView.fxml"));
+			AnchorPane rightSideView = (AnchorPane) loader2.load();
+			
+			FXMLLoader loader3 = new FXMLLoader();
+			loader3.setLocation(WarlordsController.class.getResource("view/LeftSideView.fxml"));
+			AnchorPane leftSideView = (AnchorPane) loader3.load();
+			
 			rootLayout.setCenter(gameView);
+			rootLayout.setRight(rightSideView);
+			rootLayout.setLeft(leftSideView);
 			
 			GameViewController controller = loader.getController();
 			controller.setWarlordsController(this);
+			
+			RightSideViewController controller2 = loader2.getController();
+			controller2.setWarlordsController(this);
+			
+			LeftSideViewController controller3 = loader3.getController();
+			controller3.setWarlordsController(this);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
