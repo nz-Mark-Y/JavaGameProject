@@ -110,7 +110,7 @@ public class WarlordsController extends Application {
 			rootLayout.setLeft(leftSideView);
 
 			GameViewController controller = loader.getController();
-			controller.setWarlordsController(this);
+			controller.setWarlordsController(this, scene);
 
 			RightSideViewController controller2 = loader2.getController();
 			controller2.setWarlordsController(this);

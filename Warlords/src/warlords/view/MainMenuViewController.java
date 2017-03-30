@@ -110,9 +110,9 @@ public class MainMenuViewController {
 		} else if (isSelected == 2) {
 			
 		} else if (isSelected == 3) {
-			
+			warlordsController.showGameView();
 		} else if (isSelected == 4) {
-			
+			warlordsController.stop();
 		} else {
 			System.out.println("Unavailable Menu Option");
 		}

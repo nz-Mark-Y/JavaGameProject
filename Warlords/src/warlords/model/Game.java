@@ -1,7 +1,6 @@
 package warlords.model;
 import java.util.ArrayList;
 
-import warlords.control.KeyHandlers;
 import warlords.tests.IGame;
 
 public class Game implements IGame {
@@ -13,7 +12,7 @@ public class Game implements IGame {
 	private boolean finished;
 	private float timeRemaining;
 	private int ticksSinceLastHit;
-	
+
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
 		this.ball = ball;
 		Game.xBound = xBound;
@@ -24,7 +23,7 @@ public class Game implements IGame {
 		timeRemaining = (float) 120;
 		ticksSinceLastHit = 11;
 	}
-	
+
 	@Override
 	public void tick() {	
 		timeRemaining -= 0.02;
@@ -35,14 +34,14 @@ public class Game implements IGame {
 				checkWin();
 				return;
 			}
-				
+
 			// Check if the ball is going to hit a block
 			if (checkWalls()) {
 				ticksSinceLastHit = 0;
 				checkWin();
 				return;
 			}
-				
+
 			// Check if the ball is going to hit a warlord
 			if (checkWarlords()) {
 				ticksSinceLastHit = 0;
@@ -52,7 +51,7 @@ public class Game implements IGame {
 		} else {
 			ticksSinceLastHit++;
 		}
-		
+
 		// Check for boundaries, if we hit one then rebound
 		if (ball.getXPos() + ball.getXVelocity() >= xBound) {
 			ball.setXPos(xBound - (ball.getXPos() + ball.getXVelocity() - xBound));
@@ -73,139 +72,139 @@ public class Game implements IGame {
 		} else {
 			ball.setYPos(ball.getYPos() + ball.getYVelocity());		
 		}	
-		
+
 		checkWin();
 		return;
 	}
-	
+
 	// Check for paddles, if we hit one then rebound
 	private boolean checkPaddles() {
 		for (int i=0; i<playerList.size(); i++) {			
 			//if (!playerList.get(i).isDead()) {
-				Paddle paddle = playerList.get(i).getPaddle();
-				int paddleX, paddleY;
-				for (int j=0; j<Paddle.length; j++) { // column by column
-					for (int k=0; k<Paddle.height; k++) { // row by row
-						if ((k == 0) || (k == Paddle.height - 1) || (j == 0) || (j == Paddle.length - 1)) {
-							paddleX = paddle.getXPos() + j;
-							paddleY = paddle.getYPos() + k;
-							if (coordInBallPath(paddleX, paddleY)) { 
-								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
-									ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
-								} else if ((k == Paddle.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
-									ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((j == Paddle.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
-									ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
-									ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else {
-									System.out.println("Unaccounted paddle hit at: " + j + ", " + k);
-									System.out.println("\t Ball velocity: " + ball.getXVelocity() + ", " + ball.getYVelocity());
-								}
-								return true;
-							} 
-						}							
-					}
+			Paddle paddle = playerList.get(i).getPaddle();
+			int paddleX, paddleY;
+			for (int j=0; j<Paddle.length; j++) { // column by column
+				for (int k=0; k<Paddle.height; k++) { // row by row
+					if ((k == 0) || (k == Paddle.height - 1) || (j == 0) || (j == Paddle.length - 1)) {
+						paddleX = paddle.getXPos() + j;
+						paddleY = paddle.getYPos() + k;
+						if (coordInBallPath(paddleX, paddleY)) { 
+							if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
+								ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
+								ball.setYVelocity(ball.getYVelocity() * -1);
+								ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+							} else if ((k == Paddle.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
+								ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
+								ball.setYVelocity(ball.getYVelocity() * -1);
+								ball.setXPos(ball.getXPos() + ball.getXVelocity());
+							} else if ((j == Paddle.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
+								ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
+								ball.setXVelocity(ball.getXVelocity() * -1);
+								ball.setYPos(ball.getYPos() + ball.getYVelocity());
+							} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
+								ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
+								ball.setXVelocity(ball.getXVelocity() * -1);
+								ball.setYPos(ball.getYPos() + ball.getYVelocity());
+							} else {
+								System.out.println("Unaccounted paddle hit at: " + j + ", " + k);
+								System.out.println("\t Ball velocity: " + ball.getXVelocity() + ", " + ball.getYVelocity());
+							}
+							return true;
+						} 
+					}							
 				}
+			}
 			//}
 		}
 		return false;
 	}
-	
+
 	// Check for walls, if we hit one then rebound and destroy the wall
 	private boolean checkWalls() {
 		for (int i=0; i<wallList.size(); i++) {
 			Wall wall = wallList.get(i);
 			//if (!wall.isDestroyed()) {
-				int wallX, wallY;
-				for (int j=0; j<Wall.length; j++) { // column by column
-					for (int k=0; k<Wall.height; k++) { // row by row
-						if ((k == 0) || (k == Wall.height - 1) || (j == 0) || (j == Wall.length - 1)) {
-							wallX = wall.getXPos() + j;
-							wallY = wall.getYPos() + k;
-							if (coordInBallPath(wallX, wallY)) { 
-								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
-									ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
-								} else if ((k == Wall.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
-									ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((j == Wall.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
-									ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
-									ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else {
-									System.out.println("Unaccounted wall hit at: " + j + ", " + k);
-									System.out.println("\t Ball velocity: " + ball.getXVelocity() + ", " + ball.getYVelocity());
-								}
-								wall.destroy();
-								return true;
-							} 
-						}							
-					}
+			int wallX, wallY;
+			for (int j=0; j<Wall.length; j++) { // column by column
+				for (int k=0; k<Wall.height; k++) { // row by row
+					if ((k == 0) || (k == Wall.height - 1) || (j == 0) || (j == Wall.length - 1)) {
+						wallX = wall.getXPos() + j;
+						wallY = wall.getYPos() + k;
+						if (coordInBallPath(wallX, wallY)) { 
+							if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
+								ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
+								ball.setYVelocity(ball.getYVelocity() * -1);
+								ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+							} else if ((k == Wall.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
+								ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
+								ball.setYVelocity(ball.getYVelocity() * -1);
+								ball.setXPos(ball.getXPos() + ball.getXVelocity());
+							} else if ((j == Wall.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
+								ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
+								ball.setXVelocity(ball.getXVelocity() * -1);
+								ball.setYPos(ball.getYPos() + ball.getYVelocity());
+							} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
+								ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
+								ball.setXVelocity(ball.getXVelocity() * -1);
+								ball.setYPos(ball.getYPos() + ball.getYVelocity());
+							} else {
+								System.out.println("Unaccounted wall hit at: " + j + ", " + k);
+								System.out.println("\t Ball velocity: " + ball.getXVelocity() + ", " + ball.getYVelocity());
+							}
+							wall.destroy();
+							return true;
+						} 
+					}							
 				}
+			}
 			//}
 		}
 		return false;
 	}
-	
+
 	// Check for warlords, if we hit one then rebound and destroy the warlord
 	private boolean checkWarlords() {
 		for (int i=0; i<playerList.size(); i++) {
 			Warlord player = playerList.get(i);
 			//if (!player.isDead()) {
-				int playerX, playerY;
-				for (int j=0; j<Warlord.length; j++) { // column by column
-					for (int k=0; k<Warlord.height; k++) { // row by row
-						if ((k == 0) || (k == Warlord.height - 1) || (j == 0) || (j == Warlord.length - 1)) {
-							playerX = player.getXPos() + j;
-							playerY = player.getYPos() + k;
-							if (coordInBallPath(playerX, playerY)) { 
-								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
-									ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
-								} else if ((k == Warlord.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
-									ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((j == Warlord.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
-									ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
-									ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else {
-									System.out.println("Unaccounted warlord hit at: " + j + ", " + k);
-									System.out.println("\t Ball velocity: " + ball.getXVelocity() + ", " + ball.getYVelocity());
-								}
-								player.dies();
-								return true;
-							} 
-						}							
-					}
+			int playerX, playerY;
+			for (int j=0; j<Warlord.length; j++) { // column by column
+				for (int k=0; k<Warlord.height; k++) { // row by row
+					if ((k == 0) || (k == Warlord.height - 1) || (j == 0) || (j == Warlord.length - 1)) {
+						playerX = player.getXPos() + j;
+						playerY = player.getYPos() + k;
+						if (coordInBallPath(playerX, playerY)) { 
+							if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
+								ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
+								ball.setYVelocity(ball.getYVelocity() * -1);
+								ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+							} else if ((k == Warlord.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
+								ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
+								ball.setYVelocity(ball.getYVelocity() * -1);
+								ball.setXPos(ball.getXPos() + ball.getXVelocity());
+							} else if ((j == Warlord.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
+								ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
+								ball.setXVelocity(ball.getXVelocity() * -1);
+								ball.setYPos(ball.getYPos() + ball.getYVelocity());
+							} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
+								ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
+								ball.setXVelocity(ball.getXVelocity() * -1);
+								ball.setYPos(ball.getYPos() + ball.getYVelocity());
+							} else {
+								System.out.println("Unaccounted warlord hit at: " + j + ", " + k);
+								System.out.println("\t Ball velocity: " + ball.getXVelocity() + ", " + ball.getYVelocity());
+							}
+							player.dies();
+							return true;
+						} 
+					}							
 				}
+			}
 			//}
 		}
 		return false;
 	}
-	
+
 	private void checkWin() {
 		int winnerPos = 0;
 		if (timeRemaining == 0) {
@@ -287,7 +286,7 @@ public class Game implements IGame {
 		}
 		return false;
 	}
-	
+
 
 	@Override
 	public boolean isFinished() {
@@ -298,21 +297,46 @@ public class Game implements IGame {
 	public void setTimeRemaining(int seconds) {
 		timeRemaining = (float) seconds;
 	}
-	
+
 	public int getTimeRemaining() {
 		return (int) timeRemaining;
 	}
-	
+
 	public Ball getBall() {
 		return ball;
 	}
-	
+
 	public ArrayList<Warlord> getPlayerList() {
 		return playerList;
 	}
-	
+
 	public ArrayList<Wall> getWallList() {
 		return wallList;
+	}
+
+	public void movePaddleUp(int i) {
+		if(playerList.get(i).getPaddle().getYPos() < 768 - Paddle.height){
+			playerList.get(i).getPaddle().setYPos(playerList.get(i).getPaddle().getYPos() + 10);
+		}
+	}
+
+	public void movePaddleDown(int i) {
+		if(playerList.get(i).getPaddle().getYPos() > 0){
+			playerList.get(i).getPaddle().setYPos(playerList.get(i).getPaddle().getYPos() - 10);
+		}
+	}
+
+	public void movePaddleLeft(int i) {
+		if(playerList.get(i).getPaddle().getXPos() > 0){
+			playerList.get(i).getPaddle().setXPos(playerList.get(i).getPaddle().getXPos() - 10);
+		}
+	}
+
+	public void movePaddleRight(int i) {
+		if(playerList.get(i).getPaddle().getXPos() < 768 - Paddle.height){
+			playerList.get(i).getPaddle().setXPos(playerList.get(i).getPaddle().getXPos() + 10);
+		}
+
 	}
 
 }

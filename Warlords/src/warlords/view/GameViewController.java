@@ -3,7 +3,10 @@ package warlords.view;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import warlords.WarlordsController;
@@ -15,6 +18,8 @@ import warlords.model.Warlord;
 public class GameViewController {
 	private WarlordsController warlordsController;
 	private Game game;
+	Scene scene;
+	private EventHandler<KeyEvent> handler;
 	
 	public GameViewController() {
 		
@@ -25,9 +30,10 @@ public class GameViewController {
 		
 	}
 	
-	public void setWarlordsController(WarlordsController warlordsController) {
+	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
 		this.warlordsController = warlordsController;
 		this.game = warlordsController.getGame();
+		this.scene = scene;
 		
 		game.getBall().setXVelocity(-3);
 		game.getBall().setYVelocity(-3);
@@ -39,6 +45,49 @@ public class GameViewController {
 				onTick();
 			}
 		}, 20, 20);
+		
+		
+		// Create a key handler for the scene
+		
+        handler = new EventHandler<KeyEvent>() {
+			@Override
+		    public void handle(KeyEvent t) {
+				switch(t.getCode()) {
+					case UP:
+						upArrowPressed();
+						break;
+					case DOWN:
+						downArrowPressed();
+						break;
+					case LEFT:
+						leftArrowPressed();
+						break;
+					case RIGHT:
+						rightArrowPressed();
+						break;
+					default:
+						break;					
+				}
+			}
+
+			private void rightArrowPressed() {
+				game.movePaddleRight(0);
+			}
+
+			private void leftArrowPressed() {
+				game.movePaddleLeft(0);
+			}
+
+			private void downArrowPressed() {
+				game.movePaddleDown(0);
+			}
+
+			private void upArrowPressed() {
+				game.movePaddleUp(0);
+				
+			}
+        };    
+    	scene.addEventHandler(KeyEvent.KEY_PRESSED, handler);
 	}
 	
 	private void onTick() {
