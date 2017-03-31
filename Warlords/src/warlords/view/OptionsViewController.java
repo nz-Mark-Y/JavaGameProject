@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import warlords.WarlordsController;
 
-public class MainMenuViewController {
+public class OptionsViewController {
 	private WarlordsController warlordsController;
 	private int isSelected;
 	private ArrayList<Text> menuList = new ArrayList<Text>();
 	Scene scene;
 	private EventHandler<KeyEvent> handler;
 	
-	public MainMenuViewController() {
+	public OptionsViewController() {
 		
 	}
 	
@@ -31,24 +31,28 @@ public class MainMenuViewController {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
 		// Add menu items to controller
-		menuList.add(campaign);
-		menuList.add(multiplayer);
-		menuList.add(options);
-		menuList.add(about);
-		menuList.add(exit);
+		menuList.add(volume);
+		menuList.add(textSpeed);
+		menuList.add(back);
 		isSelected = 0;	
 		
 		// Set custom fonts 
 		Font myFont = null;
+		Font titleFont = null;
+		Font backFont = null;
         try {
-            myFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
+            myFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 72);
+            titleFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
+            backFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 84);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         for (int i=0; i<menuList.size(); i++) {
         	menuList.get(i).setFont(myFont);
         }
-        updateSelection(); 
+        title.setFont(titleFont);
+        back.setFont(backFont);
+        updateSelection();
         
         // Create a key handler for the scene
         handler = new EventHandler<KeyEvent>() {
@@ -101,38 +105,35 @@ public class MainMenuViewController {
 	}
 	
 	// Removes the key handler from the scene, moves to the next view
-	public void enterPressed() {
-		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
+	public void enterPressed() {		
 		if (isSelected == 0) {
-			warlordsController.showCampaignMenuView();
+			
 		} else if (isSelected == 1) {
-			warlordsController.showMultiplayerMenuView();
+			
 		} else if (isSelected == 2) {
-			warlordsController.showOptionsView();
-		} else if (isSelected == 3) {
-			warlordsController.showAboutView();
-		} else if (isSelected == 4) {
-			warlordsController.stop();
+			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
+			warlordsController.showMainMenu();
 		} else {
 			System.out.println("Unavailable Menu Option");
 		}
 	}
 	
 	@FXML
-	private Text campaign;
+	private Text title;
 	
 	@FXML
-	private Text multiplayer;
+	private Text volume;
 	
 	@FXML
-	private Text options;
+	private Text textSpeed;
 	
 	@FXML
-	private Text about;
+	private Text back;
 	
 	@FXML
-	private Text exit;
+	private Slider volumeSelect;
 	
 	@FXML
-	private AnchorPane window;
+	private Slider textSpeedSelect;
 }
+

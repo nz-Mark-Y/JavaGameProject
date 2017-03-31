@@ -9,20 +9,19 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import warlords.WarlordsController;
 
-public class MainMenuViewController {
+public class MultiplayerMenuViewController {
 	private WarlordsController warlordsController;
 	private int isSelected;
 	private ArrayList<Text> menuList = new ArrayList<Text>();
 	Scene scene;
 	private EventHandler<KeyEvent> handler;
 	
-	public MainMenuViewController() {
+	public MultiplayerMenuViewController() {
 		
 	}
 	
@@ -31,24 +30,26 @@ public class MainMenuViewController {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
 		// Add menu items to controller
-		menuList.add(campaign);
-		menuList.add(multiplayer);
-		menuList.add(options);
-		menuList.add(about);
-		menuList.add(exit);
+		menuList.add(start);
+		menuList.add(players);
+		menuList.add(mutators);
+		menuList.add(back);
 		isSelected = 0;	
 		
 		// Set custom fonts 
 		Font myFont = null;
+		Font titleFont = null;
         try {
-            myFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
+            myFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 84);
+            titleFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         for (int i=0; i<menuList.size(); i++) {
         	menuList.get(i).setFont(myFont);
         }
-        updateSelection(); 
+        title.setFont(titleFont);
+        updateSelection();
         
         // Create a key handler for the scene
         handler = new EventHandler<KeyEvent>() {
@@ -104,35 +105,32 @@ public class MainMenuViewController {
 	public void enterPressed() {
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
 		if (isSelected == 0) {
-			warlordsController.showCampaignMenuView();
+			warlordsController.createNewGame();
+			warlordsController.showGameView();
 		} else if (isSelected == 1) {
-			warlordsController.showMultiplayerMenuView();
+			
 		} else if (isSelected == 2) {
-			warlordsController.showOptionsView();
+			
 		} else if (isSelected == 3) {
-			warlordsController.showAboutView();
-		} else if (isSelected == 4) {
-			warlordsController.stop();
+			warlordsController.showMainMenu();
 		} else {
 			System.out.println("Unavailable Menu Option");
 		}
 	}
 	
 	@FXML
-	private Text campaign;
+	private Text title;
 	
 	@FXML
-	private Text multiplayer;
+	private Text start;
 	
 	@FXML
-	private Text options;
+	private Text players;
 	
 	@FXML
-	private Text about;
+	private Text mutators;
 	
 	@FXML
-	private Text exit;
-	
-	@FXML
-	private AnchorPane window;
+	private Text back;
 }
+

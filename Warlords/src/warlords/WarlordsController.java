@@ -17,10 +17,13 @@ import warlords.model.Game;
 import warlords.model.Paddle;
 import warlords.model.Wall;
 import warlords.model.Warlord;
+import warlords.view.AboutViewController;
 import warlords.view.CampaignMenuViewController;
 import warlords.view.GameViewController;
 import warlords.view.LeftSideViewController;
 import warlords.view.MainMenuViewController;
+import warlords.view.MultiplayerMenuViewController;
+import warlords.view.OptionsViewController;
 import warlords.view.RightSideViewController;
 
 public class WarlordsController extends Application {
@@ -146,7 +149,7 @@ public class WarlordsController extends Application {
 	}
 	
 	// Display the campaign menu
-	public void showCampaignMenu() {
+	public void showCampaignMenuView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(WarlordsController.class.getResource("view/CampaignMenuView.fxml"));
@@ -155,6 +158,54 @@ public class WarlordsController extends Application {
 			rootLayout.setCenter(campaignMenuView);
 			
 			CampaignMenuViewController controller = loader.getController();
+			controller.setWarlordsController(this, scene);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	// Display the multiplayer menu
+	public void showMultiplayerMenuView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/MultiplayerMenuView.fxml"));
+			AnchorPane multiplayerMenuView = (AnchorPane) loader.load();	
+				
+			rootLayout.setCenter(multiplayerMenuView);
+				
+			MultiplayerMenuViewController controller = loader.getController();
+			controller.setWarlordsController(this, scene);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	// Display the options
+	public void showOptionsView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/OptionsView.fxml"));
+			AnchorPane optionsView = (AnchorPane) loader.load();	
+					
+			rootLayout.setCenter(optionsView);
+					
+			OptionsViewController controller = loader.getController();
+			controller.setWarlordsController(this, scene);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	// Display the about screen
+	public void showAboutView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/AboutView.fxml"));
+			AnchorPane aboutView = (AnchorPane) loader.load();	
+						
+			rootLayout.setCenter(aboutView);
+						
+			AboutViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
 		} catch (IOException ex) {
 			ex.printStackTrace();
