@@ -37,15 +37,15 @@ public class WarlordsController extends Application {
 	// Set up the objects in a new game
 	public void createNewGame() {
 		Ball ball = new Ball(350, 350);
-		Warlord player1 = new Warlord(new Paddle(200, 200), 100, 100);
-		Warlord player2 = new Warlord(new Paddle(568, 568), 668, 668);
-		Warlord player3 = new Warlord(new Paddle(200, 568), 100, 668);
-		Warlord player4 = new Warlord(new Paddle(568, 200), 668, 100);
+		Warlord player0 = new Warlord(new Paddle(181, 547), 100, 668);
+		Warlord player1 = new Warlord(new Paddle(181, 181), 100, 100);
+		Warlord player2 = new Warlord(new Paddle(547, 181), 668, 100);
+		Warlord player3 = new Warlord(new Paddle(547, 547), 668, 668);
 		ArrayList<Warlord> playerList = new ArrayList<Warlord>();
+		playerList.add(player0);
 		playerList.add(player1);
 		playerList.add(player2);
 		playerList.add(player3);
-		playerList.add(player4);
 		Wall wall1 = new Wall(100, 200, 0);
 		Wall wall2 = new Wall(668, 618, 1);
 		Wall wall3 = new Wall(100, 618, 2);
@@ -64,7 +64,7 @@ public class WarlordsController extends Application {
 		this.primaryStage.setTitle("Warlords");	
 		
 		initRootLayout();
-		showGameView();
+		showMainMenu();
 	}
 
 	public static void main(String[] args) {

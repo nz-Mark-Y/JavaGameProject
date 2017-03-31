@@ -7,11 +7,13 @@ public class Game implements IGame {
 	private Ball ball;
 	private ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 	private ArrayList<Wall> wallList = new ArrayList<Wall>();
+	private boolean[] keyList = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
 	private static int xBound;
 	private static int yBound;
 	private boolean finished;
 	private float timeRemaining;
 	private int ticksSinceLastHit;
+	private float paddleSpeed = (float) 0.7;
 
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
 		this.ball = ball;
@@ -27,6 +29,9 @@ public class Game implements IGame {
 	@Override
 	public void tick() {	
 		timeRemaining -= 0.02;
+		
+		movePaddles();
+		
 		if (ticksSinceLastHit > 10) {
 			// Check if the ball is going to hit a paddle
 			if (checkPaddles()) {
@@ -287,7 +292,99 @@ public class Game implements IGame {
 		return false;
 	}
 
-
+	public void movePaddles() {
+		if (keyList[0] == true) {
+			curveLeft(playerList.get(2).getPaddle(), 2);
+		} 
+		if (keyList[1] == true) {
+			curveRight(playerList.get(2).getPaddle(), 2);
+		}
+		if (keyList[4] == true) {
+			curveLeft(playerList.get(0).getPaddle(), 0);
+		} 
+		if (keyList[5] == true) {
+			curveRight(playerList.get(0).getPaddle(), 0);
+		}
+		if (keyList[8] == true) {
+			curveLeft(playerList.get(1).getPaddle(), 1);
+		} 
+		if (keyList[9] == true) {
+			curveRight(playerList.get(1).getPaddle(), 1);
+		}
+		if (keyList[12] == true) {
+			curveLeft(playerList.get(3).getPaddle(), 3);
+		} 
+		if (keyList[13] == true) {
+			curveRight(playerList.get(3).getPaddle(), 3); 
+		}
+		if (keyList[16] == true) {
+			pause();
+		} 
+		if (keyList[17] == true) {
+			pause();
+		}
+	}
+	
+	public void curveLeft(Paddle paddle, int centre) {
+		if (centre == 1) {
+			if (paddle.getXPos() > 0) {
+				paddle.decrTheta((float) paddleSpeed);
+				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			}
+		} else if (centre == 2) {
+			if (paddle.getYPos() > 0) {
+				paddle.incrTheta((float) paddleSpeed);
+				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			}
+		} else if (centre == 0) {
+			if (paddle.getXPos() > 0) {
+				paddle.decrTheta((float) paddleSpeed);
+				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos(768 - Paddle.height - (int) ( 256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			}
+		} else if (centre == 3) {	
+			if (paddle.getYPos() < 768 - Paddle.length) {
+				paddle.incrTheta((float) paddleSpeed);
+				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			} 
+		}
+	}
+	
+	public void curveRight(Paddle paddle, int centre) {
+		if (centre == 1) {
+			if (paddle.getYPos() > 2) {
+				paddle.incrTheta((float) paddleSpeed);
+				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			}
+		} else if (centre == 2) {
+			if (paddle.getXPos() < 768 - Paddle.length) {
+				paddle.decrTheta((float) paddleSpeed);
+				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			}
+		} else if (centre == 0) {
+			if (paddle.getYPos() < 768 - Paddle.length) {
+				paddle.incrTheta((float) paddleSpeed);
+				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			}
+		} else if (centre == 3) {
+			if (paddle.getXPos() < 768 - Paddle.length) {
+				paddle.decrTheta((float) paddleSpeed);
+				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
+				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+			}
+		}
+	}
+	
+	public void pause() {
+		System.out.println("Pause pressed");
+	}
+	
 	@Override
 	public boolean isFinished() {
 		return finished;
@@ -302,6 +399,14 @@ public class Game implements IGame {
 		return (int) timeRemaining;
 	}
 
+	public void setKeyDown(int pos) {
+		keyList[pos] = true;
+	}
+	
+	public void setKeyUp(int pos) {
+		keyList[pos] = false;
+	}
+	
 	public Ball getBall() {
 		return ball;
 	}
@@ -313,30 +418,4 @@ public class Game implements IGame {
 	public ArrayList<Wall> getWallList() {
 		return wallList;
 	}
-
-	public void movePaddleUp(int i) {
-		if(playerList.get(i).getPaddle().getYPos() < 768 - Paddle.height){
-			playerList.get(i).getPaddle().setYPos(playerList.get(i).getPaddle().getYPos() + 10);
-		}
-	}
-
-	public void movePaddleDown(int i) {
-		if(playerList.get(i).getPaddle().getYPos() > 0){
-			playerList.get(i).getPaddle().setYPos(playerList.get(i).getPaddle().getYPos() - 10);
-		}
-	}
-
-	public void movePaddleLeft(int i) {
-		if(playerList.get(i).getPaddle().getXPos() > 0){
-			playerList.get(i).getPaddle().setXPos(playerList.get(i).getPaddle().getXPos() - 10);
-		}
-	}
-
-	public void movePaddleRight(int i) {
-		if(playerList.get(i).getPaddle().getXPos() < 768 - Paddle.height){
-			playerList.get(i).getPaddle().setXPos(playerList.get(i).getPaddle().getXPos() + 10);
-		}
-
-	}
-
 }

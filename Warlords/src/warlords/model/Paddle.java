@@ -6,15 +6,18 @@ public class Paddle implements IPaddle {
 	private int y;
 	public static int height = 40;
 	public static int length = 40;
+	private float theta;
 	
 	public Paddle(int init_x, int init_y) {
 		x = init_x;
 		y = init_y;
+		theta = 45;
 	}
 	
 	public Paddle() {
 		x = 0;
 		y = 0;
+		theta = 45;
 	}
 
 	@Override
@@ -33,6 +36,18 @@ public class Paddle implements IPaddle {
 	
 	public int getYPos() {
 		return y;
+	}
+	
+	public float getTheta() {
+		return theta;
+	}
+	
+	public void incrTheta(float x) {
+		theta += x;
+	}
+	
+	public void decrTheta(float x) {
+		theta -= x;
 	}
 
 }

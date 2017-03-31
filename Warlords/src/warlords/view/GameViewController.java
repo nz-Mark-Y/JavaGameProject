@@ -19,7 +19,8 @@ public class GameViewController {
 	private WarlordsController warlordsController;
 	private Game game;
 	Scene scene;
-	private EventHandler<KeyEvent> handler;
+	private EventHandler<KeyEvent> handler0;
+	private EventHandler<KeyEvent> handler1;
 	
 	public GameViewController() {
 		
@@ -44,50 +45,137 @@ public class GameViewController {
 			public void run() {
 				onTick();
 			}
-		}, 20, 20);
-		
+		}, 20, 20);	
 		
 		// Create a key handler for the scene
-		
-        handler = new EventHandler<KeyEvent>() {
+		Thread thread = new Thread(new Runnable() {
 			@Override
-		    public void handle(KeyEvent t) {
-				switch(t.getCode()) {
-					case UP:
-						upArrowPressed();
-						break;
-					case DOWN:
-						downArrowPressed();
-						break;
-					case LEFT:
-						leftArrowPressed();
-						break;
-					case RIGHT:
-						rightArrowPressed();
-						break;
-					default:
-						break;					
-				}
-			}
-
-			private void rightArrowPressed() {
-				game.movePaddleRight(0);
-			}
-
-			private void leftArrowPressed() {
-				game.movePaddleLeft(0);
-			}
-
-			private void downArrowPressed() {
-				game.movePaddleDown(0);
-			}
-
-			private void upArrowPressed() {
-				game.movePaddleUp(0);
-				
-			}
-        };    
-    	scene.addEventHandler(KeyEvent.KEY_PRESSED, handler);
+			public void run() {
+				handler0 = new EventHandler<KeyEvent>() {
+					@Override
+				    public void handle(KeyEvent t) {
+						switch(t.getCode()) {
+							case LEFT:
+								game.setKeyDown(0);
+								break;
+							case RIGHT:
+								game.setKeyDown(1);
+								break;
+							case UP:
+								game.setKeyDown(2);
+								break;
+							case DOWN:
+								game.setKeyDown(3);
+								break;
+							case A:
+								game.setKeyDown(4);
+								break;
+							case D:
+								game.setKeyDown(5);
+								break;
+							case W:
+								game.setKeyDown(6);
+								break;
+							case S:
+								game.setKeyDown(7);
+								break;
+							case J:
+								game.setKeyDown(8);
+								break;
+							case L:
+								game.setKeyDown(9);
+								break;
+							case I:
+								game.setKeyDown(10);
+								break;
+							case K:
+								game.setKeyDown(11);
+								break;
+							case NUMPAD3:
+								game.setKeyDown(12);
+								break;
+							case NUMPAD9:
+								game.setKeyDown(13);
+								break;
+							case NUMPAD5:
+								game.setKeyDown(14);
+								break;
+							case NUMPAD6:
+								game.setKeyDown(15);
+								break;
+							default:
+								break;					
+						}
+					}
+		        };    
+		        handler1 = new EventHandler<KeyEvent>() {
+					@Override
+				    public void handle(KeyEvent t) {
+						switch(t.getCode()) {
+							case LEFT:
+								game.setKeyUp(0);
+								break;
+							case RIGHT:
+								game.setKeyUp(1);
+								break;
+							case UP:
+								game.setKeyUp(2);
+								break;
+							case DOWN:
+								game.setKeyUp(3);
+								break;
+							case A:
+								game.setKeyUp(4);
+								break;
+							case D:
+								game.setKeyUp(5);
+								break;
+							case W:
+								game.setKeyUp(6);
+								break;
+							case S:
+								game.setKeyUp(7);
+								break;
+							case J:
+								game.setKeyUp(8);
+								break;
+							case L:
+								game.setKeyUp(9);
+								break;
+							case I:
+								game.setKeyUp(10);
+								break;
+							case K:
+								game.setKeyUp(11);
+								break;
+							case NUMPAD3:
+								game.setKeyUp(12);
+								break;
+							case NUMPAD9:
+								game.setKeyUp(13);
+								break;
+							case NUMPAD5:
+								game.setKeyUp(14);
+								break;
+							case NUMPAD6:
+								game.setKeyUp(15);
+								break;
+							case P:
+								game.setKeyUp(16);
+								break;
+							case ESCAPE:
+								game.setKeyUp(17);
+								break;
+							default:
+								break;					
+						}
+					}
+		        };    
+		    	scene.setOnKeyPressed(handler0);
+		    	scene.setOnKeyReleased(handler1);
+			}		
+		});     
+        thread.start();
 	}
 	
 	private void onTick() {
