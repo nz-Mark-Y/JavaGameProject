@@ -31,7 +31,7 @@ public class GameViewController {
 		
 	}
 	
-	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
+	public void setWarlordsController(WarlordsController warlordsController, final Scene scene) {
 		this.warlordsController = warlordsController;
 		this.game = warlordsController.getGame();
 		this.scene = scene;
