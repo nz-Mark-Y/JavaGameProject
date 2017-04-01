@@ -26,6 +26,7 @@ public class Game implements IGame {
 		ticksSinceLastHit = 11;
 	}
 
+	// Game Logic
 	@Override
 	public void tick() {	
 		timeRemaining -= 0.02;
@@ -58,6 +59,7 @@ public class Game implements IGame {
 		}
 
 		// Check for boundaries, if we hit one then rebound
+		// X boundaries
 		if (ball.getXPos() + ball.getXVelocity() >= xBound) {
 			ball.setXPos(xBound - (ball.getXPos() + ball.getXVelocity() - xBound));
 			ball.setXVelocity(ball.getXVelocity() * -1);
@@ -67,7 +69,8 @@ public class Game implements IGame {
 		} else {	
 			ball.setXPos(ball.getXPos() + ball.getXVelocity());
 		}
-
+		
+		// Y boundaries
 		if (ball.getYPos() + ball.getYVelocity() >= yBound) {
 			ball.setYPos(yBound - (ball.getYPos() + ball.getYVelocity() - yBound));
 			ball.setYVelocity(ball.getYVelocity() * -1);
@@ -82,7 +85,7 @@ public class Game implements IGame {
 		return;
 	}
 
-	// Check for paddles, if we hit one then rebound
+	// Check for paddles, if we hit one then rebound (for testing purposes we do not take into account if the warlord is dead or not)
 	private boolean checkPaddles() {
 		for (int i=0; i<playerList.size(); i++) {			
 			//if (!playerList.get(i).isDead()) {
@@ -124,7 +127,7 @@ public class Game implements IGame {
 		return false;
 	}
 
-	// Check for walls, if we hit one then rebound and destroy the wall
+	// Check for walls, if we hit one then rebound and destroy the wall (for testing purposes we do not take into account if the wall is destroyed or not)
 	private boolean checkWalls() {
 		for (int i=0; i<wallList.size(); i++) {
 			Wall wall = wallList.get(i);
@@ -167,7 +170,7 @@ public class Game implements IGame {
 		return false;
 	}
 
-	// Check for warlords, if we hit one then rebound and destroy the warlord
+	// Check for warlords, if we hit one then rebound and destroy the warlord (for testing purposes we do not take into account if the warlord is dead or not)
 	private boolean checkWarlords() {
 		for (int i=0; i<playerList.size(); i++) {
 			Warlord player = playerList.get(i);
@@ -209,10 +212,12 @@ public class Game implements IGame {
 		}
 		return false;
 	}
-
+	
+	// Checks win conditions
 	private void checkWin() {
 		int winnerPos = 0;
-		if (timeRemaining == 0) {
+		// Check timeout
+		if (timeRemaining <= 0) {
 			for (int i=0; i<wallList.size(); i++) {
 				playerList.get(wallList.get(i).getOwner()).addWall();
 			}
@@ -225,6 +230,7 @@ public class Game implements IGame {
 			finished = true;
 			return;
 		}
+		// Check if there is only one player left alive
 		int playersAlive = playerList.size();
 		for (int i=0; i<playerList.size(); i++) {
 			if (playerList.get(i).isDead()) {
@@ -291,7 +297,8 @@ public class Game implements IGame {
 		}
 		return false;
 	}
-
+	
+	// If the corresponding key is down, then call the curve function on that paddle
 	public void movePaddles() {
 		if (keyList[0] == true) {
 			curveLeft(playerList.get(2).getPaddle(), 2);
@@ -325,6 +332,7 @@ public class Game implements IGame {
 		}
 	}
 	
+	// Move the paddle along its path to the left
 	public void curveLeft(Paddle paddle, int centre) {
 		if (centre == 1) {
 			if (paddle.getXPos() > 0) {
@@ -353,6 +361,7 @@ public class Game implements IGame {
 		}
 	}
 	
+	// Move the paddle along its path to the right
 	public void curveRight(Paddle paddle, int centre) {
 		if (centre == 1) {
 			if (paddle.getYPos() > 2) {
@@ -381,6 +390,7 @@ public class Game implements IGame {
 		}
 	}
 	
+	// A pause function. To be implemented further
 	public void pause() {
 		System.out.println("Pause pressed");
 	}

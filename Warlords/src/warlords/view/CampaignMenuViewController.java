@@ -104,18 +104,12 @@ public class CampaignMenuViewController {
 	// Removes the key handler from the scene, moves to the next view
 	public void enterPressed() {
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-		if (isSelected == 0) {
-			//Temporary, used to prevent crashing
-			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.showMainMenu();
-		} else if (isSelected == 1) {
-			//Temporary, used to prevent crashing
-			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.showMainMenu();
+		if (isSelected == 0) {		
+			warlordsController.showMainMenu(); //Temporary, used to prevent crashing
+		} else if (isSelected == 1) {			
+			warlordsController.showMainMenu(); // Temporary, used to prevent crashing
 		} else if (isSelected == 2) {
-			//Temporary, used to prevent crashing
-			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.showMainMenu();
+			warlordsController.showMainMenu(); // Temporary, used to prevent crashing
 		} else if (isSelected == 3) {
 			warlordsController.showMainMenu();
 		} else {

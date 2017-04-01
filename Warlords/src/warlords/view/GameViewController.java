@@ -36,9 +36,11 @@ public class GameViewController {
 		this.game = warlordsController.getGame();
 		this.scene = scene;
 		
+		// Initial ball velocity
 		game.getBall().setXVelocity(-3);
 		game.getBall().setYVelocity(-3);
 		
+		// Game timer for ball and paddles to move
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask () {
 			@Override
@@ -47,7 +49,7 @@ public class GameViewController {
 			}
 		}, 20, 20);	
 		
-		// Create a key handler for the scene
+		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -178,6 +180,7 @@ public class GameViewController {
         thread.start();
 	}
 	
+	// Do the logic, then rerender all the objects. Will add lists in soon.
 	private void onTick() {
 		game.tick();
 		ball.setCenterX(game.getBall().getXPos() + game.getBall().length / 2);
