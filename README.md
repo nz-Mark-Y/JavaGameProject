@@ -3,6 +3,7 @@
 ### COMPSYS 302 Java Game Design Project ###
 * [Group 01](https://www.youtube.com/watch?v=PfYnvDL0Qcw)
 * Prototype Version
+* MVC Class Diagram updated in appendix of Planning/Group01ProjectPlan.pdf
 
 ### How do I play?###
 To see the in game GUI:
