@@ -16,18 +16,24 @@ To play the game:
 * Top Left Player: A, D
 * Bottom Left Player: J, L
 * Bottom Right Player: LEFT, RIGHT
-* Top Right Player: 3, 9
+* Top Right Player: NUMPAD3, NUMPAD9 (ensure NUMLOCK is on)
 
 ### How do I set up in Eclipse? ###
-[(Java 8 required)](https://canvas.auckland.ac.nz/courses/22085/discussion_topics/260045)
-
 1. Clone the repository onto your system
 2. Open Eclipse
 3. Go to File > Import 
 4. Select General > Existing Projects into Workspace
 5. Next to "Select root directory", browse to the repository location, and select the Warlords folder 
 6. Click Finish, and the project will appear in Eclipse
-7. Enjoy!
+
+Additional Steps: (If you are getting JavaFX compilation errors)
+
+1. Go to Window > Preference > Java
+2. Under the JRE tab select 'Installed JREs'
+3. Click Add and select 'Standard VM'
+4. Click directory and navigate to /usr/lib/jvm/jdk1.8.0_91 then click OK
+5. Click Finish then tick the JDK you just added
+6. Click OK then Run
 
 ### How do I run the Eclipse project? ###
 1. In Eclipse, open the warlords > WarlordsController.java class
