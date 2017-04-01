@@ -6,10 +6,12 @@
 
 ### How do I play?###
 To see the in game GUI:
+
 * From the main menu, select Multiplayer, then Start
 * Use the arrow keys and ENTER to navigate the menus
 
 To play the game:
+
 * Top Left Player: A, D
 * Bottom Left Player: J, L
 * Bottom Right Player: LEFT, RIGHT
@@ -17,6 +19,7 @@ To play the game:
 
 ### How do I set up in Eclipse? ###
 [(Java 8 required)](https://canvas.auckland.ac.nz/courses/22085/discussion_topics/260045)
+
 1. Clone the repository onto your system
 2. Open Eclipse
 3. Go to File > Import 
