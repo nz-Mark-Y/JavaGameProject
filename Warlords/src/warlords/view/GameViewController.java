@@ -6,7 +6,9 @@ import java.util.TimerTask;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import warlords.WarlordsController;
@@ -209,6 +211,12 @@ public class GameViewController {
 		player3Warlord.setY(-(game.getPlayerList().get(2).getYPos() + Warlord.height));
 		player4Warlord.setX(game.getPlayerList().get(3).getXPos());
 		player4Warlord.setY(-(game.getPlayerList().get(3).getYPos() + Warlord.height));	
+		
+		//Applying patterns to rectangles
+		player1Wall.setFill(player1CratePattern);
+		player2Wall.setFill(player2CratePattern);
+		player3Wall.setFill(player3CratePattern);
+		player4Wall.setFill(player4CratePattern);
 	}
 
 	@FXML
@@ -249,4 +257,17 @@ public class GameViewController {
 	
 	@FXML 
 	private Rectangle player4Warlord;
+	
+	//Creating patterns for the rectangles
+	private Image player1Crate = new Image("file:images/player1Crate.png");
+	ImagePattern player1CratePattern = new ImagePattern(player1Crate);
+	
+	private Image player2Crate = new Image("file:images/player2Crate.png");
+	ImagePattern player2CratePattern = new ImagePattern(player2Crate);
+	
+	private Image player3Crate = new Image("file:images/player3Crate.png");
+	ImagePattern player3CratePattern = new ImagePattern(player3Crate);
+	
+	private Image player4Crate = new Image("file:images/player4Crate.png");
+	ImagePattern player4CratePattern = new ImagePattern(player4Crate);
 }

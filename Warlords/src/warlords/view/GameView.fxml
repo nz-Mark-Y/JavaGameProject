@@ -13,7 +13,7 @@
          <children>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/Final.png" />
+                  <Image url="@../../../images/gameBackground.png" />
                </image>
             </ImageView>
             <Circle fx:id="ball" fill="DODGERBLUE" layoutY="768.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
