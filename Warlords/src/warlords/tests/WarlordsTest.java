@@ -29,8 +29,8 @@ public class WarlordsTest extends TestSuite {
     public void setUp(){
     	ball = new Ball();
     	paddle = new Paddle();
-    	player1 = new Warlord((Paddle) this.paddle);
-    	player2 = new Warlord(new Paddle());
+    	player1 = new Warlord((Paddle) this.paddle, true);
+    	player2 = new Warlord(new Paddle(), true);
     	ArrayList<Warlord> playerList = new ArrayList<Warlord>();
     	playerList.add((Warlord) player1);
     	playerList.add((Warlord) player2);

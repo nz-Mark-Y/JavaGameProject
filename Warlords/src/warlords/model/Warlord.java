@@ -7,26 +7,29 @@ public class Warlord implements IWarlord {
 	private int y;
 	public static int height = 50;
 	public static int length = 50; 
+	private boolean playerControlled;
 	private boolean dead;
 	private boolean won;
 	private int wallsLeft;
 	
-	public Warlord(Paddle paddle) {
+	public Warlord(Paddle paddle, boolean control) {
 		this.paddle = paddle;
 		x = 0;
 		y = 0;
 		dead = false;
 		won = false;
 		wallsLeft = 0;
+		playerControlled = control;
 	}
 	
-	public Warlord(Paddle paddle, int x, int y) {
+	public Warlord(Paddle paddle, int x, int y, boolean control) {
 		this.paddle = paddle;
 		this.x = x;
 		this.y = y;
 		dead = false;
 		won = false;
 		wallsLeft = 0;
+		playerControlled = control;
 	}
 	
 	@Override
@@ -75,6 +78,14 @@ public class Warlord implements IWarlord {
 	
 	public Paddle getPaddle() {
 		return paddle;
+	}
+	
+	public boolean isPlayerControlled() {
+		return playerControlled;
+	}
+	
+	public void setPlayerControlled(boolean input) {
+		playerControlled = input;
 	}
 
 }

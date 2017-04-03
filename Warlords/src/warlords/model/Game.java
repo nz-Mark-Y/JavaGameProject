@@ -32,6 +32,7 @@ public class Game implements IGame {
 		timeRemaining -= 0.02;
 		
 		movePaddles();
+		computerMovePaddles();
 		
 		if (ticksSinceLastHit > 10) {
 			// Check if the ball is going to hit a paddle
@@ -300,35 +301,35 @@ public class Game implements IGame {
 	
 	// If the corresponding key is down, then call the curve function on that paddle
 	public void movePaddles() {
-		if (keyList[0] == true) {
+		if ((keyList[0] == true) && (playerList.get(2).isPlayerControlled())) {
 			curveLeft(playerList.get(2).getPaddle(), 2);
 		} 
-		if (keyList[1] == true) {
+		if ((keyList[1] == true) && (playerList.get(2).isPlayerControlled())) {
 			curveRight(playerList.get(2).getPaddle(), 2);
 		}
-		if (keyList[4] == true) {
+		if ((keyList[4] == true) && (playerList.get(0).isPlayerControlled())) {
 			curveLeft(playerList.get(0).getPaddle(), 0);
 		} 
-		if (keyList[5] == true) {
+		if ((keyList[5] == true) && (playerList.get(0).isPlayerControlled())) {
 			curveRight(playerList.get(0).getPaddle(), 0);
 		}
-		if (keyList[8] == true) {
+		if ((keyList[8] == true) && (playerList.get(1).isPlayerControlled())) {
 			curveLeft(playerList.get(1).getPaddle(), 1);
 		} 
-		if (keyList[9] == true) {
+		if ((keyList[9] == true) && (playerList.get(1).isPlayerControlled())) {
 			curveRight(playerList.get(1).getPaddle(), 1);
 		}
-		if (keyList[12] == true) {
+		if ((keyList[12] == true) && (playerList.get(3).isPlayerControlled())) {
 			curveLeft(playerList.get(3).getPaddle(), 3);
 		} 
-		if (keyList[13] == true) {
+		if ((keyList[13] == true) && (playerList.get(3).isPlayerControlled())) {
 			curveRight(playerList.get(3).getPaddle(), 3); 
 		}
 		if (keyList[16] == true) {
 			pause();
 		} 
 		if (keyList[17] == true) {
-			pause();
+			exitGame();
 		}
 	}
 	
@@ -390,9 +391,42 @@ public class Game implements IGame {
 		}
 	}
 	
+	public void computerMovePaddles() {
+		for (int i=0; i<playerList.size(); i++) {
+			if (!playerList.get(i).isPlayerControlled()) {
+				if (Math.abs(ball.getXPos() - playerList.get(i).getPaddle().getXPos()) > Math.abs(ball.getYPos() - playerList.get(i).getPaddle().getYPos())) {
+					if ((ball.getXPos() + ball.getXVelocity()) > (playerList.get(i).getPaddle().getXPos() + Paddle.length / 2)) {
+						curveRight(playerList.get(i).getPaddle(), i);
+					} else {
+						curveLeft(playerList.get(i).getPaddle(), i);
+					}
+				} else {
+					if ((ball.getYPos() + ball.getYVelocity()) > (playerList.get(i).getPaddle().getYPos() + Paddle.height / 2)) {
+						if ((i==0) || (i==2)) {
+							curveRight(playerList.get(i).getPaddle(), i);
+						} else {
+							curveLeft(playerList.get(i).getPaddle(), i);
+						}		
+					} else {
+						if ((i==0) || (i==2)) {
+							curveLeft(playerList.get(i).getPaddle(), i);				
+						} else {
+							curveRight(playerList.get(i).getPaddle(), i);
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	// A pause function. To be implemented further
 	public void pause() {
 		System.out.println("Pause pressed");
+	}
+	
+	// An exit function. To be implemented further
+	public void exitGame() {
+		
 	}
 	
 	@Override
