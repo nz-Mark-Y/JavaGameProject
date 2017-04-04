@@ -108,7 +108,7 @@ public class MultiplayerMenuViewController {
 			warlordsController.createNewGame();
 			warlordsController.showGameView();
 		} else if (isSelected == 1) {			
-			warlordsController.showMainMenu(); // Temporary, used to prevent crashing
+			warlordsController.showPlayerMenuView();
 		} else if (isSelected == 2) {			
 			warlordsController.showMainMenu(); // Temporary, used to prevent crashing
 		} else if (isSelected == 3) {

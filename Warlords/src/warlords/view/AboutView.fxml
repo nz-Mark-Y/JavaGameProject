@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warlords.view.AboutViewController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warlords.view.AboutViewController">
    <children>
       <ImageView fitHeight="868.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -23,32 +23,32 @@
             <Font name="Evanescence Series B" size="84.0" />
          </font>
       </Text>
-      <Text fx:id="line1" fill="WHITE" layoutX="58.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The University of Auckland: Faculty of Engineering" textAlignment="CENTER">
+      <Text fx:id="aboutLine2" fill="WHITE" layoutX="46.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department of Electrical and Computer Engineering" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="line2" fill="WHITE" layoutX="46.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department of Electrical and Computer Engineering" textAlignment="CENTER">
+      <Text fx:id="aboutLine3" fill="WHITE" layoutX="196.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMPSYS 302 Java Game Project" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="line3" fill="WHITE" layoutX="196.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMPSYS 302 Java Game Project" textAlignment="CENTER">
+      <Text fx:id="aboutLine4" fill="WHITE" layoutX="295.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sylvain Bechet" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="line4" fill="WHITE" layoutX="295.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sylvain Bechet" textAlignment="CENTER">
+      <Text fx:id="aboutLine5" fill="WHITE" layoutX="332.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mark Yep" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="line5" fill="WHITE" layoutX="332.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mark Yep" textAlignment="CENTER">
+      <Text fx:id="aboutLine6" fill="WHITE" layoutX="365.0" layoutY="603.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2017" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="line6" fill="WHITE" layoutX="365.0" layoutY="603.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2017" textAlignment="CENTER">
+      <Text fx:id="aboutLine7" fill="WHITE" layoutX="58.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The University of Auckland: Faculty of Engineering" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="36.0" />
          </font>

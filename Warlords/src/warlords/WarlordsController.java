@@ -24,13 +24,13 @@ import warlords.view.LeftSideViewController;
 import warlords.view.MainMenuViewController;
 import warlords.view.MultiplayerMenuViewController;
 import warlords.view.OptionsViewController;
+import warlords.view.PlayerMenuViewController;
 import warlords.view.RightSideViewController;
 
 public class WarlordsController extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Game game;
-	boolean goUp, goDown;
 	Scene scene;
 
 	public WarlordsController() {
@@ -212,6 +212,22 @@ public class WarlordsController extends Application {
 			ex.printStackTrace();
 		}
 	}
+	
+	// Display the multiplayer player select screen
+		public void showPlayerMenuView() {
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(WarlordsController.class.getResource("view/PlayerMenuView.fxml"));
+				AnchorPane playerMenuView = (AnchorPane) loader.load();	
+							
+				rootLayout.setCenter(playerMenuView);
+							
+				PlayerMenuViewController controller = loader.getController();
+				controller.setWarlordsController(this, scene);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;

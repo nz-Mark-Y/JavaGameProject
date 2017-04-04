@@ -30,12 +30,13 @@ public class AboutViewController {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
 		// Add menu items to controller
-		menuList.add(line1);
-		menuList.add(line2);
-		menuList.add(line3);
-		menuList.add(line4);
-		menuList.add(line5);
-		menuList.add(line6);
+		menuList.add(aboutLine1);
+		menuList.add(aboutLine2);
+		menuList.add(aboutLine3);
+		menuList.add(aboutLine4);
+		menuList.add(aboutLine5);
+		menuList.add(aboutLine6);
+		menuList.add(aboutLine7);
 		
 		// Set custom fonts 
 		Font myFont = null;
@@ -79,22 +80,25 @@ public class AboutViewController {
 	private Text title;
 	
 	@FXML
-	private Text line1;
+	private Text aboutLine1;
 	
 	@FXML
-	private Text line2;
+	private Text aboutLine2;
 	
 	@FXML
-	private Text line3;
+	private Text aboutLine3;
 	
 	@FXML
-	private Text line4;
+	private Text aboutLine4;
 	
 	@FXML
-	private Text line5;
+	private Text aboutLine5;
 	
 	@FXML
-	private Text line6;
+	private Text aboutLine6;
+	
+	@FXML
+	private Text aboutLine7;
 
 	@FXML
 	private Text back;

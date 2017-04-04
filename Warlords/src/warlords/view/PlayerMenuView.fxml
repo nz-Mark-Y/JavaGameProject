@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warlords.view.PlayerMenuViewController">
+   <children>
+      <ImageView fitHeight="868.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../images/mainMenuBackground.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="53.0" layoutY="338.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="191.0" layoutY="338.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="327.0" layoutY="338.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="463.0" layoutY="338.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="595.0" layoutY="338.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="53.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="191.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="327.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="463.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="595.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
+      <Text fx:id="title1" fill="WHITE" layoutX="53.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="title4" fill="WHITE" layoutX="595.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="title2" fill="WHITE" layoutX="47.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="title3" fill="WHITE" layoutX="597.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="line10" fill="WHITE" layoutX="53.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RIGHT = A/D">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line2" fill="WHITE" layoutX="597.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RIGHT = 3/9">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line3" fill="WHITE" layoutX="47.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RIGHT = J/L">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line4" fill="WHITE" layoutX="582.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RiGHT = &lt;-/-&gt;">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line5" fill="WHITE" layoutX="53.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POWERUP = W">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line6" fill="WHITE" layoutX="602.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POWERUP = 5">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line7" fill="WHITE" layoutX="49.0" layoutY="765.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POWERUP = I">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line8" fill="WHITE" layoutX="595.0" layoutY="768.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POWERUP = I">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="line9" fill="WHITE" layoutX="692.0" layoutY="771.0" strokeType="OUTSIDE" strokeWidth="0.0" text="^">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="backInstructions1" fill="WHITE" layoutX="275.0" layoutY="838.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ENTER when finished" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="backInstructions2" fill="WHITE" layoutX="275.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ENTER when finished" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
