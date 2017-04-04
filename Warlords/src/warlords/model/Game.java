@@ -2,18 +2,20 @@ package warlords.model;
 import java.util.ArrayList;
 
 import warlords.tests.IGame;
+import warlords.view.GameViewController;
 
 public class Game implements IGame {
 	private Ball ball;
 	private ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 	private ArrayList<Wall> wallList = new ArrayList<Wall>();
-	private boolean[] keyList = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+	private boolean[] keyList = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
 	private static int xBound;
 	private static int yBound;
 	private boolean finished;
 	private float timeRemaining;
 	private int ticksSinceLastHit;
 	private float paddleSpeed = (float) 0.7;
+	private GameViewController gameViewController;
 
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
 		this.ball = ball;
@@ -307,11 +309,17 @@ public class Game implements IGame {
 		if ((keyList[1] == true) && (playerList.get(2).isPlayerControlled())) {
 			curveRight(playerList.get(2).getPaddle(), 2);
 		}
+		if ((keyList[2] == true) && (playerList.get(2).isPlayerControlled())) {
+			useAbility(2); 
+		}
 		if ((keyList[4] == true) && (playerList.get(0).isPlayerControlled())) {
 			curveLeft(playerList.get(0).getPaddle(), 0);
 		} 
 		if ((keyList[5] == true) && (playerList.get(0).isPlayerControlled())) {
 			curveRight(playerList.get(0).getPaddle(), 0);
+		}
+		if ((keyList[6] == true) && (playerList.get(0).isPlayerControlled())) {
+			useAbility(0);
 		}
 		if ((keyList[8] == true) && (playerList.get(1).isPlayerControlled())) {
 			curveLeft(playerList.get(1).getPaddle(), 1);
@@ -319,17 +327,17 @@ public class Game implements IGame {
 		if ((keyList[9] == true) && (playerList.get(1).isPlayerControlled())) {
 			curveRight(playerList.get(1).getPaddle(), 1);
 		}
+		if ((keyList[10] == true) && (playerList.get(1).isPlayerControlled())) {
+			useAbility(1);
+		}
 		if ((keyList[12] == true) && (playerList.get(3).isPlayerControlled())) {
 			curveLeft(playerList.get(3).getPaddle(), 3);
 		} 
 		if ((keyList[13] == true) && (playerList.get(3).isPlayerControlled())) {
 			curveRight(playerList.get(3).getPaddle(), 3); 
 		}
-		if (keyList[16] == true) {
-			pause();
-		} 
-		if (keyList[17] == true) {
-			exitGame();
+		if ((keyList[14] == true) && (playerList.get(3).isPlayerControlled())) {
+			useAbility(3);
 		}
 	}
 	
@@ -391,6 +399,16 @@ public class Game implements IGame {
 		}
 	}
 	
+	public void useAbility(int playerNum) {
+		if (playerList.get(playerNum).getClassNum() == 0) { // France
+			
+		} else if (playerList.get(playerNum).getClassNum() == 1) { // USA
+			
+		} else {
+			
+		}
+	}
+	
 	public void computerMovePaddles() {
 		for (int i=0; i<playerList.size(); i++) {
 			if (!playerList.get(i).isPlayerControlled()) {
@@ -419,14 +437,8 @@ public class Game implements IGame {
 		}
 	}
 	
-	// A pause function. To be implemented further
-	public void pause() {
-		System.out.println("Pause pressed");
-	}
-	
-	// An exit function. To be implemented further
-	public void exitGame() {
-		
+	public void setGameViewController(GameViewController gameViewController) {
+		this.gameViewController = gameViewController;
 	}
 	
 	@Override

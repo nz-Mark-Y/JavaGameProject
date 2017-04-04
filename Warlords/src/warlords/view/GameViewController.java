@@ -1,5 +1,6 @@
 package warlords.view;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import warlords.WarlordsController;
 import warlords.model.Game;
 import warlords.model.Paddle;
@@ -23,9 +25,10 @@ public class GameViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
+	private ArrayList<Shape> additionalShapesList;
 
 	public GameViewController() {
-
+		
 	}
 
 	@FXML
@@ -36,6 +39,7 @@ public class GameViewController {
 	public void setWarlordsController(WarlordsController warlordsController, final Scene scene) {
 		this.warlordsController = warlordsController;
 		this.game = warlordsController.getGame();
+		this.game.setGameViewController(this);
 		this.scene = scene;
 
 		// Initial ball velocity
@@ -107,6 +111,12 @@ public class GameViewController {
 						case NUMPAD6:
 							game.setKeyDown(15);
 							break;
+						case P:
+							pause();
+							break;
+						case ESCAPE:
+							exit();
+							break;
 						default:
 							break;					
 						}
@@ -164,19 +174,13 @@ public class GameViewController {
 						case NUMPAD6:
 							game.setKeyUp(15);
 							break;
-						case P:
-							game.setKeyUp(16);
-							break;
-						case ESCAPE:
-							game.setKeyUp(17);
-							break;
 						default:
 							break;					
 						}
 					}
 				};    
-				scene.setOnKeyPressed(handler0);
-				scene.setOnKeyReleased(handler1);
+				scene.addEventHandler(KeyEvent.KEY_PRESSED, handler0);
+				scene.addEventHandler(KeyEvent.KEY_RELEASED, handler1);
 			}		
 		});     
 		thread.start();
@@ -211,7 +215,11 @@ public class GameViewController {
 		player3Warlord.setY(-(game.getPlayerList().get(2).getYPos() + Warlord.height));
 		player4Warlord.setX(game.getPlayerList().get(3).getXPos());
 		player4Warlord.setY(-(game.getPlayerList().get(3).getYPos() + Warlord.height));	
-
+		for (int i=0; i<additionalShapesList.size(); i++) {
+			
+		}
+ 		
+		// MOVE TO INITIALISE
 		//Applying patterns to crates
 		player1Wall.setFill(player1CratePattern);
 		player2Wall.setFill(player2CratePattern);
@@ -244,7 +252,21 @@ public class GameViewController {
 		player4Warlord.setStrokeWidth(0);
 		player4Warlord.setFill(player4MothershipPattern);
 	}
-
+	
+	public void pause() {
+		
+	}
+	
+	public void exit() {
+		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
+		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
+		warlordsController.showMainMenu();
+	}
+	
+	private void addToAdditionalShapesList() {
+		
+	}
+	
 	@FXML
 	private Circle ball;
 
