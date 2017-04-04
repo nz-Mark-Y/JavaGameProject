@@ -27,7 +27,7 @@ public class GameViewController {
 	private EventHandler<KeyEvent> handler1;
 
 	public GameViewController() {
-		
+
 	}
 
 	@FXML
@@ -40,8 +40,6 @@ public class GameViewController {
 		this.game = warlordsController.getGame();
 		this.game.setGameViewController(this);
 		this.scene = scene;
-		
-		addViewsToModels();
 
 		// Initial ball velocity
 		game.getBall().setXVelocity(-3);
@@ -56,6 +54,10 @@ public class GameViewController {
 			}
 		}, 20, 20);	
 
+		//Initialize the graphics for the objects
+		addViewsToModels();
+		graphicsInit();
+		
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
 			@Override
@@ -202,8 +204,35 @@ public class GameViewController {
 			game.getWallList().get(i).getWallView().setX(game.getWallList().get(i).getXPos());
 			game.getWallList().get(i).getWallView().setY(-(game.getWallList().get(i).getYPos() + Wall.height));
 		}
- 		
-		// MOVE TO INITIALISE
+	}
+
+	public void pause() {
+
+	}
+
+	public void exit() {
+		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
+		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
+		warlordsController.showMainMenu();
+	}
+	
+	public void addViewsToModels() {
+		game.getBall().setBallView(ball);
+		game.getPlayerList().get(0).setWarlordView(player1Warlord);
+		game.getPlayerList().get(1).setWarlordView(player2Warlord);
+		game.getPlayerList().get(2).setWarlordView(player3Warlord);
+		game.getPlayerList().get(3).setWarlordView(player4Warlord);
+		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle);
+		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle);
+		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle);
+		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle);
+		game.getWallList().get(0).setWallView(player1Wall);
+		game.getWallList().get(1).setWallView(player2Wall);
+		game.getWallList().get(2).setWallView(player3Wall);
+		game.getWallList().get(3).setWallView(player4Wall);
+	}
+
+	private void graphicsInit() {
 		//Applying patterns to crates
 		player1Wall.setFill(player1CratePattern);
 		player2Wall.setFill(player2CratePattern);
@@ -236,33 +265,7 @@ public class GameViewController {
 		player4Warlord.setStrokeWidth(0);
 		player4Warlord.setFill(player4MothershipPattern);
 	}
-	
-	public void pause() {
-		
-	}
-	
-	public void exit() {
-		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
-		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
-		warlordsController.showMainMenu();
-	}
-	
-	public void addViewsToModels() {
-		game.getBall().setBallView(ball);
-		game.getPlayerList().get(0).setWarlordView(player1Warlord);
-		game.getPlayerList().get(1).setWarlordView(player2Warlord);
-		game.getPlayerList().get(2).setWarlordView(player3Warlord);
-		game.getPlayerList().get(3).setWarlordView(player4Warlord);
-		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle);
-		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle);
-		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle);
-		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle);
-		game.getWallList().get(0).setWallView(player1Wall);
-		game.getWallList().get(1).setWallView(player2Wall);
-		game.getWallList().get(2).setWallView(player3Wall);
-		game.getWallList().get(3).setWallView(player4Wall);
-	}
-	
+
 	@FXML
 	private Circle ball;
 
