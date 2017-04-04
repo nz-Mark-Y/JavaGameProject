@@ -40,20 +40,20 @@ public class WarlordsController extends Application {
 	// Set up the objects in a new game
 	public void createNewGame() {
 		Ball ball = new Ball(350, 350);
-		Warlord player0 = new Warlord(new Paddle(181, 547), 40, 678, false, 0);	
-		Warlord player1 = new Warlord(new Paddle(181, 181), 40, 40, false, 0);
-		Warlord player2 = new Warlord(new Paddle(547, 181), 678, 40, true, 0);
-		Warlord player3 = new Warlord(new Paddle(547, 547), 678, 678, false, 0);
+		Warlord player1 = new Warlord(new Paddle(181, 547), 40, 678, false, 0);	
+		Warlord player2 = new Warlord(new Paddle(181, 181), 40, 40, false, 0);
+		Warlord player3 = new Warlord(new Paddle(547, 181), 678, 40, true, 0);
+		Warlord player4 = new Warlord(new Paddle(547, 547), 678, 678, false, 0);
 
 		ArrayList<Warlord> playerList = new ArrayList<Warlord>();
-		playerList.add(player0);
 		playerList.add(player1);
 		playerList.add(player2);
 		playerList.add(player3);
-		Wall wall1 = new Wall(100, 200, 0);
-		Wall wall2 = new Wall(668, 618, 1);
-		Wall wall3 = new Wall(100, 618, 2);
-		Wall wall4 = new Wall(668, 200, 3);
+		playerList.add(player4);
+		Wall wall1 = new Wall(100, 200, 1);
+		Wall wall2 = new Wall(668, 618, 2);
+		Wall wall3 = new Wall(100, 618, 3);
+		Wall wall4 = new Wall(668, 200, 4);
 		ArrayList<Wall> wallList = new ArrayList<Wall>();
 		wallList.add(wall1);
 		wallList.add(wall2);

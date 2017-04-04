@@ -28,7 +28,41 @@ public class GameViewController {
 	private ArrayList<Shape> additionalShapesList;
 
 	public GameViewController() {
-		
+
+	}
+
+	private void graphicsInit() {
+		//Applying patterns to crates
+		player1Wall.setFill(player1CratePattern);
+		player2Wall.setFill(player2CratePattern);
+		player3Wall.setFill(player3CratePattern);
+		player4Wall.setFill(player4CratePattern);
+
+		//Applying patterns to paddles
+		player1Paddle.setStrokeWidth(0);
+		player1Paddle.setFill(player1ShipPattern);
+
+		player2Paddle.setStrokeWidth(0);
+		player2Paddle.setFill(player2ShipPattern);
+
+		player3Paddle.setStrokeWidth(0);
+		player3Paddle.setFill(player3ShipPattern);
+
+		player4Paddle.setStrokeWidth(0);
+		player4Paddle.setFill(player4ShipPattern);
+
+		//Applying patterns to warlords
+		player1Warlord.setStrokeWidth(0);
+		player1Warlord.setFill(player1MothershipPattern);
+
+		player2Warlord.setStrokeWidth(0);
+		player2Warlord.setFill(player2MothershipPattern);
+
+		player3Warlord.setStrokeWidth(0);
+		player3Warlord.setFill(player3MothershipPattern);
+
+		player4Warlord.setStrokeWidth(0);
+		player4Warlord.setFill(player4MothershipPattern);
 	}
 
 	@FXML
@@ -55,6 +89,9 @@ public class GameViewController {
 			}
 		}, 20, 20);	
 
+		//Initialize the graphics for the objects
+		graphicsInit();
+		
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
 			@Override
@@ -215,58 +252,25 @@ public class GameViewController {
 		player3Warlord.setY(-(game.getPlayerList().get(2).getYPos() + Warlord.height));
 		player4Warlord.setX(game.getPlayerList().get(3).getXPos());
 		player4Warlord.setY(-(game.getPlayerList().get(3).getYPos() + Warlord.height));	
-		for (int i=0; i<additionalShapesList.size(); i++) {
-			
-		}
- 		
-		// MOVE TO INITIALISE
-		//Applying patterns to crates
-		player1Wall.setFill(player1CratePattern);
-		player2Wall.setFill(player2CratePattern);
-		player3Wall.setFill(player3CratePattern);
-		player4Wall.setFill(player4CratePattern);
+		//for (int i=0; i<additionalShapesList.size(); i++) {
 
-		//Applying patterns to paddles
-		player1Paddle.setStrokeWidth(0);
-		player1Paddle.setFill(player1ShipPattern);
-
-		player2Paddle.setStrokeWidth(0);
-		player2Paddle.setFill(player2ShipPattern);
-
-		player3Paddle.setStrokeWidth(0);
-		player3Paddle.setFill(player3ShipPattern);
-
-		player4Paddle.setStrokeWidth(0);
-		player4Paddle.setFill(player4ShipPattern);
-
-		//Applying patterns to warlords
-		player1Warlord.setStrokeWidth(0);
-		player1Warlord.setFill(player1MothershipPattern);
-
-		player2Warlord.setStrokeWidth(0);
-		player2Warlord.setFill(player2MothershipPattern);
-
-		player3Warlord.setStrokeWidth(0);
-		player3Warlord.setFill(player3MothershipPattern);
-
-		player4Warlord.setStrokeWidth(0);
-		player4Warlord.setFill(player4MothershipPattern);
+		//}
 	}
-	
+
 	public void pause() {
-		
+
 	}
-	
+
 	public void exit() {
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
 		warlordsController.showMainMenu();
 	}
-	
+
 	private void addToAdditionalShapesList() {
-		
+
 	}
-	
+
 	@FXML
 	private Circle ball;
 
