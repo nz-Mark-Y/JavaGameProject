@@ -16,6 +16,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
 import warlords.WarlordsController;
 import warlords.model.Ball;
 import warlords.model.Game;
@@ -45,6 +46,10 @@ public class GameViewController {
 		this.game.setGameViewController(this);
 		this.scene = scene;
 
+		//Initialize the graphics for the objects
+		graphicsInit();
+		addViewsToModels();
+		
 		// Initial ball velocity
 		int ballXVel = 0;
 		int ballYVel = 0;
@@ -74,10 +79,6 @@ public class GameViewController {
 				});
 			}
 		}, 20, 20);	
-
-		//Initialize the graphics for the objects
-		addViewsToModels();
-		graphicsInit();
 		
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
@@ -262,10 +263,10 @@ public class GameViewController {
 		game.getPlayerList().get(1).setWarlordView(player2Warlord);
 		game.getPlayerList().get(2).setWarlordView(player3Warlord);
 		game.getPlayerList().get(3).setWarlordView(player4Warlord);
-		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle);
-		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle);
-		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle);
-		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle);
+		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle, 0);
+		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle, 1);
+		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle, 2);
+		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle, 3);
 		game.getWallList().get(0).setWallView(player1Wall);
 		game.getWallList().get(1).setWallView(player2Wall);
 		game.getWallList().get(2).setWallView(player3Wall);

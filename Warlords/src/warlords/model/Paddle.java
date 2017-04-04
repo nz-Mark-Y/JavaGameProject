@@ -1,5 +1,8 @@
 package warlords.model;
+import javafx.geometry.Point3D;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import warlords.tests.IPaddle;
 
 public class Paddle implements IPaddle {
@@ -52,11 +55,24 @@ public class Paddle implements IPaddle {
 		theta -= x;
 	}
 
-	public void setPaddleView(Rectangle input) {
+	public void setPaddleView(Rectangle input, int playerNum) {
 		paddleView = input;
+		rotatePaddle(playerNum);
 	}
 	
-	public Rectangle getPaddleView() {
+	public void rotatePaddle(int playerNum) {
+		if (playerNum == 0) {
+			paddleView.setRotate(-getTheta());
+		} else if (playerNum == 1) {
+			paddleView.setRotate(180 + getTheta());
+		} else if (playerNum == 2) {
+			paddleView.setRotate(180 - getTheta());
+		} else {
+			paddleView.setRotate(getTheta());
+		}
+	}
+	
+	public Rectangle getPaddleView() {	
 		return paddleView;
 	}
 }

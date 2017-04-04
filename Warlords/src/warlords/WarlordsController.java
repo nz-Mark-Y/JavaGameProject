@@ -40,10 +40,10 @@ public class WarlordsController extends Application {
 	// Set up the objects in a new game
 	public void createNewGame() {
 		Ball ball = new Ball(350, 350);
-		Warlord player1 = new Warlord(new Paddle(181, 547), 40, 678, false, 0);	
-		Warlord player2 = new Warlord(new Paddle(181, 181), 40, 40, false, 0);
+		Warlord player1 = new Warlord(new Paddle(181, 547), 40, 678, true, 0);	
+		Warlord player2 = new Warlord(new Paddle(181, 181), 40, 40, true, 0);
 		Warlord player3 = new Warlord(new Paddle(547, 181), 678, 40, true, 1);
-		Warlord player4 = new Warlord(new Paddle(547, 547), 678, 678, false, 0);
+		Warlord player4 = new Warlord(new Paddle(547, 547), 678, 678, true, 0);
 
 		ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 		playerList.add(player1);

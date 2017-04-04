@@ -1,6 +1,7 @@
 package warlords.model;
 import java.util.ArrayList;
 
+import javafx.scene.transform.Rotate;
 import warlords.tests.IGame;
 import warlords.view.GameViewController;
 
@@ -365,61 +366,63 @@ public class Game implements IGame {
 	}
 	
 	// Move the paddle along its path to the left
-	public void curveLeft(Paddle paddle, int centre) {
-		if (centre == 1) {
+	public void curveLeft(Paddle paddle, int playerNum) {
+		if (playerNum == 1) {
 			if (paddle.getXPos() > 0) {
 				paddle.decrTheta((float) paddleSpeed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
-		} else if (centre == 2) {
+		} else if (playerNum == 2) {
 			if (paddle.getYPos() > 0) {
 				paddle.incrTheta((float) paddleSpeed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
-		} else if (centre == 0) {
+		} else if (playerNum == 0) {
 			if (paddle.getXPos() > 0) {
 				paddle.decrTheta((float) paddleSpeed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) ( 256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
-		} else if (centre == 3) {	
+		} else if (playerNum == 3) {	
 			if (paddle.getYPos() < 768 - Paddle.length) {
 				paddle.incrTheta((float) paddleSpeed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			} 
 		}
+		paddle.rotatePaddle(playerNum);
 	}
 	
 	// Move the paddle along its path to the right
-	public void curveRight(Paddle paddle, int centre) {
-		if (centre == 1) {
+	public void curveRight(Paddle paddle, int playerNum) {
+		if (playerNum == 1) {
 			if (paddle.getYPos() > 2) {
 				paddle.incrTheta((float) paddleSpeed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
-		} else if (centre == 2) {
+		} else if (playerNum == 2) {
 			if (paddle.getXPos() < 768 - Paddle.length) {
 				paddle.decrTheta((float) paddleSpeed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
-		} else if (centre == 0) {
+		} else if (playerNum == 0) {
 			if (paddle.getYPos() < 768 - Paddle.length) {
 				paddle.incrTheta((float) paddleSpeed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
-		} else if (centre == 3) {
+		} else if (playerNum == 3) {
 			if (paddle.getXPos() < 768 - Paddle.length) {
 				paddle.decrTheta((float) paddleSpeed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		}
+		paddle.rotatePaddle(playerNum);
 	}
 	
 	public void useAbility(int playerNum) {
