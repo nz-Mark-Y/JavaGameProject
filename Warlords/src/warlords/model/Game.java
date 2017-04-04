@@ -5,7 +5,7 @@ import warlords.tests.IGame;
 import warlords.view.GameViewController;
 
 public class Game implements IGame {
-	private Ball ball;
+	private ArrayList<Ball> ballList = new ArrayList<Ball>();
 	private ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 	private ArrayList<Wall> wallList = new ArrayList<Wall>();
 	private boolean[] keyList = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
@@ -18,11 +18,11 @@ public class Game implements IGame {
 	private GameViewController gameViewController;
 
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
-		this.ball = ball;
 		Game.xBound = xBound;
 		Game.yBound = yBound;
 		this.playerList = playerList;
 		this.wallList = wallList;
+		this.ballList.add(ball);
 		finished = false;
 		timeRemaining = (float) 120;
 		ticksSinceLastHit = 11;
@@ -34,62 +34,88 @@ public class Game implements IGame {
 		timeRemaining -= 0.02;
 		
 		movePaddles();
-		computerMovePaddles();
+		computerMovePaddles(ballList.get(0));
 		
-		if (ticksSinceLastHit > 10) {
-			// Check if the ball is going to hit a paddle
-			if (checkPaddles()) {
-				ticksSinceLastHit = 0;
-				checkWin();
-				return;
-			}
-
-			// Check if the ball is going to hit a block
-			if (checkWalls()) {
-				ticksSinceLastHit = 0;
-				checkWin();
-				return;
-			}
-
-			// Check if the ball is going to hit a warlord
-			if (checkWarlords()) {
-				ticksSinceLastHit = 0;
-				checkWin();
-				return;
-			}
-		} else {
-			ticksSinceLastHit++;
+		int hitNum = checkHits();
+		if (hitNum > 0) {
+			gameViewController.delBall(ballList.get(hitNum));
+			ballList.remove(hitNum);
 		}
-
-		// Check for boundaries, if we hit one then rebound
+	}
+	
+	public int checkHits() {
+		for (int i=0; i<ballList.size(); i++) {
+			Ball ball = ballList.get(i);
+			if (ticksSinceLastHit > 10) {
+				// Check if the ball is going to hit a paddle
+				if (checkPaddles(ball)) {
+					ticksSinceLastHit = 0;
+					checkWin();
+					return i;
+				}
+	
+				// Check if the ball is going to hit a block
+				if (checkWalls(ball)) {
+					ticksSinceLastHit = 0;
+					checkWin();
+					return i;
+				}
+	
+				// Check if the ball is going to hit a warlord
+				if (checkWarlords(ball)) {
+					ticksSinceLastHit = 0;
+					checkWin();
+					return i;
+				}
+			} else {
+				ticksSinceLastHit++;
+			}
+			
+			if (checkBoundaries(ball)) {
+				checkWin();
+				return i;
+			}
+				
+		}
+		checkWin();
+		return -1;
+	}
+	
+	// Check for boundaries, if we hit one then rebound
+	private boolean checkBoundaries(Ball ball) { 
+		boolean yHit = false;
+		boolean xHit = false;
 		// X boundaries
 		if (ball.getXPos() + ball.getXVelocity() >= xBound) {
 			ball.setXPos(xBound - (ball.getXPos() + ball.getXVelocity() - xBound));
 			ball.setXVelocity(ball.getXVelocity() * -1);
+			xHit = true;
 		} else if (ball.getXPos() + ball.getXVelocity() <= 0) {	
 			ball.setXPos((ball.getXPos() + ball.getXVelocity()) * -1);
 			ball.setXVelocity(ball.getXVelocity() * -1);
+			xHit = true;
 		} else {	
 			ball.setXPos(ball.getXPos() + ball.getXVelocity());
 		}
-		
+					
 		// Y boundaries
 		if (ball.getYPos() + ball.getYVelocity() >= yBound) {
 			ball.setYPos(yBound - (ball.getYPos() + ball.getYVelocity() - yBound));
 			ball.setYVelocity(ball.getYVelocity() * -1);
+			yHit = true;
 		} else if (ball.getYPos() + ball.getYVelocity() <= 0) {	
 			ball.setYPos((ball.getYPos() + ball.getYVelocity()) * -1);
 			ball.setYVelocity(ball.getYVelocity() * -1);
+			yHit = true;
 		} else {
 			ball.setYPos(ball.getYPos() + ball.getYVelocity());		
-		}	
-
-		checkWin();
-		return;
+		}
+		return (xHit || yHit);
 	}
+	
 
 	// Check for paddles, if we hit one then rebound 
-	private boolean checkPaddles() {
+	private boolean checkPaddles(Ball ball) {
 		for (int i=0; i<playerList.size(); i++) {			
 			if (!playerList.get(i).isDead()) {
 				Paddle paddle = playerList.get(i).getPaddle();
@@ -99,7 +125,7 @@ public class Game implements IGame {
 						if ((k == 0) || (k == Paddle.height - 1) || (j == 0) || (j == Paddle.length - 1)) {
 							paddleX = paddle.getXPos() + j;
 							paddleY = paddle.getYPos() + k;
-							if (coordInBallPath(paddleX, paddleY)) { 
+							if (coordInBallPath(ball, paddleX, paddleY)) { 
 								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
 									ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
@@ -130,7 +156,7 @@ public class Game implements IGame {
 	}
 
 	// Check for walls, if we hit one then rebound and destroy the wall
-	private boolean checkWalls() {
+	private boolean checkWalls(Ball ball) {
 		for (int i=0; i<wallList.size(); i++) {
 			Wall wall = wallList.get(i);
 			if (!wall.isDestroyed()) {
@@ -140,7 +166,7 @@ public class Game implements IGame {
 						if ((k == 0) || (k == Wall.height - 1) || (j == 0) || (j == Wall.length - 1)) {
 							wallX = wall.getXPos() + j;
 							wallY = wall.getYPos() + k;
-							if (coordInBallPath(wallX, wallY)) { 
+							if (coordInBallPath(ball, wallX, wallY)) { 
 								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
 									ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
@@ -172,7 +198,7 @@ public class Game implements IGame {
 	}
 
 	// Check for warlords, if we hit one then rebound and destroy the warlord
-	private boolean checkWarlords() {
+	private boolean checkWarlords(Ball ball) {
 		for (int i=0; i<playerList.size(); i++) {
 			Warlord player = playerList.get(i);
 			if (!player.isDead()) {
@@ -182,7 +208,7 @@ public class Game implements IGame {
 						if ((k == 0) || (k == Warlord.height - 1) || (j == 0) || (j == Warlord.length - 1)) {
 							playerX = player.getXPos() + j;
 							playerY = player.getYPos() + k;
-							if (coordInBallPath(playerX, playerY)) { 
+							if (coordInBallPath(ball, playerX, playerY)) { 
 								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
 									ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
 									ball.setYVelocity(ball.getYVelocity() * -1);
@@ -247,7 +273,7 @@ public class Game implements IGame {
 	}
 
 	// Check if a coordinate on the ball will hit a coordinate
-	private boolean coordInBallPath(int xCoord, int yCoord) {
+	private boolean coordInBallPath(Ball ball, int xCoord, int yCoord) {
 		int x0, x1, y0, y1;
 		for (int z=0; z<ball.length; z++) {
 			for (int y=0; y<ball.height; y++) {
@@ -400,13 +426,35 @@ public class Game implements IGame {
 		if (playerList.get(playerNum).getClassNum() == 0) { // France
 			
 		} else if (playerList.get(playerNum).getClassNum() == 1) { // USA
-			
+			if (playerList.get(playerNum).getLastAbility() == 0) {
+				Ball bullet;
+				if (playerNum == 0) {
+					bullet = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
+					bullet.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 60));
+					bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
+				} else if (playerNum == 1) {
+					bullet = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
+					bullet.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 60));
+					bullet.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 60));
+				} else if (playerNum == 2) {
+					bullet = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
+					bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
+					bullet.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 60));
+				} else {
+					bullet = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
+					bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
+					bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
+				}
+				ballList.add(bullet);
+				gameViewController.createBulletView(bullet);
+				playerList.get(playerNum).setLastAbility((int) timeRemaining);
+			}
 		} else {
 			
 		}
 	}
 	
-	public void computerMovePaddles() {
+	public void computerMovePaddles(Ball ball) {
 		for (int i=0; i<playerList.size(); i++) {
 			if (!playerList.get(i).isPlayerControlled()) {
 				if (Math.abs(ball.getXPos() - playerList.get(i).getPaddle().getXPos()) > Math.abs(ball.getYPos() - playerList.get(i).getPaddle().getYPos())) {
@@ -461,7 +509,11 @@ public class Game implements IGame {
 	}
 	
 	public Ball getBall() {
-		return ball;
+		return ballList.get(0);
+	}
+	
+	public ArrayList<Ball> getBallList() {
+		return ballList;
 	}
 
 	public ArrayList<Warlord> getPlayerList() {

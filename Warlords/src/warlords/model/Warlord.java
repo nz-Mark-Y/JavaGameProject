@@ -14,6 +14,7 @@ public class Warlord implements IWarlord {
 	private int wallsLeft;
 	private int classNum;
 	private Rectangle warlordView;
+	private int lastAbility;
 	
 	public Warlord(Paddle paddle, boolean control, int classNum) {
 		this.paddle = paddle;
@@ -23,6 +24,7 @@ public class Warlord implements IWarlord {
 		won = false;
 		wallsLeft = 0;
 		playerControlled = control;
+		lastAbility = 0;
 	}
 	
 	public Warlord(Paddle paddle, int x, int y, boolean control, int classNum) {
@@ -33,6 +35,8 @@ public class Warlord implements IWarlord {
 		won = false;
 		wallsLeft = 0;
 		playerControlled = control;
+		this.classNum = classNum;
+		lastAbility = 0;
 	}
 	
 	@Override
@@ -107,6 +111,14 @@ public class Warlord implements IWarlord {
 	
 	public Rectangle getWarlordView() {
 		return warlordView;
+	}
+	
+	public int getLastAbility() {
+		return lastAbility;
+	}
+	
+	public void setLastAbility(int input) {
+		lastAbility = input;
 	}
 }
 

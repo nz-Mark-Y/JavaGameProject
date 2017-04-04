@@ -10,12 +10,22 @@ public class Ball implements IBall {
 	public static int height = 10;
 	public static int length = 10; 
 	private Circle ballView;
+	private boolean bulletBall;
 	
 	public Ball(int init_x, int init_y) {
 		x = init_x;
 		y = init_y;
 		dx = 0;
 		dy = 0;
+		bulletBall = false;
+	}
+	
+	public Ball(int init_x, int init_y, boolean isBullet) {
+		x = init_x;
+		y = init_y;
+		dx = 0;
+		dy = 0;
+		bulletBall = true;
 	}
 	
 	public Ball() {
@@ -23,8 +33,8 @@ public class Ball implements IBall {
 		y = 0;
 		dx = 0;
 		dy = 0;
+		bulletBall = false;
 	}
-	
 	
 	@Override
 	public void setXPos(int x) {
@@ -76,5 +86,9 @@ public class Ball implements IBall {
 	
 	public Circle getBallView() {
 		return ballView;
+	}
+	
+	public boolean isBullet() {
+		return bulletBall;
 	}
 }

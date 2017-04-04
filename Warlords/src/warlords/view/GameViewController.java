@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import warlords.WarlordsController;
+import warlords.model.Ball;
 import warlords.model.Game;
 import warlords.model.Paddle;
 import warlords.model.Wall;
@@ -50,7 +54,12 @@ public class GameViewController {
 		timer.scheduleAtFixedRate(new TimerTask () {
 			@Override
 			public void run() {
-				onTick();
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						onTick();
+					}
+				});
 			}
 		}, 20, 20);	
 
@@ -192,8 +201,10 @@ public class GameViewController {
 	// Do the logic, then rerender all the objects.
 	private void onTick() {
 		game.tick();
-		game.getBall().getBallView().setCenterX(game.getBall().getXPos() + game.getBall().length / 2);
-		game.getBall().getBallView().setCenterY(-(game.getBall().getYPos() + game.getBall().height / 2));
+		for (int i=0; i<game.getBallList().size(); i++) {
+			game.getBallList().get(i).getBallView().setCenterX(game.getBallList().get(i).getXPos() + Ball.length / 2);
+			game.getBallList().get(i).getBallView().setCenterY(-(game.getBallList().get(i).getYPos() + Ball.height / 2));
+		}	
 		for (int i=0; i<game.getPlayerList().size(); i++) {
 			game.getPlayerList().get(i).getWarlordView().setX(game.getPlayerList().get(i).getXPos());
 			game.getPlayerList().get(i).getWarlordView().setY(-(game.getPlayerList().get(i).getYPos() + Warlord.height));
@@ -214,6 +225,22 @@ public class GameViewController {
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
 		warlordsController.showMainMenu();
+	}
+	
+	public void createBulletView(Ball bullet) {
+		Circle circle = new Circle();
+		circle.setFill(Color.RED);
+		circle.setRadius(Ball.length / 2);
+		circle.setCenterX(0);
+		circle.setCenterY(0);
+		circle.setLayoutX(0);
+		circle.setLayoutY(768);
+		pane.getChildren().add(circle);
+		bullet.setBallView(circle);
+	}
+	
+	public void delBall(Ball bullet) {
+		bullet.getBallView().setVisible(false);
 	}
 	
 	public void addViewsToModels() {
@@ -304,6 +331,9 @@ public class GameViewController {
 
 	@FXML 
 	private Rectangle player4Warlord;
+	
+	@FXML 
+	private Pane pane;
 
 	//Creating patterns for the walls
 	private Image player1Crate = new Image("file:images/player1Crate.png");
