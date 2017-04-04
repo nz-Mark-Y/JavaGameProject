@@ -1,4 +1,5 @@
 package warlords.model;
+import javafx.scene.shape.Circle;
 import warlords.tests.IBall;
 
 public class Ball implements IBall {
@@ -8,6 +9,7 @@ public class Ball implements IBall {
 	private int dy;
 	public static int height = 10;
 	public static int length = 10; 
+	private Circle ballView;
 	
 	public Ball(int init_x, int init_y) {
 		x = init_x;
@@ -68,4 +70,11 @@ public class Ball implements IBall {
 		return dy;
 	}
 
+	public void setBallView(Circle input) {
+		ballView = input;
+	}
+	
+	public Circle getBallView() {
+		return ballView;
+	}
 }

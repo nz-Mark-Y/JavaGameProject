@@ -1,4 +1,5 @@
 package warlords.model;
+import javafx.scene.shape.Rectangle;
 import warlords.tests.IPaddle;
 
 public class Paddle implements IPaddle {
@@ -7,6 +8,7 @@ public class Paddle implements IPaddle {
 	public static int height = 40;
 	public static int length = 40;
 	private float theta;
+	private Rectangle paddleView;
 	
 	public Paddle(int init_x, int init_y) {
 		x = init_x;
@@ -50,4 +52,11 @@ public class Paddle implements IPaddle {
 		theta -= x;
 	}
 
+	public void setPaddleView(Rectangle input) {
+		paddleView = input;
+	}
+	
+	public Rectangle getPaddleView() {
+		return paddleView;
+	}
 }

@@ -25,7 +25,6 @@ public class GameViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
-	private ArrayList<Shape> additionalShapesList;
 
 	public GameViewController() {
 		
@@ -41,6 +40,8 @@ public class GameViewController {
 		this.game = warlordsController.getGame();
 		this.game.setGameViewController(this);
 		this.scene = scene;
+		
+		addViewsToModels();
 
 		// Initial ball velocity
 		game.getBall().setXVelocity(-3);
@@ -186,37 +187,20 @@ public class GameViewController {
 		thread.start();
 	}
 
-	// Do the logic, then rerender all the objects. Will add lists in soon.
+	// Do the logic, then rerender all the objects.
 	private void onTick() {
 		game.tick();
-		ball.setCenterX(game.getBall().getXPos() + game.getBall().length / 2);
-		ball.setCenterY(-(game.getBall().getYPos() + game.getBall().height / 2));	
-		player1Paddle.setX(game.getPlayerList().get(0).getPaddle().getXPos());
-		player1Paddle.setY(-(game.getPlayerList().get(0).getPaddle().getYPos() + Paddle.height));
-		player2Paddle.setX(game.getPlayerList().get(1).getPaddle().getXPos());
-		player2Paddle.setY(-(game.getPlayerList().get(1).getPaddle().getYPos() + Paddle.height));
-		player1Wall.setX(game.getWallList().get(0).getXPos());
-		player1Wall.setY(-(game.getWallList().get(0).getYPos() + Wall.height));
-		player2Wall.setX(game.getWallList().get(1).getXPos());
-		player2Wall.setY(-(game.getWallList().get(1).getYPos() + Wall.height));
-		player1Warlord.setX(game.getPlayerList().get(0).getXPos());
-		player1Warlord.setY(-(game.getPlayerList().get(0).getYPos() + Warlord.height));
-		player2Warlord.setX(game.getPlayerList().get(1).getXPos());
-		player2Warlord.setY(-(game.getPlayerList().get(1).getYPos() + Warlord.height));	
-		player3Paddle.setX(game.getPlayerList().get(2).getPaddle().getXPos());
-		player3Paddle.setY(-(game.getPlayerList().get(2).getPaddle().getYPos() + Paddle.height));
-		player4Paddle.setX(game.getPlayerList().get(3).getPaddle().getXPos());
-		player4Paddle.setY(-(game.getPlayerList().get(3).getPaddle().getYPos() + Paddle.height));
-		player3Wall.setX(game.getWallList().get(2).getXPos());
-		player3Wall.setY(-(game.getWallList().get(2).getYPos() + Wall.height));
-		player4Wall.setX(game.getWallList().get(3).getXPos());
-		player4Wall.setY(-(game.getWallList().get(3).getYPos() + Wall.height));
-		player3Warlord.setX(game.getPlayerList().get(2).getXPos());
-		player3Warlord.setY(-(game.getPlayerList().get(2).getYPos() + Warlord.height));
-		player4Warlord.setX(game.getPlayerList().get(3).getXPos());
-		player4Warlord.setY(-(game.getPlayerList().get(3).getYPos() + Warlord.height));	
-		for (int i=0; i<additionalShapesList.size(); i++) {
-			
+		game.getBall().getBallView().setCenterX(game.getBall().getXPos() + game.getBall().length / 2);
+		game.getBall().getBallView().setCenterY(-(game.getBall().getYPos() + game.getBall().height / 2));
+		for (int i=0; i<game.getPlayerList().size(); i++) {
+			game.getPlayerList().get(i).getWarlordView().setX(game.getPlayerList().get(i).getXPos());
+			game.getPlayerList().get(i).getWarlordView().setY(-(game.getPlayerList().get(i).getYPos() + Warlord.height));
+			game.getPlayerList().get(i).getPaddle().getPaddleView().setX(game.getPlayerList().get(i).getPaddle().getXPos());
+			game.getPlayerList().get(i).getPaddle().getPaddleView().setY(-(game.getPlayerList().get(i).getPaddle().getYPos() + Paddle.height));
+		}
+		for (int i=0;i<game.getWallList().size(); i++) {
+			game.getWallList().get(i).getWallView().setX(game.getWallList().get(i).getXPos());
+			game.getWallList().get(i).getWallView().setY(-(game.getWallList().get(i).getYPos() + Wall.height));
 		}
  		
 		// MOVE TO INITIALISE
@@ -263,8 +247,20 @@ public class GameViewController {
 		warlordsController.showMainMenu();
 	}
 	
-	private void addToAdditionalShapesList() {
-		
+	public void addViewsToModels() {
+		game.getBall().setBallView(ball);
+		game.getPlayerList().get(0).setWarlordView(player1Warlord);
+		game.getPlayerList().get(1).setWarlordView(player2Warlord);
+		game.getPlayerList().get(2).setWarlordView(player3Warlord);
+		game.getPlayerList().get(3).setWarlordView(player4Warlord);
+		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle);
+		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle);
+		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle);
+		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle);
+		game.getWallList().get(0).setWallView(player1Wall);
+		game.getWallList().get(1).setWallView(player2Wall);
+		game.getWallList().get(2).setWallView(player3Wall);
+		game.getWallList().get(3).setWallView(player4Wall);
 	}
 	
 	@FXML

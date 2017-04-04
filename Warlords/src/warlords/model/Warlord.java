@@ -1,4 +1,5 @@
 package warlords.model;
+import javafx.scene.shape.Rectangle;
 import warlords.tests.IWarlord;
 
 public class Warlord implements IWarlord {
@@ -12,6 +13,7 @@ public class Warlord implements IWarlord {
 	private boolean won;
 	private int wallsLeft;
 	private int classNum;
+	private Rectangle warlordView;
 	
 	public Warlord(Paddle paddle, boolean control, int classNum) {
 		this.paddle = paddle;
@@ -62,6 +64,8 @@ public class Warlord implements IWarlord {
 	}
 	
 	public void dies() {
+		paddle.getPaddleView().setVisible(false);
+		warlordView.setVisible(false);
 		dead = true;
 	}
 	
@@ -95,6 +99,14 @@ public class Warlord implements IWarlord {
 	
 	public void setClassNum(int input) {
 		classNum = input;
+	}
+	
+	public void setWarlordView(Rectangle input) {
+		warlordView = input;
+	}
+	
+	public Rectangle getWarlordView() {
+		return warlordView;
 	}
 }
 

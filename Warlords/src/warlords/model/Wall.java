@@ -1,4 +1,5 @@
 package warlords.model;
+import javafx.scene.shape.Rectangle;
 import warlords.tests.IWall;
 
 public class Wall implements IWall {
@@ -8,6 +9,7 @@ public class Wall implements IWall {
 	public static int length = 30; 
 	private boolean destroyed;
 	private int belongsTo;
+	private Rectangle wallView;
 	
 	public Wall(int owner) {
 		x = 0;
@@ -54,4 +56,11 @@ public class Wall implements IWall {
 		destroyed = true;
 	}
 
+	public void setWallView(Rectangle input) {
+		wallView = input;
+	}
+	
+	public Rectangle getWallView() {
+		return wallView;
+	}
 }
