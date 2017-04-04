@@ -48,7 +48,7 @@
             <Font name="Evanescence Series B" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="aboutLine7" fill="WHITE" layoutX="58.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The University of Auckland: Faculty of Engineering" textAlignment="CENTER">
+      <Text fx:id="aboutLine1" fill="WHITE" layoutX="58.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The University of Auckland: faculty of Engineering" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="36.0" />
          </font>

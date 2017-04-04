@@ -39,27 +39,27 @@
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="title3" fill="WHITE" layoutX="597.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
+      <Text fx:id="title3" fill="WHITE" layoutX="597.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="line10" fill="WHITE" layoutX="53.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RIGHT = A/D">
+      <Text fx:id="line1" fill="WHITE" layoutX="53.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEfT/RIGHT = A/D">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line2" fill="WHITE" layoutX="597.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RIGHT = 3/9">
+      <Text fx:id="line2" fill="WHITE" layoutX="597.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEfT/RIGHT = 3/9">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line3" fill="WHITE" layoutX="47.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RIGHT = J/L">
+      <Text fx:id="line3" fill="WHITE" layoutX="47.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEfT/RIGHT = J/L">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line4" fill="WHITE" layoutX="582.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT/RiGHT = &lt;-/-&gt;">
+      <Text fx:id="line4" fill="WHITE" layoutX="580.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEfT/RiGHT = &lt;-/-&gt;">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
@@ -79,12 +79,7 @@
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line8" fill="WHITE" layoutX="595.0" layoutY="768.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POWERUP = I">
-         <font>
-            <Font name="Evanescence Series B" size="24.0" />
-         </font>
-      </Text>
-      <Text fx:id="line9" fill="WHITE" layoutX="692.0" layoutY="771.0" strokeType="OUTSIDE" strokeWidth="0.0" text="^">
+      <Text fx:id="line8" fill="WHITE" layoutX="595.0" layoutY="768.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POWERUP = UP">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>

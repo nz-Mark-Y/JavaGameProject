@@ -36,7 +36,6 @@ public class AboutViewController {
 		menuList.add(aboutLine4);
 		menuList.add(aboutLine5);
 		menuList.add(aboutLine6);
-		menuList.add(aboutLine7);
 		
 		// Set custom fonts 
 		Font myFont = null;
@@ -96,9 +95,6 @@ public class AboutViewController {
 	
 	@FXML
 	private Text aboutLine6;
-	
-	@FXML
-	private Text aboutLine7;
 
 	@FXML
 	private Text back;

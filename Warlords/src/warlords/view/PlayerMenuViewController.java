@@ -43,8 +43,6 @@ public class PlayerMenuViewController {
 		textList.add(line6);
 		textList.add(line7);
 		textList.add(line8);
-		textList.add(line9);
-		textList.add(line10);
 		textList.add(backInstructions1);
 		textList.add(backInstructions2);
 		
@@ -120,12 +118,6 @@ public class PlayerMenuViewController {
 	
 	@FXML
 	private Text line8;
-	
-	@FXML
-	private Text line9;
-	
-	@FXML
-	private Text line10;
 
 	@FXML
 	private Text backInstructions1;
