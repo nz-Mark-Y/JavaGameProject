@@ -1,4 +1,7 @@
 package warlords.model;
+import java.io.File;
+
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 import warlords.tests.IWall;
 
@@ -54,6 +57,11 @@ public class Wall implements IWall {
 	
 	public void destroy() {
 		destroyed = true;
+		
+		AudioClip soundMyNoise = new AudioClip(new File("sounds/explosion.mp3").toURI().toString());
+		soundMyNoise.play();
+		
+		wallView.setVisible(false);
 	}
 
 	public void setWallView(Rectangle input) {
