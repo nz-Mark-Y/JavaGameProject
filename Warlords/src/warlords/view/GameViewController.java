@@ -46,8 +46,15 @@ public class GameViewController {
 		this.scene = scene;
 
 		// Initial ball velocity
-		game.getBall().setXVelocity(-3);
-		game.getBall().setYVelocity(-3);
+		int ballXVel = 0;
+		int ballYVel = 0;
+		
+		while ((ballXVel == 0) || (ballXVel == 1) || (ballXVel == -1) || (ballYVel == 0) || (ballYVel == 1) || (ballYVel == -1)) {
+			ballXVel = 6 - (int) (Math.random() * (12));
+			ballYVel = 6 - (int) (Math.random() * (12));
+		}
+		game.getBall().setXVelocity(ballXVel);
+		game.getBall().setYVelocity(ballYVel);
 
 		// Game timer for ball and paddles to move
 		Timer timer = new Timer();
@@ -57,7 +64,12 @@ public class GameViewController {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						onTick();
+						if (!game.isFinished()) {
+							onTick();
+						} else {
+							System.out.println("Game finished");
+							timer.cancel();
+						}
 					}
 				});
 			}
@@ -224,6 +236,7 @@ public class GameViewController {
 	public void exit() {
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
+		game.finish();
 		warlordsController.showMainMenu();
 	}
 	

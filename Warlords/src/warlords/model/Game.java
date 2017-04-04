@@ -490,6 +490,10 @@ public class Game implements IGame {
 	public boolean isFinished() {
 		return finished;
 	}
+	
+	public void finish() {
+		finished = true;
+	}
 
 	@Override
 	public void setTimeRemaining(int seconds) {
