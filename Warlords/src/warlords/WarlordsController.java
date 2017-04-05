@@ -1,6 +1,7 @@
 package warlords;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import warlords.model.Ball;
 import warlords.model.Game;
@@ -32,6 +34,7 @@ public class WarlordsController extends Application {
 	private BorderPane rootLayout;
 	private Game game;
 	Scene scene;
+	private AudioClip mainMenuTheme = new AudioClip(new File("sounds/mainMenuTheme.mp3").toURI().toString());
 
 	public WarlordsController() {
 		createNewGame();
@@ -118,6 +121,11 @@ public class WarlordsController extends Application {
 
 			LeftSideViewController controller3 = loader3.getController();
 			controller3.setWarlordsController(this);
+			
+			//Stop playing the main theme if playing
+			if(mainMenuTheme.isPlaying()){
+				mainMenuTheme.stop();
+			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -144,6 +152,12 @@ public class WarlordsController extends Application {
 			
 			MainMenuViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
+			
+			//Play the main theme once
+			if(!mainMenuTheme.isPlaying()){
+				mainMenuTheme.play();
+			}
+			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}

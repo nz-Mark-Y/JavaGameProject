@@ -1,5 +1,6 @@
 package warlords.view;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -30,6 +32,7 @@ public class GameViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
+	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.mp3").toURI().toString());
 
 	public GameViewController() {
 
@@ -49,11 +52,11 @@ public class GameViewController {
 		//Initialize the graphics for the objects
 		graphicsInit();
 		addViewsToModels();
-		
+
 		// Initial ball velocity
 		int ballXVel = 0;
 		int ballYVel = 0;
-		
+
 		while ((ballXVel == 0) || (ballXVel == 1) || (ballXVel == -1) || (ballXVel == 2) || (ballXVel == -2) || (ballYVel == 0) || (ballYVel == 1) || (ballYVel == -1) || (ballYVel == 2) || (ballYVel == -2)) {
 			ballXVel = 6 - (int) (Math.random() * (12));
 			ballYVel = 6 - (int) (Math.random() * (12));
@@ -79,7 +82,7 @@ public class GameViewController {
 				});
 			}
 		}, 20, 20);	
-		
+
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
 			@Override
@@ -228,6 +231,11 @@ public class GameViewController {
 			game.getWallList().get(i).getWallView().setX(game.getWallList().get(i).getXPos());
 			game.getWallList().get(i).getWallView().setY(-(game.getWallList().get(i).getYPos() + Wall.height));
 		}
+
+		//Play multiplayer theme
+		if(!multiplayerTheme.isPlaying()){
+			multiplayerTheme.play();
+		}
 	}
 
 	public void pause() {
@@ -235,12 +243,15 @@ public class GameViewController {
 	}
 
 	public void exit() {
+		if(multiplayerTheme.isPlaying()){
+			multiplayerTheme.stop();
+		}
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
 		game.finish();
 		warlordsController.showMainMenu();
 	}
-	
+
 	public void createBulletView(Ball bullet) {
 		Circle circle = new Circle();
 		circle.setFill(Color.RED);
@@ -252,11 +263,11 @@ public class GameViewController {
 		pane.getChildren().add(circle);
 		bullet.setBallView(circle);
 	}
-	
+
 	public void delBall(Ball bullet) {
 		bullet.getBallView().setVisible(false);
 	}
-	
+
 	public void addViewsToModels() {
 		game.getBall().setBallView(ball);
 		game.getPlayerList().get(0).setWarlordView(player1Warlord);
@@ -345,7 +356,7 @@ public class GameViewController {
 
 	@FXML 
 	private Rectangle player4Warlord;
-	
+
 	@FXML 
 	private Pane pane;
 
