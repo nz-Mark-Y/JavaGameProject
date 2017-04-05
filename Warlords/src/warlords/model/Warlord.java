@@ -1,4 +1,7 @@
 package warlords.model;
+import java.io.File;
+
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 import warlords.tests.IWarlord;
 
@@ -71,6 +74,10 @@ public class Warlord implements IWarlord {
 		paddle.getPaddleView().setVisible(false);
 		warlordView.setVisible(false);
 		dead = true;
+		
+		//Play sound
+		AudioClip playerDeath = new AudioClip(new File("sounds/playerDeath.mp3").toURI().toString());
+		playerDeath.play();
 	}
 	
 	public void wins() {
