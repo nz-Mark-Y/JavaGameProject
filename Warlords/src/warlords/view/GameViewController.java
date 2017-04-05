@@ -40,6 +40,7 @@ public class GameViewController {
 	private Timer animationTimer;
 	private Timer timeLeftTimer;
 	private boolean paused;
+	private int delayer = 0;
 
 	public GameViewController() {
 
@@ -286,6 +287,32 @@ public class GameViewController {
 		if(!multiplayerTheme.isPlaying() && !paused){
 			multiplayerTheme.play();
 		}
+
+		//Loop through the ball frames
+		if(delayer == 5){
+			if(ball.getFill() == gameBall1Pattern) {
+				ball.setFill(gameBall2Pattern);
+				delayer = 0;
+			}else if(ball.getFill() == gameBall2Pattern){
+				ball.setFill(gameBall3Pattern);
+				delayer = 0;
+			}else if(ball.getFill() == gameBall3Pattern){
+				ball.setFill(gameBall4Pattern);
+				delayer = 0;
+			}else if(ball.getFill() == gameBall4Pattern){
+				ball.setFill(gameBall5Pattern);
+				delayer = 0;
+			}else if(ball.getFill() == gameBall5Pattern){
+				ball.setFill(gameBall6Pattern);
+				delayer = 0;
+			}else if(ball.getFill() == gameBall6Pattern){
+				ball.setFill(gameBall1Pattern);
+				delayer = 0;
+			}
+		}else{
+			delayer++;
+		}
+
 	}
 
 	public void pause() {
@@ -317,8 +344,8 @@ public class GameViewController {
 
 	public void createBulletView(Ball bullet) {
 		Circle circle = new Circle();
-		circle.setFill(Color.RED);
-		circle.setRadius(Ball.length / 2);
+		circle.setFill(ball.getFill());
+		circle.setRadius(5);
 		circle.setCenterX(0);
 		circle.setCenterY(0);
 		circle.setLayoutX(0);
@@ -379,6 +406,10 @@ public class GameViewController {
 
 		player4Warlord.setStrokeWidth(0);
 		player4Warlord.setFill(player4MothershipPattern);
+
+		//Applying pattern to ball
+		ball.setStrokeWidth(0);
+		ball.setFill(gameBall1Pattern);
 	}
 
 	@FXML
@@ -473,4 +504,24 @@ public class GameViewController {
 
 	private Image player4Mothership = new Image("file:images/player4Mothership.png");
 	ImagePattern player4MothershipPattern = new ImagePattern(player4Mothership);
+
+	//Creating patterns for the ball
+	private Image gameBall1 = new Image("file:images/ball1.png");
+	ImagePattern gameBall1Pattern = new ImagePattern(gameBall1);
+
+	private Image gameBall2 = new Image("file:images/ball2.png");
+	ImagePattern gameBall2Pattern = new ImagePattern(gameBall2);
+
+	private Image gameBall3 = new Image("file:images/ball3.png");
+	ImagePattern gameBall3Pattern = new ImagePattern(gameBall3);
+
+	private Image gameBall4 = new Image("file:images/ball4.png");
+	ImagePattern gameBall4Pattern = new ImagePattern(gameBall4);
+
+	private Image gameBall5 = new Image("file:images/ball5.png");
+	ImagePattern gameBall5Pattern = new ImagePattern(gameBall5);
+
+	private Image gameBall6 = new Image("file:images/ball6.png");
+	ImagePattern gameBall6Pattern = new ImagePattern(gameBall6);
+
 }
