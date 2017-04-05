@@ -42,6 +42,7 @@ public class Game implements IGame {
 			gameViewController.delBall(ballList.get(hitNum));
 			ballList.remove(hitNum);
 		}
+		checkWin();
 	}
 	
 	public int checkHits() {
@@ -51,21 +52,18 @@ public class Game implements IGame {
 				// Check if the ball is going to hit a paddle
 				if (checkPaddles(ball)) {
 					ticksSinceLastHit = 0;
-					checkWin();
 					return i;
 				}
 	
 				// Check if the ball is going to hit a block
 				if (checkWalls(ball)) {
 					ticksSinceLastHit = 0;
-					checkWin();
 					return i;
 				}
 	
 				// Check if the ball is going to hit a warlord
 				if (checkWarlords(ball)) {
 					ticksSinceLastHit = 0;
-					checkWin();
 					return i;
 				}
 			} else {
@@ -73,12 +71,9 @@ public class Game implements IGame {
 			}
 			
 			if (checkBoundaries(ball)) {
-				checkWin();
 				return i;
-			}
-				
+			}			
 		}
-		checkWin();
 		return -1;
 	}
 	
@@ -242,11 +237,42 @@ public class Game implements IGame {
 	
 	// On bounce, randomly increase or decrease velocity by 1, or leave the same
 	public void reverseVelocity(Ball ball, int dir) {
-		int randomNum = 1 - (int) (Math.random() * (3));
+		int randomX = 1 - (int) (Math.random() * (3));
+		int randomY = 1 - (int) (Math.random() * (3));
+		randomX = 0;
+		randomY = 0;
 		if (dir == 0) {
-			ball.setXVelocity((ball.getXVelocity() * -1) + randomNum);
+			if (randomX == -1) {
+				if (Math.abs(ball.getXVelocity()) > 3) {
+					ball.setXVelocity((ball.getXVelocity() * -1) - 1);
+				} else {
+					ball.setXVelocity(ball.getXVelocity() * -1);
+				}
+			} else if (randomX == 1) {
+				if (Math.abs(ball.getXVelocity()) < 6) {
+					ball.setXVelocity((ball.getXVelocity() * -1) + 1);
+				} else {
+					ball.setXVelocity(ball.getXVelocity() * -1);
+				}
+			} else {
+				ball.setXVelocity(ball.getXVelocity() * -1);
+			}
 		} else {
-			ball.setYVelocity((ball.getYVelocity() * -1) + randomNum);
+			if (randomY == -1) {
+				if (Math.abs(ball.getYVelocity()) > 3) {
+					ball.setYVelocity((ball.getYVelocity() * -1) - 1);
+				} else {
+					ball.setYVelocity(ball.getYVelocity() * -1);
+				}
+			} else if (randomY == 1) {
+				if (Math.abs(ball.getYVelocity()) < 6) {
+					ball.setYVelocity((ball.getYVelocity() * -1) + 1);
+				} else {
+					ball.setXVelocity(ball.getYVelocity() * -1);
+				}
+			} else {
+				ball.setYVelocity(ball.getYVelocity() * -1);
+			}
 		}
 	}
 	
