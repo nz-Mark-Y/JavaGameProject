@@ -392,7 +392,9 @@ public class Game implements IGame {
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			} 
 		}
-		paddle.rotatePaddle(playerNum);
+		if (!finished) {
+			paddle.rotatePaddle(playerNum);
+		}
 	}
 	
 	// Move the paddle along its path to the right
@@ -422,7 +424,9 @@ public class Game implements IGame {
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		}
-		paddle.rotatePaddle(playerNum);
+		if (!finished) {
+			paddle.rotatePaddle(playerNum);
+		}
 	}
 	
 	public void useAbility(int playerNum) {
