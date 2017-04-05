@@ -50,10 +50,10 @@ public class WarlordsController extends Application {
 		playerList.add(player2);
 		playerList.add(player3);
 		playerList.add(player4);
-		Wall wall1 = new Wall(100, 200, 1);
-		Wall wall2 = new Wall(668, 618, 2);
-		Wall wall3 = new Wall(100, 618, 3);
-		Wall wall4 = new Wall(668, 200, 4);
+		Wall wall1 = new Wall(100, 200, 0);
+		Wall wall2 = new Wall(668, 618, 1);
+		Wall wall3 = new Wall(100, 618, 2);
+		Wall wall4 = new Wall(668, 200, 3);
 		ArrayList<Wall> wallList = new ArrayList<Wall>();
 		wallList.add(wall1);
 		wallList.add(wall2);
@@ -112,12 +112,6 @@ public class WarlordsController extends Application {
 
 			GameViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
-
-			RightSideViewController controller2 = loader2.getController();
-			controller2.setWarlordsController(this);
-
-			LeftSideViewController controller3 = loader3.getController();
-			controller3.setWarlordsController(this);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
