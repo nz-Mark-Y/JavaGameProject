@@ -89,11 +89,11 @@ public class Game implements IGame {
 		// X boundaries
 		if (ball.getXPos() + ball.getXVelocity() >= xBound) {
 			ball.setXPos(xBound - (ball.getXPos() + ball.getXVelocity() - xBound));
-			ball.setXVelocity(ball.getXVelocity() * -1);
+			reverseVelocity(ball, 0);
 			xHit = true;
 		} else if (ball.getXPos() + ball.getXVelocity() <= 0) {	
 			ball.setXPos((ball.getXPos() + ball.getXVelocity()) * -1);
-			ball.setXVelocity(ball.getXVelocity() * -1);
+			reverseVelocity(ball, 0);
 			xHit = true;
 		} else {	
 			ball.setXPos(ball.getXPos() + ball.getXVelocity());
@@ -102,11 +102,11 @@ public class Game implements IGame {
 		// Y boundaries
 		if (ball.getYPos() + ball.getYVelocity() >= yBound) {
 			ball.setYPos(yBound - (ball.getYPos() + ball.getYVelocity() - yBound));
-			ball.setYVelocity(ball.getYVelocity() * -1);
+			reverseVelocity(ball, 1);
 			yHit = true;
 		} else if (ball.getYPos() + ball.getYVelocity() <= 0) {	
 			ball.setYPos((ball.getYPos() + ball.getYVelocity()) * -1);
-			ball.setYVelocity(ball.getYVelocity() * -1);
+			reverseVelocity(ball, 1);
 			yHit = true;
 		} else {
 			ball.setYPos(ball.getYPos() + ball.getYVelocity());		
@@ -129,19 +129,19 @@ public class Game implements IGame {
 							if (coordInBallPath(ball, paddleX, paddleY)) { 
 								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
 									ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
+									reverseVelocity(ball, 1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
 								} else if ((k == Paddle.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
 									ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
+									reverseVelocity(ball, 1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity());
 								} else if ((j == Paddle.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
 									ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
+									reverseVelocity(ball, 0);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
 									ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
+									reverseVelocity(ball, 0);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								} else {
 								
@@ -170,19 +170,19 @@ public class Game implements IGame {
 							if (coordInBallPath(ball, wallX, wallY)) { 
 								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
 									ball.setYPos(wall.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - wall.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
+									reverseVelocity(ball, 1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
 								} else if ((k == Wall.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
 									ball.setYPos(wall.getYPos() + Wall.height - (ball.getYPos() + ball.getYVelocity() - Wall.height - wall.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
+									reverseVelocity(ball, 1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity());
 								} else if ((j == Wall.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
 									ball.setXPos(wall.getXPos() + Wall.length - (ball.getXPos() + ball.getXVelocity() - Wall.length - wall.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
+									reverseVelocity(ball, 0);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
 									ball.setXPos(wall.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - wall.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
+									reverseVelocity(ball, 0);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								} else {
 									
@@ -212,19 +212,19 @@ public class Game implements IGame {
 							if (coordInBallPath(ball, playerX, playerY)) { 
 								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
 									ball.setYPos(player.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - player.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
+									reverseVelocity(ball, 1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
 								} else if ((k == Warlord.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
 									ball.setYPos(player.getYPos() + Warlord.height - (ball.getYPos() + ball.getYVelocity() - Warlord.height - player.getYPos()));
-									ball.setYVelocity(ball.getYVelocity() * -1);
+									reverseVelocity(ball, 1);
 									ball.setXPos(ball.getXPos() + ball.getXVelocity());
 								} else if ((j == Warlord.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
 									ball.setXPos(player.getXPos() + Warlord.length - (ball.getXPos() + ball.getXVelocity() - Warlord.length - player.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
+									reverseVelocity(ball, 0);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
 									ball.setXPos(player.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - player.getXPos()));
-									ball.setXVelocity(ball.getXVelocity() * -1);
+									reverseVelocity(ball, 0);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								} else {
 		
@@ -238,6 +238,16 @@ public class Game implements IGame {
 			}
 		}
 		return false;
+	}
+	
+	// On bounce, randomly increase or decrease velocity by 1, or leave the same
+	public void reverseVelocity(Ball ball, int dir) {
+		int randomNum = 1 - (int) (Math.random() * (3));
+		if (dir == 0) {
+			ball.setXVelocity((ball.getXVelocity() * -1) + randomNum);
+		} else {
+			ball.setYVelocity((ball.getYVelocity() * -1) + randomNum);
+		}
 	}
 	
 	// Checks win conditions

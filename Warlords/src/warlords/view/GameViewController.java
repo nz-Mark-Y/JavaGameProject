@@ -37,6 +37,9 @@ public class GameViewController {
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
 	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.wav").toURI().toString());
+	private Timer animationTimer;
+	private Timer timeLeftTimer;
+	private boolean paused;
 
 	public GameViewController() {
 
@@ -52,15 +55,15 @@ public class GameViewController {
 		this.game = warlordsController.getGame();
 		this.game.setGameViewController(this);
 		this.scene = scene;
+		paused = false;
 
-		//Initialize the graphics for the objects
+		// Initialize the graphics for the objects
 		graphicsInit();
 		addViewsToModels();
 
 		// Initial ball velocity
 		int ballXVel = 0;
 		int ballYVel = 0;
-
 		while ((ballXVel == 0) || (ballXVel == 1) || (ballXVel == -1) || (ballXVel == 2) || (ballXVel == -2) || (ballYVel == 0) || (ballYVel == 1) || (ballYVel == -1) || (ballYVel == 2) || (ballYVel == -2)) {
 			ballXVel = 6 - (int) (Math.random() * (12));
 			ballYVel = 6 - (int) (Math.random() * (12));
@@ -68,42 +71,11 @@ public class GameViewController {
 		game.getBall().setXVelocity(ballXVel);
 		game.getBall().setYVelocity(ballYVel);
 		
-		Font textFont = null;
-        try {
-            textFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        timeLeft.setFont(textFont);
-
-		// Game timer for ball and paddles to move
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask () {
-			@Override
-			public void run() {
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						if (!game.isFinished()) {
-							onTick();
-						} else {
-							System.out.println("Game finished");
-							timer.cancel();
-						}
-					}
-				});
-			}
-		}, 20, 20);	
-		
-		
-		// Timer to display time remaining
-		Timer timer2 = new Timer();
-		timer2.scheduleAtFixedRate(new TimerTask () {
-			@Override
-			public void run() {
-				showTime();
-			}
-		}, 500, 500);
+		// Fonts
+		setFonts();
+        
+        // Timers
+        createTimers();
 		
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
@@ -236,11 +208,57 @@ public class GameViewController {
 		thread.start();
 	}
 	
+	public void createTimers() {
+		// Game timer for ball and paddles to move
+		animationTimer = new Timer();
+		animationTimer.scheduleAtFixedRate(new TimerTask () {
+			@Override
+			public void run() {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						if (!game.isFinished()) {
+							onTick();
+						} else {
+							System.out.println("Game finished");
+							animationTimer.cancel();
+						}
+					}
+				});
+			}
+		}, 20, 20);		
+				
+		// Timer to display time remaining
+		timeLeftTimer = new Timer();
+		timeLeftTimer.scheduleAtFixedRate(new TimerTask () {
+			@Override
+			public void run() {
+				showTime();
+			}
+		}, 500, 500);
+	}
 	
 	private void showTime() {
 		timeLeft.setText(Integer.toString(game.getTimeRemaining()));
 	}
 
+	private void setFonts() {
+		Font textFont = null;
+		Font smallTextFont = null;
+        try {
+            textFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
+            smallTextFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 48);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        timeLeft.setFont(textFont);
+        pauseMessage1.setFont(textFont);
+        pauseMessage2.setFont(smallTextFont);
+        pauseMessage1.setVisible(false);
+        pauseMessage2.setVisible(false);
+        pauseBox.setVisible(false);
+	}
+	
 	// Do the logic, then rerender all the objects.
 	private void onTick() {
 		game.tick();
@@ -264,9 +282,22 @@ public class GameViewController {
 			multiplayerTheme.play();
 		}
 	}
-
+	
 	public void pause() {
-
+		if (!paused) {
+			paused = true;
+			animationTimer.cancel();
+			timeLeftTimer.cancel();
+			pauseMessage1.setVisible(true);
+	        pauseMessage2.setVisible(true);
+	        pauseBox.setVisible(true);
+		} else {
+			paused = false;
+			createTimers();
+			pauseMessage1.setVisible(false);
+	        pauseMessage2.setVisible(false);
+	        pauseBox.setVisible(false);
+		}
 	}
 
 	public void exit() {
@@ -389,6 +420,15 @@ public class GameViewController {
 	
 	@FXML
 	private Text timeLeft;
+	
+	@FXML
+	private Text pauseMessage1;
+	
+	@FXML
+	private Text pauseMessage2;
+	
+	@FXML 
+	private Rectangle pauseBox;
 
 	//Creating patterns for the walls
 	private Image player1Crate = new Image("file:images/player1Crate.png");
