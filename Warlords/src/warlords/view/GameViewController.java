@@ -1,6 +1,11 @@
 package warlords.view;
 
 import java.io.File;
+<<<<<<< HEAD
+=======
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+>>>>>>> origin/master
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +23,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import warlords.WarlordsController;
 import warlords.model.Ball;
@@ -63,6 +70,14 @@ public class GameViewController {
 		}
 		game.getBall().setXVelocity(ballXVel);
 		game.getBall().setYVelocity(ballYVel);
+		
+		Font textFont = null;
+        try {
+            textFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        timeLeft.setFont(textFont);
 
 		// Game timer for ball and paddles to move
 		Timer timer = new Timer();
@@ -82,7 +97,21 @@ public class GameViewController {
 				});
 			}
 		}, 20, 20);	
+<<<<<<< HEAD
 
+=======
+		
+		
+		// Timer to display time remaining
+		Timer timer2 = new Timer();
+		timer2.scheduleAtFixedRate(new TimerTask () {
+			@Override
+			public void run() {
+				showTime();
+			}
+		}, 500, 500);
+		
+>>>>>>> origin/master
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
 			@Override
@@ -212,6 +241,11 @@ public class GameViewController {
 			}		
 		});     
 		thread.start();
+	}
+	
+	
+	private void showTime() {
+		timeLeft.setText(Integer.toString(game.getTimeRemaining()));
 	}
 
 	// Do the logic, then rerender all the objects.
@@ -359,6 +393,9 @@ public class GameViewController {
 
 	@FXML 
 	private Pane pane;
+	
+	@FXML
+	private Text timeLeft;
 
 	//Creating patterns for the walls
 	private Image player1Crate = new Image("file:images/player1Crate.png");
