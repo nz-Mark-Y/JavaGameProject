@@ -36,7 +36,7 @@ public class GameViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
-	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.wav").toURI().toString());
+	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerThemeReduced.wav").toURI().toString());
 	private Timer animationTimer;
 	private Timer timeLeftTimer;
 	private boolean paused;
@@ -70,13 +70,13 @@ public class GameViewController {
 		}
 		game.getBall().setXVelocity(ballXVel);
 		game.getBall().setYVelocity(ballYVel);
-		
+
 		// Fonts
 		setFonts();
-        
-        // Timers
-        createTimers();
-		
+
+		// Timers
+		createTimers();
+
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
 			@Override
@@ -207,7 +207,7 @@ public class GameViewController {
 		});     
 		thread.start();
 	}
-	
+
 	public void createTimers() {
 		// Game timer for ball and paddles to move
 		animationTimer = new Timer();
@@ -220,6 +220,7 @@ public class GameViewController {
 						if (!game.isFinished()) {
 							onTick();
 						} else {
+							multiplayerTheme.stop();
 							System.out.println("Game finished");
 							animationTimer.cancel();
 						}
@@ -227,7 +228,7 @@ public class GameViewController {
 				});
 			}
 		}, 20, 20);		
-				
+
 		// Timer to display time remaining
 		timeLeftTimer = new Timer();
 		timeLeftTimer.scheduleAtFixedRate(new TimerTask () {
@@ -237,7 +238,7 @@ public class GameViewController {
 			}
 		}, 500, 500);
 	}
-	
+
 	private void showTime() {
 		timeLeft.setText(Integer.toString(game.getTimeRemaining()));
 	}
@@ -245,20 +246,20 @@ public class GameViewController {
 	private void setFonts() {
 		Font textFont = null;
 		Font smallTextFont = null;
-        try {
-            textFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
-            smallTextFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 48);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        timeLeft.setFont(textFont);
-        pauseMessage1.setFont(textFont);
-        pauseMessage2.setFont(smallTextFont);
-        pauseMessage1.setVisible(false);
-        pauseMessage2.setVisible(false);
-        pauseBox.setVisible(false);
+		try {
+			textFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
+			smallTextFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 48);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		timeLeft.setFont(textFont);
+		pauseMessage1.setFont(textFont);
+		pauseMessage2.setFont(smallTextFont);
+		pauseMessage1.setVisible(false);
+		pauseMessage2.setVisible(false);
+		pauseBox.setVisible(false);
 	}
-	
+
 	// Do the logic, then rerender all the objects.
 	private void onTick() {
 		game.tick();
@@ -278,32 +279,32 @@ public class GameViewController {
 		}
 
 		//Play multiplayer theme
-		if(!multiplayerTheme.isPlaying()){
+		if(!multiplayerTheme.isPlaying() && !paused){
 			multiplayerTheme.play();
 		}
 	}
-	
+
 	public void pause() {
 		if (!paused) {
+			multiplayerTheme.stop();
 			paused = true;
 			animationTimer.cancel();
 			timeLeftTimer.cancel();
 			pauseMessage1.setVisible(true);
-	        pauseMessage2.setVisible(true);
-	        pauseBox.setVisible(true);
+			pauseMessage2.setVisible(true);
+			pauseBox.setVisible(true);
 		} else {
+			multiplayerTheme.stop();
 			paused = false;
 			createTimers();
 			pauseMessage1.setVisible(false);
-	        pauseMessage2.setVisible(false);
-	        pauseBox.setVisible(false);
+			pauseMessage2.setVisible(false);
+			pauseBox.setVisible(false);
 		}
 	}
 
 	public void exit() {
-		if(multiplayerTheme.isPlaying()){
-			multiplayerTheme.stop();
-		}
+		multiplayerTheme.stop();
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
 		game.finish();
@@ -417,16 +418,16 @@ public class GameViewController {
 
 	@FXML 
 	private Pane pane;
-	
+
 	@FXML
 	private Text timeLeft;
-	
+
 	@FXML
 	private Text pauseMessage1;
-	
+
 	@FXML
 	private Text pauseMessage2;
-	
+
 	@FXML 
 	private Rectangle pauseBox;
 
