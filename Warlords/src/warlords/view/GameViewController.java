@@ -54,7 +54,7 @@ public class GameViewController {
 		int ballXVel = 0;
 		int ballYVel = 0;
 		
-		while ((ballXVel == 0) || (ballXVel == 1) || (ballXVel == -1) || (ballYVel == 0) || (ballYVel == 1) || (ballYVel == -1)) {
+		while ((ballXVel == 0) || (ballXVel == 1) || (ballXVel == -1) || (ballXVel == 2) || (ballXVel == -2) || (ballYVel == 0) || (ballYVel == 1) || (ballYVel == -1) || (ballYVel == 2) || (ballYVel == -2)) {
 			ballXVel = 6 - (int) (Math.random() * (12));
 			ballYVel = 6 - (int) (Math.random() * (12));
 		}

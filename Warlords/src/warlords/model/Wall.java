@@ -13,21 +13,21 @@ public class Wall implements IWall {
 	private boolean destroyed;
 	private int belongsTo;
 	private Rectangle wallView;
-	
+
 	public Wall(int owner) {
 		x = 0;
 		y = 0;
 		belongsTo = owner;
 		destroyed = false;
 	}
-	
+
 	public Wall(int x, int y, int owner) {
 		this.x = x;
 		this.y = y;
 		belongsTo = owner;
 		destroyed = false;
 	}
-	
+
 	@Override
 	public void setXPos(int x) {
 		this.x = x;
@@ -37,15 +37,15 @@ public class Wall implements IWall {
 	public void setYpos(int y) {
 		this.y = y;
 	}
-	
+
 	public int getXPos() {
 		return x;
 	}
-	
+
 	public int getYPos() {
 		return y;
 	}
-	
+
 	public int getOwner() {
 		return belongsTo;
 	}
@@ -54,20 +54,22 @@ public class Wall implements IWall {
 	public boolean isDestroyed() {
 		return destroyed;
 	}
-	
+
 	public void destroy() {
 		destroyed = true;
-		
-		AudioClip soundMyNoise = new AudioClip(new File("sounds/explosion.mp3").toURI().toString());
-		soundMyNoise.play();
-		
+
+		//Play sound
+		AudioClip wallExplosion = new AudioClip(new File("sounds/explosion.mp3").toURI().toString());
+		wallExplosion.play();
+
+		//Remove from the player's view
 		wallView.setVisible(false);
 	}
 
 	public void setWallView(Rectangle input) {
 		wallView = input;
 	}
-	
+
 	public Rectangle getWallView() {
 		return wallView;
 	}
