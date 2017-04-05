@@ -214,18 +214,22 @@ public class GameViewController {
 		animationTimer.scheduleAtFixedRate(new TimerTask () {
 			@Override
 			public void run() {
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						if (!game.isFinished()) {
-							onTick();
-						} else {
-							multiplayerTheme.stop();
-							System.out.println("Game finished");
-							animationTimer.cancel();
+				try {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							if (!game.isFinished()) {
+								onTick();
+							} else {
+								multiplayerTheme.stop();
+								System.out.println("Game finished");
+								animationTimer.cancel();
+							}
 						}
-					}
-				});
+					});
+				} catch (Exception ex){
+					System.out.println(ex.getMessage());
+				}
 			}
 		}, 20, 20);		
 

@@ -239,8 +239,6 @@ public class Game implements IGame {
 	public void reverseVelocity(Ball ball, int dir) {
 		int randomX = 1 - (int) (Math.random() * (3));
 		int randomY = 1 - (int) (Math.random() * (3));
-		randomX = 0;
-		randomY = 0;
 		if (dir == 0) {
 			if (randomX == -1) {
 				if (Math.abs(ball.getXVelocity()) > 3) {
@@ -268,7 +266,7 @@ public class Game implements IGame {
 				if (Math.abs(ball.getYVelocity()) < 6) {
 					ball.setYVelocity((ball.getYVelocity() * -1) + 1);
 				} else {
-					ball.setXVelocity(ball.getYVelocity() * -1);
+					ball.setYVelocity(ball.getYVelocity() * -1);
 				}
 			} else {
 				ball.setYVelocity(ball.getYVelocity() * -1);
