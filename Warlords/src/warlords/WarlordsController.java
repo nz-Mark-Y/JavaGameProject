@@ -34,7 +34,7 @@ public class WarlordsController extends Application {
 	private BorderPane rootLayout;
 	private Game game;
 	Scene scene;
-	private AudioClip mainMenuTheme = new AudioClip(new File("sounds/mainMenuTheme.mp3").toURI().toString());
+	private AudioClip mainMenuTheme = new AudioClip(new File("sounds/mainMenuTheme.wav").toURI().toString());
 
 	public WarlordsController() {
 		createNewGame();

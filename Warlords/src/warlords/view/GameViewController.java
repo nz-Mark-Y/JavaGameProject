@@ -36,7 +36,7 @@ public class GameViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
-	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.mp3").toURI().toString());
+	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.wav").toURI().toString());
 
 	public GameViewController() {
 

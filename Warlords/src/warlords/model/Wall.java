@@ -13,7 +13,7 @@ public class Wall implements IWall {
 	private boolean destroyed;
 	private int belongsTo;
 	private Rectangle wallView;
-	private AudioClip wallExplosion = new AudioClip(new File("sounds/explosion.mp3").toURI().toString());
+	private AudioClip wallExplosion = new AudioClip(new File("sounds/explosion.wav").toURI().toString());
 
 	public Wall(int owner) {
 		x = 0;
