@@ -1,11 +1,8 @@
 package warlords.view;
 
 import java.io.File;
-<<<<<<< HEAD
-=======
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
->>>>>>> origin/master
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,9 +94,6 @@ public class GameViewController {
 				});
 			}
 		}, 20, 20);	
-<<<<<<< HEAD
-
-=======
 		
 		
 		// Timer to display time remaining
@@ -111,7 +105,6 @@ public class GameViewController {
 			}
 		}, 500, 500);
 		
->>>>>>> origin/master
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
 			@Override

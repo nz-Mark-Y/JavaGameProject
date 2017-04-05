@@ -17,4 +17,9 @@ public class RightSideViewController {
 	private void initialise() {
 		
 	}
+	
+	public void setWarlordsController(WarlordsController warlordsController) {
+		this.warlordsController = warlordsController;
+		this.game = warlordsController.getGame();
+	}
 }

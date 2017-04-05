@@ -115,7 +115,6 @@ public class WarlordsController extends Application {
 
 			GameViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
-<<<<<<< HEAD
 
 			RightSideViewController controller2 = loader2.getController();
 			controller2.setWarlordsController(this);
@@ -127,8 +126,6 @@ public class WarlordsController extends Application {
 			if(mainMenuTheme.isPlaying()){
 				mainMenuTheme.stop();
 			}
-=======
->>>>>>> origin/master
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
