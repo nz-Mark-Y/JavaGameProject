@@ -464,34 +464,36 @@ public class Game implements IGame {
 	}
 	
 	public void useAbility(int playerNum) {
-		if (playerList.get(playerNum).getClassNum() == 0) { // France
-			
-		} else if (playerList.get(playerNum).getClassNum() == 1) { // USA
-			if (playerList.get(playerNum).getLastAbility() == 0) {
-				Ball bullet;
-				if (playerNum == 0) {
-					bullet = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
-					bullet.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 60));
-					bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
-				} else if (playerNum == 1) {
-					bullet = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
-					bullet.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 60));
-					bullet.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 60));
-				} else if (playerNum == 2) {
-					bullet = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
-					bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
-					bullet.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 60));
-				} else {
-					bullet = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
-					bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
-					bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
+		if (!playerList.get(playerNum).isDead()) {
+			if (playerList.get(playerNum).getClassNum() == 0) { // France
+				
+			} else if (playerList.get(playerNum).getClassNum() == 1) { // USA
+				if (playerList.get(playerNum).getLastAbility() == 0) {
+					Ball bullet;
+					if (playerNum == 0) {
+						bullet = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
+						bullet.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 60));
+						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
+					} else if (playerNum == 1) {
+						bullet = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
+						bullet.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 60));
+						bullet.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 60));
+					} else if (playerNum == 2) {
+						bullet = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
+						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
+						bullet.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 60));
+					} else {
+						bullet = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
+						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
+						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
+					}
+					ballList.add(bullet);
+					gameViewController.createBulletView(bullet);
+					playerList.get(playerNum).setLastAbility((int) timeRemaining);
 				}
-				ballList.add(bullet);
-				gameViewController.createBulletView(bullet);
-				playerList.get(playerNum).setLastAbility((int) timeRemaining);
+			} else {
+				
 			}
-		} else {
-			
 		}
 	}
 	

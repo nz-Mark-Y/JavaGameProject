@@ -24,22 +24,22 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="327.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="463.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="595.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="114.0" />
-      <Text fx:id="title1" fill="WHITE" layoutX="53.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER">
+      <Text fx:id="title1" fill="RED" layoutX="53.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="title4" fill="WHITE" layoutX="595.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
+      <Text fx:id="title4" fill="#f29514" layoutX="595.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="title2" fill="WHITE" layoutX="47.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER">
+      <Text fx:id="title2" fill="#00b4ff" layoutX="47.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="title3" fill="WHITE" layoutX="597.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER">
+      <Text fx:id="title3" fill="#03f22b" layoutX="597.0" layoutY="833.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
@@ -94,5 +94,25 @@
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
+      <Rectangle fx:id="player1Select0" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="55.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select1" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="193.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select2" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="329.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select3" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="465.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select4" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="597.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select5" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="55.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select6" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="193.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select7" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="329.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select8" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="465.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player1Select9" arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" layoutX="597.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select0" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="55.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select1" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="193.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select2" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="329.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select3" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="465.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select4" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="597.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select5" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="55.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select6" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="193.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select7" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="329.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select8" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="465.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player2Select9" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="597.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
    </children>
 </AnchorPane>
