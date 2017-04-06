@@ -237,39 +237,22 @@ public class Game implements IGame {
 	
 	// On bounce, randomly increase or decrease velocity by 1, or leave the same
 	public void reverseVelocity(Ball ball, int dir) {
+		int newValue;
 		int randomX = 1 - (int) (Math.random() * (3));
 		int randomY = 1 - (int) (Math.random() * (3));
 		if (dir == 0) {
-			if (randomX == -1) {
-				if (Math.abs(ball.getXVelocity()) > 3) {
-					ball.setXVelocity((ball.getXVelocity() * -1) - 1);
-				} else {
-					ball.setXVelocity(ball.getXVelocity() * -1);
-				}
-			} else if (randomX == 1) {
-				if (Math.abs(ball.getXVelocity()) < 6) {
-					ball.setXVelocity((ball.getXVelocity() * -1) + 1);
-				} else {
-					ball.setXVelocity(ball.getXVelocity() * -1);
-				}
-			} else {
+			newValue = (ball.getXVelocity() * -1) + randomX;
+			if ((Math.abs(newValue) < 3) || (Math.abs(newValue) > 6)) {
 				ball.setXVelocity(ball.getXVelocity() * -1);
+			} else {
+				ball.setXVelocity(newValue);
 			}
 		} else {
-			if (randomY == -1) {
-				if (Math.abs(ball.getYVelocity()) > 3) {
-					ball.setYVelocity((ball.getYVelocity() * -1) - 1);
-				} else {
-					ball.setYVelocity(ball.getYVelocity() * -1);
-				}
-			} else if (randomY == 1) {
-				if (Math.abs(ball.getYVelocity()) < 6) {
-					ball.setYVelocity((ball.getYVelocity() * -1) + 1);
-				} else {
-					ball.setYVelocity(ball.getYVelocity() * -1);
-				}
-			} else {
+			newValue = (ball.getYVelocity() * -1) + randomY;
+			if ((Math.abs(newValue) < 3) || (Math.abs(newValue) > 6)) {
 				ball.setYVelocity(ball.getYVelocity() * -1);
+			} else {
+				ball.setYVelocity(newValue);
 			}
 		}
 	}
