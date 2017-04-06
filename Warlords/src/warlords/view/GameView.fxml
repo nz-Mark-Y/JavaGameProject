@@ -46,6 +46,10 @@
                   <Font name="Evanescence Series B" size="48.0" />
                </font>
             </Text>
+            <Rectangle fx:id="player1Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player4Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player2Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player3Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
          </children>
       </Pane>
    </children>

@@ -406,6 +406,12 @@ public class GameViewController {
 		//Applying pattern to ball
 		ball.setStrokeWidth(0);
 		ball.setFill(gameBall1Pattern);
+		
+		//Apply flag pattern
+		player1Flag.setFill(null);	//NEED TO ACCESS WHICH COUNTRY WAS SELECTED IN THE MENU SELECTION
+		player2Flag.setFill(null);
+		player3Flag.setFill(null);
+		player4Flag.setFill(null);
 	}
 
 	@FXML
@@ -446,6 +452,18 @@ public class GameViewController {
 
 	@FXML 
 	private Rectangle player4Warlord;
+	
+	@FXML 
+	private Rectangle player1Flag;
+
+	@FXML 
+	private Rectangle player2Flag;
+
+	@FXML 
+	private Rectangle player3Flag;
+
+	@FXML 
+	private Rectangle player4Flag;
 
 	@FXML 
 	private Pane pane;
