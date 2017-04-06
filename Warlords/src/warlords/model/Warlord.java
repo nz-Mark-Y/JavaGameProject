@@ -11,7 +11,7 @@ public class Warlord implements IWarlord {
 	private int y;
 	public static int height = 50;
 	public static int length = 50; 
-	private boolean playerControlled;
+	private boolean computerControlled;
 	private boolean dead;
 	private boolean won;
 	private int wallsLeft;
@@ -27,7 +27,7 @@ public class Warlord implements IWarlord {
 		dead = false;
 		won = false;
 		wallsLeft = 0;
-		playerControlled = control;
+		computerControlled = control;
 		lastAbility = 0;
 	}
 	
@@ -38,7 +38,7 @@ public class Warlord implements IWarlord {
 		dead = false;
 		won = false;
 		wallsLeft = 0;
-		playerControlled = control;
+		computerControlled = control;
 		this.classNum = classNum;
 		lastAbility = 0;
 	}
@@ -96,12 +96,12 @@ public class Warlord implements IWarlord {
 		return paddle;
 	}
 	
-	public boolean isPlayerControlled() {
-		return playerControlled;
+	public boolean isComputerControlled() {
+		return computerControlled;
 	}
 	
 	public void setPlayerControlled(boolean input) {
-		playerControlled = input;
+		computerControlled = input;
 	}
 
 	public int getClassNum() {

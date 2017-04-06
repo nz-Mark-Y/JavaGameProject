@@ -32,21 +32,21 @@ import warlords.view.RightSideViewController;
 public class WarlordsController extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	private Game game;
+	private Game game = null;
 	Scene scene;
 	private AudioClip mainMenuTheme = new AudioClip(new File("sounds/mainMenuThemeReduced.wav").toURI().toString());
 
 	public WarlordsController() {
-		createNewGame();
+		
 	}
 	
 	// Set up the objects in a new game
-	public void createNewGame() {
+	public void createNewGame(int oneSelects, boolean oneIsAI, int twoSelects, boolean twoIsAI, int threeSelects, boolean threeIsAI, int fourSelects, boolean fourIsAI) {
 		Ball ball = new Ball(350, 350);
-		Warlord player1 = new Warlord(new Paddle(181, 547), 40, 678, false, 0);	
-		Warlord player2 = new Warlord(new Paddle(181, 181), 40, 40, false, 0);
-		Warlord player3 = new Warlord(new Paddle(547, 181), 678, 40, true, 1);
-		Warlord player4 = new Warlord(new Paddle(547, 547), 678, 678, false, 0);
+		Warlord player1 = new Warlord(new Paddle(181, 547), 40, 678, oneIsAI, oneSelects);	
+		Warlord player2 = new Warlord(new Paddle(181, 181), 40, 40, twoIsAI, twoSelects);
+		Warlord player3 = new Warlord(new Paddle(547, 181), 678, 40, threeIsAI, threeSelects);
+		Warlord player4 = new Warlord(new Paddle(547, 547), 678, 678, fourIsAI, fourSelects);
 
 		ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 		playerList.add(player1);
@@ -96,6 +96,9 @@ public class WarlordsController extends Application {
 	
 	// Display the game view, and the two side windows 
 	public void showGameView() {
+		if (game == null) {
+			createNewGame(0, true, 0, true, 1, false, 0 ,true);
+		}
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(WarlordsController.class.getResource("view/GameView.fxml"));

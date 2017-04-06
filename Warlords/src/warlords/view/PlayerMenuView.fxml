@@ -114,5 +114,45 @@
       <Rectangle fx:id="player2Select7" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="329.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
       <Rectangle fx:id="player2Select8" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="465.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
       <Rectangle fx:id="player2Select9" arcHeight="5.0" arcWidth="5.0" fill="#00b4ff" height="20.0" layoutX="597.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select0" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="145.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select1" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="283.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select2" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="419.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select3" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="555.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select4" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="687.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select5" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="145.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select6" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="283.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select7" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="419.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select8" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="555.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player3Select9" arcHeight="5.0" arcWidth="5.0" fill="#03f22b" height="20.0" layoutX="687.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select0" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="145.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select1" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="283.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select2" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="419.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select3" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="555.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select4" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="687.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select5" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="145.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select6" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="283.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select7" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="419.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select8" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="555.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Rectangle fx:id="player4Select9" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="687.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Text fx:id="title5" fill="RED" layoutX="254.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="title6" fill="#00b4ff" layoutX="227.0" layoutY="786.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="title7" fill="#03f22b" layoutX="513.0" layoutY="793.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
+      <Text fx:id="title8" fill="#f29514" layoutX="525.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+         <font>
+            <Font name="Evanescence Series B" size="48.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

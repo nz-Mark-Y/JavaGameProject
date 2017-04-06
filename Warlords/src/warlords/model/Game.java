@@ -344,40 +344,40 @@ public class Game implements IGame {
 	
 	// If the corresponding key is down, then call the curve function on that paddle
 	public void movePaddles() {
-		if ((keyList[0] == true) && (playerList.get(2).isPlayerControlled())) {
+		if ((keyList[0] == true) && (!playerList.get(2).isComputerControlled())) {
 			curveLeft(playerList.get(2).getPaddle(), 2);
 		} 
-		if ((keyList[1] == true) && (playerList.get(2).isPlayerControlled())) {
+		if ((keyList[1] == true) && (!playerList.get(2).isComputerControlled())) {
 			curveRight(playerList.get(2).getPaddle(), 2);
 		}
-		if ((keyList[2] == true) && (playerList.get(2).isPlayerControlled())) {
+		if ((keyList[2] == true) && (!playerList.get(2).isComputerControlled())) {
 			useAbility(2); 
 		}
-		if ((keyList[4] == true) && (playerList.get(0).isPlayerControlled())) {
+		if ((keyList[4] == true) && (!playerList.get(0).isComputerControlled())) {
 			curveLeft(playerList.get(0).getPaddle(), 0);
 		} 
-		if ((keyList[5] == true) && (playerList.get(0).isPlayerControlled())) {
+		if ((keyList[5] == true) && (!playerList.get(0).isComputerControlled())) {
 			curveRight(playerList.get(0).getPaddle(), 0);
 		}
-		if ((keyList[6] == true) && (playerList.get(0).isPlayerControlled())) {
+		if ((keyList[6] == true) && (!playerList.get(0).isComputerControlled())) {
 			useAbility(0);
 		}
-		if ((keyList[8] == true) && (playerList.get(1).isPlayerControlled())) {
+		if ((keyList[8] == true) && (!playerList.get(1).isComputerControlled())) {
 			curveLeft(playerList.get(1).getPaddle(), 1);
 		} 
-		if ((keyList[9] == true) && (playerList.get(1).isPlayerControlled())) {
+		if ((keyList[9] == true) && (!playerList.get(1).isComputerControlled())) {
 			curveRight(playerList.get(1).getPaddle(), 1);
 		}
-		if ((keyList[10] == true) && (playerList.get(1).isPlayerControlled())) {
+		if ((keyList[10] == true) && (!playerList.get(1).isComputerControlled())) {
 			useAbility(1);
 		}
-		if ((keyList[12] == true) && (playerList.get(3).isPlayerControlled())) {
+		if ((keyList[12] == true) && (!playerList.get(3).isComputerControlled())) {
 			curveLeft(playerList.get(3).getPaddle(), 3);
 		} 
-		if ((keyList[13] == true) && (playerList.get(3).isPlayerControlled())) {
+		if ((keyList[13] == true) && (!playerList.get(3).isComputerControlled())) {
 			curveRight(playerList.get(3).getPaddle(), 3); 
 		}
-		if ((keyList[14] == true) && (playerList.get(3).isPlayerControlled())) {
+		if ((keyList[14] == true) && (!playerList.get(3).isComputerControlled())) {
 			useAbility(3);
 		}
 	}
@@ -482,7 +482,7 @@ public class Game implements IGame {
 	
 	public void computerMovePaddles(Ball ball) {
 		for (int i=0; i<playerList.size(); i++) {
-			if (!playerList.get(i).isPlayerControlled()) {
+			if (playerList.get(i).isComputerControlled()) {
 				if (Math.abs(ball.getXPos() - playerList.get(i).getPaddle().getXPos()) > Math.abs(ball.getYPos() - playerList.get(i).getPaddle().getYPos())) {
 					if ((ball.getXPos() + ball.getXVelocity()) > (playerList.get(i).getPaddle().getXPos() + Paddle.length / 2)) {
 						curveRight(playerList.get(i).getPaddle(), i);

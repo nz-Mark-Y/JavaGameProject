@@ -71,6 +71,13 @@ public class PlayerMenuViewController {
         }
 	}
 	
+	// Removes the key handler from the scene, moves to the next view
+	public void enterPressed() {		
+		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
+		warlordsController.createNewGame(oneSelects, oneIsAI, twoSelects, twoIsAI, threeSelects, threeIsAI, fourSelects, fourIsAI);
+		warlordsController.showMultiplayerMenuView();
+	}
+	
 	public void addHandlers() {
 		oneSelects = 0;
         oneIsAI = false;
@@ -198,12 +205,40 @@ public class PlayerMenuViewController {
 				player2List.get(i).setVisible(false);
 			}
 		}
-	}
-	
-	// Removes the key handler from the scene, moves to the next view
-	public void enterPressed() {		
-		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-		warlordsController.showMultiplayerMenuView();
+		for (int i=0;i<player3List.size(); i++) {
+			if (i == threeSelects) {
+				player3List.get(i).setVisible(true);
+			} else {
+				player3List.get(i).setVisible(false);
+			}
+		}
+		for (int i=0;i<player4List.size(); i++) {
+			if (i == fourSelects) {
+				player4List.get(i).setVisible(true);
+			} else {
+				player4List.get(i).setVisible(false);
+			}
+		}
+		if (oneIsAI) {
+			title5.setVisible(true);
+		} else {
+			title5.setVisible(false);
+		}
+		if (twoIsAI) {
+			title6.setVisible(true);
+		} else {
+			title6.setVisible(false);
+		}
+		if (threeIsAI) {
+			title7.setVisible(true);
+		} else {
+			title7.setVisible(false);
+		}
+		if (fourIsAI) {
+			title8.setVisible(true);
+		} else {
+			title8.setVisible(false);
+		}
 	}
 	
 	public void addItems() {
@@ -211,6 +246,10 @@ public class PlayerMenuViewController {
 		titleList.add(title2);
 		titleList.add(title3);
 		titleList.add(title4);
+		titleList.add(title5);
+		titleList.add(title6);
+		titleList.add(title7);
+		titleList.add(title8);
 		textList.add(line1);
 		textList.add(line2);
 		textList.add(line3);
@@ -274,6 +313,18 @@ public class PlayerMenuViewController {
 	
 	@FXML
 	private Text title4;
+	
+	@FXML
+	private Text title5;
+	
+	@FXML
+	private Text title6;
+	
+	@FXML
+	private Text title7;
+	
+	@FXML
+	private Text title8;
 	
 	@FXML
 	private Text line1;
