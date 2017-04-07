@@ -455,20 +455,20 @@ public class Game implements IGame {
 					Ball bullet;
 					if (playerNum == 0) {
 						bullet = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
-						bullet.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 60));
-						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
+						bullet.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 50));
+						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
 					} else if (playerNum == 1) {
 						bullet = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
-						bullet.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 60));
-						bullet.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 60));
+						bullet.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 50));
+						bullet.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 50));
 					} else if (playerNum == 2) {
 						bullet = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
-						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
-						bullet.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 60));
+						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
+						bullet.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 50));
 					} else {
 						bullet = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
-						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 60));
-						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 60));
+						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
+						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
 					}
 					ballList.add(bullet);
 					gameViewController.createBulletView(bullet);

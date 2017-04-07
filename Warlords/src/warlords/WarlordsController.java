@@ -137,6 +137,7 @@ public class WarlordsController extends Application {
 	// Display the main menu, and two black side windows
 	public void showMainMenu() {
 		try {
+			game = null;
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(WarlordsController.class.getResource("view/MainMenuView.fxml"));
 			AnchorPane menuView = (AnchorPane) loader.load();	

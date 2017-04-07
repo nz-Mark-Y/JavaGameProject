@@ -273,6 +273,7 @@ public class GameViewController {
 			e.printStackTrace();
 		}
 		timeLeft.setFont(textFont);
+		countIn.setFont(textFont);
 		pauseMessage1.setFont(textFont);
 		pauseMessage2.setFont(smallTextFont);
 		pauseMessage1.setVisible(false);
@@ -351,6 +352,8 @@ public class GameViewController {
 
 	public void exit() {
 		multiplayerTheme.stop();
+		animationTimer.cancel();
+		timeLeftTimer.cancel();
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
 		game.finish();
