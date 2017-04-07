@@ -284,7 +284,7 @@ public class GameViewController {
 			multiplayerTheme.play();
 		}
 
-		//Loop through the ball frames
+		//Loop through the ball frames with delay (to be able to see)
 		if(delayer == 5){
 			if(ball.getFill() == gameBall1Pattern) {
 				ball.setFill(gameBall2Pattern);
@@ -349,6 +349,10 @@ public class GameViewController {
 		pane.getChildren().add(circle);
 		bullet.setBallView(circle);
 	}
+	
+	public void createWallView(Wall wall){
+		//Create rectangle at wall position
+	}
 
 	public void delBall(Ball bullet) {
 		bullet.getBallView().setVisible(false);
@@ -364,15 +368,45 @@ public class GameViewController {
 		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle, 1);
 		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle, 2);
 		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle, 3);
-		game.getWallList().get(0).setWallView(player1Wall);
-		game.getWallList().get(1).setWallView(player2Wall);
-		game.getWallList().get(2).setWallView(player3Wall);
-		game.getWallList().get(3).setWallView(player4Wall);
+		game.getWallList().get(0).setWallView(player1Wall1);
+		game.getWallList().get(1).setWallView(player1Wall2);
+		game.getWallList().get(2).setWallView(player1Wall3);
+		game.getWallList().get(3).setWallView(player1Wall4);
+		game.getWallList().get(4).setWallView(player1Wall5);
+		game.getWallList().get(5).setWallView(player1Wall6);
+		game.getWallList().get(6).setWallView(player1Wall7);
+		game.getWallList().get(7).setWallView(player1Wall8);
+		game.getWallList().get(8).setWallView(player1Wall9);
+		game.getWallList().get(9).setWallView(player1Wall10);
+		game.getWallList().get(10).setWallView(player1Wall11);
+		game.getWallList().get(11).setWallView(player1Wall12);
+		game.getWallList().get(12).setWallView(player1Wall13);
+		game.getWallList().get(13).setWallView(player1Wall14);
+		game.getWallList().get(14).setWallView(player1Wall15);
+		game.getWallList().get(15).setWallView(player1Wall16);
+		game.getWallList().get(16).setWallView(player2Wall);
+		game.getWallList().get(17).setWallView(player3Wall);
+		game.getWallList().get(18).setWallView(player4Wall);
 	}
 
 	private void graphicsInit() {
 		//Applying patterns to crates
-		player1Wall.setFill(player1CratePattern);
+		player1Wall1.setFill(player1CratePattern);
+		player1Wall2.setFill(player1CratePattern);
+		player1Wall3.setFill(player1CratePattern);
+		player1Wall4.setFill(player1CratePattern);
+		player1Wall5.setFill(player1CratePattern);
+		player1Wall6.setFill(player1CratePattern);
+		player1Wall7.setFill(player1CratePattern);
+		player1Wall8.setFill(player1CratePattern);
+		player1Wall9.setFill(player1CratePattern);
+		player1Wall10.setFill(player1CratePattern);
+		player1Wall11.setFill(player1CratePattern);
+		player1Wall12.setFill(player1CratePattern);
+		player1Wall13.setFill(player1CratePattern);
+		player1Wall14.setFill(player1CratePattern);
+		player1Wall15.setFill(player1CratePattern);
+		player1Wall16.setFill(player1CratePattern);
 		player2Wall.setFill(player2CratePattern);
 		player3Wall.setFill(player3CratePattern);
 		player4Wall.setFill(player4CratePattern);
@@ -424,7 +458,52 @@ public class GameViewController {
 	private Rectangle player2Paddle;
 
 	@FXML 
-	private Rectangle player1Wall;
+	private Rectangle player1Wall1;
+	
+	@FXML 
+	private Rectangle player1Wall2;
+	
+	@FXML 
+	private Rectangle player1Wall3;
+	
+	@FXML 
+	private Rectangle player1Wall4;
+	
+	@FXML 
+	private Rectangle player1Wall5;
+	
+	@FXML 
+	private Rectangle player1Wall6;
+	
+	@FXML 
+	private Rectangle player1Wall7;
+	
+	@FXML 
+	private Rectangle player1Wall8;
+	
+	@FXML 
+	private Rectangle player1Wall9;
+	
+	@FXML 
+	private Rectangle player1Wall10;
+	
+	@FXML 
+	private Rectangle player1Wall11;
+	
+	@FXML 
+	private Rectangle player1Wall12;
+	
+	@FXML 
+	private Rectangle player1Wall13;
+	
+	@FXML 
+	private Rectangle player1Wall14;
+	
+	@FXML 
+	private Rectangle player1Wall15;
+	
+	@FXML 
+	private Rectangle player1Wall16;
 
 	@FXML 
 	private Rectangle player2Wall;

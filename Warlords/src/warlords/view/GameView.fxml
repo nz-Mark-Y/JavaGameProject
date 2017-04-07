@@ -13,6 +13,7 @@
    <children>
       <Pane fx:id="pane" layoutX="-2.0" layoutY="-1.0" prefHeight="768.0" prefWidth="768.0" style="-fx-background-color: #d9d9d9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Rectangle fx:id="player3Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/gameBackground.png" />
@@ -21,7 +22,7 @@
             <Circle fx:id="ball" fill="DODGERBLUE" layoutY="768.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
             <Rectangle fx:id="player1Paddle" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="40.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
             <Rectangle fx:id="player2Paddle" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="40.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-            <Rectangle fx:id="player1Wall" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall1" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
             <Rectangle fx:id="player2Wall" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
             <Rectangle fx:id="player1Warlord" arcHeight="5.0" arcWidth="5.0" fill="#ff21f9" height="60.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle fx:id="player2Warlord" arcHeight="5.0" arcWidth="5.0" fill="#ff21f9" height="60.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
@@ -35,6 +36,24 @@
                <font>
                   <Font name="Evanescence Series B" size="96.0" />
                </font></Text>
+            <Rectangle fx:id="player1Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player4Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player2Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall2" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall4" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall5" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall6" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall7" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall8" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall9" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall10" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall11" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall12" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall13" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall14" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall15" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall3" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Wall16" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
             <Rectangle fx:id="pauseBox" arcHeight="5.0" arcWidth="5.0" height="768.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="768.0" />
             <Text fx:id="pauseMessage1" fill="WHITE" layoutX="148.0" layoutY="339.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Paused" textAlignment="CENTER" wrappingWidth="472.0000031590462">
                <font>
@@ -46,10 +65,6 @@
                   <Font name="Evanescence Series B" size="48.0" />
                </font>
             </Text>
-            <Rectangle fx:id="player1Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="player4Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="player2Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle fx:id="player3Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
          </children>
       </Pane>
    </children>
