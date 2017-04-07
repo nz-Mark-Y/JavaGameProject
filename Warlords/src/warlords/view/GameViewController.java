@@ -52,7 +52,7 @@ public class GameViewController {
 		this.game = warlordsController.getGame();
 		this.game.setGameViewController(this);
 		this.scene = scene;
-		paused = false;
+		paused = true;
 
 		// Initialize the graphics for the objects
 		graphicsInit();
@@ -61,6 +61,7 @@ public class GameViewController {
 		// Initial ball velocity
 		int ballXVel = 0;
 		int ballYVel = 0;
+		onTick();
 		while ((ballXVel == 0) || (ballXVel == 1) || (ballXVel == -1) || (ballXVel == 2) || (ballXVel == -2) || (ballYVel == 0) || (ballYVel == 1) || (ballYVel == -1) || (ballYVel == 2) || (ballYVel == -2)) {
 			ballXVel = 6 - (int) (Math.random() * (12));
 			ballYVel = 6 - (int) (Math.random() * (12));
@@ -206,44 +207,62 @@ public class GameViewController {
 	}
 
 	public void createTimers() {
-		// Game timer for ball and paddles to move
-		animationTimer = new Timer();
-		animationTimer.scheduleAtFixedRate(new TimerTask () {
+		// Count in the three seconds
+		countIn.setText("3");
+		Timer countInTimer = new Timer();
+		countInTimer.scheduleAtFixedRate(new TimerTask () {
+			int count = 2;
 			@Override
 			public void run() {
-				try {
-					Platform.runLater(new Runnable() {
+				if (count > 0) {
+					countIn.setText(Integer.toString(count));
+					count--;
+				} else if (count == 0){
+					countIn.setText("GO");
+					count--;
+				} else {	
+					countIn.setVisible(false);
+					paused = false;
+					// Game timer for ball and paddles to move
+					animationTimer = new Timer();
+					animationTimer.scheduleAtFixedRate(new TimerTask () {
 						@Override
 						public void run() {
-							if (!game.isFinished()) {
-								onTick();
-							} else {
-								multiplayerTheme.stop();
-								System.out.println("Game finished");
-								animationTimer.cancel();
+							try {
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										if (!game.isFinished()) {
+											onTick();
+										} else {
+											multiplayerTheme.stop();
+											System.out.println("Game finished");
+											animationTimer.cancel();
+										}
+									}
+								});
+							} catch (Exception ex){
+								System.out.println(ex.getMessage());
 							}
 						}
-					});
-				} catch (Exception ex){
-					System.out.println(ex.getMessage());
+					}, 20, 20);		
+
+					// Timer to display time remaining
+					timeLeftTimer = new Timer();
+					timeLeftTimer.scheduleAtFixedRate(new TimerTask () {
+						@Override
+						public void run() {
+							timeLeft.setText(Integer.toString(game.getTimeRemaining()));
+						}
+					}, 500, 500);		
+					countInTimer.cancel();
 				}
 			}
-		}, 20, 20);		
-
-		// Timer to display time remaining
-		timeLeftTimer = new Timer();
-		timeLeftTimer.scheduleAtFixedRate(new TimerTask () {
-			@Override
-			public void run() {
-				showTime();
-			}
-		}, 500, 500);
+		}, 1000, 1000);
+		
+		
 	}
-
-	private void showTime() {
-		timeLeft.setText(Integer.toString(game.getTimeRemaining()));
-	}
-
+	
 	private void setFonts() {
 		Font textFont = null;
 		Font smallTextFont = null;
@@ -254,6 +273,7 @@ public class GameViewController {
 			e.printStackTrace();
 		}
 		timeLeft.setFont(textFont);
+		countIn.setFont(textFont);
 		pauseMessage1.setFont(textFont);
 		pauseMessage2.setFont(smallTextFont);
 		pauseMessage1.setVisible(false);
@@ -286,26 +306,26 @@ public class GameViewController {
 
 		//Loop through the ball frames with delay (to be able to see)
 		if(delayer == 5){
-			if(ball.getFill() == gameBall1Pattern) {
+			if (ball.getFill() == gameBall1Pattern) {
 				ball.setFill(gameBall2Pattern);
 				delayer = 0;
-			}else if(ball.getFill() == gameBall2Pattern){
+			} else if(ball.getFill() == gameBall2Pattern) {
 				ball.setFill(gameBall3Pattern);
 				delayer = 0;
-			}else if(ball.getFill() == gameBall3Pattern){
+			} else if(ball.getFill() == gameBall3Pattern) {
 				ball.setFill(gameBall4Pattern);
 				delayer = 0;
-			}else if(ball.getFill() == gameBall4Pattern){
+			} else if(ball.getFill() == gameBall4Pattern) {
 				ball.setFill(gameBall5Pattern);
 				delayer = 0;
-			}else if(ball.getFill() == gameBall5Pattern){
+			} else if(ball.getFill() == gameBall5Pattern) {
 				ball.setFill(gameBall6Pattern);
 				delayer = 0;
-			}else if(ball.getFill() == gameBall6Pattern){
+			} else if(ball.getFill() == gameBall6Pattern) {
 				ball.setFill(gameBall1Pattern);
 				delayer = 0;
 			}
-		}else{
+		} else {
 			delayer++;
 		}
 
@@ -332,6 +352,8 @@ public class GameViewController {
 
 	public void exit() {
 		multiplayerTheme.stop();
+		animationTimer.cancel();
+		timeLeftTimer.cancel();
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
 		game.finish();
@@ -549,6 +571,9 @@ public class GameViewController {
 
 	@FXML
 	private Text timeLeft;
+	
+	@FXML
+	private Text countIn;
 
 	@FXML
 	private Text pauseMessage1;
