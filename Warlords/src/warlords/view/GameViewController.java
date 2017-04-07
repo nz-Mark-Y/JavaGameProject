@@ -73,7 +73,7 @@ public class GameViewController {
 		setFonts();
 
 		// Timers
-		createTimers();
+		countInTime();
 
 		// Key handers for keys being pressed and released
 		Thread thread = new Thread(new Runnable() {
@@ -206,7 +206,7 @@ public class GameViewController {
 		thread.start();
 	}
 
-	public void createTimers() {
+	public void countInTime() {
 		// Count in the three seconds
 		countIn.setText("3");
 		Timer countInTimer = new Timer();
@@ -223,44 +223,46 @@ public class GameViewController {
 				} else {	
 					countIn.setVisible(false);
 					paused = false;
-					// Game timer for ball and paddles to move
-					animationTimer = new Timer();
-					animationTimer.scheduleAtFixedRate(new TimerTask () {
-						@Override
-						public void run() {
-							try {
-								Platform.runLater(new Runnable() {
-									@Override
-									public void run() {
-										if (!game.isFinished()) {
-											onTick();
-										} else {
-											multiplayerTheme.stop();
-											System.out.println("Game finished");
-											animationTimer.cancel();
-										}
-									}
-								});
-							} catch (Exception ex){
-								System.out.println(ex.getMessage());
-							}
-						}
-					}, 20, 20);		
-
-					// Timer to display time remaining
-					timeLeftTimer = new Timer();
-					timeLeftTimer.scheduleAtFixedRate(new TimerTask () {
-						@Override
-						public void run() {
-							timeLeft.setText(Integer.toString(game.getTimeRemaining()));
-						}
-					}, 500, 500);		
+					createTimers();
 					countInTimer.cancel();
 				}
 			}
 		}, 1000, 1000);
-		
-		
+	}
+	
+	private void createTimers() {
+		// Game timer for ball and paddles to move
+		animationTimer = new Timer();
+		animationTimer.scheduleAtFixedRate(new TimerTask () {
+			@Override
+			public void run() {
+				try {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							if (!game.isFinished()) {
+								onTick();
+							} else {
+								multiplayerTheme.stop();
+								System.out.println("Game finished");
+								animationTimer.cancel();
+							}
+						}
+					});
+				} catch (Exception ex){
+					System.out.println(ex.getMessage());
+				}
+			}
+		}, 20, 20);		
+
+		// Timer to display time remaining
+		timeLeftTimer = new Timer();
+		timeLeftTimer.scheduleAtFixedRate(new TimerTask () {
+			@Override
+			public void run() {
+				timeLeft.setText(Integer.toString(game.getTimeRemaining()));
+			}
+		}, 500, 500);		
 	}
 	
 	private void setFonts() {

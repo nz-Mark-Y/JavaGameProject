@@ -293,8 +293,8 @@ public class Game implements IGame {
 	// Check if a coordinate on the ball will hit a coordinate
 	private boolean coordInBallPath(Ball ball, int xCoord, int yCoord) {
 		int x0, x1, y0, y1;
-		for (int z=0; z<ball.length; z++) {
-			for (int y=0; y<ball.height; y++) {
+		for (int z=0; z<Ball.length; z=z+4) {
+			for (int y=0; y<Ball.height; y=y+4) {
 				x0 = ball.getXPos() + z;
 				x1 = ball.getXPos() + ball.getXVelocity() + z;
 				y0 = ball.getYPos() + y;
