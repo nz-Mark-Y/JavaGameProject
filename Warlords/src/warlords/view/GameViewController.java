@@ -36,6 +36,7 @@ public class GameViewController {
 	private Timer animationTimer;
 	private Timer timeLeftTimer;
 	private boolean paused;
+	private boolean countingIn;
 	private int delayer = 0;
 
 	public GameViewController() {
@@ -208,6 +209,7 @@ public class GameViewController {
 
 	public void countInTime() {
 		// Count in the three seconds
+		countingIn = true;
 		countIn.setText("3");
 		Timer countInTimer = new Timer();
 		countInTimer.scheduleAtFixedRate(new TimerTask () {
@@ -222,6 +224,7 @@ public class GameViewController {
 					count--;
 				} else {	
 					countIn.setVisible(false);
+					countingIn = false;
 					paused = false;
 					createTimers();
 					countInTimer.cancel();
@@ -253,7 +256,7 @@ public class GameViewController {
 					System.out.println(ex.getMessage());
 				}
 			}
-		}, 20, 20);		
+		}, 10, 10);		
 
 		// Timer to display time remaining
 		timeLeftTimer = new Timer();
@@ -334,21 +337,23 @@ public class GameViewController {
 	}
 
 	public void pause() {
-		if (!paused) {
-			multiplayerTheme.stop();
-			paused = true;
-			animationTimer.cancel();
-			timeLeftTimer.cancel();
-			pauseMessage1.setVisible(true);
-			pauseMessage2.setVisible(true);
-			pauseBox.setVisible(true);
-		} else {
-			multiplayerTheme.stop();
-			paused = false;
-			createTimers();
-			pauseMessage1.setVisible(false);
-			pauseMessage2.setVisible(false);
-			pauseBox.setVisible(false);
+		if (countingIn == false) {
+			if (!paused) {
+				multiplayerTheme.stop();
+				paused = true;
+				animationTimer.cancel();
+				timeLeftTimer.cancel();
+				pauseMessage1.setVisible(true);
+				pauseMessage2.setVisible(true);
+				pauseBox.setVisible(true);
+			} else {
+				multiplayerTheme.stop();
+				paused = false;
+				createTimers();
+				pauseMessage1.setVisible(false);
+				pauseMessage2.setVisible(false);
+				pauseBox.setVisible(false);
+			}
 		}
 	}
 

@@ -26,13 +26,13 @@ public class Game implements IGame {
 		this.ballList.add(ball);
 		finished = false;
 		timeRemaining = (float) 120;
-		ticksSinceLastHit = 11;
+		ticksSinceLastHit = 6;
 	}
 
 	// Game Logic
 	@Override
 	public void tick() {	
-		timeRemaining -= 0.02;
+		timeRemaining -= 0.01;
 		
 		movePaddles();
 		computerMovePaddles(ballList.get(0));
@@ -48,7 +48,7 @@ public class Game implements IGame {
 	public int checkHits() {
 		for (int i=0; i<ballList.size(); i++) {
 			Ball ball = ballList.get(i);
-			if (ticksSinceLastHit > 10) {
+			if (ticksSinceLastHit > 5) {
 				// Check if the ball is going to hit a paddle
 				if (checkPaddles(ball)) {
 					ticksSinceLastHit = 0;
