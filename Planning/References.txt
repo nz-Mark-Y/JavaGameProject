@@ -1,7 +1,31 @@
 https://pixabay.com/p-1344100/?no_redirect
 
-Crates' art:
+Wall art:
 http://opengameart.org/content/free-metal-texture-creation-set-03
 
 Game background:
 http://www.lostgarden.com/2006/02/250-free-handdrawn-textures.html
+
+Warlord/paddle art:
+http://kenney.nl/assets/space-shooter-redux
+
+Main menu music theme:
+https://opengameart.org/content/another-space-background-track
+
+Multiplayer music theme:
+https://opengameart.org/content/fast-fight-battle-music-looped
+
+Wall destruction sound effect:
+https://opengameart.org/content/synthesized-explosion
+
+Warlord death sound effect::
+https://opengameart.org/content/chunky-explosion
+
+Menu scroll/select and paddle/boundary bounce sound effects:
+https://opengameart.org/content/atmospheric-interaction-sound-pack
+
+Countdown sound effects:
+https://opengameart.org/content/supertuxkart-sound-effects
+
+Post game screen music:
+https://opengameart.org/content/party-sector

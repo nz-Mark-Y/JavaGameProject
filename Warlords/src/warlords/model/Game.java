@@ -1,6 +1,8 @@
 package warlords.model;
+import java.io.File;
 import java.util.ArrayList;
 
+import javafx.scene.media.AudioClip;
 import javafx.scene.transform.Rotate;
 import warlords.tests.IGame;
 import warlords.view.GameViewController;
@@ -17,6 +19,10 @@ public class Game implements IGame {
 	private int ticksSinceLastHit;
 	private float paddleSpeed = (float) 0.7;
 	private GameViewController gameViewController;
+	private AudioClip paddleBounce = new AudioClip(new File("sounds/paddleBounce.wav").toURI().toString());
+	private AudioClip wallExplosion = new AudioClip(new File("sounds/explosion.wav").toURI().toString());
+	private AudioClip playerDeath = new AudioClip(new File("sounds/playerDeath.wav").toURI().toString());
+	private AudioClip boundaryBounce = new AudioClip(new File("sounds/boundaryBounce.wav").toURI().toString());
 
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
 		Game.xBound = xBound;
@@ -51,18 +57,21 @@ public class Game implements IGame {
 			if (ticksSinceLastHit > 5) {
 				// Check if the ball is going to hit a paddle
 				if (checkPaddles(ball)) {
+					paddleBounce.play();
 					ticksSinceLastHit = 0;
 					return i;
 				}
 	
 				// Check if the ball is going to hit a block
 				if (checkWalls(ball)) {
+					wallExplosion.play();
 					ticksSinceLastHit = 0;
 					return i;
 				}
 	
 				// Check if the ball is going to hit a warlord
 				if (checkWarlords(ball)) {
+					playerDeath.play();
 					ticksSinceLastHit = 0;
 					return i;
 				}
@@ -71,6 +80,7 @@ public class Game implements IGame {
 			}
 			
 			if (checkBoundaries(ball)) {
+				boundaryBounce.play();
 				return i;
 			}			
 		}

@@ -13,7 +13,6 @@ public class Wall implements IWall {
 	private boolean destroyed;
 	private int belongsTo;
 	private Rectangle wallView;
-	private AudioClip wallExplosion = new AudioClip(new File("sounds/explosion.wav").toURI().toString());
 
 	public Wall(int owner) {
 		x = 0;
@@ -58,9 +57,6 @@ public class Wall implements IWall {
 
 	public void destroy() {
 		destroyed = true;
-
-		//Play sound
-		wallExplosion.play();
 
 		//Remove from the player's view
 		wallView.setVisible(false);

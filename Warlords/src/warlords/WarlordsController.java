@@ -34,7 +34,8 @@ public class WarlordsController extends Application {
 	private BorderPane rootLayout;
 	private Game game = null;
 	Scene scene;
-	private AudioClip mainMenuTheme = new AudioClip(new File("sounds/mainMenuThemeReduced.wav").toURI().toString());
+	private AudioClip mainMenuTheme = new AudioClip(new File("sounds/mainMenuTheme.wav").toURI().toString());
+	private AudioClip menuSelection = new AudioClip(new File("sounds/menuSelection.wav").toURI().toString());
 
 	public WarlordsController() {
 		
@@ -155,6 +156,8 @@ public class WarlordsController extends Application {
 			LeftSideViewController controller3 = loader3.getController();
 			controller3.setWarlordsController(this);
 			
+			menuSelection.play();
+			
 			//Stop playing the main theme if playing
 			if(mainMenuTheme.isPlaying()){
 				mainMenuTheme.stop();
@@ -190,6 +193,8 @@ public class WarlordsController extends Application {
 			//Play the main theme once
 			if(!mainMenuTheme.isPlaying()){
 				mainMenuTheme.play();
+			} else {
+				menuSelection.play();
 			}
 			
 		} catch (IOException ex) {
@@ -208,6 +213,8 @@ public class WarlordsController extends Application {
 			
 			CampaignMenuViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
+			
+			menuSelection.play();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -224,6 +231,8 @@ public class WarlordsController extends Application {
 				
 			MultiplayerMenuViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
+			
+			menuSelection.play();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -240,6 +249,8 @@ public class WarlordsController extends Application {
 					
 			OptionsViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
+			
+			menuSelection.play();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -256,6 +267,8 @@ public class WarlordsController extends Application {
 						
 			AboutViewController controller = loader.getController();
 			controller.setWarlordsController(this, scene);
+			
+			menuSelection.play();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -272,6 +285,8 @@ public class WarlordsController extends Application {
 							
 				PlayerMenuViewController controller = loader.getController();
 				controller.setWarlordsController(this, scene);
+				
+				menuSelection.play();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

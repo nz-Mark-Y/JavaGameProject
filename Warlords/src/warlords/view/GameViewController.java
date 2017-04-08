@@ -32,7 +32,10 @@ public class GameViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
-	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerThemeReduced.wav").toURI().toString());
+	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.wav").toURI().toString());
+	private AudioClip countdownWait = new AudioClip(new File("sounds/countdownWait.wav").toURI().toString());
+	private AudioClip countdownReady = new AudioClip(new File("sounds/countdownReady.wav").toURI().toString());
+	private AudioClip postGameTheme = new AudioClip(new File("sounds/postGameTheme.wav").toURI().toString());
 	private Timer animationTimer;
 	private Timer timeLeftTimer;
 	private boolean paused;
@@ -211,15 +214,18 @@ public class GameViewController {
 		// Count in the three seconds
 		countingIn = true;
 		countIn.setText("3");
+		countdownWait.play();
 		Timer countInTimer = new Timer();
 		countInTimer.scheduleAtFixedRate(new TimerTask () {
 			int count = 2;
 			@Override
 			public void run() {
 				if (count > 0) {
+					countdownWait.play();
 					countIn.setText(Integer.toString(count));
 					count--;
 				} else if (count == 0){
+					countdownReady.play();
 					countIn.setText("GO");
 					count--;
 				} else {	
@@ -308,6 +314,11 @@ public class GameViewController {
 		if(!multiplayerTheme.isPlaying() && !paused){
 			multiplayerTheme.play();
 		}
+		
+		//Play post game music if game is finished but stop it if exited
+		if(game.isFinished() && !postGameTheme.isPlaying()){
+			postGameTheme.play();
+		}
 
 		//Loop through the ball frames with delay (to be able to see)
 		if(delayer == 5){
@@ -359,6 +370,7 @@ public class GameViewController {
 
 	public void exit() {
 		multiplayerTheme.stop();
+		postGameTheme.stop();
 		animationTimer.cancel();
 		timeLeftTimer.cancel();
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);

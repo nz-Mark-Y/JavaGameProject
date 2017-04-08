@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,6 +21,7 @@ public class MultiplayerMenuViewController {
 	private ArrayList<Text> menuList = new ArrayList<Text>();
 	Scene scene;
 	private EventHandler<KeyEvent> handler;
+	private AudioClip menuScroller = new AudioClip(new File("sounds/menuScroller.wav").toURI().toString());
 	
 	public MultiplayerMenuViewController() {
 		
@@ -55,6 +57,7 @@ public class MultiplayerMenuViewController {
         handler = new EventHandler<KeyEvent>() {
 			@Override
 		    public void handle(KeyEvent t) {
+				menuScroller.play();
 				switch(t.getCode()) {
 					case UP:
 						upArrowPressed();

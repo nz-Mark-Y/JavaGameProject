@@ -18,7 +18,6 @@ public class Warlord implements IWarlord {
 	private int classNum;
 	private Rectangle warlordView;
 	private int lastAbility;
-	private AudioClip playerDeath = new AudioClip(new File("sounds/playerDeath.wav").toURI().toString());
 	
 	public Warlord(Paddle paddle, boolean control, int classNum) {
 		this.paddle = paddle;
@@ -75,9 +74,6 @@ public class Warlord implements IWarlord {
 		paddle.getPaddleView().setVisible(false);
 		warlordView.setVisible(false);
 		dead = true;
-		
-		//Play sound
-		playerDeath.play();
 	}
 	
 	public void wins() {
