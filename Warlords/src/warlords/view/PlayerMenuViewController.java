@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -22,10 +23,12 @@ public class PlayerMenuViewController {
 	private WarlordsController warlordsController;
 	private ArrayList<Text> textList = new ArrayList<Text>();
 	private ArrayList<Text> titleList = new ArrayList<Text>();
+	private ArrayList<Label> labelList = new ArrayList<Label>();
 	private ArrayList<Rectangle> player1List = new ArrayList<Rectangle>();
 	private ArrayList<Rectangle> player2List = new ArrayList<Rectangle>();
 	private ArrayList<Rectangle> player3List = new ArrayList<Rectangle>();
 	private ArrayList<Rectangle> player4List = new ArrayList<Rectangle>();
+	private ArrayList<String> descriptions = new ArrayList<String>();
 	Scene scene;
 	private EventHandler<KeyEvent> handler;
 	private int oneSelects;
@@ -46,13 +49,16 @@ public class PlayerMenuViewController {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
 
+		// Add Descriptions
+		addDescriptions();
+		
 		// Add items to controller
 		addItems();
 
 		// Set custom fonts 
 		setFonts();
 
-		//Apply patterns
+		// Apply patterns
 		setPatterns();
 
 		// KeyHandlers
@@ -60,26 +66,7 @@ public class PlayerMenuViewController {
 	}
 	
 	public ImagePattern getPlayerFlag(int playerNumber){
-		//TO IMPLEMENT
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		//TO IMPLEMENT	
 		return null;	
 	}
 
@@ -196,6 +183,9 @@ public class PlayerMenuViewController {
 		}
 		for(int i=0; i<textList.size(); i++) {
 			textList.get(i).setFont(textFont);
+		}
+		for(int i=0; i<labelList.size(); i++) {
+			labelList.get(i).setFont(textFont);
 		}
 	}
 
@@ -319,6 +309,10 @@ public class PlayerMenuViewController {
 	}
 
 	public void updateSelection() {
+		description1.setText(descriptions.get(oneSelects));
+		description2.setText(descriptions.get(twoSelects));
+		description3.setText(descriptions.get(threeSelects));
+		description4.setText(descriptions.get(fourSelects));
 		for (int i=0;i<player1List.size(); i++) {
 			if (i == oneSelects) {
 				player1List.get(i).setVisible(true);
@@ -387,7 +381,10 @@ public class PlayerMenuViewController {
 		textList.add(line7);
 		textList.add(line8);
 		textList.add(backInstructions1);
-		textList.add(backInstructions2);
+		labelList.add(description1);
+		labelList.add(description2);
+		labelList.add(description3);
+		labelList.add(description4);
 		player1List.add(player1Select0);
 		player1List.add(player1Select1);
 		player1List.add(player1Select2);
@@ -430,6 +427,31 @@ public class PlayerMenuViewController {
 		player4List.add(player4Select9);
 	}
 
+	public void addDescriptions() {
+		descriptions.add("france: \n To Be Implemented");
+		descriptions.add("USA: \n Shoots a single use bullet using your UP key \n Bullet will destroy a wall or warlord if it hits one, but does not bounce");
+		descriptions.add("Britain: \n To Be Implemented");
+		descriptions.add("New Zealand: \n To Be Implemented");
+		descriptions.add("China: \n To Be Implemented");
+		descriptions.add("Australia: \n To Be Implemented");
+		descriptions.add("India: \n To Be Implemented");
+		descriptions.add("Russia: \n To Be Implemented");
+		descriptions.add("Egypt: \n To Be Implemented");
+		descriptions.add("Brazil: \n To Be Implemented");
+	}
+	
+	@FXML
+	private Label description1;
+	
+	@FXML
+	private Label description2;
+	
+	@FXML
+	private Label description3;
+	
+	@FXML
+	private Label description4;
+	
 	@FXML
 	private Text title1;
 

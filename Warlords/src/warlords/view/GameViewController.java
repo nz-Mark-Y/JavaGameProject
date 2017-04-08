@@ -141,6 +141,9 @@ public class GameViewController {
 						case ESCAPE:
 							exit();
 							break;
+						case PAGE_DOWN:
+							game.setTimeRemaining(0);
+							break;
 						default:
 							break;					
 						}
@@ -253,7 +256,15 @@ public class GameViewController {
 								onTick();
 							} else {
 								multiplayerTheme.stop();
-								System.out.println("Game finished");
+								if (game.getWinner() == -1) {
+									gameOver2.setText("Game is a Tie!");
+								} else {
+									gameOver2.setText("Player " + Integer.toString(game.getWinner()) + " Wins!");
+								}								
+								pauseBox.setVisible(true);
+								gameOver1.setVisible(true);
+								gameOver2.setVisible(true);
+								gameOver3.setVisible(true);
 								animationTimer.cancel();
 							}
 						}
@@ -287,8 +298,14 @@ public class GameViewController {
 		countIn.setFont(textFont);
 		pauseMessage1.setFont(textFont);
 		pauseMessage2.setFont(smallTextFont);
+		gameOver1.setFont(textFont);
+		gameOver2.setFont(textFont);
+		gameOver3.setFont(smallTextFont);
 		pauseMessage1.setVisible(false);
 		pauseMessage2.setVisible(false);
+		gameOver1.setVisible(false);
+		gameOver2.setVisible(false);
+		gameOver3.setVisible(false);
 		pauseBox.setVisible(false);
 	}
 
@@ -389,10 +406,6 @@ public class GameViewController {
 		circle.setLayoutY(768);
 		pane.getChildren().add(circle);
 		bullet.setBallView(circle);
-	}
-	
-	public void createWallView(Wall wall){
-		//Create rectangle at wall position
 	}
 
 	public void delBall(Ball bullet) {
@@ -599,6 +612,15 @@ public class GameViewController {
 
 	@FXML
 	private Text pauseMessage2;
+	
+	@FXML
+	private Text gameOver1;
+
+	@FXML
+	private Text gameOver2;
+	
+	@FXML
+	private Text gameOver3;
 
 	@FXML 
 	private Rectangle pauseBox;

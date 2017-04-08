@@ -74,6 +74,21 @@
                   <Font name="Evanescence Series B" size="96.0" />
                </font>
             </Text>
+            <Text fx:id="gameOver1" fill="WHITE" layoutX="148.0" layoutY="346.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over" textAlignment="CENTER" wrappingWidth="472.0000031590462">
+               <font>
+                  <Font name="Evanescence Series B" size="96.0" />
+               </font>
+            </Text>
+            <Text fx:id="gameOver2" fill="WHITE" layoutX="139.0" layoutY="420.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="Player X Wins!" textAlignment="CENTER" wrappingWidth="522.0000031590462">
+               <font>
+                  <Font name="Evanescence Series B" size="96.0" />
+               </font>
+            </Text>
+            <Text fx:id="gameOver3" fill="WHITE" layoutX="148.0" layoutY="485.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="ESC to exit" textAlignment="CENTER" wrappingWidth="472.0000031590462">
+               <font>
+                  <Font name="Evanescence Series B" size="48.0" />
+               </font>
+            </Text>
 
          </children>
       </Pane>

@@ -272,6 +272,7 @@ public class Game implements IGame {
 		int winnerPos = 0;
 		// Check timeout
 		if (timeRemaining <= 0) {
+			finished = true;
 			for (int i=0; i<wallList.size(); i++) {
 				playerList.get(wallList.get(i).getOwner()).addWall();
 			}
@@ -280,8 +281,14 @@ public class Game implements IGame {
 					winnerPos = i;
 				}
 			}
-			playerList.get(winnerPos).wins();
-			finished = true;
+			for (int i=0; i<playerList.size(); i++) {
+				if (i != winnerPos) {
+					if (playerList.get(i).getWallsLeft() == playerList.get(winnerPos).getWallsLeft()) {
+						return;
+					}
+				}
+			}
+			playerList.get(winnerPos).wins();			
 			return;
 		}
 		// Check if there is only one player left alive
@@ -562,5 +569,13 @@ public class Game implements IGame {
 
 	public ArrayList<Wall> getWallList() {
 		return wallList;
+	}
+	
+	public int getWinner() {
+		for (int i=0; i<playerList.size(); i++) {
+			if (playerList.get(i).hasWon())
+				return (i+1);
+		}
+		return -1;
 	}
 }

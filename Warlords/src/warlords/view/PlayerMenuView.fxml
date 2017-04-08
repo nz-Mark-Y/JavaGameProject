@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warlords.view.PlayerMenuViewController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warlords.view.PlayerMenuViewController">
    <children>
       <ImageView fitHeight="868.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -64,32 +65,32 @@
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line5" fill="WHITE" layoutX="53.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Controller = W">
+      <Text fx:id="line5" fill="WHITE" layoutX="53.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI Control = W">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line6" fill="WHITE" layoutX="602.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Controller = 5">
+      <Text fx:id="line6" fill="WHITE" layoutX="602.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI Control = 5">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line7" fill="WHITE" layoutX="49.0" layoutY="765.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Controller = I">
+      <Text fx:id="line7" fill="WHITE" layoutX="49.0" layoutY="765.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI Control = I">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="line8" fill="WHITE" layoutX="595.0" layoutY="768.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Controller = UP">
+      <Text fx:id="line8" fill="WHITE" layoutX="595.0" layoutY="768.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI Control = UP">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="backInstructions1" fill="WHITE" layoutX="277.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ENTER when finished" textAlignment="CENTER">
+      <Text fx:id="backInstructions1" fill="WHITE" layoutX="275.0" layoutY="853.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ENTER when finished" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="backInstructions2" fill="WHITE" layoutX="277.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ENTER when finished" textAlignment="CENTER">
+      <Text fx:id="backInstructions2" fill="WHITE" layoutX="277.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ENTER when finished" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="24.0" />
          </font>
@@ -134,25 +135,45 @@
       <Rectangle fx:id="player4Select7" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="419.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
       <Rectangle fx:id="player4Select8" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="555.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
       <Rectangle fx:id="player4Select9" arcHeight="5.0" arcWidth="5.0" fill="#f29514" height="20.0" layoutX="687.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
-      <Text fx:id="title5" fill="RED" layoutX="275.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+      <Text fx:id="title5" fill="RED" layoutX="193.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="title6" fill="#00b4ff" layoutX="239.0" layoutY="791.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+      <Text fx:id="title6" fill="#00b4ff" layoutX="193.0" layoutY="838.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="title7" fill="#03f22b" layoutX="484.0" layoutY="791.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+      <Text fx:id="title7" fill="#03f22b" layoutX="525.0" layoutY="838.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
-      <Text fx:id="title8" fill="#f29514" layoutX="492.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
+      <Text fx:id="title8" fill="#f29514" layoutX="525.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(AI)" textAlignment="CENTER">
          <font>
             <Font name="Evanescence Series B" size="48.0" />
          </font>
       </Text>
+      <Label fx:id="description1" alignment="TOP_LEFT" layoutX="54.0" layoutY="121.0" prefHeight="178.0" prefWidth="291.0" text="Label" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="description2" alignment="TOP_LEFT" layoutX="39.0" layoutY="560.0" prefHeight="178.0" prefWidth="291.0" text="Label" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="description3" alignment="TOP_LEFT" layoutX="432.0" layoutY="560.0" prefHeight="178.0" prefWidth="291.0" text="Label" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="description4" alignment="TOP_LEFT" layoutX="439.0" layoutY="121.0" prefHeight="178.0" prefWidth="291.0" text="Label" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Evanescence Series B" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
