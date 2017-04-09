@@ -23,6 +23,7 @@ public class Game implements IGame {
 	private AudioClip wallExplosion = new AudioClip(new File("sounds/explosion.wav").toURI().toString());
 	private AudioClip playerDeath = new AudioClip(new File("sounds/playerDeath.wav").toURI().toString());
 	private AudioClip boundaryBounce = new AudioClip(new File("sounds/boundaryBounce.wav").toURI().toString());
+	private AudioClip sheepBounce = new AudioClip(new File("sounds/sheep.wav").toURI().toString());
 
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
 		Game.xBound = xBound;
@@ -77,9 +78,9 @@ public class Game implements IGame {
 					return i;
 				}
 				
-				// Check if the ball is going to hit a warlord
+				// Check if the ball is going to hit a sheep
 				if (checkSheep(ball)) {
-					paddleBounce.play();
+					sheepBounce.play();
 					ticksSinceLastHit = 0;
 					return i;
 				}
