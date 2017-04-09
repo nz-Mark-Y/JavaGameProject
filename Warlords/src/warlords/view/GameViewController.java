@@ -424,10 +424,12 @@ public class GameViewController {
 		game.getPlayerList().get(1).setWarlordView(player2Warlord);
 		game.getPlayerList().get(2).setWarlordView(player3Warlord);
 		game.getPlayerList().get(3).setWarlordView(player4Warlord);
+		
 		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle, 0);
 		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle, 1);
 		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle, 2);
 		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle, 3);
+
 		if (game.getPlayerList().get(0).getSheep() != null) {
 			game.getPlayerList().get(0).getSheep().setPaddleView(player1Sheep, 0);
 		} else {
@@ -436,37 +438,39 @@ public class GameViewController {
 		if (game.getPlayerList().get(1).getSheep() != null) {
 			game.getPlayerList().get(1).getSheep().setPaddleView(player2Sheep, 1);
 		} else {
-			player1Sheep.setVisible(false);
+			player2Sheep.setVisible(false);
 		}
 		if (game.getPlayerList().get(2).getSheep() != null) {
 			game.getPlayerList().get(2).getSheep().setPaddleView(player3Sheep, 2);
 		} else {
-			player1Sheep.setVisible(false);
+			player3Sheep.setVisible(false);
 		}
 		if (game.getPlayerList().get(3).getSheep() != null) {
 			game.getPlayerList().get(3).getSheep().setPaddleView(player4Sheep, 3);
 		} else {
-			player1Sheep.setVisible(false);
+			player4Sheep.setVisible(false);
 		}
+		
 		game.getWallList().get(0).setWallView(player1Wall1);
 		game.getWallList().get(1).setWallView(player1Wall2);
 		game.getWallList().get(2).setWallView(player1Wall3);
 		game.getWallList().get(3).setWallView(player1Wall4);
 		game.getWallList().get(4).setWallView(player1Wall5);
-		game.getWallList().get(5).setWallView(player1Wall6);
-		game.getWallList().get(6).setWallView(player1Wall7);
-		game.getWallList().get(7).setWallView(player1Wall8);
-		game.getWallList().get(8).setWallView(player1Wall9);
-		game.getWallList().get(9).setWallView(player1Wall10);
-		game.getWallList().get(10).setWallView(player1Wall11);
-		game.getWallList().get(11).setWallView(player1Wall12);
-		game.getWallList().get(12).setWallView(player1Wall13);
-		game.getWallList().get(13).setWallView(player1Wall14);
-		game.getWallList().get(14).setWallView(player1Wall15);
-		game.getWallList().get(15).setWallView(player1Wall16);
-		game.getWallList().get(16).setWallView(player2Wall);
-		game.getWallList().get(17).setWallView(player3Wall);
-		game.getWallList().get(18).setWallView(player4Wall);
+		game.getWallList().get(5).setWallView(player2Wall1);
+		game.getWallList().get(6).setWallView(player2Wall2);
+		game.getWallList().get(7).setWallView(player2Wall3);
+		game.getWallList().get(8).setWallView(player2Wall4);
+		game.getWallList().get(9).setWallView(player2Wall5);
+		game.getWallList().get(10).setWallView(player3Wall1);
+		game.getWallList().get(11).setWallView(player3Wall2);
+		game.getWallList().get(12).setWallView(player3Wall3);
+		game.getWallList().get(13).setWallView(player3Wall4);
+		game.getWallList().get(14).setWallView(player3Wall5);
+		game.getWallList().get(15).setWallView(player4Wall1);
+		game.getWallList().get(16).setWallView(player4Wall2);
+		game.getWallList().get(17).setWallView(player4Wall3);
+		game.getWallList().get(18).setWallView(player4Wall4);
+		game.getWallList().get(19).setWallView(player4Wall5);
 	}
 
 	private void graphicsInit() {
@@ -476,20 +480,24 @@ public class GameViewController {
 		player1Wall3.setFill(player1CratePattern);
 		player1Wall4.setFill(player1CratePattern);
 		player1Wall5.setFill(player1CratePattern);
-		player1Wall6.setFill(player1CratePattern);
-		player1Wall7.setFill(player1CratePattern);
-		player1Wall8.setFill(player1CratePattern);
-		player1Wall9.setFill(player1CratePattern);
-		player1Wall10.setFill(player1CratePattern);
-		player1Wall11.setFill(player1CratePattern);
-		player1Wall12.setFill(player1CratePattern);
-		player1Wall13.setFill(player1CratePattern);
-		player1Wall14.setFill(player1CratePattern);
-		player1Wall15.setFill(player1CratePattern);
-		player1Wall16.setFill(player1CratePattern);
-		player2Wall.setFill(player2CratePattern);
-		player3Wall.setFill(player3CratePattern);
-		player4Wall.setFill(player4CratePattern);
+		
+		player2Wall1.setFill(player2CratePattern);
+		player2Wall2.setFill(player2CratePattern);
+		player2Wall3.setFill(player2CratePattern);
+		player2Wall4.setFill(player2CratePattern);
+		player2Wall5.setFill(player2CratePattern);
+		
+		player3Wall1.setFill(player3CratePattern);
+		player3Wall2.setFill(player3CratePattern);
+		player3Wall3.setFill(player3CratePattern);
+		player3Wall4.setFill(player3CratePattern);
+		player3Wall5.setFill(player3CratePattern);
+		
+		player4Wall1.setFill(player4CratePattern);
+		player4Wall2.setFill(player4CratePattern);
+		player4Wall3.setFill(player4CratePattern);
+		player4Wall4.setFill(player4CratePattern);
+		player4Wall5.setFill(player4CratePattern);
 
 		//Applying patterns to paddles
 		player1Paddle.setStrokeWidth(0);
@@ -551,99 +559,85 @@ public class GameViewController {
 		player4Flag.setFill(flags.get(game.getPlayerList().get(3).getClassNum()));
 	}
 
+	//Ball
 	@FXML
 	private Circle ball;
 
+	//Paddles
 	@FXML 
 	private Rectangle player1Paddle;
-
 	@FXML 
 	private Rectangle player2Paddle;
-
-	@FXML 
-	private Rectangle player1Wall1;
-	
-	@FXML 
-	private Rectangle player1Wall2;
-	
-	@FXML 
-	private Rectangle player1Wall3;
-	
-	@FXML 
-	private Rectangle player1Wall4;
-	
-	@FXML 
-	private Rectangle player1Wall5;
-	
-	@FXML 
-	private Rectangle player1Wall6;
-	
-	@FXML 
-	private Rectangle player1Wall7;
-	
-	@FXML 
-	private Rectangle player1Wall8;
-	
-	@FXML 
-	private Rectangle player1Wall9;
-	
-	@FXML 
-	private Rectangle player1Wall10;
-	
-	@FXML 
-	private Rectangle player1Wall11;
-	
-	@FXML 
-	private Rectangle player1Wall12;
-	
-	@FXML 
-	private Rectangle player1Wall13;
-	
-	@FXML 
-	private Rectangle player1Wall14;
-	
-	@FXML 
-	private Rectangle player1Wall15;
-	
-	@FXML 
-	private Rectangle player1Wall16;
-
-	@FXML 
-	private Rectangle player2Wall;
-
-	@FXML 
-	private Rectangle player1Warlord;
-
-	@FXML 
-	private Rectangle player2Warlord;
-
 	@FXML 
 	private Rectangle player3Paddle;
-
 	@FXML 
 	private Rectangle player4Paddle;
 
+	//Warlords
 	@FXML 
-	private Rectangle player3Wall;
-
+	private Rectangle player1Warlord;
 	@FXML 
-	private Rectangle player4Wall;
-
+	private Rectangle player2Warlord;
 	@FXML 
 	private Rectangle player3Warlord;
-
 	@FXML 
 	private Rectangle player4Warlord;
 	
+	//Player 1 Walls
+	@FXML 
+	private Rectangle player1Wall1;
+	@FXML 
+	private Rectangle player1Wall2;
+	@FXML 
+	private Rectangle player1Wall3;
+	@FXML 
+	private Rectangle player1Wall4;
+	@FXML 
+	private Rectangle player1Wall5;
+	
+	//Player 2 Walls
+	@FXML 
+	private Rectangle player2Wall1;
+	@FXML 
+	private Rectangle player2Wall2;
+	@FXML 
+	private Rectangle player2Wall3;
+	@FXML 
+	private Rectangle player2Wall4;
+	@FXML 
+	private Rectangle player2Wall5;
+	
+	//Player 3 Walls
+	@FXML 
+	private Rectangle player3Wall1;
+	@FXML 
+	private Rectangle player3Wall2;
+	@FXML 
+	private Rectangle player3Wall3;
+	@FXML 
+	private Rectangle player3Wall4;
+	@FXML 
+	private Rectangle player3Wall5;
+	
+	//Player 4 Walls
+	@FXML 
+	private Rectangle player4Wall1;
+	@FXML 
+	private Rectangle player4Wall2;
+	@FXML 
+	private Rectangle player4Wall3;
+	@FXML 
+	private Rectangle player4Wall4;
+	@FXML 
+	private Rectangle player4Wall5;
+	
+	//Flags
 	@FXML 
 	private Rectangle player1Flag;
-
 	@FXML 
 	private Rectangle player2Flag;
-
 	@FXML 
 	private Rectangle player3Flag;
-
 	@FXML 
 	private Rectangle player4Flag;
 	
@@ -659,6 +653,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player4Sheep;
 
+	//Miscellaneous objects
 	@FXML 
 	private Pane pane;
 
@@ -686,7 +681,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle pauseBox;
 
-	//Creating patterns for the walls
+	//Patterns for the walls
 	private Image player1Crate = new Image("file:images/player1Crate.png");
 	ImagePattern player1CratePattern = new ImagePattern(player1Crate);
 
@@ -699,7 +694,7 @@ public class GameViewController {
 	private Image player4Crate = new Image("file:images/player4Crate.png");
 	ImagePattern player4CratePattern = new ImagePattern(player4Crate);
 
-	//Creating patterns for the paddles
+	//Patterns for the paddles
 	private Image player1Ship = new Image("file:images/player1Ship.png");
 	ImagePattern player1ShipPattern = new ImagePattern(player1Ship);
 
@@ -716,7 +711,7 @@ public class GameViewController {
 	private Image sheepImage = new Image("file:images/sheep.png");
 	ImagePattern sheepPattern = new ImagePattern(sheepImage);
 
-	//Creating patterns for the warlords
+	//Patterns for the warlords
 	private Image player1Mothership = new Image("file:images/player1Mothership.png");
 	ImagePattern player1MothershipPattern = new ImagePattern(player1Mothership);
 
@@ -729,7 +724,7 @@ public class GameViewController {
 	private Image player4Mothership = new Image("file:images/player4Mothership.png");
 	ImagePattern player4MothershipPattern = new ImagePattern(player4Mothership);
 
-	//Creating patterns for the ball
+	//Patterns for the ball
 	private Image gameBall1 = new Image("file:images/ball1.png");
 	ImagePattern gameBall1Pattern = new ImagePattern(gameBall1);
 
