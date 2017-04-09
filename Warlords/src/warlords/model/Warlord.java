@@ -10,8 +10,8 @@ public class Warlord implements IWarlord {
 	private Paddle sheep;
 	private int x;
 	private int y;
-	public static int height = 50;
-	public static int length = 50; 
+	public static int height = 60;
+	public static int length = 60; 
 	private boolean computerControlled;
 	private boolean dead;
 	private boolean won;
@@ -20,6 +20,7 @@ public class Warlord implements IWarlord {
 	private Rectangle warlordView;
 	private int lastAbility;
 	private boolean sheepGoingLeft = true;
+	private int isImmune;
 	
 	public Warlord(Paddle paddle, boolean control, int classNum) {
 		this.paddle = paddle;
@@ -47,6 +48,7 @@ public class Warlord implements IWarlord {
 		} else {
 			sheep = null;
 		}
+		isImmune = -1;
 	}
 	
 	@Override
@@ -144,6 +146,14 @@ public class Warlord implements IWarlord {
 	
 	public void setSheepGoingLeft(boolean input) {
 		sheepGoingLeft = input;
+	}
+	
+	public int getImmune() {
+		return isImmune;
+	}
+	
+	public void setImmune(int input) {
+		isImmune = input;
 	}
 }
 

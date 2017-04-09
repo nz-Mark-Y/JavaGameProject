@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -326,6 +327,29 @@ public class GameViewController {
 			if (game.getPlayerList().get(i).getSheep() != null) {
 				game.getPlayerList().get(i).getSheep().getPaddleView().setX(game.getPlayerList().get(i).getSheep().getXPos());
 				game.getPlayerList().get(i).getSheep().getPaddleView().setY(-(game.getPlayerList().get(i).getSheep().getYPos() + 20));
+			}
+			if (game.getPlayerList().get(i).getClassNum() == 2) {
+				if (game.getPlayerList().get(i).getImmune() == 1) {
+					Rectangle rect = new Rectangle();
+					rect.setFill(flag2Pattern);
+					rect.setOpacity(0.5);
+					rect.setHeight(60);
+					rect.setWidth(60);
+					rect.setX(game.getPlayerList().get(i).getWarlordView().getX());
+					rect.setY(game.getPlayerList().get(i).getWarlordView().getY());
+					rect.setLayoutX(0);
+					rect.setLayoutY(768);
+					rect.setUserData("immune");
+					pane.getChildren().add(rect);
+					rect.setVisible(true);
+				} 
+				if (game.getPlayerList().get(i).getImmune() == -2) {
+					for (int j=0; j<pane.getChildren().size(); j++) {
+						if (pane.getChildren().get(j).getUserData() == "immune") {
+							pane.getChildren().get(j).setVisible(false);
+						}
+					}	
+				}
 			}
 		}
 		for (int i=0;i<game.getWallList().size(); i++) {

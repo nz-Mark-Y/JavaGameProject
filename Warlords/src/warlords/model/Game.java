@@ -50,6 +50,8 @@ public class Game implements IGame {
 			gameViewController.delBall(ballList.get(hitNum));
 			ballList.remove(hitNum);
 		}
+		
+		countImmune();
 		checkWin();
 	}
 	
@@ -73,8 +75,7 @@ public class Game implements IGame {
 	
 				// Check if the ball is going to hit a warlord
 				if (checkWarlords(ball)) {
-					playerDeath.play();
-					ticksSinceLastHit = 0;
+					ticksSinceLastHit = 0; // Sound moved to checkWarlords function
 					return i;
 				}
 				
@@ -264,7 +265,12 @@ public class Game implements IGame {
 								} else {
 		
 								}
-								player.dies();
+								if (player.getImmune() >= 0) {
+									
+								} else {
+									player.dies();
+									playerDeath.play();
+								}
 								return true;
 							} 
 						}							
@@ -547,8 +553,23 @@ public class Game implements IGame {
 					gameViewController.createBulletView(bullet);
 					playerList.get(playerNum).setLastAbility((int) timeRemaining);
 				}
-			} else {
-				
+			} else if (playerList.get(playerNum).getClassNum() == 2) { // Britain
+				if (playerList.get(playerNum).getImmune() == -1) {
+					playerList.get(playerNum).setImmune(0);
+				}
+			}
+		}
+	}
+	
+	public void countImmune() {
+		for (int i=0;i<playerList.size(); i++) {
+			if (playerList.get(i).getClassNum() == 2) {
+				if (playerList.get(i).getImmune() > 500) {
+					playerList.get(i).setImmune(-2);
+				}
+				if (playerList.get(i).getImmune() >= 0) {
+					playerList.get(i).setImmune(playerList.get(i).getImmune() + 1);
+				}
 			}
 		}
 	}
