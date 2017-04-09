@@ -32,3 +32,6 @@ https://opengameart.org/content/supertuxkart-sound-effects
 
 Post game screen music:
 https://opengameart.org/content/party-sector
+
+Sheep sound effect:
+https://opengameart.org/content/sheep-sound-bleats-yo-frankie
