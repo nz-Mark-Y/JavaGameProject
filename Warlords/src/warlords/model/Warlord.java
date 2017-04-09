@@ -7,6 +7,7 @@ import warlords.tests.IWarlord;
 
 public class Warlord implements IWarlord {
 	private Paddle paddle;
+	private Paddle sheep;
 	private int x;
 	private int y;
 	public static int height = 50;
@@ -18,6 +19,7 @@ public class Warlord implements IWarlord {
 	private int classNum;
 	private Rectangle warlordView;
 	private int lastAbility;
+	private boolean sheepGoingLeft = true;
 	
 	public Warlord(Paddle paddle, boolean control, int classNum) {
 		this.paddle = paddle;
@@ -40,6 +42,11 @@ public class Warlord implements IWarlord {
 		computerControlled = control;
 		this.classNum = classNum;
 		lastAbility = 0;
+		if (classNum == 3) {
+			sheep = new Paddle(paddle.getXPos(), paddle.getYPos());
+		} else {
+			sheep = null;
+		}
 	}
 	
 	@Override
@@ -72,6 +79,9 @@ public class Warlord implements IWarlord {
 	
 	public void dies() {
 		paddle.getPaddleView().setVisible(false);
+		if (sheep != null) {
+			sheep.getPaddleView().setVisible(false);
+		}
 		warlordView.setVisible(false);
 		dead = true;
 	}
@@ -122,6 +132,18 @@ public class Warlord implements IWarlord {
 	
 	public void setLastAbility(int input) {
 		lastAbility = input;
+	}
+	
+	public Paddle getSheep() {
+		return sheep;
+	}
+	
+	public boolean getSheepGoingLeft() {
+		return sheepGoingLeft;
+	}
+	
+	public void setSheepGoingLeft(boolean input) {
+		sheepGoingLeft = input;
 	}
 }
 

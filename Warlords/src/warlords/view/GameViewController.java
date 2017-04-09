@@ -322,7 +322,11 @@ public class GameViewController {
 			game.getPlayerList().get(i).getWarlordView().setX(game.getPlayerList().get(i).getXPos());
 			game.getPlayerList().get(i).getWarlordView().setY(-(game.getPlayerList().get(i).getYPos() + Warlord.height));
 			game.getPlayerList().get(i).getPaddle().getPaddleView().setX(game.getPlayerList().get(i).getPaddle().getXPos());
-			game.getPlayerList().get(i).getPaddle().getPaddleView().setY(-(game.getPlayerList().get(i).getPaddle().getYPos() + Paddle.height));
+			game.getPlayerList().get(i).getPaddle().getPaddleView().setY(-(game.getPlayerList().get(i).getPaddle().getYPos()+ Paddle.height));
+			if (game.getPlayerList().get(i).getSheep() != null) {
+				game.getPlayerList().get(i).getSheep().getPaddleView().setX(game.getPlayerList().get(i).getSheep().getXPos());
+				game.getPlayerList().get(i).getSheep().getPaddleView().setY(-(game.getPlayerList().get(i).getSheep().getYPos() + 20));
+			}
 		}
 		for (int i=0;i<game.getWallList().size(); i++) {
 			game.getWallList().get(i).getWallView().setX(game.getWallList().get(i).getXPos());
@@ -424,6 +428,26 @@ public class GameViewController {
 		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle, 1);
 		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle, 2);
 		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle, 3);
+		if (game.getPlayerList().get(0).getSheep() != null) {
+			game.getPlayerList().get(0).getSheep().setPaddleView(player1Sheep, 0);
+		} else {
+			player1Sheep.setVisible(false);
+		}
+		if (game.getPlayerList().get(1).getSheep() != null) {
+			game.getPlayerList().get(1).getSheep().setPaddleView(player2Sheep, 1);
+		} else {
+			player1Sheep.setVisible(false);
+		}
+		if (game.getPlayerList().get(2).getSheep() != null) {
+			game.getPlayerList().get(2).getSheep().setPaddleView(player3Sheep, 2);
+		} else {
+			player1Sheep.setVisible(false);
+		}
+		if (game.getPlayerList().get(3).getSheep() != null) {
+			game.getPlayerList().get(3).getSheep().setPaddleView(player4Sheep, 3);
+		} else {
+			player1Sheep.setVisible(false);
+		}
 		game.getWallList().get(0).setWallView(player1Wall1);
 		game.getWallList().get(1).setWallView(player1Wall2);
 		game.getWallList().get(2).setWallView(player1Wall3);
@@ -479,6 +503,19 @@ public class GameViewController {
 
 		player4Paddle.setStrokeWidth(0);
 		player4Paddle.setFill(player4ShipPattern);
+		
+		// Applying patterns to sheep
+		player1Sheep.setStrokeWidth(0);
+		player1Sheep.setFill(sheepPattern);
+
+		player2Sheep.setStrokeWidth(0);
+		player2Sheep.setFill(sheepPattern);
+
+		player3Sheep.setStrokeWidth(0);
+		player3Sheep.setFill(sheepPattern);
+
+		player4Sheep.setStrokeWidth(0);
+		player4Sheep.setFill(sheepPattern);
 
 		//Applying patterns to warlords
 		player1Warlord.setStrokeWidth(0);
@@ -609,6 +646,18 @@ public class GameViewController {
 
 	@FXML 
 	private Rectangle player4Flag;
+	
+	@FXML 
+	private Rectangle player1Sheep;
+
+	@FXML 
+	private Rectangle player2Sheep;
+
+	@FXML 
+	private Rectangle player3Sheep;
+
+	@FXML 
+	private Rectangle player4Sheep;
 
 	@FXML 
 	private Pane pane;
@@ -662,6 +711,10 @@ public class GameViewController {
 
 	private Image player4Ship = new Image("file:images/player4Ship.png");
 	ImagePattern player4ShipPattern = new ImagePattern(player4Ship);
+	
+	// Creating patterns for sheep
+	private Image sheepImage = new Image("file:images/sheep.png");
+	ImagePattern sheepPattern = new ImagePattern(sheepImage);
 
 	//Creating patterns for the warlords
 	private Image player1Mothership = new Image("file:images/player1Mothership.png");

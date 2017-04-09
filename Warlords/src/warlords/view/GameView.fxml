@@ -20,6 +20,10 @@
                </image>
             </ImageView>
             <Circle fx:id="ball" fill="DODGERBLUE" layoutY="768.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle fx:id="player1Sheep" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="20.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle fx:id="player2Sheep" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="20.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle fx:id="player3Sheep" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="20.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle fx:id="player4Sheep" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="20.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
             <Rectangle fx:id="player1Paddle" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="40.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
             <Rectangle fx:id="player2Paddle" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="40.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
             <Rectangle fx:id="player1Wall1" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
@@ -54,6 +58,10 @@
             <Rectangle fx:id="player1Wall15" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
             <Rectangle fx:id="player1Wall3" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
             <Rectangle fx:id="player1Wall16" arcHeight="5.0" arcWidth="5.0" fill="#22ff21" height="30.0" layoutY="768.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="player1Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
+            <Rectangle fx:id="player4Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
+            <Rectangle fx:id="player2Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
+            <Rectangle fx:id="player3Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
             <Rectangle fx:id="pauseBox" arcHeight="5.0" arcWidth="5.0" height="768.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="768.0" />
             <Text fx:id="pauseMessage1" fill="WHITE" layoutX="148.0" layoutY="339.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Paused" textAlignment="CENTER" wrappingWidth="472.0000031590462">
                <font>
@@ -65,10 +73,6 @@
                   <Font name="Evanescence Series B" size="48.0" />
                </font>
             </Text>
-            <Rectangle fx:id="player1Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
-            <Rectangle fx:id="player4Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
-            <Rectangle fx:id="player2Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
-            <Rectangle fx:id="player3Flag" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="738.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
             <Text fx:id="countIn" fill="WHITE" layoutX="258.0" layoutY="405.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="120" textAlignment="CENTER" wrappingWidth="247.00000315904617">
                <font>
                   <Font name="Evanescence Series B" size="96.0" />

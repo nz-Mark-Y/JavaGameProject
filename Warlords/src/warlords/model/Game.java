@@ -42,6 +42,7 @@ public class Game implements IGame {
 		
 		movePaddles();
 		computerMovePaddles(ballList.get(0));
+		sheepMove();
 		
 		int hitNum = checkHits();
 		if (hitNum > 0) {
@@ -72,6 +73,13 @@ public class Game implements IGame {
 				// Check if the ball is going to hit a warlord
 				if (checkWarlords(ball)) {
 					playerDeath.play();
+					ticksSinceLastHit = 0;
+					return i;
+				}
+				
+				// Check if the ball is going to hit a warlord
+				if (checkSheep(ball)) {
+					paddleBounce.play();
 					ticksSinceLastHit = 0;
 					return i;
 				}
@@ -125,42 +133,63 @@ public class Game implements IGame {
 		for (int i=0; i<playerList.size(); i++) {			
 			if (!playerList.get(i).isDead()) {
 				Paddle paddle = playerList.get(i).getPaddle();
-				int paddleX, paddleY;
-				for (int j=0; j<Paddle.length; j++) { // column by column
-					for (int k=0; k<Paddle.height; k++) { // row by row
-						if ((k == 0) || (k == Paddle.height - 1) || (j == 0) || (j == Paddle.length - 1)) {
-							paddleX = paddle.getXPos() + j;
-							paddleY = paddle.getYPos() + k;
-							if (coordInBallPath(ball, paddleX, paddleY)) { 
-								if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
-									ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
-									reverseVelocity(ball, 1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
-								} else if ((k == Paddle.height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
-									ball.setYPos(paddle.getYPos() + Paddle.height - (ball.getYPos() + ball.getYVelocity() - Paddle.height - paddle.getYPos()));
-									reverseVelocity(ball, 1);
-									ball.setXPos(ball.getXPos() + ball.getXVelocity());
-								} else if ((j == Paddle.length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
-									ball.setXPos(paddle.getXPos() + Paddle.length - (ball.getXPos() + ball.getXVelocity() - Paddle.length - paddle.getXPos()));
-									reverseVelocity(ball, 0);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
-									ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
-									reverseVelocity(ball, 0);
-									ball.setYPos(ball.getYPos() + ball.getYVelocity());
-								} else {
-								
-								}
-								return true;
-							} 
-						}							
-					}
+				if (checkPaddle(ball, paddle, Paddle.height, Paddle.length)) {
+					return true;
 				}
 			}
 		}
 		return false;
 	}
 
+	// Check for paddles, if we hit one then rebound 
+	private boolean checkSheep(Ball ball) {
+		for (int i=0; i<playerList.size(); i++) {			
+			if ((!playerList.get(i).isDead()) && (playerList.get(i).getClassNum() == 3)) {
+				Paddle paddle = playerList.get(i).getSheep();
+				if (checkPaddle(ball, paddle, 20, 20)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	// Helper function for checking paddles
+	private boolean checkPaddle(Ball ball, Paddle paddle, int height, int length) {
+		int paddleX, paddleY;
+		for (int j=0; j<length; j++) { // column by column
+			for (int k=0; k<height; k++) { // row by row
+				if ((k == 0) || (k == height - 1) || (j == 0) || (j == length - 1)) {
+					paddleX = paddle.getXPos() + j;
+					paddleY = paddle.getYPos() + k;
+					if (coordInBallPath(ball, paddleX, paddleY)) { 
+						if ((k == 0) && (ball.getYVelocity() > 0)) { // bottom side, reverse y
+							ball.setYPos(paddle.getYPos() - (ball.getYPos() + ball.getYVelocity() + Ball.height - paddle.getYPos()));
+							reverseVelocity(ball, 1);
+							ball.setXPos(ball.getXPos() + ball.getXVelocity()); 
+						} else if ((k == height - 1) && (ball.getYVelocity() < 0)) { // top side, reverse y
+							ball.setYPos(paddle.getYPos() + height - (ball.getYPos() + ball.getYVelocity() - height - paddle.getYPos()));
+							reverseVelocity(ball, 1);
+							ball.setXPos(ball.getXPos() + ball.getXVelocity());
+						} else if ((j == length - 1) && (ball.getXVelocity() < 0)) { // right side, reverse x
+							ball.setXPos(paddle.getXPos() + length - (ball.getXPos() + ball.getXVelocity() - length - paddle.getXPos()));
+							reverseVelocity(ball, 0);
+							ball.setYPos(ball.getYPos() + ball.getYVelocity());
+						} else if ((j == 0) && (ball.getXVelocity() > 0)){ // left side, reverse x
+							ball.setXPos(paddle.getXPos() - (ball.getXPos() + ball.getXVelocity() + Ball.length - paddle.getXPos()));
+							reverseVelocity(ball, 0);
+							ball.setYPos(ball.getYPos() + ball.getYVelocity());
+						} else {
+						
+						}
+						return true;
+					} 
+				}							
+			}
+		}
+		return false;
+	}
+	
 	// Check for walls, if we hit one then rebound and destroy the wall
 	private boolean checkWalls(Ball ball) {
 		for (int i=0; i<wallList.size(); i++) {
@@ -359,40 +388,66 @@ public class Game implements IGame {
 		return false;
 	}
 	
+	// Move the sheeps randomly
+	public void sheepMove() {
+		for (int i=0; i<playerList.size(); i++) {
+			if (playerList.get(i).getSheep() != null) {
+				double randNum = Math.random();
+				if (playerList.get(i).getSheepGoingLeft()) {
+					if (randNum > 0.05) {
+						curveLeft(playerList.get(i).getSheep(), i, (float) paddleSpeed / 3);
+						playerList.get(i).setSheepGoingLeft(true);
+					} else {
+						curveRight(playerList.get(i).getSheep(), i, (float) paddleSpeed / 3);
+						playerList.get(i).setSheepGoingLeft(false);
+					}
+				} else {
+					if (randNum > 0.95) {
+						curveLeft(playerList.get(i).getSheep(), i, (float) paddleSpeed / 3);
+						playerList.get(i).setSheepGoingLeft(true);
+					} else {
+						curveRight(playerList.get(i).getSheep(), i, (float) paddleSpeed / 3);
+						playerList.get(i).setSheepGoingLeft(false);
+					}
+				}			
+			}	
+		}
+	}
+	
 	// If the corresponding key is down, then call the curve function on that paddle
 	public void movePaddles() {
 		if ((keyList[0] == true) && (!playerList.get(2).isComputerControlled())) {
-			curveLeft(playerList.get(2).getPaddle(), 2);
+			curveLeft(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
 		} 
 		if ((keyList[1] == true) && (!playerList.get(2).isComputerControlled())) {
-			curveRight(playerList.get(2).getPaddle(), 2);
+			curveRight(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
 		}
 		if ((keyList[2] == true) && (!playerList.get(2).isComputerControlled())) {
 			useAbility(2); 
 		}
 		if ((keyList[4] == true) && (!playerList.get(0).isComputerControlled())) {
-			curveLeft(playerList.get(0).getPaddle(), 0);
+			curveLeft(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
 		} 
 		if ((keyList[5] == true) && (!playerList.get(0).isComputerControlled())) {
-			curveRight(playerList.get(0).getPaddle(), 0);
+			curveRight(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
 		}
 		if ((keyList[6] == true) && (!playerList.get(0).isComputerControlled())) {
 			useAbility(0);
 		}
 		if ((keyList[8] == true) && (!playerList.get(1).isComputerControlled())) {
-			curveLeft(playerList.get(1).getPaddle(), 1);
+			curveLeft(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
 		} 
 		if ((keyList[9] == true) && (!playerList.get(1).isComputerControlled())) {
-			curveRight(playerList.get(1).getPaddle(), 1);
+			curveRight(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
 		}
 		if ((keyList[10] == true) && (!playerList.get(1).isComputerControlled())) {
 			useAbility(1);
 		}
 		if ((keyList[12] == true) && (!playerList.get(3).isComputerControlled())) {
-			curveLeft(playerList.get(3).getPaddle(), 3);
+			curveLeft(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
 		} 
 		if ((keyList[13] == true) && (!playerList.get(3).isComputerControlled())) {
-			curveRight(playerList.get(3).getPaddle(), 3); 
+			curveRight(playerList.get(3).getPaddle(), 3, (float) paddleSpeed); 
 		}
 		if ((keyList[14] == true) && (!playerList.get(3).isComputerControlled())) {
 			useAbility(3);
@@ -400,28 +455,28 @@ public class Game implements IGame {
 	}
 	
 	// Move the paddle along its path to the left
-	public void curveLeft(Paddle paddle, int playerNum) {
+	public void curveLeft(Paddle paddle, int playerNum, float speed) {
 		if (playerNum == 1) {
 			if (paddle.getXPos() > 0) {
-				paddle.decrTheta((float) paddleSpeed);
+				paddle.decrTheta(speed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		} else if (playerNum == 2) {
 			if (paddle.getYPos() > 0) {
-				paddle.incrTheta((float) paddleSpeed);
+				paddle.incrTheta(speed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		} else if (playerNum == 0) {
 			if (paddle.getXPos() > 0) {
-				paddle.decrTheta((float) paddleSpeed);
+				paddle.decrTheta(speed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) ( 256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		} else if (playerNum == 3) {	
 			if (paddle.getYPos() < 768 - Paddle.length) {
-				paddle.incrTheta((float) paddleSpeed);
+				paddle.incrTheta(speed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			} 
@@ -432,28 +487,28 @@ public class Game implements IGame {
 	}
 	
 	// Move the paddle along its path to the right
-	public void curveRight(Paddle paddle, int playerNum) {
+	public void curveRight(Paddle paddle, int playerNum, float speed) {
 		if (playerNum == 1) {
 			if (paddle.getYPos() > 2) {
-				paddle.incrTheta((float) paddleSpeed);
+				paddle.incrTheta(speed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		} else if (playerNum == 2) {
 			if (paddle.getXPos() < 768 - Paddle.length) {
-				paddle.decrTheta((float) paddleSpeed);
+				paddle.decrTheta(speed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		} else if (playerNum == 0) {
 			if (paddle.getYPos() < 768 - Paddle.length) {
-				paddle.incrTheta((float) paddleSpeed);
+				paddle.incrTheta(speed);
 				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
 		} else if (playerNum == 3) {
 			if (paddle.getXPos() < 768 - Paddle.length) {
-				paddle.decrTheta((float) paddleSpeed);
+				paddle.decrTheta(speed);
 				paddle.setXPos(768 - Paddle.length - (int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
 				paddle.setYPos(768 - Paddle.height - (int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
 			}
@@ -502,22 +557,22 @@ public class Game implements IGame {
 			if (playerList.get(i).isComputerControlled()) {
 				if (Math.abs(ball.getXPos() - playerList.get(i).getPaddle().getXPos()) > Math.abs(ball.getYPos() - playerList.get(i).getPaddle().getYPos())) {
 					if ((ball.getXPos() + ball.getXVelocity()) > (playerList.get(i).getPaddle().getXPos() + Paddle.length / 2)) {
-						curveRight(playerList.get(i).getPaddle(), i);
+						curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
 					} else {
-						curveLeft(playerList.get(i).getPaddle(), i);
+						curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
 					}
 				} else {
 					if ((ball.getYPos() + ball.getYVelocity()) > (playerList.get(i).getPaddle().getYPos() + Paddle.height / 2)) {
 						if ((i==0) || (i==2)) {
-							curveRight(playerList.get(i).getPaddle(), i);
+							curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
 						} else {
-							curveLeft(playerList.get(i).getPaddle(), i);
+							curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
 						}		
 					} else {
 						if ((i==0) || (i==2)) {
-							curveLeft(playerList.get(i).getPaddle(), i);				
+							curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed);				
 						} else {
-							curveRight(playerList.get(i).getPaddle(), i);
+							curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
 						}
 					}
 				}

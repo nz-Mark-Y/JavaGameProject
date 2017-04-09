@@ -431,7 +431,7 @@ public class PlayerMenuViewController {
 		descriptions.add("france: \n To Be Implemented");
 		descriptions.add("USA: \n Shoots a single use bullet using your UP key \n Bullet will destroy a wall or warlord if it hits one, but does not bounce");
 		descriptions.add("Britain: \n To Be Implemented");
-		descriptions.add("New Zealand: \n To Be Implemented");
+		descriptions.add("New Zealand: \n You have an extra sheep paddle guarding your warlord \n It wanders randomly around the same path as your paddle");
 		descriptions.add("China: \n To Be Implemented");
 		descriptions.add("Australia: \n To Be Implemented");
 		descriptions.add("India: \n To Be Implemented");
