@@ -86,10 +86,6 @@ public class Warlord implements IWarlord {
 		dead = true;
 	}
 	
-	public void explodes() {
-		//explode plz
-	}
-	
 	public void wins() {
 		won = true;
 	}

@@ -265,7 +265,6 @@ public class Game implements IGame {
 		
 								}
 								player.dies();
-								player.explodes();
 								return true;
 							} 
 						}							

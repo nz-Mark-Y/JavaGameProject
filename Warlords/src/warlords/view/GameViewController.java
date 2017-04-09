@@ -343,7 +343,12 @@ public class GameViewController {
 			postGameTheme.play();
 		}
 
-		//Loop through the ball frames with delay (to be able to see)
+		ballAnimation();
+
+	}
+	
+	//Loop through the ball frames with delay (to be able to see)
+	private void ballAnimation(){
 		if(delayer == 5){
 			if (ball.getFill() == gameBall1Pattern) {
 				ball.setFill(gameBall2Pattern);
@@ -367,7 +372,6 @@ public class GameViewController {
 		} else {
 			delayer++;
 		}
-
 	}
 
 	public void pause() {
