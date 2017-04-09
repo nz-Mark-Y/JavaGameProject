@@ -54,6 +54,7 @@ public class GameViewController {
 
 	}
 
+	// Links the WarlordsController to the GameViewController. Acts as a constructor for the GameViewController
 	public void setWarlordsController(WarlordsController warlordsController, final Scene scene) {
 		this.warlordsController = warlordsController;
 		this.game = warlordsController.getGame();
@@ -65,7 +66,7 @@ public class GameViewController {
 		graphicsInit();
 		addViewsToModels();
 
-		// Initial ball velocity
+		// Initial ball velocity. X and Y velocities between 3 and 6, and -3 and -6, inclusive
 		int ballXVel = 0;
 		int ballYVel = 0;
 		onTick();
@@ -76,13 +77,13 @@ public class GameViewController {
 		game.getBall().setXVelocity(ballXVel);
 		game.getBall().setYVelocity(ballYVel);
 
-		// Fonts
+		// Fonts for text
 		setFonts();
 
-		// Timers
+		// Count in the three seconds
 		countInTime();
 
-		// Key handers for keys being pressed and released
+		// Key handers for keys being pressed and released. Sets booleans in the game model class to true or false depending on if the key is currently up or down
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -216,8 +217,8 @@ public class GameViewController {
 		thread.start();
 	}
 
+	// Count in the three seconds. Set the display to show the count in numbers
 	public void countInTime() {
-		// Count in the three seconds
 		countingIn = true;
 		countIn.setText("3");
 		countdownWait.play();
@@ -238,15 +239,16 @@ public class GameViewController {
 					countIn.setVisible(false);
 					countingIn = false;
 					paused = false;
-					createTimers();
-					countInTimer.cancel();
+					createTimers(); // Create the animation and timing timers
+					countInTimer.cancel(); // End the count in timer
 				}
 			}
 		}, 1000, 1000);
 	}
 	
+	// Create the animation timer and the timing timer
 	private void createTimers() {
-		// Game timer for ball and paddles to move
+		// Animation timer for ball and paddles to move
 		animationTimer = new Timer();
 		animationTimer.scheduleAtFixedRate(new TimerTask () {
 			@Override
@@ -257,7 +259,7 @@ public class GameViewController {
 						public void run() {
 							if (!game.isFinished()) {
 								onTick();
-							} else {
+							} else { // If the game is over
 								multiplayerTheme.stop();
 								if (game.getWinner() == -1) {
 									gameOver2.setText("Game is a Tie!");
@@ -268,7 +270,7 @@ public class GameViewController {
 								gameOver1.setVisible(true);
 								gameOver2.setVisible(true);
 								gameOver3.setVisible(true);
-								animationTimer.cancel();
+								animationTimer.cancel(); // Stop the timer
 							}
 						}
 					});
@@ -276,104 +278,63 @@ public class GameViewController {
 					System.out.println(ex.getMessage());
 				}
 			}
-		}, 10, 10);		
+		}, 10, 10);	// Tick every 10ms
 
 		// Timer to display time remaining
 		timeLeftTimer = new Timer();
 		timeLeftTimer.scheduleAtFixedRate(new TimerTask () {
 			@Override
 			public void run() {
-				timeLeft.setText(Integer.toString(game.getTimeRemaining()));
+				timeLeft.setText(Integer.toString(game.getTimeRemaining())); // Display the time remaining
 			}
-		}, 500, 500);		
-	}
-	
-	private void setFonts() {
-		Font textFont = null;
-		Font smallTextFont = null;
-		try {
-			textFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
-			smallTextFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 48);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		timeLeft.setFont(textFont);
-		countIn.setFont(textFont);
-		pauseMessage1.setFont(textFont);
-		pauseMessage2.setFont(smallTextFont);
-		gameOver1.setFont(textFont);
-		gameOver2.setFont(textFont);
-		gameOver3.setFont(smallTextFont);
-		pauseMessage1.setVisible(false);
-		pauseMessage2.setVisible(false);
-		gameOver1.setVisible(false);
-		gameOver2.setVisible(false);
-		gameOver3.setVisible(false);
-		pauseBox.setVisible(false);
+		}, 500, 500); // Tick every 500ms
 	}
 
-	// Do the logic, then rerender all the objects.
+	// Do the logic, then move all the objects.
 	private void onTick() {
-		game.tick();
-		for (int i=0; i<game.getBallList().size(); i++) {
+		game.tick(); // Do logic
+		for (int i=0; i<game.getBallList().size(); i++) { // Move balls
 			game.getBallList().get(i).getBallView().setCenterX(game.getBallList().get(i).getXPos() + Ball.length / 2);
 			game.getBallList().get(i).getBallView().setCenterY(-(game.getBallList().get(i).getYPos() + Ball.height / 2));
 		}	
-		for (int i=0; i<game.getPlayerList().size(); i++) {
+		for (int i=0; i<game.getPlayerList().size(); i++) { // Move paddles
 			game.getPlayerList().get(i).getWarlordView().setX(game.getPlayerList().get(i).getXPos());
 			game.getPlayerList().get(i).getWarlordView().setY(-(game.getPlayerList().get(i).getYPos() + Warlord.height));
 			game.getPlayerList().get(i).getPaddle().getPaddleView().setX(game.getPlayerList().get(i).getPaddle().getXPos());
 			game.getPlayerList().get(i).getPaddle().getPaddleView().setY(-(game.getPlayerList().get(i).getPaddle().getYPos()+ Paddle.height));
-			if (game.getPlayerList().get(i).getSheep() != null) {
+			if (game.getPlayerList().get(i).getSheep() != null) { // Move New Zealand sheep
 				game.getPlayerList().get(i).getSheep().getPaddleView().setX(game.getPlayerList().get(i).getSheep().getXPos());
 				game.getPlayerList().get(i).getSheep().getPaddleView().setY(-(game.getPlayerList().get(i).getSheep().getYPos() + 20));
 			}
-			if (game.getPlayerList().get(i).getClassNum() == 2) {
+			if (game.getPlayerList().get(i).getClassNum() == 2) { // Britain immunity
 				if (game.getPlayerList().get(i).getImmune() == 1) {
-					Rectangle rect = new Rectangle();
-					rect.setFill(flag2Pattern);
-					rect.setOpacity(0.5);
-					rect.setHeight(60);
-					rect.setWidth(60);
-					rect.setX(game.getPlayerList().get(i).getWarlordView().getX());
-					rect.setY(game.getPlayerList().get(i).getWarlordView().getY());
-					rect.setLayoutX(0);
-					rect.setLayoutY(768);
-					rect.setUserData("immune");
-					pane.getChildren().add(rect);
-					rect.setVisible(true);
+					setImmune(i);
 				} 
 				if (game.getPlayerList().get(i).getImmune() == -2) {
-					for (int j=0; j<pane.getChildren().size(); j++) {
-						if (pane.getChildren().get(j).getUserData() == "immune") {
-							pane.getChildren().get(j).setVisible(false);
-						}
-					}	
+					removeImmune(i);	
 				}
 			}
 		}
-		for (int i=0;i<game.getWallList().size(); i++) {
+		for (int i=0;i<game.getWallList().size(); i++) { // Render walls in their correct places
 			game.getWallList().get(i).getWallView().setX(game.getWallList().get(i).getXPos());
 			game.getWallList().get(i).getWallView().setY(-(game.getWallList().get(i).getYPos() + Wall.height));
 		}
 
-		//Play multiplayer theme
+		// Play multiplayer theme
 		if(!multiplayerTheme.isPlaying() && !paused){
 			multiplayerTheme.play();
 		}
 		
-		//Play post game music if game is finished but stop it if exited
+		// Play post game music if game is finished but stop it if exited
 		if(game.isFinished() && !postGameTheme.isPlaying()){
 			postGameTheme.play();
 		}
-
-		ballAnimation();
-
+		ballAnimation(); // Loop through the ball animation frames
 	}
 	
-	//Loop through the ball frames with delay (to be able to see)
-	private void ballAnimation(){
-		if(delayer == 5){
+	// Loop through the ball frames with delay (to be able to see)
+	private void ballAnimation() {
+		if (delayer == 5) {
 			if (ball.getFill() == gameBall1Pattern) {
 				ball.setFill(gameBall2Pattern);
 				delayer = 0;
@@ -398,9 +359,10 @@ public class GameViewController {
 		}
 	}
 
+	// If the user hits the pause key
 	public void pause() {
-		if (countingIn == false) {
-			if (!paused) {
+		if (countingIn == false) { // Check if we are not counting in to the game
+			if (!paused) { // If not already paused, stop the timers and music, show messages
 				multiplayerTheme.stop();
 				paused = true;
 				animationTimer.cancel();
@@ -408,7 +370,7 @@ public class GameViewController {
 				pauseMessage1.setVisible(true);
 				pauseMessage2.setVisible(true);
 				pauseBox.setVisible(true);
-			} else {
+			} else { // Unpause, start the timers and music, hide messages
 				multiplayerTheme.stop();
 				paused = false;
 				createTimers();
@@ -418,18 +380,20 @@ public class GameViewController {
 			}
 		}
 	}
-
+	
+	// If the user hits the exit key
 	public void exit() {
-		multiplayerTheme.stop();
+		multiplayerTheme.stop(); // Stop the music
 		postGameTheme.stop();
-		animationTimer.cancel();
+		animationTimer.cancel(); // Stop the timers
 		timeLeftTimer.cancel();
-		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
-		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1);
-		game.finish();
-		warlordsController.showMainMenu();
+		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0); // Remove the key handlers
+		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1); // Remove the key handlers
+		game.finish(); // End the game
+		warlordsController.showMainMenu(); // Return to main menu
 	}
 
+	// Creating bullets for USA ability
 	public void createBulletView(Ball bullet) {
 		Circle circle = new Circle();
 		circle.setFill(ball.getFill());
@@ -442,23 +406,103 @@ public class GameViewController {
 		bullet.setBallView(circle);
 	}
 
+	// Removing bullets for USA ability
 	public void delBall(Ball bullet) {
 		bullet.getBallView().setVisible(false);
 	}
 
+	// Setting the warlord as immune, displaying a shield around it, for Britain ability
+	private void setImmune(int i) {
+		Rectangle rect = new Rectangle(); // Create a rectang;e
+		rect.setFill(flag2Pattern);
+		rect.setOpacity(0.5);
+		rect.setHeight(60);
+		rect.setWidth(60);
+		rect.setX(game.getPlayerList().get(i).getWarlordView().getX());
+		rect.setY(game.getPlayerList().get(i).getWarlordView().getY());
+		rect.setLayoutX(0);
+		rect.setLayoutY(768);
+		if (i == 0) { // Manually set userData to identify rectangles
+			rect.setUserData("0");
+		}
+		if (i == 1) {
+			rect.setUserData("1");
+		}
+		if (i == 2) {
+			rect.setUserData("2");
+		}
+		if (i == 3) {
+			rect.setUserData("3");
+		}
+		pane.getChildren().add(rect); // Show it
+		rect.setVisible(true);
+	}
+	
+	// Removing the shield and immunity from a warlord for Britain ability
+	private void removeImmune(int i) {
+		for (int j=0; j<pane.getChildren().size(); j++) {
+			if (i == 0) {
+				if (pane.getChildren().get(j).getUserData() == "0") { // Manually look for the right rectangle and hide it
+					pane.getChildren().get(j).setVisible(false);
+				}
+			}
+			if (i == 1) {
+				if (pane.getChildren().get(j).getUserData() == "1") {
+					pane.getChildren().get(j).setVisible(false);
+				}
+			}
+			if (i == 2) {
+				if (pane.getChildren().get(j).getUserData() == "2") {
+					pane.getChildren().get(j).setVisible(false);
+				}
+			}
+			if (i == 3) {
+				if (pane.getChildren().get(j).getUserData() == "3") {
+					pane.getChildren().get(j).setVisible(false);
+				}
+			}
+		}
+	}
+	
+	// Sets the fonts for all the text on the screen
+	private void setFonts() {
+		Font textFont = null;
+		Font smallTextFont = null;
+		try {
+			textFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 96);
+			smallTextFont = Font.loadFont(new FileInputStream(new File("Fonts/evanescent_p.ttf")), 48);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		timeLeft.setFont(textFont);
+		countIn.setFont(textFont);
+		pauseMessage1.setFont(textFont);
+		pauseMessage2.setFont(smallTextFont);
+		gameOver1.setFont(textFont);
+		gameOver2.setFont(textFont);
+		gameOver3.setFont(smallTextFont);
+		pauseMessage1.setVisible(false); // Hides the text so that its not shown until it needs to be
+		pauseMessage2.setVisible(false);
+		gameOver1.setVisible(false);
+		gameOver2.setVisible(false);
+		gameOver3.setVisible(false);
+		pauseBox.setVisible(false);
+	}
+	
+	// Links the views created here to the models which the logic is implemented on. Allows for rotation and dynamic showing/hiding
 	public void addViewsToModels() {
 		game.getBall().setBallView(ball);
-		game.getPlayerList().get(0).setWarlordView(player1Warlord);
+		game.getPlayerList().get(0).setWarlordView(player1Warlord); // The warlords
 		game.getPlayerList().get(1).setWarlordView(player2Warlord);
 		game.getPlayerList().get(2).setWarlordView(player3Warlord);
 		game.getPlayerList().get(3).setWarlordView(player4Warlord);
 		
-		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle, 0);
+		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle, 0); // The paddles
 		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle, 1);
 		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle, 2);
 		game.getPlayerList().get(3).getPaddle().setPaddleView(player4Paddle, 3);
 
-		if (game.getPlayerList().get(0).getSheep() != null) {
+		if (game.getPlayerList().get(0).getSheep() != null) { // The sheep for New Zealand ability
 			game.getPlayerList().get(0).getSheep().setPaddleView(player1Sheep, 0);
 		} else {
 			player1Sheep.setVisible(false);
@@ -479,7 +523,7 @@ public class GameViewController {
 			player4Sheep.setVisible(false);
 		}
 		
-		game.getWallList().get(0).setWallView(player1Wall1);
+		game.getWallList().get(0).setWallView(player1Wall1); // The walls
 		game.getWallList().get(1).setWallView(player1Wall2);
 		game.getWallList().get(2).setWallView(player1Wall3);
 		game.getWallList().get(3).setWallView(player1Wall4);
@@ -501,8 +545,9 @@ public class GameViewController {
 		game.getWallList().get(19).setWallView(player4Wall5);
 	}
 
+	// Apply the png sprites to the game elements
 	private void graphicsInit() {
-		//Applying patterns to crates
+		// Applying patterns to crates
 		player1Wall1.setFill(player1CratePattern);
 		player1Wall2.setFill(player1CratePattern);
 		player1Wall3.setFill(player1CratePattern);
@@ -527,7 +572,7 @@ public class GameViewController {
 		player4Wall4.setFill(player4CratePattern);
 		player4Wall5.setFill(player4CratePattern);
 
-		//Applying patterns to paddles
+		// Applying patterns to paddles
 		player1Paddle.setStrokeWidth(0);
 		player1Paddle.setFill(player1ShipPattern);
 
@@ -553,7 +598,7 @@ public class GameViewController {
 		player4Sheep.setStrokeWidth(0);
 		player4Sheep.setFill(sheepPattern);
 
-		//Applying patterns to warlords
+		// Applying patterns to warlords
 		player1Warlord.setStrokeWidth(0);
 		player1Warlord.setFill(player1MothershipPattern);
 
@@ -566,11 +611,11 @@ public class GameViewController {
 		player4Warlord.setStrokeWidth(0);
 		player4Warlord.setFill(player4MothershipPattern);
 
-		//Applying pattern to ball
+		// Applying pattern to ball
 		ball.setStrokeWidth(0);
 		ball.setFill(gameBall1Pattern);
 		
-		//Apply flag pattern
+		// Apply flag patterns
 		flags.add(flag0Pattern);
 		flags.add(flag1Pattern);
 		flags.add(flag2Pattern);
@@ -587,11 +632,11 @@ public class GameViewController {
 		player4Flag.setFill(flags.get(game.getPlayerList().get(3).getClassNum()));
 	}
 
-	//Ball
+	// Ball
 	@FXML
 	private Circle ball;
 
-	//Paddles
+	// Paddles
 	@FXML 
 	private Rectangle player1Paddle;
 	@FXML 
@@ -601,7 +646,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player4Paddle;
 
-	//Warlords
+	// Warlords
 	@FXML 
 	private Rectangle player1Warlord;
 	@FXML 
@@ -611,7 +656,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player4Warlord;
 	
-	//Player 1 Walls
+	// Player 1 Walls
 	@FXML 
 	private Rectangle player1Wall1;
 	@FXML 
@@ -623,7 +668,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player1Wall5;
 	
-	//Player 2 Walls
+	// Player 2 Walls
 	@FXML 
 	private Rectangle player2Wall1;
 	@FXML 
@@ -635,7 +680,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player2Wall5;
 	
-	//Player 3 Walls
+	// Player 3 Walls
 	@FXML 
 	private Rectangle player3Wall1;
 	@FXML 
@@ -647,7 +692,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player3Wall5;
 	
-	//Player 4 Walls
+	// Player 4 Walls
 	@FXML 
 	private Rectangle player4Wall1;
 	@FXML 
@@ -659,7 +704,7 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player4Wall5;
 	
-	//Flags
+	// Flags
 	@FXML 
 	private Rectangle player1Flag;
 	@FXML 
@@ -669,15 +714,13 @@ public class GameViewController {
 	@FXML 
 	private Rectangle player4Flag;
 	
+	// Sheep
 	@FXML 
 	private Rectangle player1Sheep;
-
 	@FXML 
 	private Rectangle player2Sheep;
-
 	@FXML 
 	private Rectangle player3Sheep;
-
 	@FXML 
 	private Rectangle player4Sheep;
 
@@ -709,97 +752,73 @@ public class GameViewController {
 	@FXML 
 	private Rectangle pauseBox;
 
-	//Patterns for the walls
+	// Patterns for the walls
 	private Image player1Crate = new Image("file:images/player1Crate.png");
 	ImagePattern player1CratePattern = new ImagePattern(player1Crate);
-
 	private Image player2Crate = new Image("file:images/player2Crate.png");
 	ImagePattern player2CratePattern = new ImagePattern(player2Crate);
-
 	private Image player3Crate = new Image("file:images/player3Crate.png");
 	ImagePattern player3CratePattern = new ImagePattern(player3Crate);
-
 	private Image player4Crate = new Image("file:images/player4Crate.png");
 	ImagePattern player4CratePattern = new ImagePattern(player4Crate);
 
-	//Patterns for the paddles
+	// Patterns for the paddles
 	private Image player1Ship = new Image("file:images/player1Ship.png");
 	ImagePattern player1ShipPattern = new ImagePattern(player1Ship);
-
 	private Image player2Ship = new Image("file:images/player2Ship.png");
 	ImagePattern player2ShipPattern = new ImagePattern(player2Ship);
-
 	private Image player3Ship = new Image("file:images/player3Ship.png");
 	ImagePattern player3ShipPattern = new ImagePattern(player3Ship);
-
 	private Image player4Ship = new Image("file:images/player4Ship.png");
 	ImagePattern player4ShipPattern = new ImagePattern(player4Ship);
 	
-	// Creating patterns for sheep
+	// Patterns for sheep
 	private Image sheepImage = new Image("file:images/sheep.png");
 	ImagePattern sheepPattern = new ImagePattern(sheepImage);
 
-	//Patterns for the warlords
+	// Patterns for the warlords
 	private Image player1Mothership = new Image("file:images/player1Mothership.png");
 	ImagePattern player1MothershipPattern = new ImagePattern(player1Mothership);
-
 	private Image player2Mothership = new Image("file:images/player2Mothership.png");
 	ImagePattern player2MothershipPattern = new ImagePattern(player2Mothership);
-
 	private Image player3Mothership = new Image("file:images/player3Mothership.png");
 	ImagePattern player3MothershipPattern = new ImagePattern(player3Mothership);
-
 	private Image player4Mothership = new Image("file:images/player4Mothership.png");
 	ImagePattern player4MothershipPattern = new ImagePattern(player4Mothership);
 
-	//Patterns for the ball
+	// Patterns for the ball
 	private Image gameBall1 = new Image("file:images/ball1.png");
 	ImagePattern gameBall1Pattern = new ImagePattern(gameBall1);
-
 	private Image gameBall2 = new Image("file:images/ball2.png");
 	ImagePattern gameBall2Pattern = new ImagePattern(gameBall2);
-
 	private Image gameBall3 = new Image("file:images/ball3.png");
 	ImagePattern gameBall3Pattern = new ImagePattern(gameBall3);
-
 	private Image gameBall4 = new Image("file:images/ball4.png");
 	ImagePattern gameBall4Pattern = new ImagePattern(gameBall4);
-
 	private Image gameBall5 = new Image("file:images/ball5.png");
 	ImagePattern gameBall5Pattern = new ImagePattern(gameBall5);
-
 	private Image gameBall6 = new Image("file:images/ball6.png");
 	ImagePattern gameBall6Pattern = new ImagePattern(gameBall6);
 	
-	// Creating patterns for the flags
+	// Patterns for the flags
 	private Image flag0Image = new Image("file:images/fr.png");
 	ImagePattern flag0Pattern = new ImagePattern(flag0Image);
-
 	private Image flag1Image = new Image("file:images/us.png");
 	ImagePattern flag1Pattern = new ImagePattern(flag1Image);
-
 	private Image flag2Image = new Image("file:images/gb.png");
 	ImagePattern flag2Pattern = new ImagePattern(flag2Image);
-
 	private Image flag3Image = new Image("file:images/nz.png");
 	ImagePattern flag3Pattern = new ImagePattern(flag3Image);
-
 	private Image flag4Image = new Image("file:images/cn.png");
 	ImagePattern flag4Pattern = new ImagePattern(flag4Image);
-
 	private Image flag5Image = new Image("file:images/au.png");
 	ImagePattern flag5Pattern = new ImagePattern(flag5Image);
-
 	private Image flag6Image = new Image("file:images/in.png");
 	ImagePattern flag6Pattern = new ImagePattern(flag6Image);
-
 	private Image flag7Image = new Image("file:images/ru.png");
 	ImagePattern flag7Pattern = new ImagePattern(flag7Image);
-
 	private Image flag8Image = new Image("file:images/eg.png");
 	ImagePattern flag8Pattern = new ImagePattern(flag8Image);
-
 	private Image flag9Image = new Image("file:images/br.png");
 	ImagePattern flag9Pattern = new ImagePattern(flag9Image);
-
 }

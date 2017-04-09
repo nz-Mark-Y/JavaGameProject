@@ -1,6 +1,5 @@
 package warlords;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,20 +40,21 @@ public class WarlordsController extends Application {
 		
 	}
 	
-	// Set up the objects in a new game
+	// Set up the objects in a new game. Create a game object with the correct parameters
 	public void createNewGame(int oneSelects, boolean oneIsAI, int twoSelects, boolean twoIsAI, int threeSelects, boolean threeIsAI, int fourSelects, boolean fourIsAI) {
-		Ball ball = new Ball(350, 350);
-		Warlord player1 = new Warlord(new Paddle(181, 547), 40, 678, oneIsAI, oneSelects);	
+		Ball ball = new Ball(350, 350); // Ball
+		
+		Warlord player1 = new Warlord(new Paddle(181, 547), 40, 678, oneIsAI, oneSelects); // Players
 		Warlord player2 = new Warlord(new Paddle(181, 181), 40, 40, twoIsAI, twoSelects);
-		Warlord player3 = new Warlord(new Paddle(547, 181), 678, 40, threeIsAI, threeSelects);
-		Warlord player4 = new Warlord(new Paddle(547, 547), 678, 678, fourIsAI, fourSelects);
-
+		Warlord player3 = new Warlord(new Paddle(547, 181), 678, 40, threeIsAI, threeSelects); 
+		Warlord player4 = new Warlord(new Paddle(547, 547), 678, 678, fourIsAI, fourSelects); 
 		ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 		playerList.add(player1);
 		playerList.add(player2);
 		playerList.add(player3);
 		playerList.add(player4);
-		Wall wall11 = new Wall(0, 563, 1);
+		
+		Wall wall11 = new Wall(0, 563, 1); // Walls
 		Wall wall12 = new Wall(70, 563, 1);
 		Wall wall13 = new Wall(140, 598, 1);
 		Wall wall14 = new Wall(175, 668, 1);
@@ -95,9 +95,11 @@ public class WarlordsController extends Application {
 		wallList.add(wall43);
 		wallList.add(wall44);
 		wallList.add(wall45);
-		game = new Game(ball, 763, 763, playerList, wallList);		
+		
+		game = new Game(ball, 763, 763, playerList, wallList);	// Create the game	
 	}
 	
+	// On start, create the root layout then show the main menu
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -129,27 +131,27 @@ public class WarlordsController extends Application {
 	
 	// Display the game view, and the two side windows 
 	public void showGameView() {
-		if (game == null) {
+		if (game == null) { // Default game, useful when testing
 			createNewGame(0, true, 0, true, 2, false, 0 ,true);
 		}
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("view/GameView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/GameView.fxml")); // The game view
 			AnchorPane gameView = (AnchorPane) loader.load();
 
 			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(WarlordsController.class.getResource("view/RightSideView.fxml"));
+			loader2.setLocation(WarlordsController.class.getResource("view/RightSideView.fxml")); // Grey side view
 			AnchorPane rightSideView = (AnchorPane) loader2.load();
 
 			FXMLLoader loader3 = new FXMLLoader();
-			loader3.setLocation(WarlordsController.class.getResource("view/LeftSideView.fxml"));
+			loader3.setLocation(WarlordsController.class.getResource("view/LeftSideView.fxml")); // Grey side view
 			AnchorPane leftSideView = (AnchorPane) loader3.load();
 
 			rootLayout.setCenter(gameView);
 			rootLayout.setRight(rightSideView);
 			rootLayout.setLeft(leftSideView);
 
-			GameViewController controller = loader.getController();
+			GameViewController controller = loader.getController(); // Link controllers
 			controller.setWarlordsController(this, scene);
 
 			RightSideViewController controller2 = loader2.getController();
@@ -174,22 +176,22 @@ public class WarlordsController extends Application {
 		try {
 			game = null;
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("view/MainMenuView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/MainMenuView.fxml")); // The main menu
 			AnchorPane menuView = (AnchorPane) loader.load();	
 			
 			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(WarlordsController.class.getResource("view/BlackSideView.fxml"));
+			loader2.setLocation(WarlordsController.class.getResource("view/BlackSideView.fxml")); // Black side view
 			AnchorPane leftSideView = (AnchorPane) loader2.load();
 			
 			FXMLLoader loader3 = new FXMLLoader();
-			loader3.setLocation(WarlordsController.class.getResource("view/BlackSideView.fxml"));
+			loader3.setLocation(WarlordsController.class.getResource("view/BlackSideView.fxml")); // Black side view
 			AnchorPane rightSideView = (AnchorPane) loader3.load();
 			
 			rootLayout.setCenter(menuView);
 			rootLayout.setLeft(leftSideView);
 			rootLayout.setRight(rightSideView);
 			
-			MainMenuViewController controller = loader.getController();
+			MainMenuViewController controller = loader.getController(); // Link controllers
 			controller.setWarlordsController(this, scene);
 			
 			//Play the main theme once
@@ -198,7 +200,6 @@ public class WarlordsController extends Application {
 			} else {
 				menuSelection.play();
 			}
-			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -208,12 +209,12 @@ public class WarlordsController extends Application {
 	public void showCampaignMenuView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("view/CampaignMenuView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/CampaignMenuView.fxml")); // The campaign meny
 			AnchorPane campaignMenuView = (AnchorPane) loader.load();	
 			
 			rootLayout.setCenter(campaignMenuView);
 			
-			CampaignMenuViewController controller = loader.getController();
+			CampaignMenuViewController controller = loader.getController(); // Link controllers
 			controller.setWarlordsController(this, scene);
 			
 			menuSelection.play();
@@ -226,12 +227,12 @@ public class WarlordsController extends Application {
 	public void showMultiplayerMenuView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("view/MultiplayerMenuView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/MultiplayerMenuView.fxml")); // The multiplayer window
 			AnchorPane multiplayerMenuView = (AnchorPane) loader.load();	
 				
 			rootLayout.setCenter(multiplayerMenuView);
 				
-			MultiplayerMenuViewController controller = loader.getController();
+			MultiplayerMenuViewController controller = loader.getController(); // Link controllers
 			controller.setWarlordsController(this, scene);
 			
 			menuSelection.play();
@@ -244,12 +245,12 @@ public class WarlordsController extends Application {
 	public void showOptionsView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("view/OptionsView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/OptionsView.fxml")); // The options page
 			AnchorPane optionsView = (AnchorPane) loader.load();	
 					
 			rootLayout.setCenter(optionsView);
 					
-			OptionsViewController controller = loader.getController();
+			OptionsViewController controller = loader.getController(); // Link controllers
 			controller.setWarlordsController(this, scene);
 			
 			menuSelection.play();
@@ -262,12 +263,12 @@ public class WarlordsController extends Application {
 	public void showAboutView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(WarlordsController.class.getResource("view/AboutView.fxml"));
+			loader.setLocation(WarlordsController.class.getResource("view/AboutView.fxml")); // The about page
 			AnchorPane aboutView = (AnchorPane) loader.load();	
 						
 			rootLayout.setCenter(aboutView);
 						
-			AboutViewController controller = loader.getController();
+			AboutViewController controller = loader.getController(); // Link controllers
 			controller.setWarlordsController(this, scene);
 			
 			menuSelection.play();
@@ -280,12 +281,12 @@ public class WarlordsController extends Application {
 		public void showPlayerMenuView() {
 			try {
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(WarlordsController.class.getResource("view/PlayerMenuView.fxml"));
+				loader.setLocation(WarlordsController.class.getResource("view/PlayerMenuView.fxml")); // The multiplayer player select screen
 				AnchorPane playerMenuView = (AnchorPane) loader.load();	
 							
 				rootLayout.setCenter(playerMenuView);
 							
-				PlayerMenuViewController controller = loader.getController();
+				PlayerMenuViewController controller = loader.getController(); // Link controllers
 				controller.setWarlordsController(this, scene);
 				
 				menuSelection.play();
@@ -298,6 +299,7 @@ public class WarlordsController extends Application {
 		return primaryStage;
 	}	
 
+	// Return the current game
 	public Game getGame() {
 		return game;
 	}
