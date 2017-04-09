@@ -3,6 +3,7 @@ package warlords.view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,6 +33,7 @@ public class GameViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
+	private ArrayList<ImagePattern> flags = new ArrayList<ImagePattern>();
 	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.wav").toURI().toString());
 	private AudioClip countdownWait = new AudioClip(new File("sounds/countdownWait.wav").toURI().toString());
 	private AudioClip countdownReady = new AudioClip(new File("sounds/countdownReady.wav").toURI().toString());
@@ -496,10 +498,20 @@ public class GameViewController {
 		ball.setFill(gameBall1Pattern);
 		
 		//Apply flag pattern
-		player1Flag.setFill(null);	//NEED TO ACCESS WHICH COUNTRY WAS SELECTED IN THE MENU SELECTION
-		player2Flag.setFill(null);
-		player3Flag.setFill(null);
-		player4Flag.setFill(null);
+		flags.add(flag0Pattern);
+		flags.add(flag1Pattern);
+		flags.add(flag2Pattern);
+		flags.add(flag3Pattern);
+		flags.add(flag4Pattern);
+		flags.add(flag5Pattern);
+		flags.add(flag6Pattern);
+		flags.add(flag7Pattern);
+		flags.add(flag8Pattern);
+		flags.add(flag9Pattern);
+		player1Flag.setFill(flags.get(game.getPlayerList().get(0).getClassNum()));	
+		player2Flag.setFill(flags.get(game.getPlayerList().get(1).getClassNum()));
+		player3Flag.setFill(flags.get(game.getPlayerList().get(2).getClassNum()));
+		player4Flag.setFill(flags.get(game.getPlayerList().get(3).getClassNum()));
 	}
 
 	@FXML
@@ -682,5 +694,36 @@ public class GameViewController {
 
 	private Image gameBall6 = new Image("file:images/ball6.png");
 	ImagePattern gameBall6Pattern = new ImagePattern(gameBall6);
+	
+	// Creating patterns for the flags
+	private Image flag0Image = new Image("file:images/fr.png");
+	ImagePattern flag0Pattern = new ImagePattern(flag0Image);
+
+	private Image flag1Image = new Image("file:images/us.png");
+	ImagePattern flag1Pattern = new ImagePattern(flag1Image);
+
+	private Image flag2Image = new Image("file:images/gb.png");
+	ImagePattern flag2Pattern = new ImagePattern(flag2Image);
+
+	private Image flag3Image = new Image("file:images/nz.png");
+	ImagePattern flag3Pattern = new ImagePattern(flag3Image);
+
+	private Image flag4Image = new Image("file:images/cn.png");
+	ImagePattern flag4Pattern = new ImagePattern(flag4Image);
+
+	private Image flag5Image = new Image("file:images/au.png");
+	ImagePattern flag5Pattern = new ImagePattern(flag5Image);
+
+	private Image flag6Image = new Image("file:images/in.png");
+	ImagePattern flag6Pattern = new ImagePattern(flag6Image);
+
+	private Image flag7Image = new Image("file:images/ru.png");
+	ImagePattern flag7Pattern = new ImagePattern(flag7Image);
+
+	private Image flag8Image = new Image("file:images/eg.png");
+	ImagePattern flag8Pattern = new ImagePattern(flag8Image);
+
+	private Image flag9Image = new Image("file:images/br.png");
+	ImagePattern flag9Pattern = new ImagePattern(flag9Image);
 
 }
