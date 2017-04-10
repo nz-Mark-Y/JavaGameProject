@@ -350,8 +350,8 @@ public class Game implements IGame {
 	// Check if a coordinate on the ball will hit a coordinate on another object. Used for collision detection
 	private boolean coordInBallPath(Ball ball, int xCoord, int yCoord) {
 		int x0, x1, y0, y1;
-		for (int z=0; z<Ball.length; z=z+4) {
-			for (int y=0; y<Ball.height; y=y+4) { // Check every 4th coordinate on the ball (stops lag)
+		for (int z=0; z<Ball.length; z=z+3) {
+			for (int y=0; y<Ball.height; y=y+3) { // Check every 3rd coordinate on the ball (stops lag)
 				x0 = ball.getXPos() + z;
 				x1 = ball.getXPos() + ball.getXVelocity() + z;
 				y0 = ball.getYPos() + y;
@@ -581,6 +581,46 @@ public class Game implements IGame {
 		}
 	}
 	
+	// Adds two extra walls to a player of class China
+	public void addChinaWalls() {
+		for (int i=0; i<playerList.size(); i++) {
+			if (playerList.get(i).getClassNum() == 4) { // If the player is China
+				if (i == 0) { // Player 1
+					Wall newWall1 = new Wall(155, 463, 0);
+					Wall newWall2 = new Wall(275, 573, 0);
+					wallList.add(newWall1);
+					wallList.add(newWall2);
+					gameViewController.addWall(newWall1, i);
+					gameViewController.addWall(newWall2, i);
+				}
+				if (i == 1) { // Player 2
+					Wall newWall1 = new Wall(155, 275, 0);
+					Wall newWall2 = new Wall(275, 155, 0);
+					wallList.add(newWall1);
+					wallList.add(newWall2);
+					gameViewController.addWall(newWall1, i);
+					gameViewController.addWall(newWall2, i);
+				}
+				if (i == 2) { // Player 3
+					Wall newWall1 = new Wall(583, 275, 0);
+					Wall newWall2 = new Wall(453, 155, 0);
+					wallList.add(newWall1);
+					wallList.add(newWall2);
+					gameViewController.addWall(newWall1, i);
+					gameViewController.addWall(newWall2, i);
+				}
+				if (i == 3) { // Player 4
+					Wall newWall1 = new Wall(583, 463, 0);
+					Wall newWall2 = new Wall(463, 583, 0);
+					wallList.add(newWall1);
+					wallList.add(newWall2);
+					gameViewController.addWall(newWall1, i);
+					gameViewController.addWall(newWall2, i);
+				}
+			}
+		}
+	}
+	
 	// AI set their paddle coordinates based on where the ball is
 	public void computerMovePaddles(Ball ball) {
 		for (int i=0; i<playerList.size(); i++) {
@@ -613,6 +653,7 @@ public class Game implements IGame {
 	// Links GameViewController to WarlordsController
 	public void setGameViewController(GameViewController gameViewController) {
 		this.gameViewController = gameViewController;
+		addChinaWalls(); // If a player is China add their extra walls
 	}
 	
 	// Return if the game is finished or not

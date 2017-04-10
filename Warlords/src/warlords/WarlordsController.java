@@ -50,26 +50,26 @@ public class WarlordsController extends Application {
 		playerList.add(player3);
 		playerList.add(player4);
 		
-		Wall wall11 = new Wall(0, 563, 1); // Walls
-		Wall wall12 = new Wall(70, 563, 1);
-		Wall wall13 = new Wall(140, 598, 1);
-		Wall wall14 = new Wall(175, 668, 1);
-		Wall wall15 = new Wall(175, 738, 1);
-		Wall wall21 = new Wall(0, 175, 2);
-		Wall wall22 = new Wall(70, 175, 2);
-		Wall wall23 = new Wall(140, 140, 2);
-		Wall wall24 = new Wall(175, 70, 2);
-		Wall wall25 = new Wall(175, 0, 2);
-		Wall wall31 = new Wall(738, 175, 3);
-		Wall wall32 = new Wall(668, 175, 3);
-		Wall wall33 = new Wall(598, 140, 3);
-		Wall wall34 = new Wall(563, 70, 3);
-		Wall wall35 = new Wall(563, 0, 3);
-		Wall wall41 = new Wall(738, 563, 0);
-		Wall wall42 = new Wall(668, 563, 0);
-		Wall wall43 = new Wall(598, 598, 0);
-		Wall wall44 = new Wall(563, 668, 0);
-		Wall wall45 = new Wall(563, 738, 0);
+		Wall wall11 = new Wall(0, 563, 0); // Walls
+		Wall wall12 = new Wall(70, 563, 0);
+		Wall wall13 = new Wall(140, 598, 0);
+		Wall wall14 = new Wall(175, 668, 0);
+		Wall wall15 = new Wall(175, 738, 0);
+		Wall wall21 = new Wall(0, 175, 1);
+		Wall wall22 = new Wall(70, 175, 1);
+		Wall wall23 = new Wall(140, 140, 1);
+		Wall wall24 = new Wall(175, 70, 1);
+		Wall wall25 = new Wall(175, 0, 1);
+		Wall wall31 = new Wall(738, 175, 2);
+		Wall wall32 = new Wall(668, 175, 2);
+		Wall wall33 = new Wall(598, 140, 2);
+		Wall wall34 = new Wall(563, 70, 2);
+		Wall wall35 = new Wall(563, 0, 2);
+		Wall wall41 = new Wall(738, 563, 3);
+		Wall wall42 = new Wall(668, 563, 3);
+		Wall wall43 = new Wall(598, 598, 3);
+		Wall wall44 = new Wall(563, 668, 3);
+		Wall wall45 = new Wall(563, 738, 3);
 		ArrayList<Wall> wallList = new ArrayList<Wall>();
 		wallList.add(wall11);
 		wallList.add(wall12);
@@ -128,7 +128,7 @@ public class WarlordsController extends Application {
 	// Display the game view, and the two side windows 
 	public void showGameView() {
 		if (game == null) { // Default game, useful when testing
-			createNewGame(0, true, 0, true, 2, false, 0 ,true);
+			createNewGame(0, true, 0, true, 4, false, 0 ,true);
 		}
 		try {
 			FXMLLoader loader = new FXMLLoader();

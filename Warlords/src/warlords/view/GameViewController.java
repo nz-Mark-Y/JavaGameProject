@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -247,6 +248,18 @@ public class GameViewController {
 	
 	// Create the animation timer and the timing timer
 	private void createTimers() {
+		Platform.runLater(new Runnable() { // Setting Z order
+			@Override
+			public void run() {
+				pauseBox.toFront();
+				pauseMessage1.toFront();
+				pauseMessage2.toFront();
+				gameOver1.toFront();
+				gameOver2.toFront();
+				gameOver3.toFront();
+			}
+		});
+		
 		// Animation timer for ball and paddles to move
 		animationTimer = new Timer();
 		animationTimer.scheduleAtFixedRate(new TimerTask () {
@@ -408,6 +421,20 @@ public class GameViewController {
 	// Removing bullets for USA ability
 	public void delBall(Ball bullet) {
 		bullet.getBallView().setVisible(false);
+	}
+	
+	// Adding extra walls for China ability
+	public void addWall(Wall wall, int i) {
+		Rectangle rect = new Rectangle(); // Create a rectangle
+		rect.setFill(redCratePattern);
+		rect.setStroke(Color.BLACK);
+		rect.setStrokeWidth(1);
+		rect.setHeight(30);
+		rect.setWidth(30);
+		rect.setLayoutX(0);
+		rect.setLayoutY(768);
+		pane.getChildren().add(rect);
+		wall.setWallView(rect);
 	}
 
 	// Setting the warlord as immune, displaying a shield around it, for Britain ability
@@ -760,6 +787,8 @@ public class GameViewController {
 	ImagePattern player3CratePattern = new ImagePattern(player3Crate);
 	private Image player4Crate = new Image("file:images/player4Crate.png");
 	ImagePattern player4CratePattern = new ImagePattern(player4Crate);
+	private Image redCrate = new Image("file:images/redCrate.png");
+	ImagePattern redCratePattern = new ImagePattern(redCrate);
 
 	// Patterns for the paddles
 	private Image player1Ship = new Image("file:images/player1Ship.png");
