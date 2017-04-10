@@ -9,10 +9,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -44,7 +42,7 @@ public class PlayerMenuViewController {
 
 	}
 
-	// Sets the controller and scene
+	// Link the controller to the scene
 	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
@@ -64,111 +62,8 @@ public class PlayerMenuViewController {
 		// KeyHandlers
 		addHandlers();
 	}
-	
-	public ImagePattern getPlayerFlag(int playerNumber){
-		//TO IMPLEMENT	
-		return null;	
-	}
 
-	public void setPatterns(){
-		//Applying flag patterns
-		flag0.setFill(flag0Pattern);
-		flag1.setFill(flag1Pattern);
-		flag2.setFill(flag2Pattern);
-		flag3.setFill(flag3Pattern);
-		flag4.setFill(flag4Pattern);
-		flag5.setFill(flag5Pattern);
-		flag6.setFill(flag6Pattern);
-		flag7.setFill(flag7Pattern);
-		flag8.setFill(flag8Pattern);
-		flag9.setFill(flag9Pattern);
-		
-		//Applying cursor patterns
-		player1Select0.setStrokeWidth(0);
-		player1Select0.setFill(player1ShipPattern);
-		player1Select1.setStrokeWidth(0);
-		player1Select1.setFill(player1ShipPattern);
-		player1Select2.setStrokeWidth(0);
-		player1Select2.setFill(player1ShipPattern);
-		player1Select3.setStrokeWidth(0);
-		player1Select3.setFill(player1ShipPattern);
-		player1Select4.setStrokeWidth(0);
-		player1Select4.setFill(player1ShipPattern);
-		player1Select5.setStrokeWidth(0);
-		player1Select5.setFill(player1ShipPattern);
-		player1Select6.setStrokeWidth(0);
-		player1Select6.setFill(player1ShipPattern);
-		player1Select7.setStrokeWidth(0);
-		player1Select7.setFill(player1ShipPattern);
-		player1Select8.setStrokeWidth(0);
-		player1Select8.setFill(player1ShipPattern);
-		player1Select9.setStrokeWidth(0);
-		player1Select9.setFill(player1ShipPattern);
-		
-		player2Select0.setStrokeWidth(0);
-		player2Select0.setFill(player2ShipPattern);
-		player2Select1.setStrokeWidth(0);
-		player2Select1.setFill(player2ShipPattern);
-		player2Select2.setStrokeWidth(0);
-		player2Select2.setFill(player2ShipPattern);
-		player2Select3.setStrokeWidth(0);
-		player2Select3.setFill(player2ShipPattern);
-		player2Select4.setStrokeWidth(0);
-		player2Select4.setFill(player2ShipPattern);
-		player2Select5.setStrokeWidth(0);
-		player2Select5.setFill(player2ShipPattern);
-		player2Select6.setStrokeWidth(0);
-		player2Select6.setFill(player2ShipPattern);
-		player2Select7.setStrokeWidth(0);
-		player2Select7.setFill(player2ShipPattern);
-		player2Select8.setStrokeWidth(0);
-		player2Select8.setFill(player2ShipPattern);
-		player2Select9.setStrokeWidth(0);
-		player2Select9.setFill(player2ShipPattern);
-		
-		player3Select0.setStrokeWidth(0);
-		player3Select0.setFill(player3ShipPattern);
-		player3Select1.setStrokeWidth(0);
-		player3Select1.setFill(player3ShipPattern);
-		player3Select2.setStrokeWidth(0);
-		player3Select2.setFill(player3ShipPattern);
-		player3Select3.setStrokeWidth(0);
-		player3Select3.setFill(player3ShipPattern);
-		player3Select4.setStrokeWidth(0);
-		player3Select4.setFill(player3ShipPattern);
-		player3Select5.setStrokeWidth(0);
-		player3Select5.setFill(player3ShipPattern);
-		player3Select6.setStrokeWidth(0);
-		player3Select6.setFill(player3ShipPattern);
-		player3Select7.setStrokeWidth(0);
-		player3Select7.setFill(player3ShipPattern);
-		player3Select8.setStrokeWidth(0);
-		player3Select8.setFill(player3ShipPattern);
-		player3Select9.setStrokeWidth(0);
-		player3Select9.setFill(player3ShipPattern);
-		
-		player4Select0.setStrokeWidth(0);
-		player4Select0.setFill(player4ShipPattern);
-		player4Select1.setStrokeWidth(0);
-		player4Select1.setFill(player4ShipPattern);
-		player4Select2.setStrokeWidth(0);
-		player4Select2.setFill(player4ShipPattern);
-		player4Select3.setStrokeWidth(0);
-		player4Select3.setFill(player4ShipPattern);
-		player4Select4.setStrokeWidth(0);
-		player4Select4.setFill(player4ShipPattern);
-		player4Select5.setStrokeWidth(0);
-		player4Select5.setFill(player4ShipPattern);
-		player4Select6.setStrokeWidth(0);
-		player4Select6.setFill(player4ShipPattern);
-		player4Select7.setStrokeWidth(0);
-		player4Select7.setFill(player4ShipPattern);
-		player4Select8.setStrokeWidth(0);
-		player4Select8.setFill(player4ShipPattern);
-		player4Select9.setStrokeWidth(0);
-		player4Select9.setFill(player4ShipPattern);
-	}
-
+	// Set the fonts of the text
 	public void setFonts() {
 		Font titleFont = null;
 		Font textFont = null;
@@ -192,10 +87,11 @@ public class PlayerMenuViewController {
 	// Removes the key handler from the scene, moves to the next view
 	public void enterPressed() {		
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-		warlordsController.createNewGame(oneSelects, oneIsAI, twoSelects, twoIsAI, threeSelects, threeIsAI, fourSelects, fourIsAI);
-		warlordsController.showMultiplayerMenuView();
+		warlordsController.createNewGame(oneSelects, oneIsAI, twoSelects, twoIsAI, threeSelects, threeIsAI, fourSelects, fourIsAI); // Create game based on the user input
+		warlordsController.showMultiplayerMenuView(); // Return to multiplayer menu
 	}
 
+	// Adding key handlers for choosing classes and controllers
 	public void addHandlers() {
 		oneSelects = 0;
 		oneIsAI = false;
@@ -308,16 +204,17 @@ public class PlayerMenuViewController {
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, handler);
 	}
 
+	// Refresh the view
 	public void updateSelection() {
-		description1.setText(descriptions.get(oneSelects));
+		description1.setText(descriptions.get(oneSelects)); // Show description for player 1's class
 		description2.setText(descriptions.get(twoSelects));
 		description3.setText(descriptions.get(threeSelects));
 		description4.setText(descriptions.get(fourSelects));
 		for (int i=0;i<player1List.size(); i++) {
 			if (i == oneSelects) {
-				player1List.get(i).setVisible(true);
+				player1List.get(i).setVisible(true); // Set player 1's icon to be over the selected flag
 			} else {
-				player1List.get(i).setVisible(false);
+				player1List.get(i).setVisible(false); // Hide the other player 1 icons
 			}
 		}
 		for (int i=0;i<player2List.size(); i++) {
@@ -341,12 +238,12 @@ public class PlayerMenuViewController {
 				player4List.get(i).setVisible(false);
 			}
 		}
-		if (oneIsAI) {
+		if (oneIsAI) { // Show which players are an AI or not
 			title5.setVisible(true);
 		} else {
 			title5.setVisible(false);
 		}
-		if (twoIsAI) {
+		if (twoIsAI) { 
 			title6.setVisible(true);
 		} else {
 			title6.setVisible(false);
@@ -362,7 +259,108 @@ public class PlayerMenuViewController {
 			title8.setVisible(false);
 		}
 	}
-
+	
+	// Set the images of the flags and cursors
+		public void setPatterns(){
+			// Applying flag patterns
+			flag0.setFill(flag0Pattern);
+			flag1.setFill(flag1Pattern);
+			flag2.setFill(flag2Pattern);
+			flag3.setFill(flag3Pattern);
+			flag4.setFill(flag4Pattern);
+			flag5.setFill(flag5Pattern);
+			flag6.setFill(flag6Pattern);
+			flag7.setFill(flag7Pattern);
+			flag8.setFill(flag8Pattern);
+			flag9.setFill(flag9Pattern);
+			
+			// Applying cursor patterns
+			player1Select0.setStrokeWidth(0);
+			player1Select0.setFill(player1ShipPattern);
+			player1Select1.setStrokeWidth(0);
+			player1Select1.setFill(player1ShipPattern);
+			player1Select2.setStrokeWidth(0);
+			player1Select2.setFill(player1ShipPattern);
+			player1Select3.setStrokeWidth(0);
+			player1Select3.setFill(player1ShipPattern);
+			player1Select4.setStrokeWidth(0);
+			player1Select4.setFill(player1ShipPattern);
+			player1Select5.setStrokeWidth(0);
+			player1Select5.setFill(player1ShipPattern);
+			player1Select6.setStrokeWidth(0);
+			player1Select6.setFill(player1ShipPattern);
+			player1Select7.setStrokeWidth(0);
+			player1Select7.setFill(player1ShipPattern);
+			player1Select8.setStrokeWidth(0);
+			player1Select8.setFill(player1ShipPattern);
+			player1Select9.setStrokeWidth(0);
+			player1Select9.setFill(player1ShipPattern);
+			
+			player2Select0.setStrokeWidth(0);
+			player2Select0.setFill(player2ShipPattern);
+			player2Select1.setStrokeWidth(0);
+			player2Select1.setFill(player2ShipPattern);
+			player2Select2.setStrokeWidth(0);
+			player2Select2.setFill(player2ShipPattern);
+			player2Select3.setStrokeWidth(0);
+			player2Select3.setFill(player2ShipPattern);
+			player2Select4.setStrokeWidth(0);
+			player2Select4.setFill(player2ShipPattern);
+			player2Select5.setStrokeWidth(0);
+			player2Select5.setFill(player2ShipPattern);
+			player2Select6.setStrokeWidth(0);
+			player2Select6.setFill(player2ShipPattern);
+			player2Select7.setStrokeWidth(0);
+			player2Select7.setFill(player2ShipPattern);
+			player2Select8.setStrokeWidth(0);
+			player2Select8.setFill(player2ShipPattern);
+			player2Select9.setStrokeWidth(0);
+			player2Select9.setFill(player2ShipPattern);
+			
+			player3Select0.setStrokeWidth(0);
+			player3Select0.setFill(player3ShipPattern);
+			player3Select1.setStrokeWidth(0);
+			player3Select1.setFill(player3ShipPattern);
+			player3Select2.setStrokeWidth(0);
+			player3Select2.setFill(player3ShipPattern);
+			player3Select3.setStrokeWidth(0);
+			player3Select3.setFill(player3ShipPattern);
+			player3Select4.setStrokeWidth(0);
+			player3Select4.setFill(player3ShipPattern);
+			player3Select5.setStrokeWidth(0);
+			player3Select5.setFill(player3ShipPattern);
+			player3Select6.setStrokeWidth(0);
+			player3Select6.setFill(player3ShipPattern);
+			player3Select7.setStrokeWidth(0);
+			player3Select7.setFill(player3ShipPattern);
+			player3Select8.setStrokeWidth(0);
+			player3Select8.setFill(player3ShipPattern);
+			player3Select9.setStrokeWidth(0);
+			player3Select9.setFill(player3ShipPattern);
+			
+			player4Select0.setStrokeWidth(0);
+			player4Select0.setFill(player4ShipPattern);
+			player4Select1.setStrokeWidth(0);
+			player4Select1.setFill(player4ShipPattern);
+			player4Select2.setStrokeWidth(0);
+			player4Select2.setFill(player4ShipPattern);
+			player4Select3.setStrokeWidth(0);
+			player4Select3.setFill(player4ShipPattern);
+			player4Select4.setStrokeWidth(0);
+			player4Select4.setFill(player4ShipPattern);
+			player4Select5.setStrokeWidth(0);
+			player4Select5.setFill(player4ShipPattern);
+			player4Select6.setStrokeWidth(0);
+			player4Select6.setFill(player4ShipPattern);
+			player4Select7.setStrokeWidth(0);
+			player4Select7.setFill(player4ShipPattern);
+			player4Select8.setStrokeWidth(0);
+			player4Select8.setFill(player4ShipPattern);
+			player4Select9.setStrokeWidth(0);
+			player4Select9.setFill(player4ShipPattern);
+		}
+		
+	// Adding the fxml items to the controller
 	public void addItems() {
 		titleList.add(title1);
 		titleList.add(title2);
@@ -427,6 +425,7 @@ public class PlayerMenuViewController {
 		player4List.add(player4Select9);
 	}
 
+	// The description strings
 	public void addDescriptions() {
 		descriptions.add("france: \n To Be Implemented");
 		descriptions.add("USA: \n Shoots a single use bullet using your UP key \n Bullet will destroy a wall or warlord if it hits one, but does not bounce");
@@ -440,263 +439,185 @@ public class PlayerMenuViewController {
 		descriptions.add("Brazil: \n To Be Implemented");
 	}
 	
+	// Text
 	@FXML
 	private Label description1;
-	
 	@FXML
 	private Label description2;
-	
 	@FXML
 	private Label description3;
-	
 	@FXML
 	private Label description4;
-	
 	@FXML
 	private Text title1;
-
 	@FXML
 	private Text title2;
-
 	@FXML
 	private Text title3;
-
 	@FXML
 	private Text title4;
-
 	@FXML
 	private Text title5;
-
 	@FXML
 	private Text title6;
-
 	@FXML
 	private Text title7;
-
 	@FXML
 	private Text title8;
-
 	@FXML
 	private Text line1;
-
 	@FXML
 	private Text line2;
-
 	@FXML
 	private Text line3;
-
 	@FXML
 	private Text line4;
-
 	@FXML
 	private Text line5;
-
 	@FXML
 	private Text line6;
-
 	@FXML
 	private Text line7;
-
 	@FXML
 	private Text line8;
-
 	@FXML
 	private Text backInstructions1;
-
 	@FXML
 	private Text backInstructions2;
-
+	
+	// Selection icons
 	@FXML
 	private Rectangle player1Select0;
-
 	@FXML
 	private Rectangle player1Select1;
-
 	@FXML
 	private Rectangle player1Select2;
-
 	@FXML
 	private Rectangle player1Select3;
-
 	@FXML
 	private Rectangle player1Select4;
-
 	@FXML
 	private Rectangle player1Select5;
-
 	@FXML
 	private Rectangle player1Select6;
-
 	@FXML
 	private Rectangle player1Select7;
-
 	@FXML
 	private Rectangle player1Select8;
-
 	@FXML
 	private Rectangle player1Select9;
-
 	@FXML
 	private Rectangle player2Select0;
-
 	@FXML
 	private Rectangle player2Select1;
-
 	@FXML
 	private Rectangle player2Select2;
-
 	@FXML
 	private Rectangle player2Select3;
-
 	@FXML
 	private Rectangle player2Select4;
-
 	@FXML
 	private Rectangle player2Select5;
-
 	@FXML
 	private Rectangle player2Select6;
-
 	@FXML
 	private Rectangle player2Select7;
-
 	@FXML
 	private Rectangle player2Select8;
-
 	@FXML
 	private Rectangle player2Select9;
-
 	@FXML
 	private Rectangle player3Select0;
-
 	@FXML
 	private Rectangle player3Select1;
-
 	@FXML
 	private Rectangle player3Select2;
-
 	@FXML
 	private Rectangle player3Select3;
-
 	@FXML
 	private Rectangle player3Select4;
-
 	@FXML
 	private Rectangle player3Select5;
-
 	@FXML
 	private Rectangle player3Select6;
-
 	@FXML
 	private Rectangle player3Select7;
-
 	@FXML
 	private Rectangle player3Select8;
-
 	@FXML
 	private Rectangle player3Select9;
-
 	@FXML
 	private Rectangle player4Select0;
-
 	@FXML
 	private Rectangle player4Select1;
-
 	@FXML
 	private Rectangle player4Select2;
-
 	@FXML
 	private Rectangle player4Select3;
-
 	@FXML
 	private Rectangle player4Select4;
-
 	@FXML
 	private Rectangle player4Select5;
-
 	@FXML
 	private Rectangle player4Select6;
-
 	@FXML
 	private Rectangle player4Select7;
-
 	@FXML
 	private Rectangle player4Select8;
-
 	@FXML
 	private Rectangle player4Select9;
-
+	
+	// Flags
 	@FXML
 	private Rectangle flag0;
-
 	@FXML
 	private Rectangle flag1;
-
 	@FXML
 	private Rectangle flag2;
-
 	@FXML
 	private Rectangle flag3;
-
 	@FXML
 	private Rectangle flag4;
-
 	@FXML
 	private Rectangle flag5;
-
 	@FXML
 	private Rectangle flag6;
-
 	@FXML
 	private Rectangle flag7;
-
 	@FXML
 	private Rectangle flag8;
-
 	@FXML
 	private Rectangle flag9;
 
-	//Creating patterns for the flags
+	// Creating patterns for the flags
 	private Image flag0Image = new Image("file:images/fr.png");
 	ImagePattern flag0Pattern = new ImagePattern(flag0Image);
-
 	private Image flag1Image = new Image("file:images/us.png");
 	ImagePattern flag1Pattern = new ImagePattern(flag1Image);
-
 	private Image flag2Image = new Image("file:images/gb.png");
 	ImagePattern flag2Pattern = new ImagePattern(flag2Image);
-
 	private Image flag3Image = new Image("file:images/nz.png");
 	ImagePattern flag3Pattern = new ImagePattern(flag3Image);
-
 	private Image flag4Image = new Image("file:images/cn.png");
 	ImagePattern flag4Pattern = new ImagePattern(flag4Image);
-
 	private Image flag5Image = new Image("file:images/au.png");
 	ImagePattern flag5Pattern = new ImagePattern(flag5Image);
-
 	private Image flag6Image = new Image("file:images/in.png");
 	ImagePattern flag6Pattern = new ImagePattern(flag6Image);
-
 	private Image flag7Image = new Image("file:images/ru.png");
 	ImagePattern flag7Pattern = new ImagePattern(flag7Image);
-
 	private Image flag8Image = new Image("file:images/eg.png");
 	ImagePattern flag8Pattern = new ImagePattern(flag8Image);
-
 	private Image flag9Image = new Image("file:images/br.png");
 	ImagePattern flag9Pattern = new ImagePattern(flag9Image);
 
-	//Creating patterns for the paddles
+	// Creating patterns for the icons
 	private Image player1Ship = new Image("file:images/player1Ship.png");
 	ImagePattern player1ShipPattern = new ImagePattern(player1Ship);
-
 	private Image player2Ship = new Image("file:images/player2Ship.png");
 	ImagePattern player2ShipPattern = new ImagePattern(player2Ship);
-
 	private Image player3Ship = new Image("file:images/player3Ship.png");
 	ImagePattern player3ShipPattern = new ImagePattern(player3Ship);
-
 	private Image player4Ship = new Image("file:images/player4Ship.png");
 	ImagePattern player4ShipPattern = new ImagePattern(player4Ship);
 }

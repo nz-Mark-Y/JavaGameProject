@@ -28,7 +28,7 @@ public class OptionsViewController {
 		
 	}
 	
-	// Sets the controller and scene
+	// Link the controller to the WarlordController and scene
 	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
@@ -84,13 +84,14 @@ public class OptionsViewController {
 	public void updateSelection() {
 		for (int i=0; i<menuList.size(); i++) {
 			if (i == isSelected) {
-				menuList.get(i).setFill(Color.valueOf("#FFFFFF"));
+				menuList.get(i).setFill(Color.valueOf("#FFFFFF")); // Selected item is white
 			} else {
-				menuList.get(i).setFill(Color.valueOf("#686868"));
+				menuList.get(i).setFill(Color.valueOf("#686868")); // Unselected item is gray
 			}			
 		}	
 	}
 	
+	// If the user presses the up arrow
 	public void upArrowPressed() {
 		if (isSelected == 0) {
 			isSelected = menuList.size()-1;
@@ -99,6 +100,7 @@ public class OptionsViewController {
 		}
 	}
 	
+	// If the user presses the down arrow
 	public void downArrowPressed() {
 		if (isSelected == menuList.size()-1) {
 			isSelected = 0;
@@ -121,21 +123,19 @@ public class OptionsViewController {
 		}
 	}
 	
+	// Text
 	@FXML
 	private Text title;
-	
 	@FXML
 	private Text volume;
-	
 	@FXML
 	private Text textSpeed;
-	
 	@FXML
 	private Text back;
-	
+
+	// Sliders
 	@FXML
 	private Slider volumeSelect;
-	
 	@FXML
 	private Slider textSpeedSelect;
 }

@@ -27,7 +27,7 @@ public class MultiplayerMenuViewController {
 		
 	}
 	
-	// Sets the controller and scene
+	// Link the controller to the WarlordController and scene
 	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
@@ -81,13 +81,14 @@ public class MultiplayerMenuViewController {
 	public void updateSelection() {
 		for (int i=0; i<menuList.size(); i++) {
 			if (i == isSelected) {
-				menuList.get(i).setFill(Color.valueOf("#FFFFFF"));
+				menuList.get(i).setFill(Color.valueOf("#FFFFFF")); // Selected is white
 			} else {
-				menuList.get(i).setFill(Color.valueOf("#686868"));
+				menuList.get(i).setFill(Color.valueOf("#686868")); // Unselected is grey
 			}			
 		}	
 	}
 	
+	// If the user presses the up arrow
 	public void upArrowPressed() {
 		if (isSelected == 0) {
 			isSelected = menuList.size()-1;
@@ -96,6 +97,7 @@ public class MultiplayerMenuViewController {
 		}
 	}
 	
+	// If the user presses the down arrow
 	public void downArrowPressed() {
 		if (isSelected == menuList.size()-1) {
 			isSelected = 0;
@@ -108,7 +110,7 @@ public class MultiplayerMenuViewController {
 	public void enterPressed() {
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
 		if (isSelected == 0) {
-			warlordsController.showGameView();
+			warlordsController.showGameView(); // Create the new game
 		} else if (isSelected == 1) {			
 			warlordsController.showPlayerMenuView();
 		} else if (isSelected == 2) {			
@@ -120,18 +122,15 @@ public class MultiplayerMenuViewController {
 		}
 	}
 	
+	// Text
 	@FXML
 	private Text title;
-	
 	@FXML
 	private Text start;
-	
 	@FXML
 	private Text players;
-	
 	@FXML
 	private Text mutators;
-	
 	@FXML
 	private Text back;
 }

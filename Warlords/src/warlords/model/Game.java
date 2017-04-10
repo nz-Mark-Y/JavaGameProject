@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javafx.scene.media.AudioClip;
-import javafx.scene.transform.Rotate;
 import warlords.tests.IGame;
 import warlords.view.GameViewController;
 
@@ -447,33 +446,33 @@ public class Game implements IGame {
 		if ((keyList[6] == true) && (!playerList.get(0).isComputerControlled())) { // Player 2 ability
 			useAbility(0);
 		}
-		if ((keyList[8] == true) && (!playerList.get(1).isComputerControlled())) {
+		if ((keyList[8] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 left
 			curveLeft(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
 		} 
-		if ((keyList[9] == true) && (!playerList.get(1).isComputerControlled())) {
+		if ((keyList[9] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 right
 			curveRight(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
 		}
-		if ((keyList[10] == true) && (!playerList.get(1).isComputerControlled())) {
+		if ((keyList[10] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 ability
 			useAbility(1);
 		}
-		if ((keyList[12] == true) && (!playerList.get(3).isComputerControlled())) {
+		if ((keyList[12] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 left
 			curveLeft(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
 		} 
-		if ((keyList[13] == true) && (!playerList.get(3).isComputerControlled())) {
+		if ((keyList[13] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 right
 			curveRight(playerList.get(3).getPaddle(), 3, (float) paddleSpeed); 
 		}
-		if ((keyList[14] == true) && (!playerList.get(3).isComputerControlled())) {
+		if ((keyList[14] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 ability
 			useAbility(3);
 		}
 	}
 	
 	// Move the paddle along its path to the left
 	public void curveLeft(Paddle paddle, int playerNum, float speed) {
-		if (playerNum == 1) {
-			if (paddle.getXPos() > 0) {
-				paddle.decrTheta(speed);
-				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
-				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+		if (playerNum == 1) { // Player 2
+			if (paddle.getXPos() > 0) { // If not out of bounds
+				paddle.decrTheta(speed);  // Decrease angle
+				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); // Calculate X pos
+				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180))); // Calculate Y pos
 			}
 		} else if (playerNum == 2) {
 			if (paddle.getYPos() > 0) {
@@ -495,17 +494,17 @@ public class Game implements IGame {
 			} 
 		}
 		if (!finished) {
-			paddle.rotatePaddle(playerNum);
+			paddle.rotatePaddle(playerNum); // Rotate the paddles based on their angles
 		}
 	}
 	
 	// Move the paddle along its path to the right
 	public void curveRight(Paddle paddle, int playerNum, float speed) {
-		if (playerNum == 1) {
-			if (paddle.getYPos() > 2) {
-				paddle.incrTheta(speed);
-				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); 
-				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180)));
+		if (playerNum == 1) { // Player 2
+			if (paddle.getYPos() > 0) { // If not out of bounds
+				paddle.incrTheta(speed); // Increase angle
+				paddle.setXPos((int) (256 * Math.sin(paddle.getTheta() * Math.PI / 180))); // Calculate X pos
+				paddle.setYPos((int) (256 * Math.cos(paddle.getTheta() * Math.PI / 180))); // Calculate Y pos
 			}
 		} else if (playerNum == 2) {
 			if (paddle.getXPos() < 768 - Paddle.length) {
@@ -527,80 +526,83 @@ public class Game implements IGame {
 			}
 		}
 		if (!finished) {
-			paddle.rotatePaddle(playerNum);
+			paddle.rotatePaddle(playerNum); // Rotate paddles based on angle
 		}
 	}
 	
+	// When a player presses their ability key
 	public void useAbility(int playerNum) {
 		if (!playerList.get(playerNum).isDead()) {
-			if (playerList.get(playerNum).getClassNum() == 0) { // France
+			if (playerList.get(playerNum).getClassNum() == 0) { // France, to be implemented
 				
-			} else if (playerList.get(playerNum).getClassNum() == 1) { // USA
+			} else if (playerList.get(playerNum).getClassNum() == 1) { // USA, shoots a bullet
 				if (playerList.get(playerNum).getLastAbility() == 0) {
 					Ball bullet;
-					if (playerNum == 0) {
+					if (playerNum == 0) { // Player 1, set location and velocity of bullet
 						bullet = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
 						bullet.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 50));
 						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
-					} else if (playerNum == 1) {
+					} else if (playerNum == 1) { // Player 2
 						bullet = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
 						bullet.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 50));
 						bullet.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 50));
-					} else if (playerNum == 2) {
+					} else if (playerNum == 2) { // Player 3
 						bullet = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
 						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
 						bullet.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 50));
-					} else {
+					} else { // Player 4
 						bullet = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
 						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
 						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
 					}
-					ballList.add(bullet);
-					gameViewController.createBulletView(bullet);
-					playerList.get(playerNum).setLastAbility((int) timeRemaining);
+					ballList.add(bullet); // Add the bullet to the list of balls
+					gameViewController.createBulletView(bullet); // Create the bullet view with the game view controller
+					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Single use only
 				}
 			} else if (playerList.get(playerNum).getClassNum() == 2) { // Britain
 				if (playerList.get(playerNum).getImmune() == -1) {
-					playerList.get(playerNum).setImmune(0);
+					playerList.get(playerNum).setImmune(0); // Starts counting immunity in countImmune()
 				}
 			}
 		}
 	}
 	
+	// Counting how long a Britain players immunity is on. 500 ticks = 5s
 	public void countImmune() {
 		for (int i=0;i<playerList.size(); i++) {
 			if (playerList.get(i).getClassNum() == 2) {
-				if (playerList.get(i).getImmune() > 500) {
-					playerList.get(i).setImmune(-2);
+				if (playerList.get(i).getImmune() > 500) { // If we have reached 5s
+					playerList.get(i).setImmune(-2); // Set immune to -2, signifies ability has been used
 				}
-				if (playerList.get(i).getImmune() >= 0) {
-					playerList.get(i).setImmune(playerList.get(i).getImmune() + 1);
+				if (playerList.get(i).getImmune() >= 0) { // If we are inside the 5s
+					playerList.get(i).setImmune(playerList.get(i).getImmune() + 1); // Increment count 
 				}
 			}
 		}
 	}
 	
+	// AI set their paddle coordinates based on where the ball is
 	public void computerMovePaddles(Ball ball) {
 		for (int i=0; i<playerList.size(); i++) {
 			if (playerList.get(i).isComputerControlled()) {
-				if (Math.abs(ball.getXPos() - playerList.get(i).getPaddle().getXPos()) > Math.abs(ball.getYPos() - playerList.get(i).getPaddle().getYPos())) {
-					if ((ball.getXPos() + ball.getXVelocity()) > (playerList.get(i).getPaddle().getXPos() + Paddle.length / 2)) {
-						curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
-					} else {
-						curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
+				if (Math.abs(ball.getXPos() - playerList.get(i).getPaddle().getXPos()) > Math.abs(ball.getYPos() - playerList.get(i).getPaddle().getYPos())) { // If the ball is closer to the paddle in the x direction
+					if ((ball.getXPos() + ball.getXVelocity()) > (playerList.get(i).getPaddle().getXPos() + Paddle.length / 2)) { // If the ball is on the right of the paddle
+						curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed); // Move the paddle right
+					} else { // If the ball is on the left side of the paddle
+						curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed); // Move the paddle left
 					}
-				} else {
-					if ((ball.getYPos() + ball.getYVelocity()) > (playerList.get(i).getPaddle().getYPos() + Paddle.height / 2)) {
+				} else { // If the ball is closer to the paddle in the Y direction
+					if ((ball.getYPos() + ball.getYVelocity()) > (playerList.get(i).getPaddle().getYPos() + Paddle.height / 2)) { // If the ball is above the paddle
 						if ((i==0) || (i==2)) {
-							curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
+							curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed); // Move the paddle up
 						} else {
-							curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
+							curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed); // Move the paddle up
 						}		
-					} else {
+					} else { // If the ball is below the paddle
 						if ((i==0) || (i==2)) {
-							curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed);				
+							curveLeft(playerList.get(i).getPaddle(), i, (float) paddleSpeed); // Move the paddle down
 						} else {
-							curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed);
+							curveRight(playerList.get(i).getPaddle(), i, (float) paddleSpeed); // Move the paddle down
 						}
 					}
 				}
@@ -608,52 +610,64 @@ public class Game implements IGame {
 		}
 	}
 	
+	// Links GameViewController to WarlordsController
 	public void setGameViewController(GameViewController gameViewController) {
 		this.gameViewController = gameViewController;
 	}
 	
+	// Return if the game is finished or not
 	@Override
 	public boolean isFinished() {
 		return finished;
 	}
 	
+	// Sets the game to finished
 	public void finish() {
 		finished = true;
 	}
 
+	// Sets how much time is left
 	@Override
 	public void setTimeRemaining(int seconds) {
 		timeRemaining = (float) seconds;
 	}
 
+	// Gets how much time is left
 	public int getTimeRemaining() {
 		return (int) timeRemaining;
 	}
 
+	// Sets a key to being pressed
 	public void setKeyDown(int pos) {
 		keyList[pos] = true;
 	}
 	
+	// Sets a key to being released
 	public void setKeyUp(int pos) {
 		keyList[pos] = false;
 	}
 	
+	// Gets the ball
 	public Ball getBall() {
 		return ballList.get(0);
 	}
 	
+	// Gets the ball list
 	public ArrayList<Ball> getBallList() {
 		return ballList;
 	}
 
+	// Gets the player list
 	public ArrayList<Warlord> getPlayerList() {
 		return playerList;
 	}
 
+	// Gets the wall list
 	public ArrayList<Wall> getWallList() {
 		return wallList;
 	}
 	
+	// Gets the winner
 	public int getWinner() {
 		for (int i=0; i<playerList.size(); i++) {
 			if (playerList.get(i).hasWon())

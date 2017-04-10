@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import warlords.WarlordsController;
@@ -25,7 +23,7 @@ public class AboutViewController {
 		
 	}
 	
-	// Sets the controller and scene
+	// Links the controller to the WarlordsController and scene
 	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
@@ -75,27 +73,21 @@ public class AboutViewController {
 		warlordsController.showMainMenu();
 	}
 	
+	// Text
 	@FXML
 	private Text title;
-	
 	@FXML
 	private Text aboutLine1;
-	
 	@FXML
 	private Text aboutLine2;
-	
 	@FXML
 	private Text aboutLine3;
-	
 	@FXML
 	private Text aboutLine4;
-	
 	@FXML
 	private Text aboutLine5;
-	
 	@FXML
 	private Text aboutLine6;
-
 	@FXML
 	private Text back;
 }

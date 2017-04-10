@@ -28,7 +28,7 @@ public class MainMenuViewController {
 		
 	}
 	
-	// Sets the controller and scene
+	// Link the controller to the WarlordsController and scene
 	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
@@ -80,13 +80,14 @@ public class MainMenuViewController {
 	public void updateSelection() {
 		for (int i=0; i<menuList.size(); i++) {
 			if (i == isSelected) {
-				menuList.get(i).setFill(Color.valueOf("#FFFFFF"));
+				menuList.get(i).setFill(Color.valueOf("#FFFFFF")); // Selected item is white
 			} else {
-				menuList.get(i).setFill(Color.valueOf("#686868"));
+				menuList.get(i).setFill(Color.valueOf("#686868")); // Unselected item is grey
 			}			
 		}	
 	}
 	
+	// If the user presses the up arrow
 	public void upArrowPressed() {
 		if (isSelected == 0) {
 			isSelected = menuList.size()-1;
@@ -95,6 +96,7 @@ public class MainMenuViewController {
 		}
 	}
 	
+	// If the user presses the down arrow
 	public void downArrowPressed() {
 		if (isSelected == menuList.size()-1) {
 			isSelected = 0;
@@ -121,21 +123,17 @@ public class MainMenuViewController {
 		}
 	}
 	
+	// Text
 	@FXML
 	private Text campaign;
-	
 	@FXML
 	private Text multiplayer;
-	
 	@FXML
 	private Text options;
-	
 	@FXML
 	private Text about;
-	
 	@FXML
 	private Text exit;
-	
 	@FXML
 	private AnchorPane window;
 }

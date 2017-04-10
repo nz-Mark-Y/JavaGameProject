@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -21,12 +19,10 @@ import warlords.model.Warlord;
 import warlords.view.AboutViewController;
 import warlords.view.CampaignMenuViewController;
 import warlords.view.GameViewController;
-import warlords.view.LeftSideViewController;
 import warlords.view.MainMenuViewController;
 import warlords.view.MultiplayerMenuViewController;
 import warlords.view.OptionsViewController;
 import warlords.view.PlayerMenuViewController;
-import warlords.view.RightSideViewController;
 
 public class WarlordsController extends Application {
 	private Stage primaryStage;
@@ -153,12 +149,6 @@ public class WarlordsController extends Application {
 
 			GameViewController controller = loader.getController(); // Link controllers
 			controller.setWarlordsController(this, scene);
-
-			RightSideViewController controller2 = loader2.getController();
-			controller2.setWarlordsController(this);
-
-			LeftSideViewController controller3 = loader3.getController();
-			controller3.setWarlordsController(this);
 			
 			menuSelection.play();
 			

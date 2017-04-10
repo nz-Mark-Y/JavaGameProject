@@ -27,7 +27,7 @@ public class CampaignMenuViewController {
 		
 	}
 	
-	// Sets the controller and scene
+	// Links the controller to the WarlordsController and scene
 	public void setWarlordsController(WarlordsController warlordsController, Scene scene) {
 		this.warlordsController = warlordsController;
 		this.scene = scene;
@@ -81,13 +81,14 @@ public class CampaignMenuViewController {
 	public void updateSelection() {
 		for (int i=0; i<menuList.size(); i++) {
 			if (i == isSelected) {
-				menuList.get(i).setFill(Color.valueOf("#FFFFFF"));
+				menuList.get(i).setFill(Color.valueOf("#FFFFFF")); // Selected item is white
 			} else {
-				menuList.get(i).setFill(Color.valueOf("#686868"));
+				menuList.get(i).setFill(Color.valueOf("#686868")); // Unselected is grey
 			}			
 		}	
 	}
 	
+	// If the user presses the up arrow
 	public void upArrowPressed() {
 		if (isSelected == 0) {
 			isSelected = menuList.size()-1;
@@ -96,6 +97,7 @@ public class CampaignMenuViewController {
 		}
 	}
 	
+	// If the user presses the down arrow
 	public void downArrowPressed() {
 		if (isSelected == menuList.size()-1) {
 			isSelected = 0;
@@ -120,18 +122,15 @@ public class CampaignMenuViewController {
 		}
 	}
 	
+	// Text
 	@FXML
 	private Text title;
-	
 	@FXML
 	private Text cont;
-	
 	@FXML
 	private Text newCampaign;
-	
 	@FXML
 	private Text levelSelect;
-	
 	@FXML
 	private Text back;
 }
