@@ -351,7 +351,7 @@ public class GameViewController {
 
 	//Loads explosion animation when wall is hit
 	private void wallExplosionAnimation() {
-		for(int i=0;i<game.getWallList().size(); i++){
+		for(int i=0;i<20; i++){
 			if(game.getWallList().get(i).isDestroyed() && !game.getWallList().get(i).getWallView().isVisible()){
 				game.getWallList().get(i).getWallView().setVisible(true);
 				Image explosion = new Image("file:images/explosion.gif");
@@ -561,8 +561,8 @@ public class GameViewController {
 		rect.setWidth(30);
 		rect.setLayoutX(0);
 		rect.setLayoutY(768);
-		pane.getChildren().add(rect);
 		wall.setWallView(rect);
+		pane.getChildren().add(rect);	
 	}
 
 	// Setting the warlord as immune, displaying a shield around it, for Britain ability

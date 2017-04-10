@@ -292,10 +292,17 @@ public class Game implements IGame {
 	// On bounce, randomly increase or decrease velocity by 1, or leave the same. Helps to reduce AI getting stuck in loops, adds to game
 	public void reverseVelocity(Ball ball, int dir) {
 		int newValue;
-		int randomX = 1 - (int) (Math.random() * (3)); // Random number between -1 and 1
-		int randomY = 1 - (int) (Math.random() * (3));
-		randomX = randomX * Game.randomness; // Multiply by 0, 1, or 2
-		randomY = randomY * Game.randomness;
+		int randomX;
+		int randomY;
+		if (Game.randomness == 2) {
+			randomX = 2 - (int) (Math.random() * (5)); // Random number between -2 and 2
+			randomY = 2 - (int) (Math.random() * (5));
+		} else {
+			randomX = 1 - (int) (Math.random() * (3)); // Random number between -1 and 1
+			randomY = 1 - (int) (Math.random() * (3));
+			randomX = randomX * Game.randomness; // Multiply by 0, 1, or 2
+			randomY = randomY * Game.randomness;
+		}
 		if (dir == 0) { // Reverse on X
 			newValue = (ball.getXVelocity() * -1) + randomX;
 			if ((Math.abs(newValue) < 3) || (Math.abs(newValue) > 6)) { // Ensure velocity will still be between 3 and 6 and -3 and -6
