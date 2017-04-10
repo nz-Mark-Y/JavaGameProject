@@ -247,7 +247,7 @@ public class GameViewController {
 			}
 		}, 1000, 1000);
 	}
-	
+
 	// Create the animation timer and the timing timer
 	private void createTimers() {
 		Platform.runLater(new Runnable() { // Setting Z order
@@ -261,7 +261,7 @@ public class GameViewController {
 				gameOver3.toFront();
 			}
 		});
-		
+
 		// Animation timer for ball and paddles to move
 		animationTimer = new Timer();
 		animationTimer.scheduleAtFixedRate(new TimerTask () {
@@ -338,14 +338,138 @@ public class GameViewController {
 		if(!multiplayerTheme.isPlaying() && !paused){
 			multiplayerTheme.play();
 		}
-		
+
 		// Play post game music if game is finished but stop it if exited
 		if(game.isFinished() && !postGameTheme.isPlaying()){
 			postGameTheme.play();
 		}
-		ballAnimation(); // Loop through the ball animation frames
+		ballAnimation();
+		playerExplosionAnimation();
+		wallExplosionAnimation();
+	}
+
+	//Loads explosion animation when wall is hit
+	private void wallExplosionAnimation() {
+		for(int i=0;i<game.getWallList().size(); i++){
+			if(game.getWallList().get(i).isDestroyed() && !game.getWallList().get(i).getWallView().isVisible()){
+				game.getWallList().get(i).getWallView().setVisible(true);
+				Image explosion = new Image("file:images/explosion.gif");
+				ImagePattern explosionPattern = new ImagePattern(explosion);
+				switch(i) {
+				case 0: 
+					player1Wall1.setStrokeWidth(0);
+					player1Wall1.setFill(explosionPattern);
+					break;
+				case 1: 
+					player1Wall2.setStrokeWidth(0);
+					player1Wall2.setFill(explosionPattern);
+					break;
+				case 2: 
+					player1Wall3.setStrokeWidth(0);
+					player1Wall3.setFill(explosionPattern);
+					break;
+				case 3: 
+					player1Wall4.setStrokeWidth(0);
+					player1Wall4.setFill(explosionPattern);
+					break;
+				case 4: 
+					player1Wall5.setStrokeWidth(0);
+					player1Wall5.setFill(explosionPattern);
+					break;
+				case 5: 
+					player2Wall1.setStrokeWidth(0);
+					player2Wall1.setFill(explosionPattern);
+					break;
+				case 6: 
+					player2Wall2.setStrokeWidth(0);
+					player2Wall2.setFill(explosionPattern);
+					break;
+				case 7: 
+					player2Wall3.setStrokeWidth(0);
+					player2Wall3.setFill(explosionPattern);
+					break;
+				case 8: 
+					player2Wall4.setStrokeWidth(0);
+					player2Wall4.setFill(explosionPattern);
+					break;
+				case 9: 
+					player2Wall5.setStrokeWidth(0);
+					player2Wall5.setFill(explosionPattern);
+					break;
+				case 10: 
+					player3Wall1.setStrokeWidth(0);
+					player3Wall1.setFill(explosionPattern);
+					break;
+				case 11: 
+					player3Wall2.setStrokeWidth(0);
+					player3Wall2.setFill(explosionPattern);
+					break;
+				case 12: 
+					player3Wall3.setStrokeWidth(0);
+					player3Wall3.setFill(explosionPattern);
+					break;
+				case 13: 
+					player3Wall4.setStrokeWidth(0);
+					player3Wall4.setFill(explosionPattern);
+					break;
+				case 14: 
+					player3Wall5.setStrokeWidth(0);
+					player3Wall5.setFill(explosionPattern);
+					break;
+				case 15: 
+					player4Wall1.setStrokeWidth(0);
+					player4Wall1.setFill(explosionPattern);
+					break;
+				case 16: 
+					player4Wall2.setStrokeWidth(0);
+					player4Wall2.setFill(explosionPattern);
+					break;
+				case 17: 
+					player4Wall3.setStrokeWidth(0);
+					player4Wall3.setFill(explosionPattern);
+					break;
+				case 18: 
+					player4Wall4.setStrokeWidth(0);
+					player4Wall4.setFill(explosionPattern);
+					break;
+				case 19: 
+					player4Wall5.setStrokeWidth(0);
+					player4Wall5.setFill(explosionPattern);
+					break;
+				}
+			}
+		}
 	}
 	
+	//Loads explosion animation when warlord is hit
+	private void playerExplosionAnimation(){
+		for(int i=0; i<game.getPlayerList().size(); i++){
+			if(game.getPlayerList().get(i).isDead() && !game.getPlayerList().get(i).getWarlordView().isVisible()){
+				game.getPlayerList().get(i).getWarlordView().setVisible(true);
+				Image explosion = new Image("file:images/explosion.gif");
+				ImagePattern explosionPattern = new ImagePattern(explosion);
+				switch(i) {
+				case 0: 
+					player1Warlord.setStrokeWidth(0);
+					player1Warlord.setFill(explosionPattern);
+					break;
+				case 1: 
+					player1Warlord.setStrokeWidth(0);
+					player2Warlord.setFill(explosionPattern);
+					break;
+				case 2: 
+					player1Warlord.setStrokeWidth(0);
+					player3Warlord.setFill(explosionPattern);
+					break;
+				case 3: 
+					player1Warlord.setStrokeWidth(0);
+					player4Warlord.setFill(explosionPattern);
+					break;
+				}
+			}
+		}
+	}
+
 	// Loop through the ball frames with delay (to be able to see)
 	private void ballAnimation() {
 		if (delayer == 5) {
@@ -394,7 +518,7 @@ public class GameViewController {
 			}
 		}
 	}
-	
+
 	// If the user hits the exit key
 	public void exit() {
 		multiplayerTheme.stop(); // Stop the music
@@ -425,7 +549,7 @@ public class GameViewController {
 	public void delBall(Ball bullet) {
 		bullet.getBallView().setVisible(false);
 	}
-	
+
 	// Adding extra walls for China ability
 	public void addWall(Wall wall, int i) {
 		Rectangle rect = new Rectangle(); // Create a rectangle
@@ -467,7 +591,7 @@ public class GameViewController {
 		rect.setVisible(true);
 		powerupBuff.play();
 	}
-	
+
 	// Removing the shield and immunity from a warlord for Britain ability
 	private void removeImmune(int i) {
 		for (int j=0; j<pane.getChildren().size(); j++) {
@@ -493,7 +617,7 @@ public class GameViewController {
 			}
 		}
 	}
-	
+
 	// Sets the fonts for all the text on the screen
 	private void setFonts() {
 		Font textFont = null;
@@ -518,7 +642,7 @@ public class GameViewController {
 		gameOver3.setVisible(false);
 		pauseBox.setVisible(false);
 	}
-	
+
 	// Links the views created here to the models which the logic is implemented on. Allows for rotation and dynamic showing/hiding
 	public void addViewsToModels() {
 		game.getBall().setBallView(ball);
@@ -526,7 +650,7 @@ public class GameViewController {
 		game.getPlayerList().get(1).setWarlordView(player2Warlord);
 		game.getPlayerList().get(2).setWarlordView(player3Warlord);
 		game.getPlayerList().get(3).setWarlordView(player4Warlord);
-		
+
 		game.getPlayerList().get(0).getPaddle().setPaddleView(player1Paddle, 0); // The paddles
 		game.getPlayerList().get(1).getPaddle().setPaddleView(player2Paddle, 1);
 		game.getPlayerList().get(2).getPaddle().setPaddleView(player3Paddle, 2);
@@ -552,7 +676,7 @@ public class GameViewController {
 		} else {
 			player4Sheep.setVisible(false);
 		}
-		
+
 		game.getWallList().get(0).setWallView(player1Wall1); // The walls
 		game.getWallList().get(1).setWallView(player1Wall2);
 		game.getWallList().get(2).setWallView(player1Wall3);
@@ -583,19 +707,19 @@ public class GameViewController {
 		player1Wall3.setFill(player1CratePattern);
 		player1Wall4.setFill(player1CratePattern);
 		player1Wall5.setFill(player1CratePattern);
-		
+
 		player2Wall1.setFill(player2CratePattern);
 		player2Wall2.setFill(player2CratePattern);
 		player2Wall3.setFill(player2CratePattern);
 		player2Wall4.setFill(player2CratePattern);
 		player2Wall5.setFill(player2CratePattern);
-		
+
 		player3Wall1.setFill(player3CratePattern);
 		player3Wall2.setFill(player3CratePattern);
 		player3Wall3.setFill(player3CratePattern);
 		player3Wall4.setFill(player3CratePattern);
 		player3Wall5.setFill(player3CratePattern);
-		
+
 		player4Wall1.setFill(player4CratePattern);
 		player4Wall2.setFill(player4CratePattern);
 		player4Wall3.setFill(player4CratePattern);
@@ -614,7 +738,7 @@ public class GameViewController {
 
 		player4Paddle.setStrokeWidth(0);
 		player4Paddle.setFill(player4ShipPattern);
-		
+
 		// Applying patterns to sheep
 		player1Sheep.setStrokeWidth(0);
 		player1Sheep.setFill(sheepPattern);
@@ -644,7 +768,7 @@ public class GameViewController {
 		// Applying pattern to ball
 		ball.setStrokeWidth(0);
 		ball.setFill(gameBall1Pattern);
-		
+
 		// Apply flag patterns
 		flags.add(flag0Pattern);
 		flags.add(flag1Pattern);
@@ -660,14 +784,14 @@ public class GameViewController {
 		player2Flag.setFill(flags.get(game.getPlayerList().get(1).getClassNum()));
 		player3Flag.setFill(flags.get(game.getPlayerList().get(2).getClassNum()));
 		player4Flag.setFill(flags.get(game.getPlayerList().get(3).getClassNum()));
-		
+
 		// Game Background
 		ArrayList<ImagePattern> backgrounds = new ArrayList<ImagePattern>();
 		backgrounds.add(gameBackground1Pattern);
 		backgrounds.add(gameBackground2Pattern);
 		backgrounds.add(gameBackground3Pattern);
 		backgrounds.add(gameBackground4Pattern);
-		
+
 		background.setFill(backgrounds.get(game.getBackgroundNum()));
 	}
 
@@ -694,7 +818,7 @@ public class GameViewController {
 	private Rectangle player3Warlord;
 	@FXML 
 	private Rectangle player4Warlord;
-	
+
 	// Player 1 Walls
 	@FXML 
 	private Rectangle player1Wall1;
@@ -706,7 +830,7 @@ public class GameViewController {
 	private Rectangle player1Wall4;
 	@FXML 
 	private Rectangle player1Wall5;
-	
+
 	// Player 2 Walls
 	@FXML 
 	private Rectangle player2Wall1;
@@ -718,7 +842,7 @@ public class GameViewController {
 	private Rectangle player2Wall4;
 	@FXML 
 	private Rectangle player2Wall5;
-	
+
 	// Player 3 Walls
 	@FXML 
 	private Rectangle player3Wall1;
@@ -730,7 +854,7 @@ public class GameViewController {
 	private Rectangle player3Wall4;
 	@FXML 
 	private Rectangle player3Wall5;
-	
+
 	// Player 4 Walls
 	@FXML 
 	private Rectangle player4Wall1;
@@ -742,7 +866,7 @@ public class GameViewController {
 	private Rectangle player4Wall4;
 	@FXML 
 	private Rectangle player4Wall5;
-	
+
 	// Flags
 	@FXML 
 	private Rectangle player1Flag;
@@ -752,7 +876,7 @@ public class GameViewController {
 	private Rectangle player3Flag;
 	@FXML 
 	private Rectangle player4Flag;
-	
+
 	// Sheep
 	@FXML 
 	private Rectangle player1Sheep;
@@ -766,13 +890,13 @@ public class GameViewController {
 	//Miscellaneous objects
 	@FXML
 	private Rectangle background;
-	
+
 	@FXML 
 	private Pane pane;
 
 	@FXML
 	private Text timeLeft;
-	
+
 	@FXML
 	private Text countIn;
 
@@ -781,13 +905,13 @@ public class GameViewController {
 
 	@FXML
 	private Text pauseMessage2;
-	
+
 	@FXML
 	private Text gameOver1;
 
 	@FXML
 	private Text gameOver2;
-	
+
 	@FXML
 	private Text gameOver3;
 
@@ -815,7 +939,7 @@ public class GameViewController {
 	ImagePattern player3ShipPattern = new ImagePattern(player3Ship);
 	private Image player4Ship = new Image("file:images/player4Ship.png");
 	ImagePattern player4ShipPattern = new ImagePattern(player4Ship);
-	
+
 	// Patterns for sheep
 	private Image sheepImage = new Image("file:images/sheep.png");
 	ImagePattern sheepPattern = new ImagePattern(sheepImage);
@@ -843,7 +967,7 @@ public class GameViewController {
 	ImagePattern gameBall5Pattern = new ImagePattern(gameBall5);
 	private Image gameBall6 = new Image("file:images/ball6.png");
 	ImagePattern gameBall6Pattern = new ImagePattern(gameBall6);
-	
+
 	// Patterns for the flags
 	private Image flag0Image = new Image("file:images/fr.png");
 	ImagePattern flag0Pattern = new ImagePattern(flag0Image);
@@ -865,7 +989,7 @@ public class GameViewController {
 	ImagePattern flag8Pattern = new ImagePattern(flag8Image);
 	private Image flag9Image = new Image("file:images/br.png");
 	ImagePattern flag9Pattern = new ImagePattern(flag9Image);
-	
+
 	// Patterns for the background
 	private Image gameBackground1 = new Image("file:images/gameBackground.png");
 	ImagePattern gameBackground1Pattern = new ImagePattern(gameBackground1);
