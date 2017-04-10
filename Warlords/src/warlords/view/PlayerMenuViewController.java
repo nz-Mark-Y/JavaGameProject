@@ -379,6 +379,7 @@ public class PlayerMenuViewController {
 		textList.add(line7);
 		textList.add(line8);
 		textList.add(backInstructions1);
+		textList.add(backInstructions2);
 		labelList.add(description1);
 		labelList.add(description2);
 		labelList.add(description3);

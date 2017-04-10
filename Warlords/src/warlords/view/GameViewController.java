@@ -39,6 +39,8 @@ public class GameViewController {
 	private AudioClip countdownWait = new AudioClip(new File("sounds/countdownWait.wav").toURI().toString());
 	private AudioClip countdownReady = new AudioClip(new File("sounds/countdownReady.wav").toURI().toString());
 	private AudioClip postGameTheme = new AudioClip(new File("sounds/postGameTheme.wav").toURI().toString());
+	private AudioClip powerupBuff = new AudioClip(new File("sounds/powerupBuff.wav").toURI().toString());
+	private AudioClip powerupFire = new AudioClip(new File("sounds/powerupFire.wav").toURI().toString());
 	private Timer animationTimer;
 	private Timer timeLeftTimer;
 	private boolean paused;
@@ -416,6 +418,7 @@ public class GameViewController {
 		circle.setLayoutY(768);
 		pane.getChildren().add(circle);
 		bullet.setBallView(circle);
+		powerupFire.play();
 	}
 
 	// Removing bullets for USA ability
@@ -462,6 +465,7 @@ public class GameViewController {
 		}
 		pane.getChildren().add(rect); // Show it
 		rect.setVisible(true);
+		powerupBuff.play();
 	}
 	
 	// Removing the shield and immunity from a warlord for Britain ability
