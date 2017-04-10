@@ -37,7 +37,7 @@ public class WarlordsTest extends TestSuite {
     	player1Wall = new Wall(0);
     	ArrayList<Wall> wallList = new ArrayList<Wall>();
     	wallList.add((Wall) player1Wall);
-    	game = new Game((Ball) ball, 768, 768, playerList, wallList);
+    	game = new Game((Ball) ball, 768, 768, playerList, wallList, -1);
     }
 
     @Test

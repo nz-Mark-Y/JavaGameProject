@@ -19,6 +19,7 @@ public class Game implements IGame {
 	private int ticksSinceLastHit;
 	private float paddleSpeed = (float) 0.7;
 	private GameViewController gameViewController;
+	private int backgroundNum;
 	// Sounds
 	private AudioClip paddleBounce = new AudioClip(new File("sounds/paddleBounce.wav").toURI().toString());
 	private AudioClip wallExplosion = new AudioClip(new File("sounds/explosion.wav").toURI().toString());
@@ -27,7 +28,7 @@ public class Game implements IGame {
 	private AudioClip sheepBounce = new AudioClip(new File("sounds/sheep.wav").toURI().toString());
 
 	// Constructor
-	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList) {
+	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList, int backgroundNum) {
 		Game.xBound = xBound;
 		Game.yBound = yBound;
 		this.playerList = playerList;
@@ -36,6 +37,7 @@ public class Game implements IGame {
 		finished = false;
 		timeRemaining = (float) 120;
 		ticksSinceLastHit = 6;
+		setBackgroundNum(backgroundNum);
 	}
 
 	// Game Logic
@@ -647,6 +649,20 @@ public class Game implements IGame {
 					}
 				}
 			}
+		}
+	}
+	
+	// Return the background number
+	public int getBackgroundNum() {
+		return backgroundNum;
+	}
+	
+	// Set the background number to random or an assigned value
+	public void setBackgroundNum(int num) {
+		if (num == -1) {
+			backgroundNum = (int) (Math.random() * 4); // Random number from 0 to 3
+		} else {
+			backgroundNum = num;
 		}
 	}
 	

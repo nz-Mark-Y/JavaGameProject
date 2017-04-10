@@ -656,6 +656,15 @@ public class GameViewController {
 		player2Flag.setFill(flags.get(game.getPlayerList().get(1).getClassNum()));
 		player3Flag.setFill(flags.get(game.getPlayerList().get(2).getClassNum()));
 		player4Flag.setFill(flags.get(game.getPlayerList().get(3).getClassNum()));
+		
+		// Game Background
+		ArrayList<ImagePattern> backgrounds = new ArrayList<ImagePattern>();
+		backgrounds.add(gameBackground1Pattern);
+		backgrounds.add(gameBackground2Pattern);
+		backgrounds.add(gameBackground3Pattern);
+		backgrounds.add(gameBackground4Pattern);
+		
+		background.setFill(backgrounds.get(game.getBackgroundNum()));
 	}
 
 	// Ball
@@ -751,6 +760,9 @@ public class GameViewController {
 	private Rectangle player4Sheep;
 
 	//Miscellaneous objects
+	@FXML
+	private Rectangle background;
+	
 	@FXML 
 	private Pane pane;
 
@@ -849,4 +861,14 @@ public class GameViewController {
 	ImagePattern flag8Pattern = new ImagePattern(flag8Image);
 	private Image flag9Image = new Image("file:images/br.png");
 	ImagePattern flag9Pattern = new ImagePattern(flag9Image);
+	
+	// Patterns for the background
+	private Image gameBackground1 = new Image("file:images/gameBackground.png");
+	ImagePattern gameBackground1Pattern = new ImagePattern(gameBackground1);
+	private Image gameBackground2 = new Image("file:images/gameBackground2.png");
+	ImagePattern gameBackground2Pattern = new ImagePattern(gameBackground2);
+	private Image gameBackground3 = new Image("file:images/gameBackground3.png");
+	ImagePattern gameBackground3Pattern = new ImagePattern(gameBackground3);
+	private Image gameBackground4 = new Image("file:images/gameBackground4.png");
+	ImagePattern gameBackground4Pattern = new ImagePattern(gameBackground4);
 }

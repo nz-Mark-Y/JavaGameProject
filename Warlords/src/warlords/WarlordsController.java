@@ -92,7 +92,7 @@ public class WarlordsController extends Application {
 		wallList.add(wall44);
 		wallList.add(wall45);
 		
-		game = new Game(ball, 763, 763, playerList, wallList);	// Create the game	
+		game = new Game(ball, 763, 763, playerList, wallList, -1);	// Create the game	
 	}
 	
 	// On start, create the root layout then show the main menu
