@@ -8,6 +8,8 @@ import warlords.tests.IGame;
 import warlords.view.GameViewController;
 
 public class Game implements IGame {
+	public static boolean reverseControls = false;
+	public static int randomness = 1;
 	private ArrayList<Ball> ballList = new ArrayList<Ball>();
 	private ArrayList<Warlord> playerList = new ArrayList<Warlord>();
 	private ArrayList<Wall> wallList = new ArrayList<Wall>();
@@ -292,6 +294,8 @@ public class Game implements IGame {
 		int newValue;
 		int randomX = 1 - (int) (Math.random() * (3)); // Random number between -1 and 1
 		int randomY = 1 - (int) (Math.random() * (3));
+		randomX = randomX * Game.randomness; // Multiply by 0, 1, or 2
+		randomY = randomY * Game.randomness;
 		if (dir == 0) { // Reverse on X
 			newValue = (ball.getXVelocity() * -1) + randomX;
 			if ((Math.abs(newValue) < 3) || (Math.abs(newValue) > 6)) { // Ensure velocity will still be between 3 and 6 and -3 and -6
@@ -431,37 +435,69 @@ public class Game implements IGame {
 	// If its corresponding key is down, then call the curve function on that paddle
 	public void movePaddles() {
 		if ((keyList[0] == true) && (!playerList.get(2).isComputerControlled())) { // Player 1 left
-			curveLeft(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
+			if (reverseControls) {
+				curveRight(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
+			} else {
+				curveLeft(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
+			}	
 		} 
 		if ((keyList[1] == true) && (!playerList.get(2).isComputerControlled())) { // Player 1 right
-			curveRight(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
+			if (reverseControls) {
+				curveLeft(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
+			} else {
+				curveRight(playerList.get(2).getPaddle(), 2, (float) paddleSpeed);
+			}
 		}
 		if ((keyList[2] == true) && (!playerList.get(2).isComputerControlled())) { // Player 1 ability
 			useAbility(2); 
 		}
 		if ((keyList[4] == true) && (!playerList.get(0).isComputerControlled())) { // Player 2 left
-			curveLeft(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
+			if (reverseControls) {
+				curveRight(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
+			} else {
+				curveLeft(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
+			}
 		} 
 		if ((keyList[5] == true) && (!playerList.get(0).isComputerControlled())) { // Player 2 right
-			curveRight(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
+			if (reverseControls) {
+				curveLeft(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
+			} else {
+				curveRight(playerList.get(0).getPaddle(), 0, (float) paddleSpeed);
+			}
 		}
 		if ((keyList[6] == true) && (!playerList.get(0).isComputerControlled())) { // Player 2 ability
 			useAbility(0);
 		}
 		if ((keyList[8] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 left
-			curveLeft(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
+			if (reverseControls) {
+				curveRight(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
+			} else {
+				curveLeft(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
+			}
 		} 
 		if ((keyList[9] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 right
-			curveRight(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
+			if (reverseControls) {
+				curveLeft(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
+			} else {
+				curveRight(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
+			}
 		}
 		if ((keyList[10] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 ability
 			useAbility(1);
 		}
 		if ((keyList[12] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 left
-			curveLeft(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
+			if (reverseControls) {
+				curveRight(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
+			} else {
+				curveLeft(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
+			}
 		} 
 		if ((keyList[13] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 right
-			curveRight(playerList.get(3).getPaddle(), 3, (float) paddleSpeed); 
+			if (reverseControls) {
+				curveLeft(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
+			} else {
+				curveRight(playerList.get(3).getPaddle(), 3, (float) paddleSpeed); 
+			}
 		}
 		if ((keyList[14] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 ability
 			useAbility(3);

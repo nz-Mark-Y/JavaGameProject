@@ -21,6 +21,7 @@ import warlords.view.CampaignMenuViewController;
 import warlords.view.GameViewController;
 import warlords.view.MainMenuViewController;
 import warlords.view.MultiplayerMenuViewController;
+import warlords.view.MutatorsViewController;
 import warlords.view.OptionsViewController;
 import warlords.view.PlayerMenuViewController;
 
@@ -268,22 +269,40 @@ public class WarlordsController extends Application {
 	}
 	
 	// Display the multiplayer player select screen
-		public void showPlayerMenuView() {
-			try {
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(WarlordsController.class.getResource("view/PlayerMenuView.fxml")); // The multiplayer player select screen
-				AnchorPane playerMenuView = (AnchorPane) loader.load();	
+	public void showPlayerMenuView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/PlayerMenuView.fxml")); // The multiplayer player select screen
+			AnchorPane playerMenuView = (AnchorPane) loader.load();	
 							
-				rootLayout.setCenter(playerMenuView);
+			rootLayout.setCenter(playerMenuView);
 							
-				PlayerMenuViewController controller = loader.getController(); // Link controllers
-				controller.setWarlordsController(this, scene);
+			PlayerMenuViewController controller = loader.getController(); // Link controllers
+			controller.setWarlordsController(this, scene);
 				
-				menuSelection.play();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
+			menuSelection.play();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
+	}
+	
+	// Display the multiplayer mutators select screen
+	public void showMutatorsView() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/MutatorsView.fxml")); // The multiplayer mutators select screen
+			AnchorPane mutatorsView = (AnchorPane) loader.load();	
+							
+			rootLayout.setCenter(mutatorsView);
+							
+			MutatorsViewController controller = loader.getController(); // Link controllers
+			controller.setWarlordsController(this, scene);
+				
+			menuSelection.play();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;

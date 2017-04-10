@@ -29,6 +29,7 @@ import warlords.model.Wall;
 import warlords.model.Warlord;
 
 public class GameViewController {
+	public static int gameSpeed = 12;
 	private WarlordsController warlordsController;
 	private Game game;
 	Scene scene;
@@ -292,7 +293,7 @@ public class GameViewController {
 					System.out.println(ex.getMessage());
 				}
 			}
-		}, 10, 10);	// Tick every 10ms
+		}, gameSpeed, gameSpeed);	// Tick every 10ms
 
 		// Timer to display time remaining
 		timeLeftTimer = new Timer();
