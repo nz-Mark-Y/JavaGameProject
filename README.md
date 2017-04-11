@@ -24,6 +24,7 @@ To play the game:
 * Bottom Left Player: J, L, I
 * Bottom Right Player: LEFT, RIGHT, UP
 * Top Right Player: NUMPAD9, NUMPAD3, NUMPAD5 (ensure NUMLOCK is on)
+* If your class has a cool down ability then it is ready whenever the flag in your corner is fully opaque.
 
 ### How do I set up in Eclipse? ###
 1. Clone the repository onto your system
