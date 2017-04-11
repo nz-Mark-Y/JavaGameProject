@@ -11,6 +11,7 @@ public class Wall implements IWall {
 	private boolean destroyed;
 	private int belongsTo;
 	private Rectangle wallView;
+	private boolean isTaken;
 
 	// Default constructor for the wall, creates at (0, 0)
 	public Wall(int owner) {
@@ -18,6 +19,7 @@ public class Wall implements IWall {
 		y = 0;
 		belongsTo = owner;
 		destroyed = false;
+		isTaken = false;
 	}
 
 	// Constructor for the wall, also specifies the player that owns the wall
@@ -26,6 +28,7 @@ public class Wall implements IWall {
 		this.y = y;
 		belongsTo = owner;
 		destroyed = false;
+		isTaken = false;
 	}
 
 	// Set the X position
@@ -75,5 +78,15 @@ public class Wall implements IWall {
 	// Get the wall view
 	public Rectangle getWallView() {
 		return wallView;
+	}
+	
+	// Get if the wall is taken by the Russia ability
+	public boolean getTaken() {
+		return isTaken;
+	}
+	
+	// Set if the wall is taken by the Russia ability
+	public void setTaken(boolean taken) {
+		isTaken = taken;
 	}
 }

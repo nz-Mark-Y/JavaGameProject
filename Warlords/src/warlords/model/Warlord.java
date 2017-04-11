@@ -29,7 +29,7 @@ public class Warlord implements IWarlord {
 		won = false;
 		wallsLeft = 0;
 		computerControlled = control;
-		lastAbility = 0;
+		lastAbility = 140;
 	}
 	
 	// Constructor for the warlord, specifies if the AI controls the paddle, and the class of the warlord
@@ -42,7 +42,7 @@ public class Warlord implements IWarlord {
 		won = false;
 		wallsLeft = 0;
 		computerControlled = control;
-		lastAbility = 0;
+		lastAbility = 140;
 		if (classNum == 3) { // If the player is New Zealand
 			sheep = new Paddle(paddle.getXPos(), paddle.getYPos()); // Create a sheep
 		} else {

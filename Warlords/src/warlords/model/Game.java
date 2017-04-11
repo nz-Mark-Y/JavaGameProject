@@ -192,6 +192,9 @@ public class Game implements IGame {
 						} else {
 							
 						}
+						if (ball.isSpider()) { // If the ball is an australian spider
+							paddle.setSlow(true);
+						}
 						return true;
 					} 
 				}							
@@ -231,7 +234,11 @@ public class Game implements IGame {
 								} else {
 									
 								}
-								wall.destroy(); // Destroy the wall on hit
+								if (ball.isSpider()){ // If the ball is an Australian spider, dont destroy it
+									
+								} else {
+									wall.destroy(); // Destroy the wall on hit
+								}						
 								return true;
 							} 
 						}							
@@ -273,7 +280,7 @@ public class Game implements IGame {
 								} else {
 								
 								}
-								if (player.getImmune() >= 0) { // If the player is Britain and immune, dont die
+								if ((player.getImmune() >= 0) || (ball.isSpider())){ // If the player is Britain and immune, or an Australian spider, dont die
 									
 								} else { 
 									player.dies(); // Player dies
@@ -363,8 +370,8 @@ public class Game implements IGame {
 	// Check if a coordinate on the ball will hit a coordinate on another object. Used for collision detection
 	private boolean coordInBallPath(Ball ball, int xCoord, int yCoord) {
 		int x0, x1, y0, y1;
-		for (int z=0; z<Ball.length; z=z+3) {
-			for (int y=0; y<Ball.height; y=y+3) { // Check every 3rd coordinate on the ball (stops lag)
+		for (int z=0; z<Ball.length; z=z+5) {
+			for (int y=0; y<Ball.height; y=y+5) { // Check every 5th coordinate on the ball (stops lag)
 				x0 = ball.getXPos() + z;
 				x1 = ball.getXPos() + ball.getXVelocity() + (ball.getXVelocity() / 3) + z;
 				y0 = ball.getYPos() + y;
@@ -513,6 +520,9 @@ public class Game implements IGame {
 	
 	// Move the paddle along its path to the left
 	public void curveLeft(Paddle paddle, int playerNum, float speed) {
+		if (paddle.getSlow()) { // Australian spider slows
+			speed = speed / 2;
+		}
 		if (playerNum == 1) { // Player 2
 			if (paddle.getXPos() > 0) { // If not out of bounds
 				paddle.decrTheta(speed);  // Decrease angle
@@ -545,6 +555,9 @@ public class Game implements IGame {
 	
 	// Move the paddle along its path to the right
 	public void curveRight(Paddle paddle, int playerNum, float speed) {
+		if (paddle.getSlow()) { // Australian spider slows
+			speed = speed / 2;
+		}
 		if (playerNum == 1) { // Player 2
 			if (paddle.getYPos() > 0) { // If not out of bounds
 				paddle.incrTheta(speed); // Increase angle
@@ -581,37 +594,136 @@ public class Game implements IGame {
 			if (playerList.get(playerNum).getClassNum() == 0) { // France, to be implemented
 				
 			} else if (playerList.get(playerNum).getClassNum() == 1) { // USA, shoots a bullet
-				if (playerList.get(playerNum).getLastAbility() == 0) {
+				if (playerList.get(playerNum).getLastAbility() - timeRemaining > 20) { // 20 second cooldown
 					Ball bullet;
 					if (playerNum == 0) { // Player 1, set location and velocity of bullet
-						bullet = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
+						bullet = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, true, false);
 						bullet.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 50));
 						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
 					} else if (playerNum == 1) { // Player 2
-						bullet = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
+						bullet = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true, false);
 						bullet.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 50));
 						bullet.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 50));
 					} else if (playerNum == 2) { // Player 3
-						bullet = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true);
+						bullet = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, true, false);
 						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
 						bullet.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 50));
 					} else { // Player 4
-						bullet = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, true);
+						bullet = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, true, false);
 						bullet.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
 						bullet.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
 					}
 					ballList.add(bullet); // Add the bullet to the list of balls
 					gameViewController.createBulletView(bullet); // Create the bullet view with the game view controller
-					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Single use only
+					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
 				}
 			} else if (playerList.get(playerNum).getClassNum() == 2) { // Britain
 				if (playerList.get(playerNum).getImmune() == -1) {
 					playerList.get(playerNum).setImmune(0); // Starts counting immunity in countImmune()
 				}
+			} else if (playerList.get(playerNum).getClassNum() == 5) { // Australia
+				if (playerList.get(playerNum).getLastAbility() - timeRemaining > 20) { // 20 second cooldown
+					Ball spider;
+					if (playerNum == 0) { // Player 1, set location and velocity of spider
+						spider = new Ball(playerList.get(0).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(0).getPaddle().getYPos() - Ball.height - Ball.height / 2, false, true);
+						spider.setXVelocity((int) (playerList.get(0).getPaddle().getXPos() / 50));
+						spider.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
+					} else if (playerNum == 1) { // Player 2
+						spider = new Ball(playerList.get(1).getPaddle().getXPos() + Paddle.length + Ball.length + Ball.length / 2, playerList.get(1).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, false, true);
+						spider.setXVelocity((int) (playerList.get(1).getPaddle().getXPos() / 50));
+						spider.setYVelocity((int) (playerList.get(1).getPaddle().getYPos() / 50));
+					} else if (playerNum == 2) { // Player 3
+						spider = new Ball(playerList.get(2).getPaddle(). getXPos() - Ball.length - Ball.length / 2, playerList.get(2).getPaddle().getYPos() + Paddle.height + Ball.height + Ball.height / 2, false, true);
+						spider.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
+						spider.setYVelocity((int) (playerList.get(2).getPaddle().getYPos() / 50));
+					} else { // Player 4
+						spider = new Ball(playerList.get(3).getPaddle().getXPos() - Ball.length - Ball.length / 2, playerList.get(3).getPaddle().getYPos() - Ball.height - Ball.height / 2, false, true);
+						spider.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
+						spider.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
+					}
+					ballList.add(spider); // Add the spider to the list of balls
+					gameViewController.createSpiderView(spider); // Create the bullet view with the game view controller
+					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
+				}
+			} else if (playerList.get(playerNum).getClassNum() == 7) { // Russia
+				if (playerList.get(playerNum).getLastAbility() == 140) { // Single use only
+					for (int i=0; i<playerList.size(); i++) {
+						if (playerNum != i) { // Everyone but the player
+							ArrayList<Wall> tempWallList = new ArrayList<Wall>(); // Create a list of walls belonging to that player
+							for (int j=0; j<wallList.size(); j++) {
+								if ((wallList.get(j).getOwner() == i) && (wallList.get(j).getTaken() == false)) { // Check if that wall has already been taken
+									tempWallList.add(wallList.get(j));
+								}
+							}
+							russiaTake(tempWallList, playerNum, i);
+						}
+					}
+				}
+				playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
 			}
 		}
 	}
 	
+	// Helper function for Russia to take a random wall from other players
+	public void russiaTake(ArrayList<Wall> tempWallList, int playerNum, int i) {
+		if (tempWallList.size() > 0) {
+			int randPos = (int) Math.random() * tempWallList.size(); // Choose a random wall
+			if (playerNum == 0) { // Player 1 taking
+				if (i == 1) { // Take from player 2
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(484);
+				}
+				if (i == 2) { // Take from player 3
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(484);
+				}
+				if (i == 3) { // Take from player 4
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(484);
+				}
+			} else if (playerNum == 1) { // Player 2 taking
+				if (i == 0) { // Take from player 1
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(404);
+				}
+				if (i == 2) { // Take from player 3
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(404);
+				}
+				if (i == 3) { // Take from player 3
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(404);
+				}
+			} else if (playerNum == 2) { // Player 3 taking
+				if (i == 0) { // Take from player 1
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(324);
+				}
+				if (i == 1) { // Take from player 2
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(324);
+				}
+				if (i == 3) { // Take from player 3
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(324);
+				}
+			} else { // Player 4 taking
+				if (i == 0) { // Take from player 1
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(244);
+				}
+				if (i == 1) { // Take from player 2
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(244);
+				}
+				if (i == 2) { // Take from player 3
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(244);
+				}
+			}
+			tempWallList.get(randPos).setTaken(true);
+		}
+	}
 	// Counting how long a Britain players immunity is on. 500 ticks = 5s
 	public void countImmune() {
 		for (int i=0;i<playerList.size(); i++) {

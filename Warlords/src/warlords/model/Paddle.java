@@ -1,5 +1,9 @@
 package warlords.model;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import warlords.tests.IPaddle;
 
@@ -10,12 +14,14 @@ public class Paddle implements IPaddle {
 	public static int length = 40;
 	private float theta;
 	private Rectangle paddleView;
+	private boolean isSlowed;
 	
 	// Constructor for the paddle
 	public Paddle(int init_x, int init_y) {
 		x = init_x;
 		y = init_y;
 		theta = 45;
+		isSlowed = false;
 	}
 	
 	// Default constructor for the paddle, creates at (0, 0)
@@ -23,6 +29,7 @@ public class Paddle implements IPaddle {
 		x = 0;
 		y = 0;
 		theta = 45;
+		isSlowed = false;
 	}
 
 	// Set the X position
@@ -81,7 +88,30 @@ public class Paddle implements IPaddle {
 		}
 	}
 	
+	// Get the view of the paddle
 	public Rectangle getPaddleView() {	
 		return paddleView;
+	}
+	
+	// Get if the paddle is slowed or not
+	public boolean getSlow() {
+		return isSlowed;
+	}
+	
+	// Set if the paddle is slowed or not
+	public void setSlow(boolean input) {
+		isSlowed = input;
+		if (input == true) {
+			paddleView.setStroke(Color.LAWNGREEN);
+			paddleView.setStrokeWidth(3.0);
+			Timer slowTime = new Timer();
+			slowTime.schedule(new TimerTask() { // 5 seconds of slow
+				@Override
+				public void run() {
+					isSlowed = false;	
+					paddleView.setStrokeWidth(0);
+				}			
+			}, 5000);
+		}
 	}
 }
