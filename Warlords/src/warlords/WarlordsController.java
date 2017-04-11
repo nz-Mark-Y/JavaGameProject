@@ -129,7 +129,7 @@ public class WarlordsController extends Application {
 	// Display the game view, and the two side windows 
 	public void showGameView() {
 		if (game == null) { // Default game, useful when testing
-			createNewGame(0, true, 0, true, 5, false, 0 ,true);
+			createNewGame(0, true, 0, true, 7, false, 0 ,true);
 		}
 		try {
 			FXMLLoader loader = new FXMLLoader();

@@ -435,7 +435,7 @@ public class PlayerMenuViewController {
 		descriptions.add("China: \n You have two extra walls guarding your warlord. Reliability not guaranteed.");
 		descriptions.add("Australia: \n Shoots a spider using your UP key \n Spider will not affect walls or warlords, but if its hits a paddle it will be slowed for 5s. 20s cooldown.");
 		descriptions.add("India: \n To Be Implemented");
-		descriptions.add("Russia: \n To Be Implemented");
+		descriptions.add("Russia: \n Sieze the Memes of Production! \n Takes random walls from other players' bases and adds them to a communal wall in the middle. Single use.");
 		descriptions.add("Egypt: \n To Be Implemented");
 		descriptions.add("Brazil: \n To Be Implemented");
 	}

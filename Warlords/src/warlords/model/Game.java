@@ -641,14 +641,89 @@ public class Game implements IGame {
 						spider.setXVelocity((int) -((xBound - playerList.get(2).getPaddle().getXPos()) / 50));
 						spider.setYVelocity((int) -((yBound - playerList.get(1).getPaddle().getYPos()) / 50));
 					}
-					ballList.add(spider); // Add thespiderto the list of balls
+					ballList.add(spider); // Add the spider to the list of balls
 					gameViewController.createSpiderView(spider); // Create the bullet view with the game view controller
 					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
 				}
+			} else if (playerList.get(playerNum).getClassNum() == 7) { // Russia
+				if (playerList.get(playerNum).getLastAbility() == 140) { // Single use only
+					for (int i=0; i<playerList.size(); i++) {
+						if (playerNum != i) { // Everyone but the player
+							ArrayList<Wall> tempWallList = new ArrayList<Wall>(); // Create a list of walls belonging to that player
+							for (int j=0; j<wallList.size(); j++) {
+								if ((wallList.get(j).getOwner() == i) && (wallList.get(j).getTaken() == false)) { // Check if that wall has already been taken
+									tempWallList.add(wallList.get(j));
+								}
+							}
+							russiaTake(tempWallList, playerNum, i);
+						}
+					}
+				}
+				playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
 			}
 		}
 	}
 	
+	// Helper function for Russia to take a random wall from other players
+	public void russiaTake(ArrayList<Wall> tempWallList, int playerNum, int i) {
+		if (tempWallList.size() > 0) {
+			int randPos = (int) Math.random() * tempWallList.size(); // Choose a random wall
+			if (playerNum == 0) { // Player 1 taking
+				if (i == 1) { // Take from player 2
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(484);
+				}
+				if (i == 2) { // Take from player 3
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(484);
+				}
+				if (i == 3) { // Take from player 4
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(484);
+				}
+			} else if (playerNum == 1) { // Player 2 taking
+				if (i == 0) { // Take from player 1
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(404);
+				}
+				if (i == 2) { // Take from player 3
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(404);
+				}
+				if (i == 3) { // Take from player 3
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(404);
+				}
+			} else if (playerNum == 2) { // Player 3 taking
+				if (i == 0) { // Take from player 1
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(324);
+				}
+				if (i == 1) { // Take from player 2
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(324);
+				}
+				if (i == 3) { // Take from player 3
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(324);
+				}
+			} else { // Player 4 taking
+				if (i == 0) { // Take from player 1
+					tempWallList.get(randPos).setXPos(284);
+					tempWallList.get(randPos).setYpos(244);
+				}
+				if (i == 1) { // Take from player 2
+					tempWallList.get(randPos).setXPos(364);
+					tempWallList.get(randPos).setYpos(244);
+				}
+				if (i == 2) { // Take from player 3
+					tempWallList.get(randPos).setXPos(444);
+					tempWallList.get(randPos).setYpos(244);
+				}
+			}
+			tempWallList.get(randPos).setTaken(true);
+		}
+	}
 	// Counting how long a Britain players immunity is on. 500 ticks = 5s
 	public void countImmune() {
 		for (int i=0;i<playerList.size(); i++) {
