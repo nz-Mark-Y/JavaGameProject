@@ -154,7 +154,6 @@ public class GameViewController {
 							break;
 						case ENTER:
 							if(MainMenuViewController.level <= 8 && MainMenuViewController.isCampaign){
-								MainMenuViewController.level++;
 								scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
 								
 								//Load next part of story
