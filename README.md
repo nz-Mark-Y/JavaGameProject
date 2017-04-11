@@ -14,9 +14,9 @@ To play a campaign game:
 To play a multiplayer or single player game:
 
 * From the main menu, select Multiplayer 
-* In the Player select screen use LEFT or RIGHT to choose each player's class, and UP to toggle between player or AI control.
+* In the Player select screen use LEFT or RIGHT to choose each player's class, and UP to toggle between player or AI control. Press ENTER to confirm.
 * In the Mutators select screen use UP and DOWN to select a mutator, and ENTER key to modify it.
-* Press ENTER and then Start to play
+* Select Start to play
 
 To play the game:
 
