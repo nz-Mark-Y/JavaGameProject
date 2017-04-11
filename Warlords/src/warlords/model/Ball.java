@@ -8,10 +8,11 @@ public class Ball implements IBall {
 	private int y;
 	private int dx;
 	private int dy;
-	public static int height = 10;
-	public static int length = 10; 
+	public static int height = 16;
+	public static int length = 16; 
 	private Circle ballView;
 	private boolean bulletBall;
+	private boolean spiderBall;
 	
 	// Ball constructor for regular ball
 	public Ball(int init_x, int init_y) {
@@ -20,16 +21,18 @@ public class Ball implements IBall {
 		dx = 0;
 		dy = 0;
 		bulletBall = false;
+		spiderBall = false;
 	}
 	
 	
-	// Ball constructor for if bullet
-	public Ball(int init_x, int init_y, boolean isBullet) {
+	// Ball constructor for if special
+	public Ball(int init_x, int init_y, boolean isBullet, boolean isSpider) {
 		x = init_x;
 		y = init_y;
 		dx = 0;
 		dy = 0;
-		bulletBall = true;
+		bulletBall = isBullet;
+		spiderBall = isSpider;
 	}
 	
 	// Ball constructor for default ball at (0, 0)
@@ -107,4 +110,9 @@ public class Ball implements IBall {
 	public boolean isBullet() {
 		return bulletBall;
 	}
+	
+	// Get if the ball is a spider or not
+		public boolean isSpider() {
+			return spiderBall;
+		}
 }

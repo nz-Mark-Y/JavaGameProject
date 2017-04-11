@@ -429,11 +429,11 @@ public class PlayerMenuViewController {
 	// The description strings
 	public void addDescriptions() {
 		descriptions.add("france: \n To Be Implemented");
-		descriptions.add("USA: \n Shoots a single use bullet using your UP key \n Bullet will destroy a wall or warlord if it hits one, but does not bounce. Single use.");
+		descriptions.add("USA: \n Shoots a bullet using your UP key \n Bullet will destroy a wall or warlord if it hits one, but does not bounce. 20s cooldown.");
 		descriptions.add("Britain: \n Trigger article 50 by pressing the UP key for your warlord to have 5 seconds of immunity. Single use.");
 		descriptions.add("New Zealand: \n You have an extra sheep paddle guarding your warlord \n It wanders randomly around the same path as your paddle. \n Baaa!");
 		descriptions.add("China: \n You have two extra walls guarding your warlord. Reliability not guaranteed.");
-		descriptions.add("Australia: \n To Be Implemented");
+		descriptions.add("Australia: \n Shoots a spider using your UP key \n Spider will not affect walls or warlords, but if its hits a paddle it will be slowed for 5s. 20s cooldown.");
 		descriptions.add("India: \n To Be Implemented");
 		descriptions.add("Russia: \n To Be Implemented");
 		descriptions.add("Egypt: \n To Be Implemented");

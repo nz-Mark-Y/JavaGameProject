@@ -36,6 +36,7 @@ public class GameViewController {
 	private EventHandler<KeyEvent> handler0;
 	private EventHandler<KeyEvent> handler1;
 	private ArrayList<ImagePattern> flags = new ArrayList<ImagePattern>();
+	private ArrayList<Rectangle> flagRects = new ArrayList<Rectangle>();
 	private AudioClip multiplayerTheme = new AudioClip(new File("sounds/multiplayerTheme.wav").toURI().toString());
 	private AudioClip countdownWait = new AudioClip(new File("sounds/countdownWait.wav").toURI().toString());
 	private AudioClip countdownReady = new AudioClip(new File("sounds/countdownReady.wav").toURI().toString());
@@ -329,6 +330,13 @@ public class GameViewController {
 					removeImmune(i);	
 				}
 			}
+			if ((game.getPlayerList().get(i).getClassNum() == 1) || (game.getPlayerList().get(i).getClassNum() == 5)) { // If USA or Australia, cooldown visibility
+				float diff = game.getPlayerList().get(i).getLastAbility() - game.getTimeRemaining();
+				if (diff > 20) {
+					diff = 20;
+				}
+				flagRects.get(i).setOpacity(diff / 20);
+			}
 		}
 		for (int i=0;i<game.getWallList().size(); i++) { // Render walls in their correct places
 			game.getWallList().get(i).getWallView().setX(game.getWallList().get(i).getXPos());
@@ -540,7 +548,7 @@ public class GameViewController {
 	public void createBulletView(Ball bullet) {
 		Circle circle = new Circle();
 		circle.setFill(ball.getFill());
-		circle.setRadius(5);
+		circle.setRadius(8);
 		circle.setCenterX(0);
 		circle.setCenterY(0);
 		circle.setLayoutX(0);
@@ -549,8 +557,22 @@ public class GameViewController {
 		bullet.setBallView(circle);
 		powerupFire.play();
 	}
+	
+	// Creating spiders for Australia ability
+		public void createSpiderView(Ball spider) {
+			Circle circle = new Circle();
+			circle.setFill(spiderPattern);
+			circle.setRadius(8);
+			circle.setCenterX(0);
+			circle.setCenterY(0);
+			circle.setLayoutX(0);
+			circle.setLayoutY(768);
+			pane.getChildren().add(circle);
+			spider.setBallView(circle);
+			powerupFire.play();
+		}
 
-	// Removing bullets for USA ability
+	// Removing bullets for USA and Australia ability
 	public void delBall(Ball bullet) {
 		bullet.getBallView().setVisible(false);
 	}
@@ -789,6 +811,10 @@ public class GameViewController {
 		player2Flag.setFill(flags.get(game.getPlayerList().get(1).getClassNum()));
 		player3Flag.setFill(flags.get(game.getPlayerList().get(2).getClassNum()));
 		player4Flag.setFill(flags.get(game.getPlayerList().get(3).getClassNum()));
+		flagRects.add(player1Flag);
+		flagRects.add(player2Flag);
+		flagRects.add(player3Flag);
+		flagRects.add(player4Flag);
 
 		// Game Background
 		ArrayList<ImagePattern> backgrounds = new ArrayList<ImagePattern>();
@@ -948,6 +974,10 @@ public class GameViewController {
 	// Patterns for sheep
 	private Image sheepImage = new Image("file:images/sheep.png");
 	ImagePattern sheepPattern = new ImagePattern(sheepImage);
+	
+	// Patterns for spiders
+	private Image spiderImage = new Image("file:images/spider.png");
+	ImagePattern spiderPattern = new ImagePattern(spiderImage);
 
 	// Patterns for the warlords
 	private Image player1Mothership = new Image("file:images/player1Mothership.png");
