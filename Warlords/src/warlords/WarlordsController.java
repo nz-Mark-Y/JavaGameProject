@@ -24,6 +24,7 @@ import warlords.view.MultiplayerMenuViewController;
 import warlords.view.MutatorsViewController;
 import warlords.view.OptionsViewController;
 import warlords.view.PlayerMenuViewController;
+import warlords.view.Story0ViewController;
 
 public class WarlordsController extends Application {
 	private Stage primaryStage;
@@ -161,7 +162,28 @@ public class WarlordsController extends Application {
 			ex.printStackTrace();
 		}
 	}
-
+	
+	public void showStory0View() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(WarlordsController.class.getResource("view/Story0View.fxml")); // The dialogue page
+			AnchorPane Story0View = (AnchorPane) loader.load();	
+						
+			rootLayout.setCenter(Story0View);
+			
+			//Imported from .view
+			Story0ViewController controller = loader.getController(); // Link controllers
+			controller.setWarlordsController(this, scene);
+			
+			//Stop playing the main theme if playing
+			if(mainMenuTheme.isPlaying()){
+				mainMenuTheme.stop();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
 	// Display the main menu, and two black side windows
 	public void showMainMenu() {
 		try {

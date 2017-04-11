@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warlords.view.Story0ViewController">
+   <children>
+      <ImageView fitHeight="868.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../images/mainMenuBackground.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="title" fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Text fx:id="skip" fill="WHITE" layoutX="14.0" layoutY="850.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press UP/DOWN to scroll" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+      <Label fx:id="story1" layoutX="51.0" layoutY="247.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story2" layoutX="51.0" layoutY="264.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story3" layoutX="51.0" layoutY="281.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story4" layoutX="51.0" layoutY="298.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story5" layoutX="51.0" layoutY="315.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story6" layoutX="51.0" layoutY="332.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story7" layoutX="51.0" layoutY="349.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story8" layoutX="51.0" layoutY="366.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story9" layoutX="51.0" layoutY="383.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story10" layoutX="51.0" layoutY="400.0" text="Label" AnchorPane.leftAnchor="51.0" />
+      <Label fx:id="story11" layoutX="51.0" layoutY="417.0" text="Label" AnchorPane.leftAnchor="51.0" />
+   </children>
+</AnchorPane>

@@ -110,6 +110,7 @@ public class MultiplayerMenuViewController {
 	public void enterPressed() {
 		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
 		if (isSelected == 0) {
+			MainMenuViewController.isCampaign = false;
 			warlordsController.showGameView(); // Create the new game
 		} else if (isSelected == 1) {			
 			warlordsController.showPlayerMenuView();

@@ -151,6 +151,16 @@ public class GameViewController {
 						case PAGE_DOWN:
 							game.setTimeRemaining(0);
 							break;
+						case ENTER:
+							if(MainMenuViewController.level <= 8 && MainMenuViewController.isCampaign){
+								MainMenuViewController.level++;
+								scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0);
+								
+								//Load next part of story
+								warlordsController.showStory0View();
+							} else {
+								exit();
+							}
 						default:
 							break;					
 						}
@@ -441,7 +451,7 @@ public class GameViewController {
 			}
 		}
 	}
-	
+
 	//Loads explosion animation when warlord is hit
 	private void playerExplosionAnimation(){
 		for(int i=0; i<game.getPlayerList().size(); i++){
@@ -789,6 +799,13 @@ public class GameViewController {
 		player2Flag.setFill(flags.get(game.getPlayerList().get(1).getClassNum()));
 		player3Flag.setFill(flags.get(game.getPlayerList().get(2).getClassNum()));
 		player4Flag.setFill(flags.get(game.getPlayerList().get(3).getClassNum()));
+		
+		//Adapt depending on game type
+		if(MainMenuViewController.isCampaign){
+			gameOver3.setText("Press ENTER to Continue \n or ESC to exit.");
+		} else {
+			gameOver3.setText("Press ESC to exit.");
+		}
 
 		// Game Background
 		ArrayList<ImagePattern> backgrounds = new ArrayList<ImagePattern>();

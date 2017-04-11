@@ -1,0 +1,11 @@
+End game:
+
+Gary: Finally, Jake has been defeated and all zombies in the base have been eradicated.
+      However, there is still work to be done, so many zombies remain...
+
+*You go to your friend's corpse*
+
+[Press f to pay respects]
+
+Congratulation on completing the free version!
+To access the full version, please buy the DLC.

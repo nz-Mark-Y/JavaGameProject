@@ -23,7 +23,6 @@ public class CampaignMenuViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler;
 	private AudioClip menuScroller = new AudioClip(new File("sounds/menuScroller.wav").toURI().toString());
-	private static int level = 0;	
 	
 	public CampaignMenuViewController() {
 		
@@ -113,82 +112,73 @@ public class CampaignMenuViewController {
 	// Removes the key handler from the scene, moves to the next view
 	public void enterPressed() {
 		if (isSelected == 0) {		
-			switch(level){
+			switch(MainMenuViewController.level){
 			case 0:
 				prompt.setVisible(true);
 				break;
 			case 1:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				level = 2;
 				warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 				Game.randomness = 0;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 15;
-				warlordsController.showGameView(); //Creates level 2
+				warlordsController.showGameView(); //Creates level 1 with settings specified in this case
 				break;
 			case 2:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				level = 3;
 				warlordsController.createNewGame(3, false, 0, true, 0, true, 0, true);
 				Game.randomness = 1;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 15;
-				warlordsController.showGameView(); //Creates level 3
+				warlordsController.showGameView(); //Creates level 2 with settings specified in this case
 				break;
 			case 3:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				level = 4;
 				warlordsController.createNewGame(4, false, 0, true, 0, true, 0, true);
 				Game.randomness = 1;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 12;
-				warlordsController.showGameView(); //Creates level 4
+				warlordsController.showGameView(); //Creates level 3 with settings specified in this case
 				break;
 			case 4:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				level = 5;
 				warlordsController.createNewGame(5, false, 0, true, 0, true, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 12;
-				warlordsController.showGameView(); //Creates level 5
+				warlordsController.showGameView(); //Creates level 4 with settings specified in this case
 				break;
 			case 5:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				level = 6;
 				warlordsController.createNewGame(6, false, 0, true, 0, true, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 9;
-				warlordsController.showGameView(); //Creates level 6
+				warlordsController.showGameView(); //Creates level 5 with settings specified in this case
 				break;
 			case 6:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				level = 7;
 				warlordsController.createNewGame(7, false, 0, true, 0, true, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 6;
-				warlordsController.showGameView(); ///Creates level 7
+				warlordsController.showGameView(); ///Creates level 6 with settings specified in this case
 				break;
 			case 7:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				level = 7;
 				warlordsController.createNewGame(8, false, 0, true, 0, true, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = true;
 				GameViewController.gameSpeed = 6;
-				warlordsController.showGameView(); //Creates level 8
+				warlordsController.showGameView(); //Creates level 7 with settings specified in this case
 				break;
 			}
 		} else if (isSelected == 1) {
+			//Reset to introduction (level 0)
+			MainMenuViewController.isCampaign = true;
+			MainMenuViewController.level = 0;
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			level = 1;
-			warlordsController.createNewGame(0, false, 0, true, 0, true, 0, true);
-			Game.randomness = 0;
-			Game.reverseControls = false;
-			GameViewController.gameSpeed = 18;
-			warlordsController.showGameView(); //Creates level 1
+			warlordsController.showStory0View();
 		} else if (isSelected == 2) {
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
 			warlordsController.showMainMenu(); // Temporary, used to prevent crashing

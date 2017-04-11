@@ -23,6 +23,8 @@ public class MainMenuViewController {
 	Scene scene;
 	private EventHandler<KeyEvent> handler;
 	private AudioClip menuScroller = new AudioClip(new File("sounds/menuScroller.wav").toURI().toString());
+	protected static int level = 0;
+	protected static boolean isCampaign = false;
 	
 	public MainMenuViewController() {
 		
