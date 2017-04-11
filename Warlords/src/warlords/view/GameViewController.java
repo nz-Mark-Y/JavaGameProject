@@ -302,7 +302,7 @@ public class GameViewController {
 			public void run() {
 				timeLeft.setText(Integer.toString(game.getTimeRemaining())); // Display the time remaining
 			}
-		}, 500, 500); // Tick every 500ms
+		}, 200, 200); // Tick every 200ms
 	}
 
 	// Do the logic, then move all the objects.
@@ -501,35 +501,39 @@ public class GameViewController {
 	// If the user hits the pause key
 	public void pause() {
 		if (countingIn == false) { // Check if we are not counting in to the game
-			if (!paused) { // If not already paused, stop the timers and music, show messages
-				multiplayerTheme.stop();
-				paused = true;
-				animationTimer.cancel();
-				timeLeftTimer.cancel();
-				pauseMessage1.setVisible(true);
-				pauseMessage2.setVisible(true);
-				pauseBox.setVisible(true);
-			} else { // Unpause, start the timers and music, hide messages
-				multiplayerTheme.stop();
-				paused = false;
-				createTimers();
-				pauseMessage1.setVisible(false);
-				pauseMessage2.setVisible(false);
-				pauseBox.setVisible(false);
+			if (game.isFinished() == false) { // Check if the game is not finished
+				if (!paused) { // If not already paused, stop the timers and music, show messages
+					multiplayerTheme.stop();
+					paused = true;
+					animationTimer.cancel();
+					timeLeftTimer.cancel();
+					pauseMessage1.setVisible(true);
+					pauseMessage2.setVisible(true);
+					pauseBox.setVisible(true);
+				} else { // Unpause, start the timers and music, hide messages
+					multiplayerTheme.stop();
+					paused = false;
+					createTimers();
+					pauseMessage1.setVisible(false);
+					pauseMessage2.setVisible(false);
+					pauseBox.setVisible(false);
+				}
 			}
 		}
 	}
 
 	// If the user hits the exit key
 	public void exit() {
-		multiplayerTheme.stop(); // Stop the music
-		postGameTheme.stop();
-		animationTimer.cancel(); // Stop the timers
-		timeLeftTimer.cancel();
-		scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0); // Remove the key handlers
-		scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1); // Remove the key handlers
-		game.finish(); // End the game
-		warlordsController.showMainMenu(); // Return to main menu
+		if (countingIn == false) {
+			multiplayerTheme.stop(); // Stop the music
+			postGameTheme.stop();
+			animationTimer.cancel(); // Stop the timers
+			timeLeftTimer.cancel();
+			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler0); // Remove the key handlers
+			scene.removeEventHandler(KeyEvent.KEY_RELEASED, handler1); // Remove the key handlers
+			game.finish(); // End the game
+			warlordsController.showMainMenu(); // Return to main menu
+		}
 	}
 
 	// Creating bullets for USA ability

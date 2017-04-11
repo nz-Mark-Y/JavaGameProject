@@ -44,8 +44,8 @@ public class Game implements IGame {
 
 	// Game Logic
 	@Override
-	public void tick() {	
-		timeRemaining -= 0.01; // Game ticks every 10ms
+	public void tick() {			
+		timeRemaining -= ((float) GameViewController.gameSpeed / 1000); // Game ticks every 10ms
 		
 		movePaddles(); // Set new paddle coordinates based on which keys are currently pressed
 		computerMovePaddles(ballList.get(0)); // AI set their new paddle coordinates
@@ -190,7 +190,7 @@ public class Game implements IGame {
 							reverseVelocity(ball, 0);
 							ball.setYPos(ball.getYPos() + ball.getYVelocity());
 						} else {
-						
+							
 						}
 						return true;
 					} 
@@ -271,7 +271,7 @@ public class Game implements IGame {
 									reverseVelocity(ball, 0);
 									ball.setYPos(ball.getYPos() + ball.getYVelocity());
 								} else {
-		
+								
 								}
 								if (player.getImmune() >= 0) { // If the player is Britain and immune, dont die
 									
@@ -366,9 +366,9 @@ public class Game implements IGame {
 		for (int z=0; z<Ball.length; z=z+3) {
 			for (int y=0; y<Ball.height; y=y+3) { // Check every 3rd coordinate on the ball (stops lag)
 				x0 = ball.getXPos() + z;
-				x1 = ball.getXPos() + ball.getXVelocity() + z;
+				x1 = ball.getXPos() + ball.getXVelocity() + (ball.getXVelocity() / 3) + z;
 				y0 = ball.getYPos() + y;
-				y1 = ball.getYPos() + ball.getYVelocity() + y;		
+				y1 = ball.getYPos() + ball.getYVelocity() + (ball.getYVelocity() / 3) + y;		
 				ArrayList<int []> coordsList = new ArrayList<int []>();
 				// Bresenham's Algorithm, creates an ArrayList of coordinates on the balls path
 				int deltaX = x1 - x0;
@@ -480,7 +480,7 @@ public class Game implements IGame {
 				curveRight(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
 			} else {
 				curveLeft(playerList.get(1).getPaddle(), 1, (float) paddleSpeed);
-			}
+			} 
 		} 
 		if ((keyList[9] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 right
 			if (reverseControls) {
@@ -492,14 +492,14 @@ public class Game implements IGame {
 		if ((keyList[10] == true) && (!playerList.get(1).isComputerControlled())) { // Player 3 ability
 			useAbility(1);
 		}
-		if ((keyList[12] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 left
+		if ((keyList[13] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 left
 			if (reverseControls) {
 				curveRight(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
 			} else {
 				curveLeft(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
 			}
 		} 
-		if ((keyList[13] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 right
+		if ((keyList[12] == true) && (!playerList.get(3).isComputerControlled())) { // Player 4 right
 			if (reverseControls) {
 				curveLeft(playerList.get(3).getPaddle(), 3, (float) paddleSpeed);
 			} else {
