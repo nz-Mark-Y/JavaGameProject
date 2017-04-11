@@ -2,21 +2,28 @@
 
 ### COMPSYS 302 Java Game Design Project ###
 * [Group 01](https://www.youtube.com/watch?v=PfYnvDL0Qcw)
-* Prototype Version
-* MVC Class Diagram updated in appendix of Planning/Group01ProjectPlan.pdf
+* Final Submission Version
 
 ### How do I play?###
-To see the in game GUI:
+Use the arrow keys and ENTER to navigate the menus.
+To play a campaign game:
 
-* From the main menu, select Multiplayer, then Start
-* Use the arrow keys and ENTER to navigate the menus
+* From the main menu, select Campaign 
+* In the Campaign menu you can choose to create a new campaign, continue a campaign in progress, or play a campaign level
+
+To play a multiplayer or single player game:
+
+* From the main menu, select Multiplayer 
+* In the Player select screen use LEFT or RIGHT to choose each player's class, and UP to toggle between player or AI control.
+* In the Mutators select screen use UP and DOWN to select a mutator, and ENTER key to modify it.
+* Press ENTER and then Start to play
 
 To play the game:
 
-* Top Left Player: A, D
-* Bottom Left Player: J, L
-* Bottom Right Player: LEFT, RIGHT
-* Top Right Player: NUMPAD3, NUMPAD9 (ensure NUMLOCK is on)
+* Top Left Player: A, D, W
+* Bottom Left Player: J, L, I
+* Bottom Right Player: LEFT, RIGHT, UP
+* Top Right Player: NUMPAD9, NUMPAD3, NUMPAD5 (ensure NUMLOCK is on)
 
 ### How do I set up in Eclipse? ###
 1. Clone the repository onto your system
@@ -37,10 +44,6 @@ Additional Steps: (If you are getting JavaFX compilation errors)
 
 ### How do I run the Eclipse project? ###
 1. In Eclipse, open the warlords > WarlordsController.java class
-2. Click Run
-
-### How do I run JUnit Tests? ###
-1. In Eclipse, open the WarlordsTest.java class
 2. Click Run
 
 ### Who do I talk to? ###
