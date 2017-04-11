@@ -209,7 +209,7 @@ public class Story0ViewController {
 			story2.setText("Gary: However, there is still work to be done, \n\t so many zombies remain...");
 			story3.setText("...");
 			story4.setText("*You go to your Savi's corpse*");
-			story5.setText("[Press F to pay respects]");
+			story5.setText("[Press X to pay respects]");
 			story6.setText("...");
 			story7.setText("Congratulation on completing the free version!");
 			story8.setText("To access the full version, please buy the DLC.");
@@ -257,7 +257,7 @@ public class Story0ViewController {
 		switch(MainMenuViewController.level){
 		case 0:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.createNewGame(0, false, 0, true, 0, true, 0, true);
+			warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 			Game.randomness = 0;
 			Game.reverseControls = false;
 			GameViewController.gameSpeed = 18;
@@ -273,7 +273,7 @@ public class Story0ViewController {
 			break;
 		case 2:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.createNewGame(3, false, 0, true, 0, true, 0, true);
+			warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 			Game.randomness = 1;
 			Game.reverseControls = false;
 			GameViewController.gameSpeed = 15;
@@ -281,7 +281,7 @@ public class Story0ViewController {
 			break;
 		case 3:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.createNewGame(4, false, 0, true, 0, true, 0, true);
+			warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 			Game.randomness = 1;
 			Game.reverseControls = false;
 			GameViewController.gameSpeed = 12;
@@ -289,7 +289,7 @@ public class Story0ViewController {
 			break;
 		case 4:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.createNewGame(5, false, 0, true, 0, true, 0, true);
+			warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 			Game.randomness = 2;
 			Game.reverseControls = false;
 			GameViewController.gameSpeed = 12;
@@ -297,7 +297,7 @@ public class Story0ViewController {
 			break;
 		case 5:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.createNewGame(6, false, 0, true, 0, true, 0, true);
+			warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 			Game.randomness = 2;
 			Game.reverseControls = false;
 			GameViewController.gameSpeed = 9;
@@ -305,7 +305,7 @@ public class Story0ViewController {
 			break;
 		case 6:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.createNewGame(7, false, 0, true, 0, true, 0, true);
+			warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 			Game.randomness = 2;
 			Game.reverseControls = false;
 			GameViewController.gameSpeed = 6;
@@ -313,7 +313,7 @@ public class Story0ViewController {
 			break;
 		case 7:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.createNewGame(8, false, 0, true, 0, true, 0, true);
+			warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
 			Game.randomness = 2;
 			Game.reverseControls = true;
 			GameViewController.gameSpeed = 6;
