@@ -172,6 +172,14 @@ public class CampaignMenuViewController {
 				GameViewController.gameSpeed = 6;
 				warlordsController.showGameView(); //Creates level 7 with settings specified in this case
 				break;
+			case 8:
+				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
+				warlordsController.createNewGame(8, false, 0, true, 0, true, 0, true);
+				Game.randomness = 2;
+				Game.reverseControls = true;
+				GameViewController.gameSpeed = 6;
+				warlordsController.showGameView(); //Creates level 7 with settings specified in this case
+				break;				
 			}
 		} else if (isSelected == 1) {
 			//Reset to introduction (level 0)
