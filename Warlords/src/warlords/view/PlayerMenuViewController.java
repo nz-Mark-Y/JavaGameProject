@@ -264,7 +264,6 @@ public class PlayerMenuViewController {
 		public void setPatterns(){
 			// Applying flag patterns
 			flag0.setFill(flag0Pattern);
-			flag0.setOpacity(0.5);
 			flag1.setFill(flag1Pattern);
 			flag2.setFill(flag2Pattern);
 			flag3.setFill(flag3Pattern);
@@ -431,7 +430,7 @@ public class PlayerMenuViewController {
 
 	// The description strings
 	public void addDescriptions() {
-		descriptions.add("france: \n To Be Implemented");
+		descriptions.add("france: \n Press UP to make your walls unbreakable for 5s. \n Will not affect walls taken by Russia. 20s cooldown.");
 		descriptions.add("USA: \n Shoots a bullet using your UP key \n Bullet will destroy a wall or warlord if it hits one, but does not bounce. 20s cooldown.");
 		descriptions.add("Britain: \n Trigger article 50 by pressing the UP key for your warlord to have 5 seconds of immunity. Single use.");
 		descriptions.add("New Zealand: \n You have an extra sheep paddle guarding your warlord \n It wanders randomly around the same path as your paddle. \n Baaa!");

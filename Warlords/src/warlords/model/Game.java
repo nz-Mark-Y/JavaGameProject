@@ -75,7 +75,6 @@ public class Game implements IGame {
 	
 				// Check if the ball is going to hit a block
 				if (checkWalls(ball)) {
-					wallExplosion.play();
 					ticksSinceLastHit = 0;
 					return i;
 				}
@@ -238,10 +237,11 @@ public class Game implements IGame {
 								} else {
 									
 								}
-								if (ball.isSpider()){ // If the ball is an Australian spider, dont destroy it
+								if (ball.isSpider() || (wall.getUnbreakable())){ // If the ball is an Australian spider or unbreakable, dont destroy it
 									
 								} else {
 									wall.destroy(); // Destroy the wall on hit
+									wallExplosion.play();
 								}						
 								return true;
 							} 
@@ -601,8 +601,15 @@ public class Game implements IGame {
 	// When a player presses their ability key
 	public void useAbility(int playerNum) {
 		if (!playerList.get(playerNum).isDead()) {
-			if (playerList.get(playerNum).getClassNum() == 0) { // France, to be implemented
-				
+			if (playerList.get(playerNum).getClassNum() == 0) { // France
+				if (playerList.get(playerNum).getLastAbility() - timeRemaining > 20) { // 20 second cooldown
+					for (int i=0; i<wallList.size(); i++) {
+						if ((wallList.get(i).getOwner() == playerNum) && (wallList.get(i).isDestroyed() == false) && (wallList.get(i).getTaken() == false)) { // Walls that are owned by the player and are not destroyed or taken
+							wallList.get(i).setUnbreakable(true, playerNum); // Set the wall to unbreakable
+						}
+					}
+					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
+				}
 			} else if (playerList.get(playerNum).getClassNum() == 1) { // USA, shoots a bullet
 				if (playerList.get(playerNum).getLastAbility() - timeRemaining > 20) { // 20 second cooldown
 					Ball bullet;

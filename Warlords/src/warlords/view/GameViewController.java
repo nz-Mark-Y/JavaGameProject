@@ -343,7 +343,7 @@ public class GameViewController {
 					removeImmune(i);	
 				}
 			}
-			if ((game.getPlayerList().get(i).getClassNum() == 1) || (game.getPlayerList().get(i).getClassNum() == 5) || (game.getPlayerList().get(i).getClassNum() == 8)) { // If USA, Australia, or Egypt, cooldown visibility
+			if ((game.getPlayerList().get(i).getClassNum() == 0) || (game.getPlayerList().get(i).getClassNum() == 1) || (game.getPlayerList().get(i).getClassNum() == 5) || (game.getPlayerList().get(i).getClassNum() == 8)) { // If France, USA, Australia, or Egypt, cooldown visibility
 				float diff = game.getPlayerList().get(i).getLastAbility() - game.getTimeRemaining();
 				if (diff > 20) {
 					diff = 20;

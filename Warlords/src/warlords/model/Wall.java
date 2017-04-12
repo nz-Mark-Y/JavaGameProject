@@ -1,5 +1,10 @@
 package warlords.model;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import warlords.tests.IWall;
 
@@ -12,6 +17,7 @@ public class Wall implements IWall {
 	private int belongsTo;
 	private Rectangle wallView;
 	private boolean isTaken;
+	private boolean isUnbreakable;
 
 	// Default constructor for the wall, creates at (0, 0)
 	public Wall(int owner) {
@@ -20,6 +26,7 @@ public class Wall implements IWall {
 		belongsTo = owner;
 		destroyed = false;
 		isTaken = false;
+		isUnbreakable = false;
 	}
 
 	// Constructor for the wall, also specifies the player that owns the wall
@@ -29,6 +36,7 @@ public class Wall implements IWall {
 		belongsTo = owner;
 		destroyed = false;
 		isTaken = false;
+		isUnbreakable = false;
 	}
 
 	// Set the X position
@@ -89,4 +97,30 @@ public class Wall implements IWall {
 	public void setTaken(boolean taken) {
 		isTaken = taken;
 	}
+	
+	// Get if the wall is unbreakable or not
+	public boolean getUnbreakable() {
+		return isUnbreakable;
+	}
+		
+	// Set if the wall is unbreakable or not
+	public void setUnbreakable(boolean input, int playerNum) {
+		isUnbreakable = input;
+		ImagePattern oldFill = (ImagePattern) wallView.getFill(); // Save the old fill
+		wallView.setFill(wallPattern); // Add the new fill
+		if (input == true) {	
+			Timer unbreakTime = new Timer();
+			unbreakTime.schedule(new TimerTask() { // 5 seconds of unbreakable
+				@Override
+				public void run() {
+					isUnbreakable = false;
+					wallView.setFill(oldFill); // Return to the old fill
+				}			
+			}, 5000);
+		}
+	}
+	
+	// Patterns for pyramids
+	private Image wallImage = new Image("file:images/unbreakable.png");
+	ImagePattern wallPattern = new ImagePattern(wallImage);
 }
