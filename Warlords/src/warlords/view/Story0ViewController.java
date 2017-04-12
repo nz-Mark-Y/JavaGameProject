@@ -49,8 +49,6 @@ public class Story0ViewController {
 		labelList.add(story10);
 		labelList.add(story11);
 		
-		updateSave();
-		
 		loadText();
 
 		isSelected = 0;	
@@ -96,11 +94,12 @@ public class Story0ViewController {
 				}
 			}
         };    
+		updateSave();
     	scene.addEventHandler(KeyEvent.KEY_PRESSED, handler);
 	}
 	
 	private void updateSave() {
-		if(MainMenuViewController.level < 8){
+		if(MainMenuViewController.level <= 8){
 			MainMenuViewController.level++;
 		}
 	}
@@ -326,6 +325,14 @@ public class Story0ViewController {
 			Game.reverseControls = true;
 			GameViewController.gameSpeed = 6;
 			warlordsController.showGameView(); //Creates level 7 with settings specified in this case
+			break;
+		case 8:
+			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
+			warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
+			Game.randomness = 2;
+			Game.reverseControls = true;
+			GameViewController.gameSpeed = 6;
+			warlordsController.showGameView(); //Creates level 8 with settings specified in this case
 			break;
 		default:
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);

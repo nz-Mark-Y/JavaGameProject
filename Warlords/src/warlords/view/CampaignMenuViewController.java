@@ -190,7 +190,7 @@ public class CampaignMenuViewController {
 			warlordsController.showStory0View();
 		} else if (isSelected == 2) {
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-			warlordsController.showMainMenu(); // Temporary, used to prevent crashing
+			warlordsController.showMainMenu();
 		} else if (isSelected == 3) {
 			scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
 			warlordsController.showMainMenu();
