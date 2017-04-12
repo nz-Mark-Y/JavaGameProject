@@ -326,8 +326,12 @@ public class GameViewController {
 		for (int i=0; i<game.getPlayerList().size(); i++) { // Move paddles
 			game.getPlayerList().get(i).getWarlordView().setX(game.getPlayerList().get(i).getXPos());
 			game.getPlayerList().get(i).getWarlordView().setY(-(game.getPlayerList().get(i).getYPos() + Warlord.height));
+			if (game.getPlayerList().get(i).getPaddle().getPyramid()) { // Pyramid paddles adjusted
+				game.getPlayerList().get(i).getPaddle().getPaddleView().setY(-(game.getPlayerList().get(i).getPaddle().getYPos() + Paddle.height * 2));
+			} else {
+				game.getPlayerList().get(i).getPaddle().getPaddleView().setY(-(game.getPlayerList().get(i).getPaddle().getYPos() + Paddle.height));
+			}
 			game.getPlayerList().get(i).getPaddle().getPaddleView().setX(game.getPlayerList().get(i).getPaddle().getXPos());
-			game.getPlayerList().get(i).getPaddle().getPaddleView().setY(-(game.getPlayerList().get(i).getPaddle().getYPos()+ Paddle.height));
 			if (game.getPlayerList().get(i).getSheep() != null) { // Move New Zealand sheep
 				game.getPlayerList().get(i).getSheep().getPaddleView().setX(game.getPlayerList().get(i).getSheep().getXPos());
 				game.getPlayerList().get(i).getSheep().getPaddleView().setY(-(game.getPlayerList().get(i).getSheep().getYPos() + 20));
@@ -340,7 +344,7 @@ public class GameViewController {
 					removeImmune(i);	
 				}
 			}
-			if ((game.getPlayerList().get(i).getClassNum() == 1) || (game.getPlayerList().get(i).getClassNum() == 5)) { // If USA or Australia, cooldown visibility
+			if ((game.getPlayerList().get(i).getClassNum() == 1) || (game.getPlayerList().get(i).getClassNum() == 5) || (game.getPlayerList().get(i).getClassNum() == 8)) { // If USA, Australia, or Egypt, cooldown visibility
 				float diff = game.getPlayerList().get(i).getLastAbility() - game.getTimeRemaining();
 				if (diff > 20) {
 					diff = 20;
@@ -995,7 +999,7 @@ public class GameViewController {
 	// Patterns for spiders
 	private Image spiderImage = new Image("file:images/spider.png");
 	ImagePattern spiderPattern = new ImagePattern(spiderImage);
-
+	
 	// Patterns for the warlords
 	private Image player1Mothership = new Image("file:images/player1Mothership.png");
 	ImagePattern player1MothershipPattern = new ImagePattern(player1Mothership);

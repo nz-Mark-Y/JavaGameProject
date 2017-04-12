@@ -264,15 +264,18 @@ public class PlayerMenuViewController {
 		public void setPatterns(){
 			// Applying flag patterns
 			flag0.setFill(flag0Pattern);
+			flag0.setOpacity(0.5);
 			flag1.setFill(flag1Pattern);
 			flag2.setFill(flag2Pattern);
 			flag3.setFill(flag3Pattern);
 			flag4.setFill(flag4Pattern);
 			flag5.setFill(flag5Pattern);
 			flag6.setFill(flag6Pattern);
+			flag6.setOpacity(0.5);
 			flag7.setFill(flag7Pattern);
 			flag8.setFill(flag8Pattern);
 			flag9.setFill(flag9Pattern);
+			flag9.setOpacity(0.5);
 			
 			// Applying cursor patterns
 			player1Select0.setStrokeWidth(0);
@@ -435,8 +438,8 @@ public class PlayerMenuViewController {
 		descriptions.add("China: \n You have two extra walls guarding your warlord. Reliability not guaranteed.");
 		descriptions.add("Australia: \n Shoots a spider using your UP key \n Spider will not affect walls or warlords, but if its hits a paddle it will be slowed for 5s. 20s cooldown.");
 		descriptions.add("India: \n To Be Implemented");
-		descriptions.add("Russia: \n Sieze the Memes of Production! \n Takes random walls from other players' bases and adds them to a communal wall in the middle. Single use.");
-		descriptions.add("Egypt: \n To Be Implemented");
+		descriptions.add("Russia: \n Sieze the Memes of Production! \n Press UP to take random walls from other players' bases and adds them to a communal wall in the middle. Single use.");
+		descriptions.add("Egypt: \n Press UP to turn your paddle into a massive pyramid for 5s. /n It can't move during this time but is immune to slow effects. 20s cooldown.");
 		descriptions.add("Brazil: \n To Be Implemented");
 	}
 	

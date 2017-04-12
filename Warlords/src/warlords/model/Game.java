@@ -167,6 +167,10 @@ public class Game implements IGame {
 	// Helper function for checking paddles
 	private boolean checkPaddle(Ball ball, Paddle paddle, int height, int length) {
 		int paddleX, paddleY;
+		if (paddle.getPyramid()) {
+			height = height * 2;
+			length = length * 2;
+		}
 		for (int j=0; j<length; j++) { // Column by column of the paddle
 			for (int k=0; k<height; k++) { // Row by row of the paddle
 				if ((k == 0) || (k == height - 1) || (j == 0) || (j == length - 1)) { // If we are on the edge of the paddle (one of the side pixels)
@@ -192,7 +196,7 @@ public class Game implements IGame {
 						} else {
 							
 						}
-						if (ball.isSpider()) { // If the ball is an australian spider
+						if (ball.isSpider() && (paddle.getPyramid() == false)) { // If the ball is an australian spider, and paddle isn't a pyramid
 							paddle.setSlow(true);
 						}
 						return true;
@@ -520,6 +524,9 @@ public class Game implements IGame {
 	
 	// Move the paddle along its path to the left
 	public void curveLeft(Paddle paddle, int playerNum, float speed) {
+		if (paddle.getPyramid()) { // Pyramids can't move
+			return;
+		}
 		if (paddle.getSlow()) { // Australian spider slows
 			speed = speed / 2;
 		}
@@ -555,6 +562,9 @@ public class Game implements IGame {
 	
 	// Move the paddle along its path to the right
 	public void curveRight(Paddle paddle, int playerNum, float speed) {
+		if (paddle.getPyramid()) { // Pyramids can't move
+			return;
+		}
 		if (paddle.getSlow()) { // Australian spider slows
 			speed = speed / 2;
 		}
@@ -651,7 +661,7 @@ public class Game implements IGame {
 						if (playerNum != i) { // Everyone but the player
 							ArrayList<Wall> tempWallList = new ArrayList<Wall>(); // Create a list of walls belonging to that player
 							for (int j=0; j<wallList.size(); j++) {
-								if ((wallList.get(j).getOwner() == i) && (wallList.get(j).getTaken() == false)) { // Check if that wall has already been taken
+								if ((wallList.get(j).getOwner() == i) && (wallList.get(j).getTaken() == false) && (wallList.get(j).isDestroyed() == false)) { // Check if that wall has already been taken or is already destroyed
 									tempWallList.add(wallList.get(j));
 								}
 							}
@@ -660,6 +670,14 @@ public class Game implements IGame {
 					}
 				}
 				playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
+			} else if (playerList.get(playerNum).getClassNum() == 8) { // Egypt 
+				if (playerList.get(playerNum).getLastAbility() - timeRemaining > 20) { // 20 second cooldown
+					playerList.get(playerNum).getPaddle().setPyramid(true, playerNum);
+					if ((playerNum == 2) || (playerNum == 3)) { // Adjust position
+						playerList.get(playerNum).getPaddle().setXPos(playerList.get(playerNum).getPaddle().getXPos() - 40);
+					}
+					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
+				}
 			}
 		}
 	}
