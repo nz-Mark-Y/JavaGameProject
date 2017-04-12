@@ -111,14 +111,15 @@ public class CampaignMenuViewController {
 	
 	// Removes the key handler from the scene, moves to the next view
 	public void enterPressed() {
-		if (isSelected == 0) {		
+		if (isSelected == 0) {
+			MainMenuViewController.isCampaign = true;
 			switch(MainMenuViewController.level){
 			case 0:
 				prompt.setVisible(true);
 				break;
 			case 1:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(2, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 0;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 15;
@@ -126,7 +127,7 @@ public class CampaignMenuViewController {
 				break;
 			case 2:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(3, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 1;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 15;
@@ -134,7 +135,7 @@ public class CampaignMenuViewController {
 				break;
 			case 3:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(4, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 1;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 12;
@@ -142,7 +143,7 @@ public class CampaignMenuViewController {
 				break;
 			case 4:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(5, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 12;
@@ -150,7 +151,7 @@ public class CampaignMenuViewController {
 				break;
 			case 5:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(6, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 9;
@@ -158,7 +159,7 @@ public class CampaignMenuViewController {
 				break;
 			case 6:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(7, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = false;
 				GameViewController.gameSpeed = 6;
@@ -166,7 +167,7 @@ public class CampaignMenuViewController {
 				break;
 			case 7:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(8, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = true;
 				GameViewController.gameSpeed = 6;
@@ -174,7 +175,7 @@ public class CampaignMenuViewController {
 				break;
 			case 8:
 				scene.removeEventHandler(KeyEvent.KEY_PRESSED, handler);
-				warlordsController.createNewGame(8, false, 0, true, 0, true, 0, true);
+				warlordsController.createNewGame(0, true, 0, true, 2, false, 0, true);
 				Game.randomness = 2;
 				Game.reverseControls = true;
 				GameViewController.gameSpeed = 6;
