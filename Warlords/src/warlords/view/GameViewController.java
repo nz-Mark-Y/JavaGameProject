@@ -59,7 +59,7 @@ public class GameViewController {
 	}
 
 	// Links the WarlordsController to the GameViewController. Acts as a constructor for the GameViewController
-	public void setWarlordsController(WarlordsController warlordsController, final Scene scene) {
+	public void setWarlordsController(final WarlordsController warlordsController, final Scene scene) {
 		this.warlordsController = warlordsController;
 		this.game = warlordsController.getGame();
 		this.game.setGameViewController(this);
@@ -235,7 +235,7 @@ public class GameViewController {
 		countingIn = true;
 		countIn.setText("3");
 		countdownWait.play();
-		Timer countInTimer = new Timer();
+		final Timer countInTimer = new Timer();
 		countInTimer.scheduleAtFixedRate(new TimerTask () {
 			int count = 2;
 			@Override

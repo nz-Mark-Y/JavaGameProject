@@ -106,7 +106,7 @@ public class Wall implements IWall {
 	// Set if the wall is unbreakable or not
 	public void setUnbreakable(boolean input, int playerNum) {
 		isUnbreakable = input;
-		ImagePattern oldFill = (ImagePattern) wallView.getFill(); // Save the old fill
+		final ImagePattern oldFill = (ImagePattern) wallView.getFill(); // Save the old fill
 		wallView.setFill(wallPattern); // Add the new fill
 		if (input == true) {	
 			Timer unbreakTime = new Timer();

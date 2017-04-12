@@ -126,10 +126,10 @@ public class Paddle implements IPaddle {
 		}
 	
 	// Set if the paddle is pyramid or not
-	public void setPyramid(boolean input, int playerNum) {
+	public void setPyramid(boolean input, final int playerNum) {
 		isPyramid = input;
 		if (input == true) {
-			ImagePattern oldFill = (ImagePattern) paddleView.getFill();
+			final ImagePattern oldFill = (ImagePattern) paddleView.getFill();
 			paddleView.setHeight(80);
 			paddleView.setWidth(80);
 			paddleView.setFill(pyramidPattern);
