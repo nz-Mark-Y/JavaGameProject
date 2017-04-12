@@ -150,7 +150,7 @@ public class GameViewController {
 							exit();
 							break;
 						case PAGE_DOWN:
-							game.setTimeRemaining(0);
+							game.setTimeRemaining(10);
 							break;
 						case ENTER:
 							if(MainMenuViewController.level <= 8 && MainMenuViewController.isCampaign){

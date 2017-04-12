@@ -28,6 +28,7 @@ public class Game implements IGame {
 	private AudioClip playerDeath = new AudioClip(new File("sounds/playerDeath.wav").toURI().toString());
 	private AudioClip boundaryBounce = new AudioClip(new File("sounds/boundaryBounce.wav").toURI().toString());
 	private AudioClip sheepBounce = new AudioClip(new File("sounds/sheep.wav").toURI().toString());
+	private AudioClip powerupBuff = new AudioClip(new File("sounds/powerupBuff.wav").toURI().toString());
 
 	// Constructor
 	public Game(Ball ball, int xBound, int yBound, ArrayList<Warlord> playerList, ArrayList<Wall> wallList, int backgroundNum) {
@@ -338,7 +339,9 @@ public class Game implements IGame {
 		if (timeRemaining <= 0) {
 			finished = true;
 			for (int i=0; i<wallList.size(); i++) {
-				playerList.get(wallList.get(i).getOwner()).addWall(); // Count up walls remaining
+				if (!wallList.get(i).isDestroyed()) {
+					playerList.get(wallList.get(i).getOwner()).addWall(); // Count up walls remaining
+				}		
 			}
 			for (int i=0; i<playerList.size(); i++) {
 				if (playerList.get(i).getWallsLeft() > playerList.get(winnerPos).getWallsLeft()) { // See who has the most walls remaining
@@ -608,6 +611,7 @@ public class Game implements IGame {
 							wallList.get(i).setUnbreakable(true, playerNum); // Set the wall to unbreakable
 						}
 					}
+					powerupBuff.play();
 					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
 				}
 			} else if (playerList.get(playerNum).getClassNum() == 1) { // USA, shoots a bullet
@@ -672,6 +676,7 @@ public class Game implements IGame {
 									tempWallList.add(wallList.get(j));
 								}
 							}
+							powerupBuff.play();
 							russiaTake(tempWallList, playerNum, i);
 						}
 					}
@@ -683,6 +688,7 @@ public class Game implements IGame {
 					if ((playerNum == 2) || (playerNum == 3)) { // Adjust position
 						playerList.get(playerNum).getPaddle().setXPos(playerList.get(playerNum).getPaddle().getXPos() - 40);
 					}
+					powerupBuff.play();
 					playerList.get(playerNum).setLastAbility((int) timeRemaining); // Set the last time the player used the ability
 				}
 			}
