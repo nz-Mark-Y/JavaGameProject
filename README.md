@@ -1,11 +1,11 @@
 # README #
 
 ### COMPSYS 302 Java Game Design Project ###
-* [Group 01](https://www.youtube.com/watch?v=PfYnvDL0Qcw)
+* Group 01
 * Final Submission Version
 * Apologies for the large repo size, it's because we used uncompressed .wav files for Linux compatibility
 
-### How do I play?###
+### How do I play? ###
 Use the arrow keys and ENTER to navigate the menus.
 To play a campaign game:
 
